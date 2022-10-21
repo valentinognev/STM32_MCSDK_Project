@@ -1,0 +1,3038 @@
+ARM GAS  /tmp/ccwRyL58.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"pwm_curr_fdbk.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.PWMC_Clear,"ax",%progbits
+  18              		.align	1
+  19              		.global	PWMC_Clear
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	PWMC_Clear:
+  27              	.LVL0:
+  28              	.LFB1437:
+  29              		.file 1 "Src/pwm_curr_fdbk.c"
+   1:Src/pwm_curr_fdbk.c **** /**
+   2:Src/pwm_curr_fdbk.c ****   ******************************************************************************
+   3:Src/pwm_curr_fdbk.c ****   * @file    pwm_curr_fdbk.c
+   4:Src/pwm_curr_fdbk.c ****   * @author  Motor Control SDK Team, ST Microelectronics
+   5:Src/pwm_curr_fdbk.c ****   * @brief   This file provides firmware functions that implement the following features
+   6:Src/pwm_curr_fdbk.c ****   *          of the PWM & Current Feedback component of the Motor Control SDK:
+   7:Src/pwm_curr_fdbk.c ****   *
+   8:Src/pwm_curr_fdbk.c ****   *           * current sensing
+   9:Src/pwm_curr_fdbk.c ****   *           * regular ADC conversion execution
+  10:Src/pwm_curr_fdbk.c ****   *           * space vector modulation
+  11:Src/pwm_curr_fdbk.c ****   *
+  12:Src/pwm_curr_fdbk.c ****   ******************************************************************************
+  13:Src/pwm_curr_fdbk.c ****   * @attention
+  14:Src/pwm_curr_fdbk.c ****   *
+  15:Src/pwm_curr_fdbk.c ****   * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
+  16:Src/pwm_curr_fdbk.c ****   * All rights reserved.</center></h2>
+  17:Src/pwm_curr_fdbk.c ****   *
+  18:Src/pwm_curr_fdbk.c ****   * This software component is licensed by ST under Ultimate Liberty license
+  19:Src/pwm_curr_fdbk.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
+  20:Src/pwm_curr_fdbk.c ****   * the License. You may obtain a copy of the License at:
+  21:Src/pwm_curr_fdbk.c ****   *                             www.st.com/SLA0044
+  22:Src/pwm_curr_fdbk.c ****   *
+  23:Src/pwm_curr_fdbk.c ****   ******************************************************************************
+  24:Src/pwm_curr_fdbk.c ****   */
+  25:Src/pwm_curr_fdbk.c **** 
+  26:Src/pwm_curr_fdbk.c **** /* Includes ------------------------------------------------------------------*/
+  27:Src/pwm_curr_fdbk.c **** #include "pwm_curr_fdbk.h"
+  28:Src/pwm_curr_fdbk.c **** #include "mc_math.h"
+  29:Src/pwm_curr_fdbk.c **** #include "mc_type.h"
+ARM GAS  /tmp/ccwRyL58.s 			page 2
+
+
+  30:Src/pwm_curr_fdbk.c **** 
+  31:Src/pwm_curr_fdbk.c **** /** @addtogroup MCSDK
+  32:Src/pwm_curr_fdbk.c ****   * @{
+  33:Src/pwm_curr_fdbk.c ****   */
+  34:Src/pwm_curr_fdbk.c **** 
+  35:Src/pwm_curr_fdbk.c **** /** @defgroup pwm_curr_fdbk PWM & Current Feedback
+  36:Src/pwm_curr_fdbk.c ****   *
+  37:Src/pwm_curr_fdbk.c ****   * @brief PWM & Current Feedback components of the Motor Control SDK
+  38:Src/pwm_curr_fdbk.c ****   *
+  39:Src/pwm_curr_fdbk.c ****   * These components fulfill two functions in a Motor Control subsystem:
+  40:Src/pwm_curr_fdbk.c ****   *
+  41:Src/pwm_curr_fdbk.c ****   * - The generation of the Space Vector Pulse Width Modulation on the motor's phases
+  42:Src/pwm_curr_fdbk.c ****   * - The sampling of the actual motor's phases current
+  43:Src/pwm_curr_fdbk.c ****   *
+  44:Src/pwm_curr_fdbk.c ****   * Both these features are closely related as the instants when the values of the phase currents
+  45:Src/pwm_curr_fdbk.c ****   * should be sampled by the ADC channels are basically triggered by the timers used to generate
+  46:Src/pwm_curr_fdbk.c ****   * the duty cycles for the PWM.
+  47:Src/pwm_curr_fdbk.c ****   *
+  48:Src/pwm_curr_fdbk.c ****   * Several implementation of PWM and Current Feedback components are provided by the Motor Control
+  49:Src/pwm_curr_fdbk.c ****   * SDK to account for the specificities of the application:
+  50:Src/pwm_curr_fdbk.c ****   *
+  51:Src/pwm_curr_fdbk.c ****   * - The selected MCU: the number of ADCs available on a given MCU, the presence of internal
+  52:Src/pwm_curr_fdbk.c ****   * comparators or OpAmps, for instance, lead to different implementation of this feature
+  53:Src/pwm_curr_fdbk.c ****   * - The Current sensing topology also has an impact on the firmware: implementations are provided
+  54:Src/pwm_curr_fdbk.c ****   * for Insulated Current Sensors, Single Shunt and Three Shunt resistors current sensing topologie
+  55:Src/pwm_curr_fdbk.c ****   *
+  56:Src/pwm_curr_fdbk.c ****   * The choice of the implementation mostly depend on these two factors and is performed by the
+  57:Src/pwm_curr_fdbk.c ****   * Motor Control Workbench tool.
+  58:Src/pwm_curr_fdbk.c ****   *
+  59:Src/pwm_curr_fdbk.c ****   * All these implementations are built on a base PWM & Current Feedback component that they extend
+  60:Src/pwm_curr_fdbk.c ****   * and that provides the functions and data that are common to all of them. This base component is
+  61:Src/pwm_curr_fdbk.c ****   * never used directly as it does not provide a complete implementation of the features. Rather,
+  62:Src/pwm_curr_fdbk.c ****   * its handle structure (PWMC_Handle) is reused by all the PWM & Current Feedback specific
+  63:Src/pwm_curr_fdbk.c ****   * implementations and the functions it provides form the API of the PWM and Current feedback feat
+  64:Src/pwm_curr_fdbk.c ****   * Calling them results in calling functions of the component that actually implement the feature.
+  65:Src/pwm_curr_fdbk.c ****   * See PWMC_Handle for more details on this mechanism.
+  66:Src/pwm_curr_fdbk.c ****   * @{
+  67:Src/pwm_curr_fdbk.c ****   */
+  68:Src/pwm_curr_fdbk.c **** 
+  69:Src/pwm_curr_fdbk.c **** /**
+  70:Src/pwm_curr_fdbk.c ****   * @brief  It is used to clear the variable in CPWMC.
+  71:Src/pwm_curr_fdbk.c ****   * @param  this related object of class CPWMC
+  72:Src/pwm_curr_fdbk.c ****   * @retval none
+  73:Src/pwm_curr_fdbk.c ****   */
+  74:Src/pwm_curr_fdbk.c **** void PWMC_Clear(PWMC_Handle_t *pHandle)
+  75:Src/pwm_curr_fdbk.c **** {
+  30              		.loc 1 75 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  76:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+  77:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+  78:Src/pwm_curr_fdbk.c ****   {
+  79:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+  80:Src/pwm_curr_fdbk.c ****   }
+  81:Src/pwm_curr_fdbk.c ****   else
+ARM GAS  /tmp/ccwRyL58.s 			page 3
+
+
+  82:Src/pwm_curr_fdbk.c ****   {
+  83:Src/pwm_curr_fdbk.c **** #endif
+  84:Src/pwm_curr_fdbk.c ****     pHandle->IaEst = 0;
+  35              		.loc 1 84 5 view .LVU1
+  36              		.loc 1 84 20 is_stmt 0 view .LVU2
+  37 0000 0023     		movs	r3, #0
+  38 0002 A0F85630 		strh	r3, [r0, #86]	@ movhi
+  85:Src/pwm_curr_fdbk.c ****     pHandle->IbEst = 0;
+  39              		.loc 1 85 5 is_stmt 1 view .LVU3
+  40              		.loc 1 85 20 is_stmt 0 view .LVU4
+  41 0006 A0F85830 		strh	r3, [r0, #88]	@ movhi
+  86:Src/pwm_curr_fdbk.c ****     pHandle->IcEst = 0;
+  42              		.loc 1 86 5 is_stmt 1 view .LVU5
+  43              		.loc 1 86 20 is_stmt 0 view .LVU6
+  44 000a A0F85A30 		strh	r3, [r0, #90]	@ movhi
+  87:Src/pwm_curr_fdbk.c ****     pHandle->LPFIdBuf = 0;
+  45              		.loc 1 87 5 is_stmt 1 view .LVU7
+  46              		.loc 1 87 23 is_stmt 0 view .LVU8
+  47 000e 8363     		str	r3, [r0, #56]
+  88:Src/pwm_curr_fdbk.c ****     pHandle->LPFIqBuf = 0;
+  48              		.loc 1 88 5 is_stmt 1 view .LVU9
+  49              		.loc 1 88 23 is_stmt 0 view .LVU10
+  50 0010 4363     		str	r3, [r0, #52]
+  89:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+  90:Src/pwm_curr_fdbk.c ****   }
+  91:Src/pwm_curr_fdbk.c **** #endif
+  92:Src/pwm_curr_fdbk.c **** }
+  51              		.loc 1 92 1 view .LVU11
+  52 0012 7047     		bx	lr
+  53              		.cfi_endproc
+  54              	.LFE1437:
+  56              		.section	.text.PWMC_SetOffsetCalib,"ax",%progbits
+  57              		.align	1
+  58              		.weak	PWMC_SetOffsetCalib
+  59              		.syntax unified
+  60              		.thumb
+  61              		.thumb_func
+  62              		.fpu fpv4-sp-d16
+  64              	PWMC_SetOffsetCalib:
+  65              	.LVL1:
+  66              	.LFB1438:
+  93:Src/pwm_curr_fdbk.c **** 
+  94:Src/pwm_curr_fdbk.c **** /**
+  95:Src/pwm_curr_fdbk.c ****   * @brief  Sets the calibrated offsets. In case of single shunt only phase A is relevant
+  96:Src/pwm_curr_fdbk.c ****   *
+  97:Src/pwm_curr_fdbk.c ****   * @param  pHandle: handle on the target instance of the PWMC component
+  98:Src/pwm_curr_fdbk.c ****   * @param  offsets: offsets to set
+  99:Src/pwm_curr_fdbk.c ****   */
+ 100:Src/pwm_curr_fdbk.c **** //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
+ 101:Src/pwm_curr_fdbk.c **** __weak void PWMC_SetOffsetCalib(PWMC_Handle_t *pHandle, PolarizationOffsets_t *offsets)
+ 102:Src/pwm_curr_fdbk.c **** {
+  67              		.loc 1 102 1 is_stmt 1 view -0
+  68              		.cfi_startproc
+  69              		@ args = 0, pretend = 0, frame = 0
+  70              		@ frame_needed = 0, uses_anonymous_args = 0
+ 103:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+  71              		.loc 1 103 3 view .LVU13
+ARM GAS  /tmp/ccwRyL58.s 			page 4
+
+
+  72              		.loc 1 103 6 is_stmt 0 view .LVU14
+  73 0000 18B1     		cbz	r0, .L5
+ 102:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+  74              		.loc 1 102 1 view .LVU15
+  75 0002 08B5     		push	{r3, lr}
+  76              		.cfi_def_cfa_offset 8
+  77              		.cfi_offset 3, -8
+  78              		.cfi_offset 14, -4
+ 104:Src/pwm_curr_fdbk.c ****   {
+ 105:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 106:Src/pwm_curr_fdbk.c ****   }
+ 107:Src/pwm_curr_fdbk.c ****   else
+ 108:Src/pwm_curr_fdbk.c ****   {
+ 109:Src/pwm_curr_fdbk.c ****     pHandle->pFctSetOffsetCalib(pHandle, offsets);
+  79              		.loc 1 109 5 is_stmt 1 view .LVU16
+  80              		.loc 1 109 12 is_stmt 0 view .LVU17
+  81 0004 C26A     		ldr	r2, [r0, #44]
+  82              		.loc 1 109 5 view .LVU18
+  83 0006 9047     		blx	r2
+  84              	.LVL2:
+ 110:Src/pwm_curr_fdbk.c ****   }
+ 111:Src/pwm_curr_fdbk.c **** }
+  85              		.loc 1 111 1 view .LVU19
+  86 0008 08BD     		pop	{r3, pc}
+  87              	.LVL3:
+  88              	.L5:
+  89              		.cfi_def_cfa_offset 0
+  90              		.cfi_restore 3
+  91              		.cfi_restore 14
+  92              		.loc 1 111 1 view .LVU20
+  93 000a 7047     		bx	lr
+  94              		.cfi_endproc
+  95              	.LFE1438:
+  97              		.section	.text.PWMC_GetOffsetCalib,"ax",%progbits
+  98              		.align	1
+  99              		.weak	PWMC_GetOffsetCalib
+ 100              		.syntax unified
+ 101              		.thumb
+ 102              		.thumb_func
+ 103              		.fpu fpv4-sp-d16
+ 105              	PWMC_GetOffsetCalib:
+ 106              	.LVL4:
+ 107              	.LFB1439:
+ 112:Src/pwm_curr_fdbk.c **** 
+ 113:Src/pwm_curr_fdbk.c **** /**
+ 114:Src/pwm_curr_fdbk.c ****   * @brief  Gets the calibrated offsets. In case of single shunt only phase A is relevant
+ 115:Src/pwm_curr_fdbk.c ****   *
+ 116:Src/pwm_curr_fdbk.c ****   * @param  pHandle: handle on the target instance of the PWMC component
+ 117:Src/pwm_curr_fdbk.c ****   * @param  offsets: offsets to get
+ 118:Src/pwm_curr_fdbk.c ****   */
+ 119:Src/pwm_curr_fdbk.c **** //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
+ 120:Src/pwm_curr_fdbk.c **** __weak void PWMC_GetOffsetCalib(PWMC_Handle_t *pHandle, PolarizationOffsets_t *offsets)
+ 121:Src/pwm_curr_fdbk.c **** {
+ 108              		.loc 1 121 1 is_stmt 1 view -0
+ 109              		.cfi_startproc
+ 110              		@ args = 0, pretend = 0, frame = 0
+ 111              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccwRyL58.s 			page 5
+
+
+ 122:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 112              		.loc 1 122 3 view .LVU22
+ 113              		.loc 1 122 6 is_stmt 0 view .LVU23
+ 114 0000 18B1     		cbz	r0, .L11
+ 121:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 115              		.loc 1 121 1 view .LVU24
+ 116 0002 08B5     		push	{r3, lr}
+ 117              		.cfi_def_cfa_offset 8
+ 118              		.cfi_offset 3, -8
+ 119              		.cfi_offset 14, -4
+ 123:Src/pwm_curr_fdbk.c ****   {
+ 124:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 125:Src/pwm_curr_fdbk.c ****   }
+ 126:Src/pwm_curr_fdbk.c ****   else
+ 127:Src/pwm_curr_fdbk.c ****   {
+ 128:Src/pwm_curr_fdbk.c ****     pHandle->pFctGetOffsetCalib(pHandle, offsets);
+ 120              		.loc 1 128 5 is_stmt 1 view .LVU25
+ 121              		.loc 1 128 12 is_stmt 0 view .LVU26
+ 122 0004 026B     		ldr	r2, [r0, #48]
+ 123              		.loc 1 128 5 view .LVU27
+ 124 0006 9047     		blx	r2
+ 125              	.LVL5:
+ 129:Src/pwm_curr_fdbk.c ****   }
+ 130:Src/pwm_curr_fdbk.c **** }
+ 126              		.loc 1 130 1 view .LVU28
+ 127 0008 08BD     		pop	{r3, pc}
+ 128              	.LVL6:
+ 129              	.L11:
+ 130              		.cfi_def_cfa_offset 0
+ 131              		.cfi_restore 3
+ 132              		.cfi_restore 14
+ 133              		.loc 1 130 1 view .LVU29
+ 134 000a 7047     		bx	lr
+ 135              		.cfi_endproc
+ 136              	.LFE1439:
+ 138              		.section	.text.PWMC_GetPhaseCurrents,"ax",%progbits
+ 139              		.align	1
+ 140              		.weak	PWMC_GetPhaseCurrents
+ 141              		.syntax unified
+ 142              		.thumb
+ 143              		.thumb_func
+ 144              		.fpu fpv4-sp-d16
+ 146              	PWMC_GetPhaseCurrents:
+ 147              	.LVL7:
+ 148              	.LFB1440:
+ 131:Src/pwm_curr_fdbk.c **** 
+ 132:Src/pwm_curr_fdbk.c **** #if defined (CCMRAM)
+ 133:Src/pwm_curr_fdbk.c **** #if defined (__ICCARM__)
+ 134:Src/pwm_curr_fdbk.c **** #pragma location = ".ccmram"
+ 135:Src/pwm_curr_fdbk.c **** #elif defined (__CC_ARM) || defined(__GNUC__)
+ 136:Src/pwm_curr_fdbk.c **** __attribute__( ( section ( ".ccmram" ) ) )
+ 137:Src/pwm_curr_fdbk.c **** #endif
+ 138:Src/pwm_curr_fdbk.c **** #endif
+ 139:Src/pwm_curr_fdbk.c **** /**
+ 140:Src/pwm_curr_fdbk.c ****   * @brief Returns the phase current of the motor as read by the ADC (in s16A unit)
+ 141:Src/pwm_curr_fdbk.c ****   *
+ 142:Src/pwm_curr_fdbk.c ****   * The function actually returns the current values of phase A & B. Phase C current
+ARM GAS  /tmp/ccwRyL58.s 			page 6
+
+
+ 143:Src/pwm_curr_fdbk.c ****   * can be deduced thanks to the formula:
+ 144:Src/pwm_curr_fdbk.c ****   *
+ 145:Src/pwm_curr_fdbk.c ****   * @f[
+ 146:Src/pwm_curr_fdbk.c ****   * I_{C} = -I_{A} - I_{C}
+ 147:Src/pwm_curr_fdbk.c ****   * @f]
+ 148:Src/pwm_curr_fdbk.c ****   *
+ 149:Src/pwm_curr_fdbk.c ****   * @param  pHandle handle on the target PWMC component
+ 150:Src/pwm_curr_fdbk.c ****   * @param  pStator_Currents Pointer to the structure that will receive motor current
+ 151:Src/pwm_curr_fdbk.c ****   *         of phase A and B in ElectricalValue format.
+ 152:Src/pwm_curr_fdbk.c ****   */
+ 153:Src/pwm_curr_fdbk.c **** //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
+ 154:Src/pwm_curr_fdbk.c **** __weak void PWMC_GetPhaseCurrents(PWMC_Handle_t *pHandle, ab_t *Iab)
+ 155:Src/pwm_curr_fdbk.c **** {
+ 149              		.loc 1 155 1 is_stmt 1 view -0
+ 150              		.cfi_startproc
+ 151              		@ args = 0, pretend = 0, frame = 0
+ 152              		@ frame_needed = 0, uses_anonymous_args = 0
+ 153              		.loc 1 155 1 is_stmt 0 view .LVU31
+ 154 0000 08B5     		push	{r3, lr}
+ 155              		.cfi_def_cfa_offset 8
+ 156              		.cfi_offset 3, -8
+ 157              		.cfi_offset 14, -4
+ 156:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 157:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 158:Src/pwm_curr_fdbk.c ****   {
+ 159:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 160:Src/pwm_curr_fdbk.c ****   }
+ 161:Src/pwm_curr_fdbk.c ****   else
+ 162:Src/pwm_curr_fdbk.c ****   {
+ 163:Src/pwm_curr_fdbk.c **** #endif
+ 164:Src/pwm_curr_fdbk.c ****     pHandle->pFctGetPhaseCurrents(pHandle, Iab);
+ 158              		.loc 1 164 5 is_stmt 1 view .LVU32
+ 159              		.loc 1 164 12 is_stmt 0 view .LVU33
+ 160 0002 0368     		ldr	r3, [r0]
+ 161              		.loc 1 164 5 view .LVU34
+ 162 0004 9847     		blx	r3
+ 163              	.LVL8:
+ 165:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 166:Src/pwm_curr_fdbk.c ****   }
+ 167:Src/pwm_curr_fdbk.c **** #endif
+ 168:Src/pwm_curr_fdbk.c **** }
+ 164              		.loc 1 168 1 view .LVU35
+ 165 0006 08BD     		pop	{r3, pc}
+ 166              		.cfi_endproc
+ 167              	.LFE1440:
+ 169              		.section	.text.PWMC_SetPhaseVoltage,"ax",%progbits
+ 170              		.align	1
+ 171              		.weak	PWMC_SetPhaseVoltage
+ 172              		.syntax unified
+ 173              		.thumb
+ 174              		.thumb_func
+ 175              		.fpu fpv4-sp-d16
+ 177              	PWMC_SetPhaseVoltage:
+ 178              	.LVL9:
+ 179              	.LFB1441:
+ 169:Src/pwm_curr_fdbk.c **** 
+ 170:Src/pwm_curr_fdbk.c **** #if defined (CCMRAM)
+ARM GAS  /tmp/ccwRyL58.s 			page 7
+
+
+ 171:Src/pwm_curr_fdbk.c **** #if defined (__ICCARM__)
+ 172:Src/pwm_curr_fdbk.c **** #pragma location = ".ccmram"
+ 173:Src/pwm_curr_fdbk.c **** #elif defined (__CC_ARM) || defined(__GNUC__)
+ 174:Src/pwm_curr_fdbk.c **** __attribute__( ( section ( ".ccmram" ) ) )
+ 175:Src/pwm_curr_fdbk.c **** #endif
+ 176:Src/pwm_curr_fdbk.c **** #endif
+ 177:Src/pwm_curr_fdbk.c **** /**
+ 178:Src/pwm_curr_fdbk.c ****  * @brief Sets the PWM duty cycles
+ 179:Src/pwm_curr_fdbk.c ****  *
+ 180:Src/pwm_curr_fdbk.c ****  *
+ 181:Src/pwm_curr_fdbk.c ****  */
+ 182:Src/pwm_curr_fdbk.c **** 
+ 183:Src/pwm_curr_fdbk.c **** /**
+ 184:Src/pwm_curr_fdbk.c ****   * @brief  Converts input voltages @f$ V_{\alpha} @f$ and @f$ V_{\beta} @f$ into PWM duty cycles
+ 185:Src/pwm_curr_fdbk.c ****   *         and feed them to the inverter.
+ 186:Src/pwm_curr_fdbk.c ****   * @param  pHandle handler on the target PWMC component.
+ 187:Src/pwm_curr_fdbk.c ****   * @param  Valfa_beta Voltage Components expressed in the @f$(\alpha, \beta)@f$ reference frame
+ 188:Src/pwm_curr_fdbk.c ****   *
+ 189:Src/pwm_curr_fdbk.c ****   * This function computes the the time during wIch the transistors of each phase are to be switche
+ 190:Src/pwm_curr_fdbk.c ****   * a PWM cycle in order to achieve the reference phase voltage set by @p Valfa_beta. Then, the fun
+ 191:Src/pwm_curr_fdbk.c ****   * programs the resulting duty cycles in the related timer channels. It also sets the phase curren
+ 192:Src/pwm_curr_fdbk.c ****   * sampling point for the next PWM cycle accordingly.
+ 193:Src/pwm_curr_fdbk.c ****   *
+ 194:Src/pwm_curr_fdbk.c ****   * This function is used in the FOC frequency loop and needs to complete before the next PWM cycle
+ 195:Src/pwm_curr_fdbk.c ****   * so that the duty cycles it computes can be taken into account. Failing to do so (for instance b
+ 196:Src/pwm_curr_fdbk.c ****   * the PWM Frequency is too high) results in the functions returning #MC_DURATION wIch entails a
+ 197:Src/pwm_curr_fdbk.c ****   * Motor Control Fault that stops the motor.
+ 198:Src/pwm_curr_fdbk.c ****   *
+ 199:Src/pwm_curr_fdbk.c ****   * @retval Returns #MC_NO_ERROR if no error occurred or #MC_DURATION if the duty cycles were
+ 200:Src/pwm_curr_fdbk.c ****   *         set too late for being taken into account in the next PWM cycle.
+ 201:Src/pwm_curr_fdbk.c ****   */
+ 202:Src/pwm_curr_fdbk.c **** __weak uint16_t PWMC_SetPhaseVoltage(PWMC_Handle_t *pHandle, alphabeta_t Valfa_beta)
+ 203:Src/pwm_curr_fdbk.c **** {
+ 180              		.loc 1 203 1 is_stmt 1 view -0
+ 181              		.cfi_startproc
+ 182              		@ args = 0, pretend = 0, frame = 8
+ 183              		@ frame_needed = 0, uses_anonymous_args = 0
+ 184              		.loc 1 203 1 is_stmt 0 view .LVU37
+ 185 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+ 186              		.cfi_def_cfa_offset 20
+ 187              		.cfi_offset 4, -20
+ 188              		.cfi_offset 5, -16
+ 189              		.cfi_offset 6, -12
+ 190              		.cfi_offset 7, -8
+ 191              		.cfi_offset 14, -4
+ 192 0002 83B0     		sub	sp, sp, #12
+ 193              		.cfi_def_cfa_offset 32
+ 194 0004 0191     		str	r1, [sp, #4]
+ 204:Src/pwm_curr_fdbk.c ****   uint16_t returnValue;
+ 195              		.loc 1 204 3 is_stmt 1 view .LVU38
+ 205:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 206:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 207:Src/pwm_curr_fdbk.c ****   {
+ 208:Src/pwm_curr_fdbk.c ****     returnValue = 0U;
+ 209:Src/pwm_curr_fdbk.c ****   }
+ 210:Src/pwm_curr_fdbk.c ****   else
+ 211:Src/pwm_curr_fdbk.c ****   {
+ARM GAS  /tmp/ccwRyL58.s 			page 8
+
+
+ 212:Src/pwm_curr_fdbk.c **** #endif
+ 213:Src/pwm_curr_fdbk.c ****     int32_t wX;
+ 196              		.loc 1 213 5 view .LVU39
+ 214:Src/pwm_curr_fdbk.c ****     int32_t wY;
+ 197              		.loc 1 214 5 view .LVU40
+ 215:Src/pwm_curr_fdbk.c ****     int32_t wZ;
+ 198              		.loc 1 215 5 view .LVU41
+ 216:Src/pwm_curr_fdbk.c ****     int32_t wUAlpha;
+ 199              		.loc 1 216 5 view .LVU42
+ 217:Src/pwm_curr_fdbk.c ****     int32_t wUBeta;
+ 200              		.loc 1 217 5 view .LVU43
+ 218:Src/pwm_curr_fdbk.c ****     int32_t wTimePhA;
+ 201              		.loc 1 218 5 view .LVU44
+ 219:Src/pwm_curr_fdbk.c ****     int32_t wTimePhB;
+ 202              		.loc 1 219 5 view .LVU45
+ 220:Src/pwm_curr_fdbk.c ****     int32_t wTimePhC;
+ 203              		.loc 1 220 5 view .LVU46
+ 221:Src/pwm_curr_fdbk.c **** 
+ 222:Src/pwm_curr_fdbk.c ****     wUAlpha = Valfa_beta.alpha * (int32_t)pHandle->hT_Sqrt3;
+ 204              		.loc 1 222 5 view .LVU47
+ 205              		.loc 1 222 25 is_stmt 0 view .LVU48
+ 206 0006 0BB2     		sxth	r3, r1
+ 207              		.loc 1 222 50 view .LVU49
+ 208 0008 868F     		ldrh	r6, [r0, #60]
+ 209              		.loc 1 222 13 view .LVU50
+ 210 000a 06FB03F6 		mul	r6, r6, r3
+ 211              	.LVL10:
+ 223:Src/pwm_curr_fdbk.c ****     wUBeta = -(Valfa_beta.beta * ((int32_t)pHandle->PWMperiod)) * 2;
+ 212              		.loc 1 223 5 is_stmt 1 view .LVU51
+ 213              		.loc 1 223 26 is_stmt 0 view .LVU52
+ 214 000e 0914     		asrs	r1, r1, #16
+ 215              		.loc 1 223 51 view .LVU53
+ 216 0010 B0F86030 		ldrh	r3, [r0, #96]
+ 217              		.loc 1 223 32 view .LVU54
+ 218 0014 03FB01F1 		mul	r1, r3, r1
+ 219              		.loc 1 223 12 view .LVU55
+ 220 0018 C1EBC171 		rsb	r1, r1, r1, lsl #31
+ 221 001c 4C00     		lsls	r4, r1, #1
+ 222              	.LVL11:
+ 224:Src/pwm_curr_fdbk.c **** 
+ 225:Src/pwm_curr_fdbk.c ****     wX = wUBeta;
+ 223              		.loc 1 225 5 is_stmt 1 view .LVU56
+ 226:Src/pwm_curr_fdbk.c ****     wY = (wUBeta + wUAlpha) / 2;
+ 224              		.loc 1 226 5 view .LVU57
+ 225              		.loc 1 226 18 is_stmt 0 view .LVU58
+ 226 001e 06EB4105 		add	r5, r6, r1, lsl #1
+ 227              		.loc 1 226 8 view .LVU59
+ 228 0022 05EBD572 		add	r2, r5, r5, lsr #31
+ 229 0026 5710     		asrs	r7, r2, #1
+ 230              	.LVL12:
+ 227:Src/pwm_curr_fdbk.c ****     wZ = (wUBeta - wUAlpha) / 2;
+ 231              		.loc 1 227 5 is_stmt 1 view .LVU60
+ 232              		.loc 1 227 18 is_stmt 0 view .LVU61
+ 233 0028 C6EB4101 		rsb	r1, r6, r1, lsl #1
+ 234              		.loc 1 227 8 view .LVU62
+ 235 002c 01EBD172 		add	r2, r1, r1, lsr #31
+ 236 0030 5210     		asrs	r2, r2, #1
+ARM GAS  /tmp/ccwRyL58.s 			page 9
+
+
+ 237              	.LVL13:
+ 228:Src/pwm_curr_fdbk.c **** 
+ 229:Src/pwm_curr_fdbk.c ****     /* Sector calculation from wX, wY, wZ */
+ 230:Src/pwm_curr_fdbk.c ****     if (wY < 0)
+ 238              		.loc 1 230 5 is_stmt 1 view .LVU63
+ 239              		.loc 1 230 8 is_stmt 0 view .LVU64
+ 240 0032 B5F1FF3F 		cmp	r5, #-1
+ 241 0036 38DB     		blt	.L54
+ 231:Src/pwm_curr_fdbk.c ****     {
+ 232:Src/pwm_curr_fdbk.c ****       if (wZ < 0)
+ 233:Src/pwm_curr_fdbk.c ****       {
+ 234:Src/pwm_curr_fdbk.c ****         pHandle->Sector = SECTOR_5;
+ 235:Src/pwm_curr_fdbk.c ****         wTimePhA = (((int32_t)pHandle->PWMperiod) / 4) + ((wY - wZ) / (int32_t)262144);
+ 236:Src/pwm_curr_fdbk.c ****         wTimePhB = wTimePhA + (wZ / 131072);
+ 237:Src/pwm_curr_fdbk.c ****         wTimePhC = wTimePhA - (wY / 131072) ;
+ 238:Src/pwm_curr_fdbk.c **** 
+ 239:Src/pwm_curr_fdbk.c ****         pHandle->lowDuty = (uint16_t)wTimePhC;
+ 240:Src/pwm_curr_fdbk.c ****         pHandle->midDuty = (uint16_t)wTimePhA;
+ 241:Src/pwm_curr_fdbk.c ****         pHandle->highDuty = (uint16_t)wTimePhB;
+ 242:Src/pwm_curr_fdbk.c ****       }
+ 243:Src/pwm_curr_fdbk.c ****       else /* wZ >= 0 */
+ 244:Src/pwm_curr_fdbk.c ****         if (wX <= 0)
+ 245:Src/pwm_curr_fdbk.c ****         {
+ 246:Src/pwm_curr_fdbk.c ****           pHandle->Sector = SECTOR_4;
+ 247:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t)pHandle->PWMperiod) / 4) + ((wX - wZ) / (int32_t)262144);
+ 248:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhA + (wZ / 131072);
+ 249:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhB - (wX / 131072);
+ 250:Src/pwm_curr_fdbk.c **** 
+ 251:Src/pwm_curr_fdbk.c ****           pHandle->lowDuty = (uint16_t)wTimePhC;
+ 252:Src/pwm_curr_fdbk.c ****           pHandle->midDuty = (uint16_t)wTimePhB;
+ 253:Src/pwm_curr_fdbk.c ****           pHandle->highDuty = (uint16_t)wTimePhA;
+ 254:Src/pwm_curr_fdbk.c ****         }
+ 255:Src/pwm_curr_fdbk.c ****         else /* wX > 0 */
+ 256:Src/pwm_curr_fdbk.c ****         {
+ 257:Src/pwm_curr_fdbk.c ****           pHandle->Sector = SECTOR_3;
+ 258:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t )pHandle->PWMperiod) / 4)+ ((wY - wX) / (int32_t)262144);
+ 259:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhA - (wY / 131072);
+ 260:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhC + (wX / 131072);
+ 261:Src/pwm_curr_fdbk.c **** 
+ 262:Src/pwm_curr_fdbk.c ****           pHandle->lowDuty = (uint16_t)wTimePhB;
+ 263:Src/pwm_curr_fdbk.c ****           pHandle->midDuty = (uint16_t)wTimePhC;
+ 264:Src/pwm_curr_fdbk.c ****           pHandle->highDuty = (uint16_t)wTimePhA;
+ 265:Src/pwm_curr_fdbk.c ****         }
+ 266:Src/pwm_curr_fdbk.c ****     }
+ 267:Src/pwm_curr_fdbk.c ****     else /* wY > 0 */
+ 268:Src/pwm_curr_fdbk.c ****     {
+ 269:Src/pwm_curr_fdbk.c ****       if (wZ >= 0)
+ 242              		.loc 1 269 7 is_stmt 1 view .LVU65
+ 243              		.loc 1 269 10 is_stmt 0 view .LVU66
+ 244 0038 B1F1FF3F 		cmp	r1, #-1
+ 245 003c C0F2C180 		blt	.L30
+ 270:Src/pwm_curr_fdbk.c ****       {
+ 271:Src/pwm_curr_fdbk.c ****         pHandle->Sector = SECTOR_2;
+ 246              		.loc 1 271 9 is_stmt 1 view .LVU67
+ 247              		.loc 1 271 25 is_stmt 0 view .LVU68
+ 248 0040 0124     		movs	r4, #1
+ 249              	.LVL14:
+ARM GAS  /tmp/ccwRyL58.s 			page 10
+
+
+ 250              		.loc 1 271 25 view .LVU69
+ 251 0042 80F86A40 		strb	r4, [r0, #106]
+ 252              	.LVL15:
+ 272:Src/pwm_curr_fdbk.c ****         wTimePhA = (((int32_t)pHandle->PWMperiod) / 4) + ((wY - wZ) / (int32_t)262144);
+ 253              		.loc 1 272 9 is_stmt 1 view .LVU70
+ 254              		.loc 1 272 51 is_stmt 0 view .LVU71
+ 255 0046 9B08     		lsrs	r3, r3, #2
+ 256              		.loc 1 272 69 view .LVU72
+ 257 0048 BA1A     		subs	r2, r7, r2
+ 258              	.LVL16:
+ 259              		.loc 1 272 69 view .LVU73
+ 260 004a 00F1AB80 		bmi	.L55
+ 261              	.L31:
+ 262              		.loc 1 272 18 view .LVU74
+ 263 004e 03EBA243 		add	r3, r3, r2, asr #18
+ 264              	.LVL17:
+ 273:Src/pwm_curr_fdbk.c ****         wTimePhB = wTimePhA + (wZ / 131072);
+ 265              		.loc 1 273 9 is_stmt 1 view .LVU75
+ 266              		.loc 1 273 35 is_stmt 0 view .LVU76
+ 267 0052 0A46     		mov	r2, r1
+ 268 0054 0029     		cmp	r1, #0
+ 269 0056 C0F2AA80 		blt	.L56
+ 270              	.L32:
+ 271              		.loc 1 273 18 view .LVU77
+ 272 005a 03EBA242 		add	r2, r3, r2, asr #18
+ 273              	.LVL18:
+ 274:Src/pwm_curr_fdbk.c ****         wTimePhC = wTimePhA - (wY / 131072);
+ 274              		.loc 1 274 9 is_stmt 1 view .LVU78
+ 275              		.loc 1 274 35 is_stmt 0 view .LVU79
+ 276 005e 2946     		mov	r1, r5
+ 277              	.LVL19:
+ 278              		.loc 1 274 35 view .LVU80
+ 279 0060 002D     		cmp	r5, #0
+ 280 0062 C0F2A980 		blt	.L57
+ 281              	.L33:
+ 282              		.loc 1 274 18 view .LVU81
+ 283 0066 A3EBA141 		sub	r1, r3, r1, asr #18
+ 284              	.LVL20:
+ 275:Src/pwm_curr_fdbk.c **** 
+ 276:Src/pwm_curr_fdbk.c ****         pHandle->lowDuty = (uint16_t)wTimePhB;
+ 285              		.loc 1 276 9 is_stmt 1 view .LVU82
+ 286              		.loc 1 276 26 is_stmt 0 view .LVU83
+ 287 006a A0F84620 		strh	r2, [r0, #70]	@ movhi
+ 277:Src/pwm_curr_fdbk.c ****         pHandle->midDuty = (uint16_t)wTimePhA;
+ 288              		.loc 1 277 9 is_stmt 1 view .LVU84
+ 289              		.loc 1 277 26 is_stmt 0 view .LVU85
+ 290 006e A0F84830 		strh	r3, [r0, #72]	@ movhi
+ 278:Src/pwm_curr_fdbk.c ****         pHandle->highDuty = (uint16_t)wTimePhC;
+ 291              		.loc 1 278 9 is_stmt 1 view .LVU86
+ 292              		.loc 1 278 27 is_stmt 0 view .LVU87
+ 293 0072 A0F84A10 		strh	r1, [r0, #74]	@ movhi
+ 294              	.L22:
+ 279:Src/pwm_curr_fdbk.c ****       }
+ 280:Src/pwm_curr_fdbk.c ****       else /* wZ < 0 */
+ 281:Src/pwm_curr_fdbk.c ****         if ( wX <= 0 )
+ 282:Src/pwm_curr_fdbk.c ****         {
+ 283:Src/pwm_curr_fdbk.c ****           pHandle->Sector = SECTOR_6;
+ARM GAS  /tmp/ccwRyL58.s 			page 11
+
+
+ 284:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t )pHandle->PWMperiod) / 4) + ((wY - wX) / (int32_t)262144);
+ 285:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhA - (wY / 131072);
+ 286:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhC + (wX / 131072);
+ 287:Src/pwm_curr_fdbk.c **** 
+ 288:Src/pwm_curr_fdbk.c ****           pHandle->lowDuty = (uint16_t)wTimePhA;
+ 289:Src/pwm_curr_fdbk.c ****           pHandle->midDuty = (uint16_t)wTimePhC;
+ 290:Src/pwm_curr_fdbk.c ****           pHandle->highDuty = (uint16_t)wTimePhB;
+ 291:Src/pwm_curr_fdbk.c ****         }
+ 292:Src/pwm_curr_fdbk.c ****         else /* wX > 0 */
+ 293:Src/pwm_curr_fdbk.c ****         {
+ 294:Src/pwm_curr_fdbk.c ****           pHandle->Sector = SECTOR_1;
+ 295:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t)pHandle->PWMperiod) / 4)+ ((wX - wZ) / (int32_t)262144);
+ 296:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhA + (wZ / 131072);
+ 297:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhB - (wX / 131072);
+ 298:Src/pwm_curr_fdbk.c **** 
+ 299:Src/pwm_curr_fdbk.c ****           pHandle->lowDuty = (uint16_t)wTimePhA;
+ 300:Src/pwm_curr_fdbk.c ****           pHandle->midDuty = (uint16_t)wTimePhB;
+ 301:Src/pwm_curr_fdbk.c ****           pHandle->highDuty = (uint16_t)wTimePhC;
+ 302:Src/pwm_curr_fdbk.c ****         }
+ 303:Src/pwm_curr_fdbk.c ****     }
+ 304:Src/pwm_curr_fdbk.c **** 
+ 305:Src/pwm_curr_fdbk.c ****     pHandle->CntPhA = (uint16_t)(MAX(wTimePhA, 0));
+ 295              		.loc 1 305 5 is_stmt 1 view .LVU88
+ 296              		.loc 1 305 23 is_stmt 0 view .LVU89
+ 297 0076 002B     		cmp	r3, #0
+ 298 0078 40F3F580 		ble	.L50
+ 299              		.loc 1 305 23 discriminator 1 view .LVU90
+ 300 007c 9BB2     		uxth	r3, r3
+ 301              	.LVL21:
+ 302              	.L41:
+ 303              		.loc 1 305 21 discriminator 4 view .LVU91
+ 304 007e C387     		strh	r3, [r0, #62]	@ movhi
+ 306:Src/pwm_curr_fdbk.c ****     pHandle->CntPhB = (uint16_t)(MAX(wTimePhB, 0));
+ 305              		.loc 1 306 5 is_stmt 1 discriminator 4 view .LVU92
+ 306              		.loc 1 306 23 is_stmt 0 discriminator 4 view .LVU93
+ 307 0080 002A     		cmp	r2, #0
+ 308 0082 40F3F280 		ble	.L51
+ 309              		.loc 1 306 23 discriminator 1 view .LVU94
+ 310 0086 92B2     		uxth	r2, r2
+ 311              	.LVL22:
+ 312              	.L42:
+ 313              		.loc 1 306 21 discriminator 4 view .LVU95
+ 314 0088 A0F84020 		strh	r2, [r0, #64]	@ movhi
+ 307:Src/pwm_curr_fdbk.c ****     pHandle->CntPhC = (uint16_t)(MAX(wTimePhC, 0));
+ 315              		.loc 1 307 5 is_stmt 1 discriminator 4 view .LVU96
+ 316              		.loc 1 307 23 is_stmt 0 discriminator 4 view .LVU97
+ 317 008c 0029     		cmp	r1, #0
+ 318 008e 40F3EE80 		ble	.L52
+ 319              		.loc 1 307 23 discriminator 1 view .LVU98
+ 320 0092 89B2     		uxth	r1, r1
+ 321              	.LVL23:
+ 322              	.L43:
+ 323              		.loc 1 307 21 discriminator 4 view .LVU99
+ 324 0094 A0F84210 		strh	r1, [r0, #66]	@ movhi
+ 308:Src/pwm_curr_fdbk.c **** 
+ 309:Src/pwm_curr_fdbk.c ****     if (1U == pHandle->DTTest)
+ 325              		.loc 1 309 5 is_stmt 1 discriminator 4 view .LVU100
+ARM GAS  /tmp/ccwRyL58.s 			page 12
+
+
+ 326              		.loc 1 309 22 is_stmt 0 discriminator 4 view .LVU101
+ 327 0098 B0F85E40 		ldrh	r4, [r0, #94]
+ 328              		.loc 1 309 8 discriminator 4 view .LVU102
+ 329 009c 012C     		cmp	r4, #1
+ 330 009e 00F0E880 		beq	.L58
+ 331              	.L44:
+ 310:Src/pwm_curr_fdbk.c ****     {
+ 311:Src/pwm_curr_fdbk.c ****       /* Dead time compensation */
+ 312:Src/pwm_curr_fdbk.c ****       if (pHandle->Ia > 0)
+ 313:Src/pwm_curr_fdbk.c ****       {
+ 314:Src/pwm_curr_fdbk.c ****         pHandle->CntPhA += pHandle->DTCompCnt;
+ 315:Src/pwm_curr_fdbk.c ****       }
+ 316:Src/pwm_curr_fdbk.c ****       else
+ 317:Src/pwm_curr_fdbk.c ****       {
+ 318:Src/pwm_curr_fdbk.c ****         pHandle->CntPhA -= pHandle->DTCompCnt;
+ 319:Src/pwm_curr_fdbk.c ****       }
+ 320:Src/pwm_curr_fdbk.c **** 
+ 321:Src/pwm_curr_fdbk.c ****       if (pHandle->Ib > 0)
+ 322:Src/pwm_curr_fdbk.c ****       {
+ 323:Src/pwm_curr_fdbk.c ****         pHandle->CntPhB += pHandle->DTCompCnt;
+ 324:Src/pwm_curr_fdbk.c ****       }
+ 325:Src/pwm_curr_fdbk.c ****       else
+ 326:Src/pwm_curr_fdbk.c ****       {
+ 327:Src/pwm_curr_fdbk.c ****         pHandle->CntPhB -= pHandle->DTCompCnt;
+ 328:Src/pwm_curr_fdbk.c ****       }
+ 329:Src/pwm_curr_fdbk.c **** 
+ 330:Src/pwm_curr_fdbk.c ****       if (pHandle->Ic > 0)
+ 331:Src/pwm_curr_fdbk.c ****       {
+ 332:Src/pwm_curr_fdbk.c ****         pHandle->CntPhC += pHandle->DTCompCnt;
+ 333:Src/pwm_curr_fdbk.c ****       }
+ 334:Src/pwm_curr_fdbk.c ****       else
+ 335:Src/pwm_curr_fdbk.c ****       {
+ 336:Src/pwm_curr_fdbk.c ****         pHandle->CntPhC -= pHandle->DTCompCnt;
+ 337:Src/pwm_curr_fdbk.c ****       }
+ 338:Src/pwm_curr_fdbk.c ****     }
+ 339:Src/pwm_curr_fdbk.c ****     returnValue = pHandle->pFctSetADCSampPointSectX(pHandle);
+ 332              		.loc 1 339 5 is_stmt 1 view .LVU103
+ 333              		.loc 1 339 26 is_stmt 0 view .LVU104
+ 334 00a2 4369     		ldr	r3, [r0, #20]
+ 335              		.loc 1 339 19 view .LVU105
+ 336 00a4 9847     		blx	r3
+ 337              	.LVL24:
+ 340:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 341:Src/pwm_curr_fdbk.c ****   }
+ 342:Src/pwm_curr_fdbk.c **** #endif
+ 343:Src/pwm_curr_fdbk.c ****   return (returnValue);
+ 338              		.loc 1 343 3 is_stmt 1 view .LVU106
+ 344:Src/pwm_curr_fdbk.c **** }
+ 339              		.loc 1 344 1 is_stmt 0 view .LVU107
+ 340 00a6 03B0     		add	sp, sp, #12
+ 341              		.cfi_remember_state
+ 342              		.cfi_def_cfa_offset 20
+ 343              		@ sp needed
+ 344 00a8 F0BD     		pop	{r4, r5, r6, r7, pc}
+ 345              	.LVL25:
+ 346              	.L54:
+ 347              		.cfi_restore_state
+ARM GAS  /tmp/ccwRyL58.s 			page 13
+
+
+ 232:Src/pwm_curr_fdbk.c ****       {
+ 348              		.loc 1 232 7 is_stmt 1 view .LVU108
+ 232:Src/pwm_curr_fdbk.c ****       {
+ 349              		.loc 1 232 10 is_stmt 0 view .LVU109
+ 350 00aa B1F1FF3F 		cmp	r1, #-1
+ 351 00ae 1ADB     		blt	.L59
+ 244:Src/pwm_curr_fdbk.c ****         {
+ 352              		.loc 1 244 9 is_stmt 1 view .LVU110
+ 244:Src/pwm_curr_fdbk.c ****         {
+ 353              		.loc 1 244 12 is_stmt 0 view .LVU111
+ 354 00b0 002C     		cmp	r4, #0
+ 355 00b2 40DD     		ble	.L60
+ 257:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t )pHandle->PWMperiod) / 4)+ ((wY - wX) / (int32_t)262144);
+ 356              		.loc 1 257 11 is_stmt 1 view .LVU112
+ 257:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t )pHandle->PWMperiod) / 4)+ ((wY - wX) / (int32_t)262144);
+ 357              		.loc 1 257 27 is_stmt 0 view .LVU113
+ 358 00b4 0222     		movs	r2, #2
+ 359              	.LVL26:
+ 257:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t )pHandle->PWMperiod) / 4)+ ((wY - wX) / (int32_t)262144);
+ 360              		.loc 1 257 27 view .LVU114
+ 361 00b6 80F86A20 		strb	r2, [r0, #106]
+ 258:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhA - (wY / 131072);
+ 362              		.loc 1 258 11 is_stmt 1 view .LVU115
+ 258:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhA - (wY / 131072);
+ 363              		.loc 1 258 54 is_stmt 0 view .LVU116
+ 364 00ba D340     		lsrs	r3, r3, r2
+ 258:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhA - (wY / 131072);
+ 365              		.loc 1 258 71 view .LVU117
+ 366 00bc 3A1B     		subs	r2, r7, r4
+ 367 00be 62D4     		bmi	.L61
+ 368              	.L27:
+ 258:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhA - (wY / 131072);
+ 369              		.loc 1 258 20 view .LVU118
+ 370 00c0 03EBA243 		add	r3, r3, r2, asr #18
+ 371              	.LVL27:
+ 259:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhC + (wX / 131072);
+ 372              		.loc 1 259 11 is_stmt 1 view .LVU119
+ 259:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhC + (wX / 131072);
+ 373              		.loc 1 259 37 is_stmt 0 view .LVU120
+ 374 00c4 2946     		mov	r1, r5
+ 375              	.LVL28:
+ 259:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhC + (wX / 131072);
+ 376              		.loc 1 259 37 view .LVU121
+ 377 00c6 002D     		cmp	r5, #0
+ 378 00c8 62DB     		blt	.L62
+ 379              	.L28:
+ 259:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhC + (wX / 131072);
+ 380              		.loc 1 259 20 view .LVU122
+ 381 00ca A3EBA141 		sub	r1, r3, r1, asr #18
+ 382              	.LVL29:
+ 260:Src/pwm_curr_fdbk.c **** 
+ 383              		.loc 1 260 11 is_stmt 1 view .LVU123
+ 260:Src/pwm_curr_fdbk.c **** 
+ 384              		.loc 1 260 37 is_stmt 0 view .LVU124
+ 385 00ce 2246     		mov	r2, r4
+ 386 00d0 002C     		cmp	r4, #0
+ 387 00d2 62DB     		blt	.L63
+ARM GAS  /tmp/ccwRyL58.s 			page 14
+
+
+ 388              	.L29:
+ 260:Src/pwm_curr_fdbk.c **** 
+ 389              		.loc 1 260 20 view .LVU125
+ 390 00d4 01EB6242 		add	r2, r1, r2, asr #17
+ 391              	.LVL30:
+ 262:Src/pwm_curr_fdbk.c ****           pHandle->midDuty = (uint16_t)wTimePhC;
+ 392              		.loc 1 262 11 is_stmt 1 view .LVU126
+ 262:Src/pwm_curr_fdbk.c ****           pHandle->midDuty = (uint16_t)wTimePhC;
+ 393              		.loc 1 262 28 is_stmt 0 view .LVU127
+ 394 00d8 A0F84620 		strh	r2, [r0, #70]	@ movhi
+ 263:Src/pwm_curr_fdbk.c ****           pHandle->highDuty = (uint16_t)wTimePhA;
+ 395              		.loc 1 263 11 is_stmt 1 view .LVU128
+ 263:Src/pwm_curr_fdbk.c ****           pHandle->highDuty = (uint16_t)wTimePhA;
+ 396              		.loc 1 263 28 is_stmt 0 view .LVU129
+ 397 00dc A0F84810 		strh	r1, [r0, #72]	@ movhi
+ 264:Src/pwm_curr_fdbk.c ****         }
+ 398              		.loc 1 264 11 is_stmt 1 view .LVU130
+ 264:Src/pwm_curr_fdbk.c ****         }
+ 399              		.loc 1 264 29 is_stmt 0 view .LVU131
+ 400 00e0 A0F84A30 		strh	r3, [r0, #74]	@ movhi
+ 401 00e4 C7E7     		b	.L22
+ 402              	.LVL31:
+ 403              	.L59:
+ 234:Src/pwm_curr_fdbk.c ****         wTimePhA = (((int32_t)pHandle->PWMperiod) / 4) + ((wY - wZ) / (int32_t)262144);
+ 404              		.loc 1 234 9 is_stmt 1 view .LVU132
+ 234:Src/pwm_curr_fdbk.c ****         wTimePhA = (((int32_t)pHandle->PWMperiod) / 4) + ((wY - wZ) / (int32_t)262144);
+ 405              		.loc 1 234 25 is_stmt 0 view .LVU133
+ 406 00e6 0424     		movs	r4, #4
+ 407              	.LVL32:
+ 234:Src/pwm_curr_fdbk.c ****         wTimePhA = (((int32_t)pHandle->PWMperiod) / 4) + ((wY - wZ) / (int32_t)262144);
+ 408              		.loc 1 234 25 view .LVU134
+ 409 00e8 80F86A40 		strb	r4, [r0, #106]
+ 410              	.LVL33:
+ 235:Src/pwm_curr_fdbk.c ****         wTimePhB = wTimePhA + (wZ / 131072);
+ 411              		.loc 1 235 9 is_stmt 1 view .LVU135
+ 235:Src/pwm_curr_fdbk.c ****         wTimePhB = wTimePhA + (wZ / 131072);
+ 412              		.loc 1 235 51 is_stmt 0 view .LVU136
+ 413 00ec 9B08     		lsrs	r3, r3, #2
+ 235:Src/pwm_curr_fdbk.c ****         wTimePhB = wTimePhA + (wZ / 131072);
+ 414              		.loc 1 235 69 view .LVU137
+ 415 00ee BA1A     		subs	r2, r7, r2
+ 416              	.LVL34:
+ 235:Src/pwm_curr_fdbk.c ****         wTimePhB = wTimePhA + (wZ / 131072);
+ 417              		.loc 1 235 69 view .LVU138
+ 418 00f0 12D4     		bmi	.L64
+ 419              	.L19:
+ 235:Src/pwm_curr_fdbk.c ****         wTimePhB = wTimePhA + (wZ / 131072);
+ 420              		.loc 1 235 18 view .LVU139
+ 421 00f2 03EBA243 		add	r3, r3, r2, asr #18
+ 422              	.LVL35:
+ 236:Src/pwm_curr_fdbk.c ****         wTimePhC = wTimePhA - (wY / 131072) ;
+ 423              		.loc 1 236 9 is_stmt 1 view .LVU140
+ 236:Src/pwm_curr_fdbk.c ****         wTimePhC = wTimePhA - (wY / 131072) ;
+ 424              		.loc 1 236 35 is_stmt 0 view .LVU141
+ 425 00f6 0A46     		mov	r2, r1
+ 426 00f8 0029     		cmp	r1, #0
+ 427 00fa 12DB     		blt	.L65
+ARM GAS  /tmp/ccwRyL58.s 			page 15
+
+
+ 428              	.L20:
+ 236:Src/pwm_curr_fdbk.c ****         wTimePhC = wTimePhA - (wY / 131072) ;
+ 429              		.loc 1 236 18 view .LVU142
+ 430 00fc 03EBA242 		add	r2, r3, r2, asr #18
+ 431              	.LVL36:
+ 237:Src/pwm_curr_fdbk.c **** 
+ 432              		.loc 1 237 9 is_stmt 1 view .LVU143
+ 237:Src/pwm_curr_fdbk.c **** 
+ 433              		.loc 1 237 35 is_stmt 0 view .LVU144
+ 434 0100 2946     		mov	r1, r5
+ 435              	.LVL37:
+ 237:Src/pwm_curr_fdbk.c **** 
+ 436              		.loc 1 237 35 view .LVU145
+ 437 0102 002D     		cmp	r5, #0
+ 438 0104 12DB     		blt	.L66
+ 439              	.L21:
+ 237:Src/pwm_curr_fdbk.c **** 
+ 440              		.loc 1 237 18 view .LVU146
+ 441 0106 A3EBA141 		sub	r1, r3, r1, asr #18
+ 442              	.LVL38:
+ 239:Src/pwm_curr_fdbk.c ****         pHandle->midDuty = (uint16_t)wTimePhA;
+ 443              		.loc 1 239 9 is_stmt 1 view .LVU147
+ 239:Src/pwm_curr_fdbk.c ****         pHandle->midDuty = (uint16_t)wTimePhA;
+ 444              		.loc 1 239 26 is_stmt 0 view .LVU148
+ 445 010a A0F84610 		strh	r1, [r0, #70]	@ movhi
+ 240:Src/pwm_curr_fdbk.c ****         pHandle->highDuty = (uint16_t)wTimePhB;
+ 446              		.loc 1 240 9 is_stmt 1 view .LVU149
+ 240:Src/pwm_curr_fdbk.c ****         pHandle->highDuty = (uint16_t)wTimePhB;
+ 447              		.loc 1 240 26 is_stmt 0 view .LVU150
+ 448 010e A0F84830 		strh	r3, [r0, #72]	@ movhi
+ 241:Src/pwm_curr_fdbk.c ****       }
+ 449              		.loc 1 241 9 is_stmt 1 view .LVU151
+ 241:Src/pwm_curr_fdbk.c ****       }
+ 450              		.loc 1 241 27 is_stmt 0 view .LVU152
+ 451 0112 A0F84A20 		strh	r2, [r0, #74]	@ movhi
+ 452 0116 AEE7     		b	.L22
+ 453              	.LVL39:
+ 454              	.L64:
+ 235:Src/pwm_curr_fdbk.c ****         wTimePhB = wTimePhA + (wZ / 131072);
+ 455              		.loc 1 235 69 view .LVU153
+ 456 0118 02F57F32 		add	r2, r2, #261120
+ 457 011c 02F2FF32 		addw	r2, r2, #1023
+ 458 0120 E7E7     		b	.L19
+ 459              	.LVL40:
+ 460              	.L65:
+ 236:Src/pwm_curr_fdbk.c ****         wTimePhC = wTimePhA - (wY / 131072) ;
+ 461              		.loc 1 236 35 view .LVU154
+ 462 0122 01F57F32 		add	r2, r1, #261120
+ 463 0126 02F2FF32 		addw	r2, r2, #1023
+ 464 012a E7E7     		b	.L20
+ 465              	.LVL41:
+ 466              	.L66:
+ 237:Src/pwm_curr_fdbk.c **** 
+ 467              		.loc 1 237 35 view .LVU155
+ 468 012c 05F57F31 		add	r1, r5, #261120
+ 469 0130 01F2FF31 		addw	r1, r1, #1023
+ 470 0134 E7E7     		b	.L21
+ARM GAS  /tmp/ccwRyL58.s 			page 16
+
+
+ 471              	.LVL42:
+ 472              	.L60:
+ 246:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t)pHandle->PWMperiod) / 4) + ((wX - wZ) / (int32_t)262144);
+ 473              		.loc 1 246 11 is_stmt 1 view .LVU156
+ 246:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t)pHandle->PWMperiod) / 4) + ((wX - wZ) / (int32_t)262144);
+ 474              		.loc 1 246 27 is_stmt 0 view .LVU157
+ 475 0136 0325     		movs	r5, #3
+ 476 0138 80F86A50 		strb	r5, [r0, #106]
+ 247:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhA + (wZ / 131072);
+ 477              		.loc 1 247 11 is_stmt 1 view .LVU158
+ 247:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhA + (wZ / 131072);
+ 478              		.loc 1 247 53 is_stmt 0 view .LVU159
+ 479 013c 9B08     		lsrs	r3, r3, #2
+ 247:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhA + (wZ / 131072);
+ 480              		.loc 1 247 71 view .LVU160
+ 481 013e A21A     		subs	r2, r4, r2
+ 482              	.LVL43:
+ 247:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhA + (wZ / 131072);
+ 483              		.loc 1 247 71 view .LVU161
+ 484 0140 12D4     		bmi	.L67
+ 485              	.L24:
+ 247:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhA + (wZ / 131072);
+ 486              		.loc 1 247 20 view .LVU162
+ 487 0142 03EBA243 		add	r3, r3, r2, asr #18
+ 488              	.LVL44:
+ 248:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhB - (wX / 131072);
+ 489              		.loc 1 248 11 is_stmt 1 view .LVU163
+ 248:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhB - (wX / 131072);
+ 490              		.loc 1 248 37 is_stmt 0 view .LVU164
+ 491 0146 0A46     		mov	r2, r1
+ 492 0148 0029     		cmp	r1, #0
+ 493 014a 12DB     		blt	.L68
+ 494              	.L25:
+ 248:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhB - (wX / 131072);
+ 495              		.loc 1 248 20 view .LVU165
+ 496 014c 03EBA242 		add	r2, r3, r2, asr #18
+ 497              	.LVL45:
+ 249:Src/pwm_curr_fdbk.c **** 
+ 498              		.loc 1 249 11 is_stmt 1 view .LVU166
+ 249:Src/pwm_curr_fdbk.c **** 
+ 499              		.loc 1 249 37 is_stmt 0 view .LVU167
+ 500 0150 2146     		mov	r1, r4
+ 501              	.LVL46:
+ 249:Src/pwm_curr_fdbk.c **** 
+ 502              		.loc 1 249 37 view .LVU168
+ 503 0152 002C     		cmp	r4, #0
+ 504 0154 12DB     		blt	.L69
+ 505              	.L26:
+ 249:Src/pwm_curr_fdbk.c **** 
+ 506              		.loc 1 249 20 view .LVU169
+ 507 0156 A2EB6141 		sub	r1, r2, r1, asr #17
+ 508              	.LVL47:
+ 251:Src/pwm_curr_fdbk.c ****           pHandle->midDuty = (uint16_t)wTimePhB;
+ 509              		.loc 1 251 11 is_stmt 1 view .LVU170
+ 251:Src/pwm_curr_fdbk.c ****           pHandle->midDuty = (uint16_t)wTimePhB;
+ 510              		.loc 1 251 28 is_stmt 0 view .LVU171
+ 511 015a A0F84610 		strh	r1, [r0, #70]	@ movhi
+ARM GAS  /tmp/ccwRyL58.s 			page 17
+
+
+ 252:Src/pwm_curr_fdbk.c ****           pHandle->highDuty = (uint16_t)wTimePhA;
+ 512              		.loc 1 252 11 is_stmt 1 view .LVU172
+ 252:Src/pwm_curr_fdbk.c ****           pHandle->highDuty = (uint16_t)wTimePhA;
+ 513              		.loc 1 252 28 is_stmt 0 view .LVU173
+ 514 015e A0F84820 		strh	r2, [r0, #72]	@ movhi
+ 253:Src/pwm_curr_fdbk.c ****         }
+ 515              		.loc 1 253 11 is_stmt 1 view .LVU174
+ 253:Src/pwm_curr_fdbk.c ****         }
+ 516              		.loc 1 253 29 is_stmt 0 view .LVU175
+ 517 0162 A0F84A30 		strh	r3, [r0, #74]	@ movhi
+ 518 0166 86E7     		b	.L22
+ 519              	.LVL48:
+ 520              	.L67:
+ 247:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhA + (wZ / 131072);
+ 521              		.loc 1 247 71 view .LVU176
+ 522 0168 02F57F32 		add	r2, r2, #261120
+ 523 016c 02F2FF32 		addw	r2, r2, #1023
+ 524 0170 E7E7     		b	.L24
+ 525              	.LVL49:
+ 526              	.L68:
+ 248:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhB - (wX / 131072);
+ 527              		.loc 1 248 37 view .LVU177
+ 528 0172 01F57F32 		add	r2, r1, #261120
+ 529 0176 02F2FF32 		addw	r2, r2, #1023
+ 530 017a E7E7     		b	.L25
+ 531              	.LVL50:
+ 532              	.L69:
+ 249:Src/pwm_curr_fdbk.c **** 
+ 533              		.loc 1 249 37 view .LVU178
+ 534 017c 04F5FF31 		add	r1, r4, #130560
+ 535              	.LVL51:
+ 249:Src/pwm_curr_fdbk.c **** 
+ 536              		.loc 1 249 37 view .LVU179
+ 537 0180 01F2FF11 		addw	r1, r1, #511
+ 538 0184 E7E7     		b	.L26
+ 539              	.LVL52:
+ 540              	.L61:
+ 258:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhA - (wY / 131072);
+ 541              		.loc 1 258 71 view .LVU180
+ 542 0186 02F57F32 		add	r2, r2, #261120
+ 543 018a 02F2FF32 		addw	r2, r2, #1023
+ 544 018e 97E7     		b	.L27
+ 545              	.LVL53:
+ 546              	.L62:
+ 259:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhC + (wX / 131072);
+ 547              		.loc 1 259 37 view .LVU181
+ 548 0190 05F57F31 		add	r1, r5, #261120
+ 549 0194 01F2FF31 		addw	r1, r1, #1023
+ 550 0198 97E7     		b	.L28
+ 551              	.LVL54:
+ 552              	.L63:
+ 260:Src/pwm_curr_fdbk.c **** 
+ 553              		.loc 1 260 37 view .LVU182
+ 554 019a 04F5FF32 		add	r2, r4, #130560
+ 555              	.LVL55:
+ 260:Src/pwm_curr_fdbk.c **** 
+ 556              		.loc 1 260 37 view .LVU183
+ARM GAS  /tmp/ccwRyL58.s 			page 18
+
+
+ 557 019e 02F2FF12 		addw	r2, r2, #511
+ 558 01a2 97E7     		b	.L29
+ 559              	.LVL56:
+ 560              	.L55:
+ 272:Src/pwm_curr_fdbk.c ****         wTimePhB = wTimePhA + (wZ / 131072);
+ 561              		.loc 1 272 69 view .LVU184
+ 562 01a4 02F57F32 		add	r2, r2, #261120
+ 563 01a8 02F2FF32 		addw	r2, r2, #1023
+ 564 01ac 4FE7     		b	.L31
+ 565              	.LVL57:
+ 566              	.L56:
+ 273:Src/pwm_curr_fdbk.c ****         wTimePhC = wTimePhA - (wY / 131072);
+ 567              		.loc 1 273 35 view .LVU185
+ 568 01ae 01F57F32 		add	r2, r1, #261120
+ 569 01b2 02F2FF32 		addw	r2, r2, #1023
+ 570 01b6 50E7     		b	.L32
+ 571              	.LVL58:
+ 572              	.L57:
+ 274:Src/pwm_curr_fdbk.c **** 
+ 573              		.loc 1 274 35 view .LVU186
+ 574 01b8 05F57F31 		add	r1, r5, #261120
+ 575 01bc 01F2FF31 		addw	r1, r1, #1023
+ 576 01c0 51E7     		b	.L33
+ 577              	.LVL59:
+ 578              	.L30:
+ 281:Src/pwm_curr_fdbk.c ****         {
+ 579              		.loc 1 281 9 is_stmt 1 view .LVU187
+ 281:Src/pwm_curr_fdbk.c ****         {
+ 580              		.loc 1 281 12 is_stmt 0 view .LVU188
+ 581 01c2 002C     		cmp	r4, #0
+ 582 01c4 18DD     		ble	.L70
+ 294:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t)pHandle->PWMperiod) / 4)+ ((wX - wZ) / (int32_t)262144);
+ 583              		.loc 1 294 11 is_stmt 1 view .LVU189
+ 294:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t)pHandle->PWMperiod) / 4)+ ((wX - wZ) / (int32_t)262144);
+ 584              		.loc 1 294 27 is_stmt 0 view .LVU190
+ 585 01c6 0025     		movs	r5, #0
+ 586 01c8 80F86A50 		strb	r5, [r0, #106]
+ 295:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhA + (wZ / 131072);
+ 587              		.loc 1 295 11 is_stmt 1 view .LVU191
+ 295:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhA + (wZ / 131072);
+ 588              		.loc 1 295 53 is_stmt 0 view .LVU192
+ 589 01cc 9D08     		lsrs	r5, r3, #2
+ 295:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhA + (wZ / 131072);
+ 590              		.loc 1 295 70 view .LVU193
+ 591 01ce A31A     		subs	r3, r4, r2
+ 592 01d0 3AD4     		bmi	.L71
+ 593              	.L38:
+ 295:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhA + (wZ / 131072);
+ 594              		.loc 1 295 20 view .LVU194
+ 595 01d2 05EBA343 		add	r3, r5, r3, asr #18
+ 596              	.LVL60:
+ 296:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhB - (wX / 131072);
+ 597              		.loc 1 296 11 is_stmt 1 view .LVU195
+ 296:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhB - (wX / 131072);
+ 598              		.loc 1 296 37 is_stmt 0 view .LVU196
+ 599 01d6 0A46     		mov	r2, r1
+ 600              	.LVL61:
+ARM GAS  /tmp/ccwRyL58.s 			page 19
+
+
+ 296:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhB - (wX / 131072);
+ 601              		.loc 1 296 37 view .LVU197
+ 602 01d8 0029     		cmp	r1, #0
+ 603 01da 3ADB     		blt	.L72
+ 604              	.L39:
+ 296:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhB - (wX / 131072);
+ 605              		.loc 1 296 20 view .LVU198
+ 606 01dc 03EBA242 		add	r2, r3, r2, asr #18
+ 607              	.LVL62:
+ 297:Src/pwm_curr_fdbk.c **** 
+ 608              		.loc 1 297 11 is_stmt 1 view .LVU199
+ 297:Src/pwm_curr_fdbk.c **** 
+ 609              		.loc 1 297 37 is_stmt 0 view .LVU200
+ 610 01e0 2146     		mov	r1, r4
+ 611              	.LVL63:
+ 297:Src/pwm_curr_fdbk.c **** 
+ 612              		.loc 1 297 37 view .LVU201
+ 613 01e2 002C     		cmp	r4, #0
+ 614 01e4 3ADB     		blt	.L73
+ 615              	.L40:
+ 297:Src/pwm_curr_fdbk.c **** 
+ 616              		.loc 1 297 20 view .LVU202
+ 617 01e6 A2EB6141 		sub	r1, r2, r1, asr #17
+ 618              	.LVL64:
+ 299:Src/pwm_curr_fdbk.c ****           pHandle->midDuty = (uint16_t)wTimePhB;
+ 619              		.loc 1 299 11 is_stmt 1 view .LVU203
+ 299:Src/pwm_curr_fdbk.c ****           pHandle->midDuty = (uint16_t)wTimePhB;
+ 620              		.loc 1 299 28 is_stmt 0 view .LVU204
+ 621 01ea A0F84630 		strh	r3, [r0, #70]	@ movhi
+ 300:Src/pwm_curr_fdbk.c ****           pHandle->highDuty = (uint16_t)wTimePhC;
+ 622              		.loc 1 300 11 is_stmt 1 view .LVU205
+ 300:Src/pwm_curr_fdbk.c ****           pHandle->highDuty = (uint16_t)wTimePhC;
+ 623              		.loc 1 300 28 is_stmt 0 view .LVU206
+ 624 01ee A0F84820 		strh	r2, [r0, #72]	@ movhi
+ 301:Src/pwm_curr_fdbk.c ****         }
+ 625              		.loc 1 301 11 is_stmt 1 view .LVU207
+ 301:Src/pwm_curr_fdbk.c ****         }
+ 626              		.loc 1 301 29 is_stmt 0 view .LVU208
+ 627 01f2 A0F84A10 		strh	r1, [r0, #74]	@ movhi
+ 628 01f6 3EE7     		b	.L22
+ 629              	.LVL65:
+ 630              	.L70:
+ 283:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t )pHandle->PWMperiod) / 4) + ((wY - wX) / (int32_t)262144);
+ 631              		.loc 1 283 11 is_stmt 1 view .LVU209
+ 283:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t )pHandle->PWMperiod) / 4) + ((wY - wX) / (int32_t)262144);
+ 632              		.loc 1 283 27 is_stmt 0 view .LVU210
+ 633 01f8 0522     		movs	r2, #5
+ 634              	.LVL66:
+ 283:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t )pHandle->PWMperiod) / 4) + ((wY - wX) / (int32_t)262144);
+ 635              		.loc 1 283 27 view .LVU211
+ 636 01fa 80F86A20 		strb	r2, [r0, #106]
+ 284:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhA - (wY / 131072);
+ 637              		.loc 1 284 11 is_stmt 1 view .LVU212
+ 284:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhA - (wY / 131072);
+ 638              		.loc 1 284 54 is_stmt 0 view .LVU213
+ 639 01fe 9B08     		lsrs	r3, r3, #2
+ 284:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhA - (wY / 131072);
+ARM GAS  /tmp/ccwRyL58.s 			page 20
+
+
+ 640              		.loc 1 284 72 view .LVU214
+ 641 0200 3A1B     		subs	r2, r7, r4
+ 642 0202 12D4     		bmi	.L74
+ 643              	.L35:
+ 284:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhA - (wY / 131072);
+ 644              		.loc 1 284 20 view .LVU215
+ 645 0204 03EBA243 		add	r3, r3, r2, asr #18
+ 646              	.LVL67:
+ 285:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhC + (wX / 131072);
+ 647              		.loc 1 285 11 is_stmt 1 view .LVU216
+ 285:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhC + (wX / 131072);
+ 648              		.loc 1 285 37 is_stmt 0 view .LVU217
+ 649 0208 2946     		mov	r1, r5
+ 650              	.LVL68:
+ 285:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhC + (wX / 131072);
+ 651              		.loc 1 285 37 view .LVU218
+ 652 020a 002D     		cmp	r5, #0
+ 653 020c 12DB     		blt	.L75
+ 654              	.L36:
+ 285:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhC + (wX / 131072);
+ 655              		.loc 1 285 20 view .LVU219
+ 656 020e A3EBA141 		sub	r1, r3, r1, asr #18
+ 657              	.LVL69:
+ 286:Src/pwm_curr_fdbk.c **** 
+ 658              		.loc 1 286 11 is_stmt 1 view .LVU220
+ 286:Src/pwm_curr_fdbk.c **** 
+ 659              		.loc 1 286 37 is_stmt 0 view .LVU221
+ 660 0212 2246     		mov	r2, r4
+ 661 0214 002C     		cmp	r4, #0
+ 662 0216 12DB     		blt	.L76
+ 663              	.L37:
+ 286:Src/pwm_curr_fdbk.c **** 
+ 664              		.loc 1 286 20 view .LVU222
+ 665 0218 01EB6242 		add	r2, r1, r2, asr #17
+ 666              	.LVL70:
+ 288:Src/pwm_curr_fdbk.c ****           pHandle->midDuty = (uint16_t)wTimePhC;
+ 667              		.loc 1 288 11 is_stmt 1 view .LVU223
+ 288:Src/pwm_curr_fdbk.c ****           pHandle->midDuty = (uint16_t)wTimePhC;
+ 668              		.loc 1 288 28 is_stmt 0 view .LVU224
+ 669 021c A0F84630 		strh	r3, [r0, #70]	@ movhi
+ 289:Src/pwm_curr_fdbk.c ****           pHandle->highDuty = (uint16_t)wTimePhB;
+ 670              		.loc 1 289 11 is_stmt 1 view .LVU225
+ 289:Src/pwm_curr_fdbk.c ****           pHandle->highDuty = (uint16_t)wTimePhB;
+ 671              		.loc 1 289 28 is_stmt 0 view .LVU226
+ 672 0220 A0F84810 		strh	r1, [r0, #72]	@ movhi
+ 290:Src/pwm_curr_fdbk.c ****         }
+ 673              		.loc 1 290 11 is_stmt 1 view .LVU227
+ 290:Src/pwm_curr_fdbk.c ****         }
+ 674              		.loc 1 290 29 is_stmt 0 view .LVU228
+ 675 0224 A0F84A20 		strh	r2, [r0, #74]	@ movhi
+ 676 0228 25E7     		b	.L22
+ 677              	.LVL71:
+ 678              	.L74:
+ 284:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhA - (wY / 131072);
+ 679              		.loc 1 284 72 view .LVU229
+ 680 022a 02F57F32 		add	r2, r2, #261120
+ 681 022e 02F2FF32 		addw	r2, r2, #1023
+ARM GAS  /tmp/ccwRyL58.s 			page 21
+
+
+ 682 0232 E7E7     		b	.L35
+ 683              	.LVL72:
+ 684              	.L75:
+ 285:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhC + (wX / 131072);
+ 685              		.loc 1 285 37 view .LVU230
+ 686 0234 05F57F31 		add	r1, r5, #261120
+ 687 0238 01F2FF31 		addw	r1, r1, #1023
+ 688 023c E7E7     		b	.L36
+ 689              	.LVL73:
+ 690              	.L76:
+ 286:Src/pwm_curr_fdbk.c **** 
+ 691              		.loc 1 286 37 view .LVU231
+ 692 023e 04F5FF32 		add	r2, r4, #130560
+ 693              	.LVL74:
+ 286:Src/pwm_curr_fdbk.c **** 
+ 694              		.loc 1 286 37 view .LVU232
+ 695 0242 02F2FF12 		addw	r2, r2, #511
+ 696 0246 E7E7     		b	.L37
+ 697              	.LVL75:
+ 698              	.L71:
+ 295:Src/pwm_curr_fdbk.c ****           wTimePhB = wTimePhA + (wZ / 131072);
+ 699              		.loc 1 295 70 view .LVU233
+ 700 0248 03F57F33 		add	r3, r3, #261120
+ 701 024c 03F2FF33 		addw	r3, r3, #1023
+ 702 0250 BFE7     		b	.L38
+ 703              	.LVL76:
+ 704              	.L72:
+ 296:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhB - (wX / 131072);
+ 705              		.loc 1 296 37 view .LVU234
+ 706 0252 01F57F32 		add	r2, r1, #261120
+ 707 0256 02F2FF32 		addw	r2, r2, #1023
+ 708 025a BFE7     		b	.L39
+ 709              	.LVL77:
+ 710              	.L73:
+ 297:Src/pwm_curr_fdbk.c **** 
+ 711              		.loc 1 297 37 view .LVU235
+ 712 025c 04F5FF31 		add	r1, r4, #130560
+ 713              	.LVL78:
+ 297:Src/pwm_curr_fdbk.c **** 
+ 714              		.loc 1 297 37 view .LVU236
+ 715 0260 01F2FF11 		addw	r1, r1, #511
+ 716 0264 BFE7     		b	.L40
+ 717              	.LVL79:
+ 718              	.L50:
+ 305:Src/pwm_curr_fdbk.c ****     pHandle->CntPhB = (uint16_t)(MAX(wTimePhB, 0));
+ 719              		.loc 1 305 23 view .LVU237
+ 720 0266 0023     		movs	r3, #0
+ 721              	.LVL80:
+ 305:Src/pwm_curr_fdbk.c ****     pHandle->CntPhB = (uint16_t)(MAX(wTimePhB, 0));
+ 722              		.loc 1 305 23 view .LVU238
+ 723 0268 09E7     		b	.L41
+ 724              	.L51:
+ 306:Src/pwm_curr_fdbk.c ****     pHandle->CntPhC = (uint16_t)(MAX(wTimePhC, 0));
+ 725              		.loc 1 306 23 view .LVU239
+ 726 026a 0022     		movs	r2, #0
+ 727              	.LVL81:
+ 306:Src/pwm_curr_fdbk.c ****     pHandle->CntPhC = (uint16_t)(MAX(wTimePhC, 0));
+ARM GAS  /tmp/ccwRyL58.s 			page 22
+
+
+ 728              		.loc 1 306 23 view .LVU240
+ 729 026c 0CE7     		b	.L42
+ 730              	.L52:
+ 307:Src/pwm_curr_fdbk.c **** 
+ 731              		.loc 1 307 23 view .LVU241
+ 732 026e 0021     		movs	r1, #0
+ 733              	.LVL82:
+ 307:Src/pwm_curr_fdbk.c **** 
+ 734              		.loc 1 307 23 view .LVU242
+ 735 0270 10E7     		b	.L43
+ 736              	.L58:
+ 312:Src/pwm_curr_fdbk.c ****       {
+ 737              		.loc 1 312 7 is_stmt 1 view .LVU243
+ 312:Src/pwm_curr_fdbk.c ****       {
+ 738              		.loc 1 312 18 is_stmt 0 view .LVU244
+ 739 0272 B0F95040 		ldrsh	r4, [r0, #80]
+ 312:Src/pwm_curr_fdbk.c ****       {
+ 740              		.loc 1 312 10 view .LVU245
+ 741 0276 002C     		cmp	r4, #0
+ 742 0278 16DD     		ble	.L45
+ 314:Src/pwm_curr_fdbk.c ****       }
+ 743              		.loc 1 314 9 is_stmt 1 view .LVU246
+ 314:Src/pwm_curr_fdbk.c ****       }
+ 744              		.loc 1 314 35 is_stmt 0 view .LVU247
+ 745 027a B0F86240 		ldrh	r4, [r0, #98]
+ 314:Src/pwm_curr_fdbk.c ****       }
+ 746              		.loc 1 314 25 view .LVU248
+ 747 027e 2344     		add	r3, r3, r4
+ 748 0280 C387     		strh	r3, [r0, #62]	@ movhi
+ 749              	.L46:
+ 321:Src/pwm_curr_fdbk.c ****       {
+ 750              		.loc 1 321 7 is_stmt 1 view .LVU249
+ 321:Src/pwm_curr_fdbk.c ****       {
+ 751              		.loc 1 321 18 is_stmt 0 view .LVU250
+ 752 0282 B0F95230 		ldrsh	r3, [r0, #82]
+ 321:Src/pwm_curr_fdbk.c ****       {
+ 753              		.loc 1 321 10 view .LVU251
+ 754 0286 002B     		cmp	r3, #0
+ 755 0288 13DD     		ble	.L47
+ 323:Src/pwm_curr_fdbk.c ****       }
+ 756              		.loc 1 323 9 is_stmt 1 view .LVU252
+ 323:Src/pwm_curr_fdbk.c ****       }
+ 757              		.loc 1 323 35 is_stmt 0 view .LVU253
+ 758 028a B0F86230 		ldrh	r3, [r0, #98]
+ 323:Src/pwm_curr_fdbk.c ****       }
+ 759              		.loc 1 323 25 view .LVU254
+ 760 028e 1A44     		add	r2, r2, r3
+ 761 0290 A0F84020 		strh	r2, [r0, #64]	@ movhi
+ 762              	.L48:
+ 330:Src/pwm_curr_fdbk.c ****       {
+ 763              		.loc 1 330 7 is_stmt 1 view .LVU255
+ 330:Src/pwm_curr_fdbk.c ****       {
+ 764              		.loc 1 330 18 is_stmt 0 view .LVU256
+ 765 0294 B0F95430 		ldrsh	r3, [r0, #84]
+ 330:Src/pwm_curr_fdbk.c ****       {
+ 766              		.loc 1 330 10 view .LVU257
+ 767 0298 002B     		cmp	r3, #0
+ARM GAS  /tmp/ccwRyL58.s 			page 23
+
+
+ 768 029a 10DD     		ble	.L49
+ 332:Src/pwm_curr_fdbk.c ****       }
+ 769              		.loc 1 332 9 is_stmt 1 view .LVU258
+ 332:Src/pwm_curr_fdbk.c ****       }
+ 770              		.loc 1 332 35 is_stmt 0 view .LVU259
+ 771 029c B0F86230 		ldrh	r3, [r0, #98]
+ 332:Src/pwm_curr_fdbk.c ****       }
+ 772              		.loc 1 332 25 view .LVU260
+ 773 02a0 1944     		add	r1, r1, r3
+ 774 02a2 A0F84210 		strh	r1, [r0, #66]	@ movhi
+ 775 02a6 FCE6     		b	.L44
+ 776              	.L45:
+ 318:Src/pwm_curr_fdbk.c ****       }
+ 777              		.loc 1 318 9 is_stmt 1 view .LVU261
+ 318:Src/pwm_curr_fdbk.c ****       }
+ 778              		.loc 1 318 35 is_stmt 0 view .LVU262
+ 779 02a8 B0F86240 		ldrh	r4, [r0, #98]
+ 318:Src/pwm_curr_fdbk.c ****       }
+ 780              		.loc 1 318 25 view .LVU263
+ 781 02ac 1B1B     		subs	r3, r3, r4
+ 782 02ae C387     		strh	r3, [r0, #62]	@ movhi
+ 783 02b0 E7E7     		b	.L46
+ 784              	.L47:
+ 327:Src/pwm_curr_fdbk.c ****       }
+ 785              		.loc 1 327 9 is_stmt 1 view .LVU264
+ 327:Src/pwm_curr_fdbk.c ****       }
+ 786              		.loc 1 327 35 is_stmt 0 view .LVU265
+ 787 02b2 B0F86230 		ldrh	r3, [r0, #98]
+ 327:Src/pwm_curr_fdbk.c ****       }
+ 788              		.loc 1 327 25 view .LVU266
+ 789 02b6 D21A     		subs	r2, r2, r3
+ 790 02b8 A0F84020 		strh	r2, [r0, #64]	@ movhi
+ 791 02bc EAE7     		b	.L48
+ 792              	.L49:
+ 336:Src/pwm_curr_fdbk.c ****       }
+ 793              		.loc 1 336 9 is_stmt 1 view .LVU267
+ 336:Src/pwm_curr_fdbk.c ****       }
+ 794              		.loc 1 336 35 is_stmt 0 view .LVU268
+ 795 02be B0F86230 		ldrh	r3, [r0, #98]
+ 336:Src/pwm_curr_fdbk.c ****       }
+ 796              		.loc 1 336 25 view .LVU269
+ 797 02c2 C91A     		subs	r1, r1, r3
+ 798 02c4 A0F84210 		strh	r1, [r0, #66]	@ movhi
+ 799 02c8 EBE6     		b	.L44
+ 800              		.cfi_endproc
+ 801              	.LFE1441:
+ 803              		.section	.text.PWMC_SwitchOffPWM,"ax",%progbits
+ 804              		.align	1
+ 805              		.weak	PWMC_SwitchOffPWM
+ 806              		.syntax unified
+ 807              		.thumb
+ 808              		.thumb_func
+ 809              		.fpu fpv4-sp-d16
+ 811              	PWMC_SwitchOffPWM:
+ 812              	.LVL83:
+ 813              	.LFB1442:
+ 345:Src/pwm_curr_fdbk.c **** 
+ARM GAS  /tmp/ccwRyL58.s 			page 24
+
+
+ 346:Src/pwm_curr_fdbk.c **** /**
+ 347:Src/pwm_curr_fdbk.c ****   * @brief  Switches PWM generation off, inactivating the outputs.
+ 348:Src/pwm_curr_fdbk.c ****   * @param  pHandle Handle on the target instance of the PWMC component
+ 349:Src/pwm_curr_fdbk.c ****   */
+ 350:Src/pwm_curr_fdbk.c **** //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
+ 351:Src/pwm_curr_fdbk.c **** __weak void PWMC_SwitchOffPWM(PWMC_Handle_t *pHandle)
+ 352:Src/pwm_curr_fdbk.c **** {
+ 814              		.loc 1 352 1 is_stmt 1 view -0
+ 815              		.cfi_startproc
+ 816              		@ args = 0, pretend = 0, frame = 0
+ 817              		@ frame_needed = 0, uses_anonymous_args = 0
+ 818              		.loc 1 352 1 is_stmt 0 view .LVU271
+ 819 0000 08B5     		push	{r3, lr}
+ 820              		.cfi_def_cfa_offset 8
+ 821              		.cfi_offset 3, -8
+ 822              		.cfi_offset 14, -4
+ 353:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 354:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 355:Src/pwm_curr_fdbk.c ****   {
+ 356:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 357:Src/pwm_curr_fdbk.c ****   }
+ 358:Src/pwm_curr_fdbk.c ****   else
+ 359:Src/pwm_curr_fdbk.c ****   {
+ 360:Src/pwm_curr_fdbk.c **** #endif
+ 361:Src/pwm_curr_fdbk.c ****     pHandle->pFctSwitchOffPwm(pHandle);
+ 823              		.loc 1 361 5 is_stmt 1 view .LVU272
+ 824              		.loc 1 361 12 is_stmt 0 view .LVU273
+ 825 0002 4368     		ldr	r3, [r0, #4]
+ 826              		.loc 1 361 5 view .LVU274
+ 827 0004 9847     		blx	r3
+ 828              	.LVL84:
+ 362:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 363:Src/pwm_curr_fdbk.c ****   }
+ 364:Src/pwm_curr_fdbk.c **** #endif
+ 365:Src/pwm_curr_fdbk.c **** }
+ 829              		.loc 1 365 1 view .LVU275
+ 830 0006 08BD     		pop	{r3, pc}
+ 831              		.cfi_endproc
+ 832              	.LFE1442:
+ 834              		.section	.text.PWMC_SwitchOnPWM,"ax",%progbits
+ 835              		.align	1
+ 836              		.weak	PWMC_SwitchOnPWM
+ 837              		.syntax unified
+ 838              		.thumb
+ 839              		.thumb_func
+ 840              		.fpu fpv4-sp-d16
+ 842              	PWMC_SwitchOnPWM:
+ 843              	.LVL85:
+ 844              	.LFB1443:
+ 366:Src/pwm_curr_fdbk.c **** 
+ 367:Src/pwm_curr_fdbk.c **** /**
+ 368:Src/pwm_curr_fdbk.c ****   * @brief  Switches PWM generation on
+ 369:Src/pwm_curr_fdbk.c ****   * @param  pHandle Handle on the target instance of the PWMC component
+ 370:Src/pwm_curr_fdbk.c ****   */
+ 371:Src/pwm_curr_fdbk.c **** //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
+ 372:Src/pwm_curr_fdbk.c **** __weak void PWMC_SwitchOnPWM(PWMC_Handle_t *pHandle)
+ 373:Src/pwm_curr_fdbk.c **** {
+ARM GAS  /tmp/ccwRyL58.s 			page 25
+
+
+ 845              		.loc 1 373 1 is_stmt 1 view -0
+ 846              		.cfi_startproc
+ 847              		@ args = 0, pretend = 0, frame = 0
+ 848              		@ frame_needed = 0, uses_anonymous_args = 0
+ 849              		.loc 1 373 1 is_stmt 0 view .LVU277
+ 850 0000 08B5     		push	{r3, lr}
+ 851              		.cfi_def_cfa_offset 8
+ 852              		.cfi_offset 3, -8
+ 853              		.cfi_offset 14, -4
+ 374:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 375:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 376:Src/pwm_curr_fdbk.c ****   {
+ 377:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 378:Src/pwm_curr_fdbk.c ****   }
+ 379:Src/pwm_curr_fdbk.c ****   else
+ 380:Src/pwm_curr_fdbk.c ****   {
+ 381:Src/pwm_curr_fdbk.c **** #endif
+ 382:Src/pwm_curr_fdbk.c ****     pHandle->pFctSwitchOnPwm(pHandle);
+ 854              		.loc 1 382 5 is_stmt 1 view .LVU278
+ 855              		.loc 1 382 12 is_stmt 0 view .LVU279
+ 856 0002 8368     		ldr	r3, [r0, #8]
+ 857              		.loc 1 382 5 view .LVU280
+ 858 0004 9847     		blx	r3
+ 859              	.LVL86:
+ 383:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 384:Src/pwm_curr_fdbk.c ****   }
+ 385:Src/pwm_curr_fdbk.c **** #endif
+ 386:Src/pwm_curr_fdbk.c **** }
+ 860              		.loc 1 386 1 view .LVU281
+ 861 0006 08BD     		pop	{r3, pc}
+ 862              		.cfi_endproc
+ 863              	.LFE1443:
+ 865              		.section	.text.PWMC_CurrentReadingCalibr,"ax",%progbits
+ 866              		.align	1
+ 867              		.weak	PWMC_CurrentReadingCalibr
+ 868              		.syntax unified
+ 869              		.thumb
+ 870              		.thumb_func
+ 871              		.fpu fpv4-sp-d16
+ 873              	PWMC_CurrentReadingCalibr:
+ 874              	.LVL87:
+ 875              	.LFB1444:
+ 387:Src/pwm_curr_fdbk.c **** 
+ 388:Src/pwm_curr_fdbk.c **** /**
+ 389:Src/pwm_curr_fdbk.c ****   * @brief  Calibrates ADC current conversions by reading the offset voltage
+ 390:Src/pwm_curr_fdbk.c ****   *         present on ADC pins when no motor current is flowing in.
+ 391:Src/pwm_curr_fdbk.c ****   *
+ 392:Src/pwm_curr_fdbk.c ****   * This function should be called before each motor start-up.
+ 393:Src/pwm_curr_fdbk.c ****   *
+ 394:Src/pwm_curr_fdbk.c ****   * @param  pHandle Handle on the target instance of the PWMC component
+ 395:Src/pwm_curr_fdbk.c ****   * @param  action Can be #CRC_START to initialize the offset calibration or
+ 396:Src/pwm_curr_fdbk.c ****   *         #CRC_EXEC to execute the offset calibration.
+ 397:Src/pwm_curr_fdbk.c ****   * @retval true if the current calibration has been completed, false if it is
+ 398:Src/pwm_curr_fdbk.c ****   *         still ongoing.
+ 399:Src/pwm_curr_fdbk.c ****   */
+ 400:Src/pwm_curr_fdbk.c **** __weak bool PWMC_CurrentReadingCalibr(PWMC_Handle_t *pHandle, CRCAction_t action)
+ 401:Src/pwm_curr_fdbk.c **** {
+ARM GAS  /tmp/ccwRyL58.s 			page 26
+
+
+ 876              		.loc 1 401 1 is_stmt 1 view -0
+ 877              		.cfi_startproc
+ 878              		@ args = 0, pretend = 0, frame = 0
+ 879              		@ frame_needed = 0, uses_anonymous_args = 0
+ 880              		.loc 1 401 1 is_stmt 0 view .LVU283
+ 881 0000 10B5     		push	{r4, lr}
+ 882              		.cfi_def_cfa_offset 8
+ 883              		.cfi_offset 4, -8
+ 884              		.cfi_offset 14, -4
+ 885 0002 0446     		mov	r4, r0
+ 402:Src/pwm_curr_fdbk.c ****   bool retVal = false;
+ 886              		.loc 1 402 3 is_stmt 1 view .LVU284
+ 887              	.LVL88:
+ 403:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 404:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 405:Src/pwm_curr_fdbk.c ****   {
+ 406:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 407:Src/pwm_curr_fdbk.c ****   }
+ 408:Src/pwm_curr_fdbk.c ****   else
+ 409:Src/pwm_curr_fdbk.c ****   {
+ 410:Src/pwm_curr_fdbk.c **** #endif
+ 411:Src/pwm_curr_fdbk.c ****     if (CRC_START == action)
+ 888              		.loc 1 411 5 view .LVU285
+ 889              		.loc 1 411 8 is_stmt 0 view .LVU286
+ 890 0004 19B1     		cbz	r1, .L88
+ 412:Src/pwm_curr_fdbk.c ****     {
+ 413:Src/pwm_curr_fdbk.c ****       PWMC_SwitchOffPWM(pHandle);
+ 414:Src/pwm_curr_fdbk.c ****       pHandle->pFctCurrReadingCalib(pHandle);
+ 415:Src/pwm_curr_fdbk.c ****       retVal = true;
+ 416:Src/pwm_curr_fdbk.c ****     }
+ 417:Src/pwm_curr_fdbk.c ****     else if (CRC_EXEC == action)
+ 891              		.loc 1 417 10 is_stmt 1 view .LVU287
+ 892              		.loc 1 417 13 is_stmt 0 view .LVU288
+ 893 0006 0129     		cmp	r1, #1
+ 894 0008 08D0     		beq	.L89
+ 402:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 895              		.loc 1 402 8 view .LVU289
+ 896 000a 0020     		movs	r0, #0
+ 897              	.LVL89:
+ 898              	.L83:
+ 418:Src/pwm_curr_fdbk.c ****     {
+ 419:Src/pwm_curr_fdbk.c ****       if (pHandle->OffCalibrWaitTimeCounter > 0u)
+ 420:Src/pwm_curr_fdbk.c ****       {
+ 421:Src/pwm_curr_fdbk.c ****         pHandle->OffCalibrWaitTimeCounter--;
+ 422:Src/pwm_curr_fdbk.c ****         if (0U == pHandle->OffCalibrWaitTimeCounter)
+ 423:Src/pwm_curr_fdbk.c ****         {
+ 424:Src/pwm_curr_fdbk.c ****           pHandle->pFctCurrReadingCalib(pHandle);
+ 425:Src/pwm_curr_fdbk.c ****           retVal = true;
+ 426:Src/pwm_curr_fdbk.c ****         }
+ 427:Src/pwm_curr_fdbk.c ****       }
+ 428:Src/pwm_curr_fdbk.c ****       else
+ 429:Src/pwm_curr_fdbk.c ****       {
+ 430:Src/pwm_curr_fdbk.c ****         retVal = true;
+ 431:Src/pwm_curr_fdbk.c ****       }
+ 432:Src/pwm_curr_fdbk.c ****     }
+ 433:Src/pwm_curr_fdbk.c ****     else
+ 434:Src/pwm_curr_fdbk.c ****     {
+ARM GAS  /tmp/ccwRyL58.s 			page 27
+
+
+ 435:Src/pwm_curr_fdbk.c ****       /* Nothing to do */
+ 436:Src/pwm_curr_fdbk.c ****     }
+ 899              		.loc 1 436 5 is_stmt 1 view .LVU290
+ 437:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 438:Src/pwm_curr_fdbk.c ****   }
+ 439:Src/pwm_curr_fdbk.c **** #endif
+ 440:Src/pwm_curr_fdbk.c ****   return (retVal);
+ 900              		.loc 1 440 3 view .LVU291
+ 441:Src/pwm_curr_fdbk.c **** }
+ 901              		.loc 1 441 1 is_stmt 0 view .LVU292
+ 902 000c 10BD     		pop	{r4, pc}
+ 903              	.LVL90:
+ 904              	.L88:
+ 413:Src/pwm_curr_fdbk.c ****       pHandle->pFctCurrReadingCalib(pHandle);
+ 905              		.loc 1 413 7 is_stmt 1 view .LVU293
+ 906 000e FFF7FEFF 		bl	PWMC_SwitchOffPWM
+ 907              	.LVL91:
+ 414:Src/pwm_curr_fdbk.c ****       retVal = true;
+ 908              		.loc 1 414 7 view .LVU294
+ 414:Src/pwm_curr_fdbk.c ****       retVal = true;
+ 909              		.loc 1 414 14 is_stmt 0 view .LVU295
+ 910 0012 E368     		ldr	r3, [r4, #12]
+ 414:Src/pwm_curr_fdbk.c ****       retVal = true;
+ 911              		.loc 1 414 7 view .LVU296
+ 912 0014 2046     		mov	r0, r4
+ 913 0016 9847     		blx	r3
+ 914              	.LVL92:
+ 415:Src/pwm_curr_fdbk.c ****     }
+ 915              		.loc 1 415 7 is_stmt 1 view .LVU297
+ 415:Src/pwm_curr_fdbk.c ****     }
+ 916              		.loc 1 415 14 is_stmt 0 view .LVU298
+ 917 0018 0120     		movs	r0, #1
+ 918 001a F7E7     		b	.L83
+ 919              	.LVL93:
+ 920              	.L89:
+ 419:Src/pwm_curr_fdbk.c ****       {
+ 921              		.loc 1 419 7 is_stmt 1 view .LVU299
+ 419:Src/pwm_curr_fdbk.c ****       {
+ 922              		.loc 1 419 18 is_stmt 0 view .LVU300
+ 923 001c B0F84E30 		ldrh	r3, [r0, #78]
+ 419:Src/pwm_curr_fdbk.c ****       {
+ 924              		.loc 1 419 10 view .LVU301
+ 925 0020 43B1     		cbz	r3, .L85
+ 421:Src/pwm_curr_fdbk.c ****         if (0U == pHandle->OffCalibrWaitTimeCounter)
+ 926              		.loc 1 421 9 is_stmt 1 view .LVU302
+ 421:Src/pwm_curr_fdbk.c ****         if (0U == pHandle->OffCalibrWaitTimeCounter)
+ 927              		.loc 1 421 42 is_stmt 0 view .LVU303
+ 928 0022 013B     		subs	r3, r3, #1
+ 929 0024 9BB2     		uxth	r3, r3
+ 930 0026 A0F84E30 		strh	r3, [r0, #78]	@ movhi
+ 422:Src/pwm_curr_fdbk.c ****         {
+ 931              		.loc 1 422 9 is_stmt 1 view .LVU304
+ 422:Src/pwm_curr_fdbk.c ****         {
+ 932              		.loc 1 422 12 is_stmt 0 view .LVU305
+ 933 002a 2BB9     		cbnz	r3, .L86
+ 424:Src/pwm_curr_fdbk.c ****           retVal = true;
+ 934              		.loc 1 424 11 is_stmt 1 view .LVU306
+ARM GAS  /tmp/ccwRyL58.s 			page 28
+
+
+ 424:Src/pwm_curr_fdbk.c ****           retVal = true;
+ 935              		.loc 1 424 18 is_stmt 0 view .LVU307
+ 936 002c C368     		ldr	r3, [r0, #12]
+ 424:Src/pwm_curr_fdbk.c ****           retVal = true;
+ 937              		.loc 1 424 11 view .LVU308
+ 938 002e 9847     		blx	r3
+ 939              	.LVL94:
+ 425:Src/pwm_curr_fdbk.c ****         }
+ 940              		.loc 1 425 11 is_stmt 1 view .LVU309
+ 425:Src/pwm_curr_fdbk.c ****         }
+ 941              		.loc 1 425 18 is_stmt 0 view .LVU310
+ 942 0030 0120     		movs	r0, #1
+ 943 0032 EBE7     		b	.L83
+ 944              	.LVL95:
+ 945              	.L85:
+ 430:Src/pwm_curr_fdbk.c ****       }
+ 946              		.loc 1 430 16 view .LVU311
+ 947 0034 0120     		movs	r0, #1
+ 948              	.LVL96:
+ 430:Src/pwm_curr_fdbk.c ****       }
+ 949              		.loc 1 430 16 view .LVU312
+ 950 0036 E9E7     		b	.L83
+ 951              	.LVL97:
+ 952              	.L86:
+ 402:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 953              		.loc 1 402 8 view .LVU313
+ 954 0038 0020     		movs	r0, #0
+ 955              	.LVL98:
+ 402:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 956              		.loc 1 402 8 view .LVU314
+ 957 003a E7E7     		b	.L83
+ 958              		.cfi_endproc
+ 959              	.LFE1444:
+ 961              		.section	.text.PWMC_CalcPhaseCurrentsEst,"ax",%progbits
+ 962              		.align	1
+ 963              		.global	PWMC_CalcPhaseCurrentsEst
+ 964              		.syntax unified
+ 965              		.thumb
+ 966              		.thumb_func
+ 967              		.fpu fpv4-sp-d16
+ 969              	PWMC_CalcPhaseCurrentsEst:
+ 970              	.LVL99:
+ 971              	.LFB1446:
+ 442:Src/pwm_curr_fdbk.c **** 
+ 443:Src/pwm_curr_fdbk.c **** #if defined (CCMRAM)
+ 444:Src/pwm_curr_fdbk.c **** #if defined (__ICCARM__)
+ 445:Src/pwm_curr_fdbk.c **** #pragma location = ".ccmram"
+ 446:Src/pwm_curr_fdbk.c **** #elif defined (__CC_ARM) || defined(__GNUC__)
+ 447:Src/pwm_curr_fdbk.c **** __attribute__( ( section ( ".ccmram" ) ) )
+ 448:Src/pwm_curr_fdbk.c **** #endif
+ 449:Src/pwm_curr_fdbk.c **** #endif
+ 450:Src/pwm_curr_fdbk.c **** static inline int32_t PWMC_LowPassFilter(int32_t in, int32_t *out_buf, int32_t t)
+ 451:Src/pwm_curr_fdbk.c **** {
+ 452:Src/pwm_curr_fdbk.c ****   int32_t x;
+ 453:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 454:Src/pwm_curr_fdbk.c ****   if (MC_NULL == out_buf)
+ 455:Src/pwm_curr_fdbk.c ****   {
+ARM GAS  /tmp/ccwRyL58.s 			page 29
+
+
+ 456:Src/pwm_curr_fdbk.c ****     x = 0;
+ 457:Src/pwm_curr_fdbk.c ****   }
+ 458:Src/pwm_curr_fdbk.c ****   else
+ 459:Src/pwm_curr_fdbk.c ****   {
+ 460:Src/pwm_curr_fdbk.c **** #endif
+ 461:Src/pwm_curr_fdbk.c **** #ifndef FULL_MISRA_C_COMPLIANCY_PWM_CURR
+ 462:Src/pwm_curr_fdbk.c ****     //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 463:Src/pwm_curr_fdbk.c ****     *out_buf = (*out_buf) + ((in - ((*out_buf) >> 15)) * t);
+ 464:Src/pwm_curr_fdbk.c ****     x = (*out_buf) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 465:Src/pwm_curr_fdbk.c **** #else
+ 466:Src/pwm_curr_fdbk.c ****     *out_buf = (*out_buf) + ((in - ((*out_buf) / 32768)) * t);
+ 467:Src/pwm_curr_fdbk.c ****     x = (*out_buf) / 32768;
+ 468:Src/pwm_curr_fdbk.c **** 
+ 469:Src/pwm_curr_fdbk.c **** #endif
+ 470:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 471:Src/pwm_curr_fdbk.c ****   }
+ 472:Src/pwm_curr_fdbk.c **** #endif
+ 473:Src/pwm_curr_fdbk.c ****   return (x);
+ 474:Src/pwm_curr_fdbk.c **** }
+ 475:Src/pwm_curr_fdbk.c **** 
+ 476:Src/pwm_curr_fdbk.c **** #if defined (CCMRAM)
+ 477:Src/pwm_curr_fdbk.c **** #if defined (__ICCARM__)
+ 478:Src/pwm_curr_fdbk.c **** #pragma location = ".ccmram"
+ 479:Src/pwm_curr_fdbk.c **** #elif defined (__CC_ARM) || defined(__GNUC__)
+ 480:Src/pwm_curr_fdbk.c **** __attribute__( ( section ( ".ccmram" ) ) )
+ 481:Src/pwm_curr_fdbk.c **** #endif
+ 482:Src/pwm_curr_fdbk.c **** #endif
+ 483:Src/pwm_curr_fdbk.c **** /**
+ 484:Src/pwm_curr_fdbk.c ****   * @brief  It converts input currents components Iqd into estimated
+ 485:Src/pwm_curr_fdbk.c ****   *         currents Ia, Ib and Ic
+ 486:Src/pwm_curr_fdbk.c ****   * @param  Iqd: Iq and Id currents
+ 487:Src/pwm_curr_fdbk.c ****   * @param  hElAngledpp: electrical angle
+ 488:Src/pwm_curr_fdbk.c ****   * @retval none
+ 489:Src/pwm_curr_fdbk.c ****   */
+ 490:Src/pwm_curr_fdbk.c **** void PWMC_CalcPhaseCurrentsEst(PWMC_Handle_t *pHandle, qd_t Iqd, int16_t hElAngledpp)
+ 491:Src/pwm_curr_fdbk.c **** {
+ 972              		.loc 1 491 1 is_stmt 1 view -0
+ 973              		.cfi_startproc
+ 974              		@ args = 0, pretend = 0, frame = 16
+ 975              		@ frame_needed = 0, uses_anonymous_args = 0
+ 976              		.loc 1 491 1 is_stmt 0 view .LVU316
+ 977 0000 30B5     		push	{r4, r5, lr}
+ 978              		.cfi_def_cfa_offset 12
+ 979              		.cfi_offset 4, -12
+ 980              		.cfi_offset 5, -8
+ 981              		.cfi_offset 14, -4
+ 982 0002 85B0     		sub	sp, sp, #20
+ 983              		.cfi_def_cfa_offset 32
+ 984 0004 0446     		mov	r4, r0
+ 985 0006 0191     		str	r1, [sp, #4]
+ 492:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 493:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 494:Src/pwm_curr_fdbk.c ****   {
+ 495:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 496:Src/pwm_curr_fdbk.c ****   }
+ 497:Src/pwm_curr_fdbk.c ****   else
+ 498:Src/pwm_curr_fdbk.c ****   {
+ARM GAS  /tmp/ccwRyL58.s 			page 30
+
+
+ 499:Src/pwm_curr_fdbk.c **** #endif
+ 500:Src/pwm_curr_fdbk.c ****     qd_t idq_ave;
+ 986              		.loc 1 500 5 is_stmt 1 view .LVU317
+ 501:Src/pwm_curr_fdbk.c ****     alphabeta_t ialpha_beta;
+ 987              		.loc 1 501 5 view .LVU318
+ 502:Src/pwm_curr_fdbk.c ****     int32_t temp1, temp2;
+ 988              		.loc 1 502 5 view .LVU319
+ 503:Src/pwm_curr_fdbk.c **** 
+ 504:Src/pwm_curr_fdbk.c ****     idq_ave.q = (int16_t)PWMC_LowPassFilter(Iqd.q, &(pHandle->LPFIqBuf), pHandle->LPFIqd_const);
+ 989              		.loc 1 504 5 view .LVU320
+ 990              		.loc 1 504 48 is_stmt 0 view .LVU321
+ 991 0008 0BB2     		sxth	r3, r1
+ 992              		.loc 1 504 81 view .LVU322
+ 993 000a B0F95C00 		ldrsh	r0, [r0, #92]
+ 994              	.LVL100:
+ 995              	.LBB6:
+ 996              	.LBI6:
+ 450:Src/pwm_curr_fdbk.c **** {
+ 997              		.loc 1 450 23 is_stmt 1 view .LVU323
+ 998              	.LBB7:
+ 452:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 999              		.loc 1 452 3 view .LVU324
+ 463:Src/pwm_curr_fdbk.c ****     x = (*out_buf) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 1000              		.loc 1 463 5 view .LVU325
+ 463:Src/pwm_curr_fdbk.c ****     x = (*out_buf) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 1001              		.loc 1 463 17 is_stmt 0 view .LVU326
+ 1002 000e 656B     		ldr	r5, [r4, #52]
+ 463:Src/pwm_curr_fdbk.c ****     x = (*out_buf) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 1003              		.loc 1 463 34 view .LVU327
+ 1004 0010 A3EBE533 		sub	r3, r3, r5, asr #15
+ 1005              	.LVL101:
+ 463:Src/pwm_curr_fdbk.c ****     x = (*out_buf) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 1006              		.loc 1 463 27 view .LVU328
+ 1007 0014 03FB0053 		mla	r3, r3, r0, r5
+ 463:Src/pwm_curr_fdbk.c ****     x = (*out_buf) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 1008              		.loc 1 463 14 view .LVU329
+ 1009 0018 6363     		str	r3, [r4, #52]
+ 464:Src/pwm_curr_fdbk.c **** #else
+ 1010              		.loc 1 464 5 is_stmt 1 view .LVU330
+ 1011              	.LVL102:
+ 473:Src/pwm_curr_fdbk.c **** }
+ 1012              		.loc 1 473 3 view .LVU331
+ 473:Src/pwm_curr_fdbk.c **** }
+ 1013              		.loc 1 473 3 is_stmt 0 view .LVU332
+ 1014              	.LBE7:
+ 1015              	.LBE6:
+ 1016              		.loc 1 504 17 view .LVU333
+ 1017 001a 43F3CF33 		sbfx	r3, r3, #15, #16
+ 1018              		.loc 1 504 15 view .LVU334
+ 1019 001e ADF80C30 		strh	r3, [sp, #12]	@ movhi
+ 505:Src/pwm_curr_fdbk.c ****     idq_ave.d = (int16_t)PWMC_LowPassFilter(Iqd.d, &(pHandle->LPFIdBuf), pHandle->LPFIqd_const);
+ 1020              		.loc 1 505 5 is_stmt 1 view .LVU335
+ 1021              	.LVL103:
+ 1022              	.LBB8:
+ 1023              	.LBI8:
+ 450:Src/pwm_curr_fdbk.c **** {
+ 1024              		.loc 1 450 23 view .LVU336
+ARM GAS  /tmp/ccwRyL58.s 			page 31
+
+
+ 1025              	.LBB9:
+ 452:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 1026              		.loc 1 452 3 view .LVU337
+ 463:Src/pwm_curr_fdbk.c ****     x = (*out_buf) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 1027              		.loc 1 463 5 view .LVU338
+ 463:Src/pwm_curr_fdbk.c ****     x = (*out_buf) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 1028              		.loc 1 463 17 is_stmt 0 view .LVU339
+ 1029 0022 A56B     		ldr	r5, [r4, #56]
+ 463:Src/pwm_curr_fdbk.c ****     x = (*out_buf) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 1030              		.loc 1 463 48 view .LVU340
+ 1031 0024 EB13     		asrs	r3, r5, #15
+ 463:Src/pwm_curr_fdbk.c ****     x = (*out_buf) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 1032              		.loc 1 463 34 view .LVU341
+ 1033 0026 C3EB2143 		rsb	r3, r3, r1, asr #16
+ 463:Src/pwm_curr_fdbk.c ****     x = (*out_buf) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 1034              		.loc 1 463 27 view .LVU342
+ 1035 002a 03FB0050 		mla	r0, r3, r0, r5
+ 1036              	.LVL104:
+ 463:Src/pwm_curr_fdbk.c ****     x = (*out_buf) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 1037              		.loc 1 463 14 view .LVU343
+ 1038 002e A063     		str	r0, [r4, #56]
+ 464:Src/pwm_curr_fdbk.c **** #else
+ 1039              		.loc 1 464 5 is_stmt 1 view .LVU344
+ 1040              	.LVL105:
+ 473:Src/pwm_curr_fdbk.c **** }
+ 1041              		.loc 1 473 3 view .LVU345
+ 473:Src/pwm_curr_fdbk.c **** }
+ 1042              		.loc 1 473 3 is_stmt 0 view .LVU346
+ 1043              	.LBE9:
+ 1044              	.LBE8:
+ 1045              		.loc 1 505 17 view .LVU347
+ 1046 0030 40F3CF30 		sbfx	r0, r0, #15, #16
+ 1047              		.loc 1 505 15 view .LVU348
+ 1048 0034 ADF80E00 		strh	r0, [sp, #14]	@ movhi
+ 506:Src/pwm_curr_fdbk.c **** 
+ 507:Src/pwm_curr_fdbk.c ****     ialpha_beta = MCM_Rev_Park(idq_ave, hElAngledpp);
+ 1049              		.loc 1 507 5 is_stmt 1 view .LVU349
+ 1050              		.loc 1 507 19 is_stmt 0 view .LVU350
+ 1051 0038 1146     		mov	r1, r2
+ 1052 003a 0398     		ldr	r0, [sp, #12]
+ 1053 003c FFF7FEFF 		bl	MCM_Rev_Park
+ 1054              	.LVL106:
+ 508:Src/pwm_curr_fdbk.c **** 
+ 509:Src/pwm_curr_fdbk.c ****     /* reverse Clarke */
+ 510:Src/pwm_curr_fdbk.c **** 
+ 511:Src/pwm_curr_fdbk.c ****     /*Ia*/
+ 512:Src/pwm_curr_fdbk.c ****     pHandle->IaEst = ialpha_beta.alpha;
+ 1055              		.loc 1 512 5 is_stmt 1 view .LVU351
+ 1056              		.loc 1 512 33 is_stmt 0 view .LVU352
+ 1057 0040 03B2     		sxth	r3, r0
+ 1058              		.loc 1 512 20 view .LVU353
+ 1059 0042 A4F85630 		strh	r3, [r4, #86]	@ movhi
+ 513:Src/pwm_curr_fdbk.c **** 
+ 514:Src/pwm_curr_fdbk.c ****     temp1 = - ialpha_beta.alpha;
+ 1060              		.loc 1 514 5 is_stmt 1 view .LVU354
+ 1061              		.loc 1 514 11 is_stmt 0 view .LVU355
+ 1062 0046 5B42     		rsbs	r3, r3, #0
+ARM GAS  /tmp/ccwRyL58.s 			page 32
+
+
+ 1063              	.LVL107:
+ 515:Src/pwm_curr_fdbk.c **** #ifndef FULL_MISRA_C_COMPLIANCY_PWM_CURR
+ 516:Src/pwm_curr_fdbk.c ****     //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 517:Src/pwm_curr_fdbk.c ****     temp2 = (int32_t)(ialpha_beta.beta) * ((int32_t)SQRT3FACTOR >> 15);
+ 1064              		.loc 1 517 5 is_stmt 1 view .LVU356
+ 518:Src/pwm_curr_fdbk.c **** #else
+ 519:Src/pwm_curr_fdbk.c ****     temp2 = (int32_t)(ialpha_beta.beta) * (int32_t)SQRT3FACTOR / 32768;
+ 520:Src/pwm_curr_fdbk.c **** #endif
+ 521:Src/pwm_curr_fdbk.c **** 
+ 522:Src/pwm_curr_fdbk.c ****     /*Ib*/
+ 523:Src/pwm_curr_fdbk.c ****     pHandle->IbEst = (int16_t)(temp1 - temp2)/2;
+ 1065              		.loc 1 523 5 view .LVU357
+ 1066              		.loc 1 523 38 is_stmt 0 view .LVU358
+ 1067 0048 9BB2     		uxth	r3, r3
+ 1068              	.LVL108:
+ 1069              		.loc 1 523 38 view .LVU359
+ 1070 004a A3EB1042 		sub	r2, r3, r0, lsr #16
+ 1071              		.loc 1 523 20 view .LVU360
+ 1072 004e C2F3C031 		ubfx	r1, r2, #15, #1
+ 1073 0052 01FA82F2 		sxtah	r2, r1, r2
+ 1074 0056 5210     		asrs	r2, r2, #1
+ 1075 0058 A4F85820 		strh	r2, [r4, #88]	@ movhi
+ 524:Src/pwm_curr_fdbk.c **** 
+ 525:Src/pwm_curr_fdbk.c ****     /*Ic*/
+ 526:Src/pwm_curr_fdbk.c ****     pHandle->IcEst = (int16_t)(temp1 + temp2)/2;
+ 1076              		.loc 1 526 5 is_stmt 1 view .LVU361
+ 1077              		.loc 1 526 38 is_stmt 0 view .LVU362
+ 1078 005c 03EB1043 		add	r3, r3, r0, lsr #16
+ 1079              		.loc 1 526 20 view .LVU363
+ 1080 0060 C3F3C030 		ubfx	r0, r3, #15, #1
+ 1081              	.LVL109:
+ 1082              		.loc 1 526 20 view .LVU364
+ 1083 0064 00FA83F3 		sxtah	r3, r0, r3
+ 1084 0068 5B10     		asrs	r3, r3, #1
+ 1085 006a A4F85A30 		strh	r3, [r4, #90]	@ movhi
+ 527:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 528:Src/pwm_curr_fdbk.c ****   }
+ 529:Src/pwm_curr_fdbk.c **** #endif
+ 530:Src/pwm_curr_fdbk.c **** }
+ 1086              		.loc 1 530 1 view .LVU365
+ 1087 006e 05B0     		add	sp, sp, #20
+ 1088              		.cfi_def_cfa_offset 12
+ 1089              		@ sp needed
+ 1090 0070 30BD     		pop	{r4, r5, pc}
+ 1091              		.loc 1 530 1 view .LVU366
+ 1092              		.cfi_endproc
+ 1093              	.LFE1446:
+ 1095              		.section	.text.PWMC_TurnOnLowSides,"ax",%progbits
+ 1096              		.align	1
+ 1097              		.weak	PWMC_TurnOnLowSides
+ 1098              		.syntax unified
+ 1099              		.thumb
+ 1100              		.thumb_func
+ 1101              		.fpu fpv4-sp-d16
+ 1103              	PWMC_TurnOnLowSides:
+ 1104              	.LVL110:
+ 1105              	.LFB1447:
+ARM GAS  /tmp/ccwRyL58.s 			page 33
+
+
+ 531:Src/pwm_curr_fdbk.c **** 
+ 532:Src/pwm_curr_fdbk.c **** /**
+ 533:Src/pwm_curr_fdbk.c ****   * @brief  Switches power stage Low Sides transistors on.
+ 534:Src/pwm_curr_fdbk.c ****   *
+ 535:Src/pwm_curr_fdbk.c ****   * This function is meant for charging boot capacitors of the driving
+ 536:Src/pwm_curr_fdbk.c ****   * section. It has to be called on each motor start-up when using high
+ 537:Src/pwm_curr_fdbk.c ****   * voltage drivers.
+ 538:Src/pwm_curr_fdbk.c ****   *
+ 539:Src/pwm_curr_fdbk.c ****   * @param  pHandle: handle on the target instance of the PWMC component
+ 540:Src/pwm_curr_fdbk.c ****   */
+ 541:Src/pwm_curr_fdbk.c **** //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
+ 542:Src/pwm_curr_fdbk.c **** __weak void PWMC_TurnOnLowSides(PWMC_Handle_t *pHandle)
+ 543:Src/pwm_curr_fdbk.c **** {
+ 1106              		.loc 1 543 1 is_stmt 1 view -0
+ 1107              		.cfi_startproc
+ 1108              		@ args = 0, pretend = 0, frame = 0
+ 1109              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1110              		.loc 1 543 1 is_stmt 0 view .LVU368
+ 1111 0000 08B5     		push	{r3, lr}
+ 1112              		.cfi_def_cfa_offset 8
+ 1113              		.cfi_offset 3, -8
+ 1114              		.cfi_offset 14, -4
+ 544:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 545:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 546:Src/pwm_curr_fdbk.c ****   {
+ 547:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 548:Src/pwm_curr_fdbk.c ****   }
+ 549:Src/pwm_curr_fdbk.c ****   else
+ 550:Src/pwm_curr_fdbk.c ****   {
+ 551:Src/pwm_curr_fdbk.c **** #endif
+ 552:Src/pwm_curr_fdbk.c ****     pHandle->pFctTurnOnLowSides(pHandle);
+ 1115              		.loc 1 552 5 is_stmt 1 view .LVU369
+ 1116              		.loc 1 552 12 is_stmt 0 view .LVU370
+ 1117 0002 0369     		ldr	r3, [r0, #16]
+ 1118              		.loc 1 552 5 view .LVU371
+ 1119 0004 9847     		blx	r3
+ 1120              	.LVL111:
+ 553:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 554:Src/pwm_curr_fdbk.c ****   }
+ 555:Src/pwm_curr_fdbk.c **** #endif
+ 556:Src/pwm_curr_fdbk.c **** }
+ 1121              		.loc 1 556 1 view .LVU372
+ 1122 0006 08BD     		pop	{r3, pc}
+ 1123              		.cfi_endproc
+ 1124              	.LFE1447:
+ 1126              		.section	.text.PWMC_CheckOverCurrent,"ax",%progbits
+ 1127              		.align	1
+ 1128              		.weak	PWMC_CheckOverCurrent
+ 1129              		.syntax unified
+ 1130              		.thumb
+ 1131              		.thumb_func
+ 1132              		.fpu fpv4-sp-d16
+ 1134              	PWMC_CheckOverCurrent:
+ 1135              	.LVL112:
+ 1136              	.LFB1448:
+ 557:Src/pwm_curr_fdbk.c **** 
+ 558:Src/pwm_curr_fdbk.c **** /** @brief Returns #MC_BREAK_IN if an over current condition was detected on the power stage
+ARM GAS  /tmp/ccwRyL58.s 			page 34
+
+
+ 559:Src/pwm_curr_fdbk.c ****   *         controlled by the PWMC component pointed by  @p pHandle, since the last call to this fu
+ 560:Src/pwm_curr_fdbk.c ****   *         returns #MC_NO_FAULTS otherwise.
+ 561:Src/pwm_curr_fdbk.c ****   */
+ 562:Src/pwm_curr_fdbk.c **** __weak uint16_t PWMC_CheckOverCurrent(PWMC_Handle_t *pHandle) //cstat !MISRAC2012-Rule-8.13
+ 563:Src/pwm_curr_fdbk.c **** {
+ 1137              		.loc 1 563 1 is_stmt 1 view -0
+ 1138              		.cfi_startproc
+ 1139              		@ args = 0, pretend = 0, frame = 0
+ 1140              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1141              		.loc 1 563 1 is_stmt 0 view .LVU374
+ 1142 0000 08B5     		push	{r3, lr}
+ 1143              		.cfi_def_cfa_offset 8
+ 1144              		.cfi_offset 3, -8
+ 1145              		.cfi_offset 14, -4
+ 564:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 565:Src/pwm_curr_fdbk.c ****   return ((MC_NULL == pHandle) ? MC_NO_FAULTS : (uint16_t)pHandle->pFctIsOverCurrentOccurred(pHandl
+ 566:Src/pwm_curr_fdbk.c **** #else
+ 567:Src/pwm_curr_fdbk.c ****   return ((uint16_t)pHandle->pFctIsOverCurrentOccurred(pHandle));
+ 1146              		.loc 1 567 3 is_stmt 1 view .LVU375
+ 1147              		.loc 1 567 28 is_stmt 0 view .LVU376
+ 1148 0002 8369     		ldr	r3, [r0, #24]
+ 1149              		.loc 1 567 21 view .LVU377
+ 1150 0004 9847     		blx	r3
+ 1151              	.LVL113:
+ 568:Src/pwm_curr_fdbk.c **** #endif
+ 569:Src/pwm_curr_fdbk.c **** }
+ 1152              		.loc 1 569 1 view .LVU378
+ 1153 0006 08BD     		pop	{r3, pc}
+ 1154              		.cfi_endproc
+ 1155              	.LFE1448:
+ 1157              		.section	.text.PWMC_OCPSetReferenceVoltage,"ax",%progbits
+ 1158              		.align	1
+ 1159              		.weak	PWMC_OCPSetReferenceVoltage
+ 1160              		.syntax unified
+ 1161              		.thumb
+ 1162              		.thumb_func
+ 1163              		.fpu fpv4-sp-d16
+ 1165              	PWMC_OCPSetReferenceVoltage:
+ 1166              	.LVL114:
+ 1167              	.LFB1449:
+ 570:Src/pwm_curr_fdbk.c **** 
+ 571:Src/pwm_curr_fdbk.c **** /**
+ 572:Src/pwm_curr_fdbk.c ****   * @brief  Sets the over current threshold to be used
+ 573:Src/pwm_curr_fdbk.c ****   *
+ 574:Src/pwm_curr_fdbk.c ****   * The value to be set is relative to the VDD_DAC DAC reference voltage with
+ 575:Src/pwm_curr_fdbk.c ****   * 0 standing for 0 V and 65536 standing for VDD_DAC.
+ 576:Src/pwm_curr_fdbk.c ****   *
+ 577:Src/pwm_curr_fdbk.c ****   * @param  pHandle handle on the target instance of the PWMC component
+ 578:Src/pwm_curr_fdbk.c ****   * @param  hDACVref Value of DAC reference expressed as 16bit unsigned integer
+ 579:Src/pwm_curr_fdbk.c ****   */
+ 580:Src/pwm_curr_fdbk.c **** //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
+ 581:Src/pwm_curr_fdbk.c **** __weak void PWMC_OCPSetReferenceVoltage(PWMC_Handle_t *pHandle, uint16_t hDACVref)
+ 582:Src/pwm_curr_fdbk.c **** {
+ 1168              		.loc 1 582 1 is_stmt 1 view -0
+ 1169              		.cfi_startproc
+ 1170              		@ args = 0, pretend = 0, frame = 0
+ 1171              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccwRyL58.s 			page 35
+
+
+ 1172              		.loc 1 582 1 is_stmt 0 view .LVU380
+ 1173 0000 08B5     		push	{r3, lr}
+ 1174              		.cfi_def_cfa_offset 8
+ 1175              		.cfi_offset 3, -8
+ 1176              		.cfi_offset 14, -4
+ 583:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 584:Src/pwm_curr_fdbk.c ****   if ((MC_NULL == pHandle) || (MC_NULL == pHandle->pFctOCPSetReferenceVoltage))
+ 585:Src/pwm_curr_fdbk.c ****   {
+ 586:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 587:Src/pwm_curr_fdbk.c ****   }
+ 588:Src/pwm_curr_fdbk.c ****   else
+ 589:Src/pwm_curr_fdbk.c ****   {
+ 590:Src/pwm_curr_fdbk.c **** #endif
+ 591:Src/pwm_curr_fdbk.c ****     pHandle->pFctOCPSetReferenceVoltage(pHandle, hDACVref);
+ 1177              		.loc 1 591 5 is_stmt 1 view .LVU381
+ 1178              		.loc 1 591 12 is_stmt 0 view .LVU382
+ 1179 0002 C369     		ldr	r3, [r0, #28]
+ 1180              		.loc 1 591 5 view .LVU383
+ 1181 0004 9847     		blx	r3
+ 1182              	.LVL115:
+ 592:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 593:Src/pwm_curr_fdbk.c ****   }
+ 594:Src/pwm_curr_fdbk.c **** #endif
+ 595:Src/pwm_curr_fdbk.c **** }
+ 1183              		.loc 1 595 1 view .LVU384
+ 1184 0006 08BD     		pop	{r3, pc}
+ 1185              		.cfi_endproc
+ 1186              	.LFE1449:
+ 1188              		.section	.text.PWMC_GetTurnOnLowSidesAction,"ax",%progbits
+ 1189              		.align	1
+ 1190              		.weak	PWMC_GetTurnOnLowSidesAction
+ 1191              		.syntax unified
+ 1192              		.thumb
+ 1193              		.thumb_func
+ 1194              		.fpu fpv4-sp-d16
+ 1196              	PWMC_GetTurnOnLowSidesAction:
+ 1197              	.LVL116:
+ 1198              	.LFB1450:
+ 596:Src/pwm_curr_fdbk.c **** 
+ 597:Src/pwm_curr_fdbk.c **** /**
+ 598:Src/pwm_curr_fdbk.c ****   * @brief  It is used to retrieve the satus of TurnOnLowSides action.
+ 599:Src/pwm_curr_fdbk.c ****   * @param  pHandle: handler of the current instance of the PWMC component
+ 600:Src/pwm_curr_fdbk.c ****   * @retval bool It returns the state of TurnOnLowSides action:
+ 601:Src/pwm_curr_fdbk.c ****   *         true if TurnOnLowSides action is active, false otherwise.
+ 602:Src/pwm_curr_fdbk.c ****   */
+ 603:Src/pwm_curr_fdbk.c **** /** @brief Returns the status of the "TurnOnLowSide" action on the power stage
+ 604:Src/pwm_curr_fdbk.c ****  *         controlled by the @p pHandle PWMC component: true if it
+ 605:Src/pwm_curr_fdbk.c ****  *         is active, false otherwise*/
+ 606:Src/pwm_curr_fdbk.c **** __weak bool PWMC_GetTurnOnLowSidesAction(const PWMC_Handle_t *pHandle)
+ 607:Src/pwm_curr_fdbk.c **** {
+ 1199              		.loc 1 607 1 is_stmt 1 view -0
+ 1200              		.cfi_startproc
+ 1201              		@ args = 0, pretend = 0, frame = 0
+ 1202              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1203              		@ link register save eliminated.
+ 608:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 609:Src/pwm_curr_fdbk.c ****   return ((MC_NULL == pHandle) ? false : pHandle->TurnOnLowSidesAction);
+ARM GAS  /tmp/ccwRyL58.s 			page 36
+
+
+ 610:Src/pwm_curr_fdbk.c **** #else
+ 611:Src/pwm_curr_fdbk.c ****   return (pHandle->TurnOnLowSidesAction);
+ 1204              		.loc 1 611 3 view .LVU386
+ 612:Src/pwm_curr_fdbk.c **** #endif
+ 613:Src/pwm_curr_fdbk.c **** }
+ 1205              		.loc 1 613 1 is_stmt 0 view .LVU387
+ 1206 0000 90F86B00 		ldrb	r0, [r0, #107]	@ zero_extendqisi2
+ 1207              	.LVL117:
+ 1208              		.loc 1 613 1 view .LVU388
+ 1209 0004 7047     		bx	lr
+ 1210              		.cfi_endproc
+ 1211              	.LFE1450:
+ 1213              		.section	.text.PWMC_DPWM_ModeEnable,"ax",%progbits
+ 1214              		.align	1
+ 1215              		.weak	PWMC_DPWM_ModeEnable
+ 1216              		.syntax unified
+ 1217              		.thumb
+ 1218              		.thumb_func
+ 1219              		.fpu fpv4-sp-d16
+ 1221              	PWMC_DPWM_ModeEnable:
+ 1222              	.LVL118:
+ 1223              	.LFB1451:
+ 614:Src/pwm_curr_fdbk.c **** 
+ 615:Src/pwm_curr_fdbk.c **** /** @brief Enables Discontinious PWM mode by the @p pHandle PWMC component. */
+ 616:Src/pwm_curr_fdbk.c **** __weak void PWMC_DPWM_ModeEnable( PWMC_Handle_t * pHandle )
+ 617:Src/pwm_curr_fdbk.c **** {
+ 1224              		.loc 1 617 1 is_stmt 1 view -0
+ 1225              		.cfi_startproc
+ 1226              		@ args = 0, pretend = 0, frame = 0
+ 1227              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1228              		@ link register save eliminated.
+ 618:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 619:Src/pwm_curr_fdbk.c ****   if (MC_NULL ==  pHandle)
+ 620:Src/pwm_curr_fdbk.c ****   {
+ 621:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 622:Src/pwm_curr_fdbk.c ****   }
+ 623:Src/pwm_curr_fdbk.c ****   else
+ 624:Src/pwm_curr_fdbk.c ****   {
+ 625:Src/pwm_curr_fdbk.c **** #endif
+ 626:Src/pwm_curr_fdbk.c ****     pHandle->DPWM_Mode = true;
+ 1229              		.loc 1 626 5 view .LVU390
+ 1230              		.loc 1 626 24 is_stmt 0 view .LVU391
+ 1231 0000 0123     		movs	r3, #1
+ 1232 0002 80F86C30 		strb	r3, [r0, #108]
+ 627:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 628:Src/pwm_curr_fdbk.c ****   }
+ 629:Src/pwm_curr_fdbk.c **** #endif
+ 630:Src/pwm_curr_fdbk.c **** }
+ 1233              		.loc 1 630 1 view .LVU392
+ 1234 0006 7047     		bx	lr
+ 1235              		.cfi_endproc
+ 1236              	.LFE1451:
+ 1238              		.section	.text.PWMC_DPWM_ModeDisable,"ax",%progbits
+ 1239              		.align	1
+ 1240              		.weak	PWMC_DPWM_ModeDisable
+ 1241              		.syntax unified
+ 1242              		.thumb
+ARM GAS  /tmp/ccwRyL58.s 			page 37
+
+
+ 1243              		.thumb_func
+ 1244              		.fpu fpv4-sp-d16
+ 1246              	PWMC_DPWM_ModeDisable:
+ 1247              	.LVL119:
+ 1248              	.LFB1452:
+ 631:Src/pwm_curr_fdbk.c **** 
+ 632:Src/pwm_curr_fdbk.c **** /** @brief Disables Discontinious PWM mode by the @p pHandle PWMC component. */
+ 633:Src/pwm_curr_fdbk.c **** __weak void PWMC_DPWM_ModeDisable( PWMC_Handle_t * pHandle )
+ 634:Src/pwm_curr_fdbk.c **** {
+ 1249              		.loc 1 634 1 is_stmt 1 view -0
+ 1250              		.cfi_startproc
+ 1251              		@ args = 0, pretend = 0, frame = 0
+ 1252              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1253              		@ link register save eliminated.
+ 635:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 636:Src/pwm_curr_fdbk.c ****   if (MC_NULL ==  pHandle)
+ 637:Src/pwm_curr_fdbk.c ****   {
+ 638:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 639:Src/pwm_curr_fdbk.c ****   }
+ 640:Src/pwm_curr_fdbk.c ****   else
+ 641:Src/pwm_curr_fdbk.c ****   {
+ 642:Src/pwm_curr_fdbk.c **** #endif
+ 643:Src/pwm_curr_fdbk.c ****     pHandle->DPWM_Mode = false;
+ 1254              		.loc 1 643 5 view .LVU394
+ 1255              		.loc 1 643 24 is_stmt 0 view .LVU395
+ 1256 0000 0023     		movs	r3, #0
+ 1257 0002 80F86C30 		strb	r3, [r0, #108]
+ 644:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 645:Src/pwm_curr_fdbk.c ****   }
+ 646:Src/pwm_curr_fdbk.c **** #endif
+ 647:Src/pwm_curr_fdbk.c **** }
+ 1258              		.loc 1 647 1 view .LVU396
+ 1259 0006 7047     		bx	lr
+ 1260              		.cfi_endproc
+ 1261              	.LFE1452:
+ 1263              		.section	.text.PWMC_GetDPWM_Mode,"ax",%progbits
+ 1264              		.align	1
+ 1265              		.weak	PWMC_GetDPWM_Mode
+ 1266              		.syntax unified
+ 1267              		.thumb
+ 1268              		.thumb_func
+ 1269              		.fpu fpv4-sp-d16
+ 1271              	PWMC_GetDPWM_Mode:
+ 1272              	.LVL120:
+ 1273              	.LFB1453:
+ 648:Src/pwm_curr_fdbk.c **** 
+ 649:Src/pwm_curr_fdbk.c **** /** @brief Returns the status of the DPWM Mode: true if enable, false otherwise*/
+ 650:Src/pwm_curr_fdbk.c **** __weak bool PWMC_GetDPWM_Mode( PWMC_Handle_t * pHandle )
+ 651:Src/pwm_curr_fdbk.c **** {
+ 1274              		.loc 1 651 1 is_stmt 1 view -0
+ 1275              		.cfi_startproc
+ 1276              		@ args = 0, pretend = 0, frame = 0
+ 1277              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1278              		@ link register save eliminated.
+ 652:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 653:Src/pwm_curr_fdbk.c ****   return ((MC_NULL == pHandle) ? false : pHandle->DPWM_Mode);
+ 654:Src/pwm_curr_fdbk.c **** #else
+ARM GAS  /tmp/ccwRyL58.s 			page 38
+
+
+ 655:Src/pwm_curr_fdbk.c ****   return (pHandle->DPWM_Mode);
+ 1279              		.loc 1 655 3 view .LVU398
+ 656:Src/pwm_curr_fdbk.c **** #endif
+ 657:Src/pwm_curr_fdbk.c **** }
+ 1280              		.loc 1 657 1 is_stmt 0 view .LVU399
+ 1281 0000 90F86C00 		ldrb	r0, [r0, #108]	@ zero_extendqisi2
+ 1282              	.LVL121:
+ 1283              		.loc 1 657 1 view .LVU400
+ 1284 0004 7047     		bx	lr
+ 1285              		.cfi_endproc
+ 1286              	.LFE1453:
+ 1288              		.section	.text.PWMC_RLDetectionModeEnable,"ax",%progbits
+ 1289              		.align	1
+ 1290              		.weak	PWMC_RLDetectionModeEnable
+ 1291              		.syntax unified
+ 1292              		.thumb
+ 1293              		.thumb_func
+ 1294              		.fpu fpv4-sp-d16
+ 1296              	PWMC_RLDetectionModeEnable:
+ 1297              	.LVL122:
+ 1298              	.LFB1454:
+ 658:Src/pwm_curr_fdbk.c **** 
+ 659:Src/pwm_curr_fdbk.c **** /** @brief Enables the RL detection mode on the power stage controlled by the @p pHandle PWMC compo
+ 660:Src/pwm_curr_fdbk.c **** //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
+ 661:Src/pwm_curr_fdbk.c **** __weak void PWMC_RLDetectionModeEnable(PWMC_Handle_t *pHandle)
+ 662:Src/pwm_curr_fdbk.c **** {
+ 1299              		.loc 1 662 1 is_stmt 1 view -0
+ 1300              		.cfi_startproc
+ 1301              		@ args = 0, pretend = 0, frame = 0
+ 1302              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1303              		.loc 1 662 1 is_stmt 0 view .LVU402
+ 1304 0000 08B5     		push	{r3, lr}
+ 1305              		.cfi_def_cfa_offset 8
+ 1306              		.cfi_offset 3, -8
+ 1307              		.cfi_offset 14, -4
+ 663:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 664:Src/pwm_curr_fdbk.c ****   if ((MC_NULL == pHandle) || ( MC_NULL == pHandle->pFctRLDetectionModeEnable))
+ 665:Src/pwm_curr_fdbk.c ****   {
+ 666:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 667:Src/pwm_curr_fdbk.c ****   }
+ 668:Src/pwm_curr_fdbk.c ****   else
+ 669:Src/pwm_curr_fdbk.c ****   {
+ 670:Src/pwm_curr_fdbk.c **** #endif
+ 671:Src/pwm_curr_fdbk.c ****     pHandle->pFctRLDetectionModeEnable(pHandle);
+ 1308              		.loc 1 671 5 is_stmt 1 view .LVU403
+ 1309              		.loc 1 671 12 is_stmt 0 view .LVU404
+ 1310 0002 036A     		ldr	r3, [r0, #32]
+ 1311              		.loc 1 671 5 view .LVU405
+ 1312 0004 9847     		blx	r3
+ 1313              	.LVL123:
+ 672:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 673:Src/pwm_curr_fdbk.c ****   }
+ 674:Src/pwm_curr_fdbk.c **** #endif
+ 675:Src/pwm_curr_fdbk.c **** }
+ 1314              		.loc 1 675 1 view .LVU406
+ 1315 0006 08BD     		pop	{r3, pc}
+ 1316              		.cfi_endproc
+ARM GAS  /tmp/ccwRyL58.s 			page 39
+
+
+ 1317              	.LFE1454:
+ 1319              		.section	.text.PWMC_RLDetectionModeDisable,"ax",%progbits
+ 1320              		.align	1
+ 1321              		.weak	PWMC_RLDetectionModeDisable
+ 1322              		.syntax unified
+ 1323              		.thumb
+ 1324              		.thumb_func
+ 1325              		.fpu fpv4-sp-d16
+ 1327              	PWMC_RLDetectionModeDisable:
+ 1328              	.LVL124:
+ 1329              	.LFB1455:
+ 676:Src/pwm_curr_fdbk.c **** 
+ 677:Src/pwm_curr_fdbk.c **** /** @brief Disables the RL detection mode on the power stage controlled by the @p pHandle PWMC comp
+ 678:Src/pwm_curr_fdbk.c **** //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
+ 679:Src/pwm_curr_fdbk.c **** __weak void PWMC_RLDetectionModeDisable(PWMC_Handle_t *pHandle)
+ 680:Src/pwm_curr_fdbk.c **** {
+ 1330              		.loc 1 680 1 is_stmt 1 view -0
+ 1331              		.cfi_startproc
+ 1332              		@ args = 0, pretend = 0, frame = 0
+ 1333              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1334              		.loc 1 680 1 is_stmt 0 view .LVU408
+ 1335 0000 08B5     		push	{r3, lr}
+ 1336              		.cfi_def_cfa_offset 8
+ 1337              		.cfi_offset 3, -8
+ 1338              		.cfi_offset 14, -4
+ 681:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 682:Src/pwm_curr_fdbk.c ****   if ((MC_NULL == pHandle) || ( MC_NULL == pHandle->pFctRLDetectionModeDisable))
+ 683:Src/pwm_curr_fdbk.c ****   {
+ 684:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 685:Src/pwm_curr_fdbk.c ****   }
+ 686:Src/pwm_curr_fdbk.c ****   else
+ 687:Src/pwm_curr_fdbk.c ****   {
+ 688:Src/pwm_curr_fdbk.c **** #endif
+ 689:Src/pwm_curr_fdbk.c ****     pHandle->pFctRLDetectionModeDisable(pHandle);
+ 1339              		.loc 1 689 5 is_stmt 1 view .LVU409
+ 1340              		.loc 1 689 12 is_stmt 0 view .LVU410
+ 1341 0002 436A     		ldr	r3, [r0, #36]
+ 1342              		.loc 1 689 5 view .LVU411
+ 1343 0004 9847     		blx	r3
+ 1344              	.LVL125:
+ 690:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 691:Src/pwm_curr_fdbk.c ****   }
+ 692:Src/pwm_curr_fdbk.c **** #endif
+ 693:Src/pwm_curr_fdbk.c **** }
+ 1345              		.loc 1 693 1 view .LVU412
+ 1346 0006 08BD     		pop	{r3, pc}
+ 1347              		.cfi_endproc
+ 1348              	.LFE1455:
+ 1350              		.section	.text.PWMC_RLDetectionModeSetDuty,"ax",%progbits
+ 1351              		.align	1
+ 1352              		.weak	PWMC_RLDetectionModeSetDuty
+ 1353              		.syntax unified
+ 1354              		.thumb
+ 1355              		.thumb_func
+ 1356              		.fpu fpv4-sp-d16
+ 1358              	PWMC_RLDetectionModeSetDuty:
+ 1359              	.LVL126:
+ARM GAS  /tmp/ccwRyL58.s 			page 40
+
+
+ 1360              	.LFB1456:
+ 694:Src/pwm_curr_fdbk.c **** 
+ 695:Src/pwm_curr_fdbk.c **** /**
+ 696:Src/pwm_curr_fdbk.c ****   * @brief  Sets the PWM duty cycle to apply in the RL Detection mode.
+ 697:Src/pwm_curr_fdbk.c ****   * @param  pHandle: handle on the target instance of the PWMC component
+ 698:Src/pwm_curr_fdbk.c ****   * @param  hDuty Duty cycle to apply
+ 699:Src/pwm_curr_fdbk.c ****   *
+ 700:Src/pwm_curr_fdbk.c ****   * @todo TODO: Describe the unit of the hDuty variable.
+ 701:Src/pwm_curr_fdbk.c ****   *
+ 702:Src/pwm_curr_fdbk.c ****   * @retval If the Duty Cycle could be applied on time for the next PWM period,
+ 703:Src/pwm_curr_fdbk.c ****   *         #MC_NO_ERROR is returned. Otherwise, #MC_DURATION is returned.
+ 704:Src/pwm_curr_fdbk.c ****   */
+ 705:Src/pwm_curr_fdbk.c **** __weak uint16_t PWMC_RLDetectionModeSetDuty(PWMC_Handle_t *pHandle, uint16_t hDuty) //cstat !MISRAC
+ 706:Src/pwm_curr_fdbk.c **** {
+ 1361              		.loc 1 706 1 is_stmt 1 view -0
+ 1362              		.cfi_startproc
+ 1363              		@ args = 0, pretend = 0, frame = 0
+ 1364              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1365              		.loc 1 706 1 is_stmt 0 view .LVU414
+ 1366 0000 08B5     		push	{r3, lr}
+ 1367              		.cfi_def_cfa_offset 8
+ 1368              		.cfi_offset 3, -8
+ 1369              		.cfi_offset 14, -4
+ 707:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 708:Src/pwm_curr_fdbk.c ****  uint16_t retVal = MC_DURATION;
+ 709:Src/pwm_curr_fdbk.c **** 
+ 710:Src/pwm_curr_fdbk.c ****  if ((MC_NULL == pHandle) || ( MC_NULL == pHandle->pFctRLDetectionModeSetDuty))
+ 711:Src/pwm_curr_fdbk.c ****  {
+ 712:Src/pwm_curr_fdbk.c ****    /* Nothing to do */
+ 713:Src/pwm_curr_fdbk.c ****  }
+ 714:Src/pwm_curr_fdbk.c ****  else
+ 715:Src/pwm_curr_fdbk.c ****  {
+ 716:Src/pwm_curr_fdbk.c ****    retVal = pHandle->pFctRLDetectionModeSetDuty(pHandle, hDuty);
+ 717:Src/pwm_curr_fdbk.c ****  }
+ 718:Src/pwm_curr_fdbk.c ****  return (retVal);
+ 719:Src/pwm_curr_fdbk.c **** #else
+ 720:Src/pwm_curr_fdbk.c ****   return (pHandle->pFctRLDetectionModeSetDuty(pHandle, hDuty));
+ 1370              		.loc 1 720 3 is_stmt 1 view .LVU415
+ 1371              		.loc 1 720 18 is_stmt 0 view .LVU416
+ 1372 0002 836A     		ldr	r3, [r0, #40]
+ 1373              		.loc 1 720 11 view .LVU417
+ 1374 0004 9847     		blx	r3
+ 1375              	.LVL127:
+ 721:Src/pwm_curr_fdbk.c **** #endif
+ 722:Src/pwm_curr_fdbk.c **** }
+ 1376              		.loc 1 722 1 view .LVU418
+ 1377 0006 08BD     		pop	{r3, pc}
+ 1378              		.cfi_endproc
+ 1379              	.LFE1456:
+ 1381              		.section	.text.PWMC_SetAlignFlag,"ax",%progbits
+ 1382              		.align	1
+ 1383              		.global	PWMC_SetAlignFlag
+ 1384              		.syntax unified
+ 1385              		.thumb
+ 1386              		.thumb_func
+ 1387              		.fpu fpv4-sp-d16
+ 1389              	PWMC_SetAlignFlag:
+ARM GAS  /tmp/ccwRyL58.s 			page 41
+
+
+ 1390              	.LVL128:
+ 1391              	.LFB1457:
+ 723:Src/pwm_curr_fdbk.c **** 
+ 724:Src/pwm_curr_fdbk.c **** /**
+ 725:Src/pwm_curr_fdbk.c **** * @brief  It is used to set the align motor flag.
+ 726:Src/pwm_curr_fdbk.c **** * @param  this related object of class CPWMC
+ 727:Src/pwm_curr_fdbk.c **** * @param  flag to be applied in uint8_t, 1: motor is in align stage, 2: motor is not in align stage
+ 728:Src/pwm_curr_fdbk.c **** * @retval none
+ 729:Src/pwm_curr_fdbk.c **** */
+ 730:Src/pwm_curr_fdbk.c **** void PWMC_SetAlignFlag(PWMC_Handle_t *pHandle, uint8_t flag)
+ 731:Src/pwm_curr_fdbk.c **** {
+ 1392              		.loc 1 731 1 is_stmt 1 view -0
+ 1393              		.cfi_startproc
+ 1394              		@ args = 0, pretend = 0, frame = 0
+ 1395              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1396              		@ link register save eliminated.
+ 732:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 733:Src/pwm_curr_fdbk.c ****   if (MC_NULL ==  pHandle)
+ 734:Src/pwm_curr_fdbk.c ****   {
+ 735:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 736:Src/pwm_curr_fdbk.c ****   }
+ 737:Src/pwm_curr_fdbk.c ****   else
+ 738:Src/pwm_curr_fdbk.c ****   {
+ 739:Src/pwm_curr_fdbk.c **** #endif
+ 740:Src/pwm_curr_fdbk.c ****     pHandle->AlignFlag = flag;
+ 1397              		.loc 1 740 5 view .LVU420
+ 1398              		.loc 1 740 24 is_stmt 0 view .LVU421
+ 1399 0000 80F86910 		strb	r1, [r0, #105]
+ 741:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 742:Src/pwm_curr_fdbk.c ****   }
+ 743:Src/pwm_curr_fdbk.c **** #endif
+ 744:Src/pwm_curr_fdbk.c **** }
+ 1400              		.loc 1 744 1 view .LVU422
+ 1401 0004 7047     		bx	lr
+ 1402              		.cfi_endproc
+ 1403              	.LFE1457:
+ 1405              		.section	.text.PWMC_RegisterGetPhaseCurrentsCallBack,"ax",%progbits
+ 1406              		.align	1
+ 1407              		.weak	PWMC_RegisterGetPhaseCurrentsCallBack
+ 1408              		.syntax unified
+ 1409              		.thumb
+ 1410              		.thumb_func
+ 1411              		.fpu fpv4-sp-d16
+ 1413              	PWMC_RegisterGetPhaseCurrentsCallBack:
+ 1414              	.LVL129:
+ 1415              	.LFB1458:
+ 745:Src/pwm_curr_fdbk.c **** 
+ 746:Src/pwm_curr_fdbk.c **** /**
+ 747:Src/pwm_curr_fdbk.c ****  * @brief Sets the Callback that the PWMC component shall invoke to get phases current.
+ 748:Src/pwm_curr_fdbk.c ****  * @param pCallBack pointer on the callback
+ 749:Src/pwm_curr_fdbk.c ****  * @param pHandle pointer on the handle structure of the PWMC instance
+ 750:Src/pwm_curr_fdbk.c ****  *
+ 751:Src/pwm_curr_fdbk.c ****  */
+ 752:Src/pwm_curr_fdbk.c **** __weak void PWMC_RegisterGetPhaseCurrentsCallBack(PWMC_GetPhaseCurr_Cb_t pCallBack, PWMC_Handle_t *
+ 753:Src/pwm_curr_fdbk.c **** {
+ 1416              		.loc 1 753 1 is_stmt 1 view -0
+ 1417              		.cfi_startproc
+ARM GAS  /tmp/ccwRyL58.s 			page 42
+
+
+ 1418              		@ args = 0, pretend = 0, frame = 0
+ 1419              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1420              		@ link register save eliminated.
+ 754:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 755:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 756:Src/pwm_curr_fdbk.c ****   {
+ 757:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 758:Src/pwm_curr_fdbk.c ****   }
+ 759:Src/pwm_curr_fdbk.c ****   else
+ 760:Src/pwm_curr_fdbk.c ****   {
+ 761:Src/pwm_curr_fdbk.c **** #endif
+ 762:Src/pwm_curr_fdbk.c ****     pHandle->pFctGetPhaseCurrents = pCallBack;
+ 1421              		.loc 1 762 5 view .LVU424
+ 1422              		.loc 1 762 35 is_stmt 0 view .LVU425
+ 1423 0000 0860     		str	r0, [r1]
+ 763:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 764:Src/pwm_curr_fdbk.c ****   }
+ 765:Src/pwm_curr_fdbk.c **** #endif
+ 766:Src/pwm_curr_fdbk.c **** }
+ 1424              		.loc 1 766 1 view .LVU426
+ 1425 0002 7047     		bx	lr
+ 1426              		.cfi_endproc
+ 1427              	.LFE1458:
+ 1429              		.section	.text.PWMC_RegisterSwitchOffPwmCallBack,"ax",%progbits
+ 1430              		.align	1
+ 1431              		.weak	PWMC_RegisterSwitchOffPwmCallBack
+ 1432              		.syntax unified
+ 1433              		.thumb
+ 1434              		.thumb_func
+ 1435              		.fpu fpv4-sp-d16
+ 1437              	PWMC_RegisterSwitchOffPwmCallBack:
+ 1438              	.LVL130:
+ 1439              	.LFB1459:
+ 767:Src/pwm_curr_fdbk.c **** 
+ 768:Src/pwm_curr_fdbk.c **** /**
+ 769:Src/pwm_curr_fdbk.c ****  * @brief Sets the Callback that the PWMC component shall invoke to switch PWM
+ 770:Src/pwm_curr_fdbk.c ****  *        generation off.
+ 771:Src/pwm_curr_fdbk.c ****  * @param pCallBack pointer on the callback
+ 772:Src/pwm_curr_fdbk.c ****  * @param pHandle pointer on the handle structure of the PWMC instance
+ 773:Src/pwm_curr_fdbk.c ****  *
+ 774:Src/pwm_curr_fdbk.c ****  */
+ 775:Src/pwm_curr_fdbk.c **** __weak void PWMC_RegisterSwitchOffPwmCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_Handle_t *pHandle)
+ 776:Src/pwm_curr_fdbk.c **** {
+ 1440              		.loc 1 776 1 is_stmt 1 view -0
+ 1441              		.cfi_startproc
+ 1442              		@ args = 0, pretend = 0, frame = 0
+ 1443              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1444              		@ link register save eliminated.
+ 777:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 778:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 779:Src/pwm_curr_fdbk.c ****   {
+ 780:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 781:Src/pwm_curr_fdbk.c ****   }
+ 782:Src/pwm_curr_fdbk.c ****   else
+ 783:Src/pwm_curr_fdbk.c ****   {
+ 784:Src/pwm_curr_fdbk.c **** #endif
+ 785:Src/pwm_curr_fdbk.c ****     pHandle->pFctSwitchOffPwm = pCallBack;
+ARM GAS  /tmp/ccwRyL58.s 			page 43
+
+
+ 1445              		.loc 1 785 5 view .LVU428
+ 1446              		.loc 1 785 31 is_stmt 0 view .LVU429
+ 1447 0000 4860     		str	r0, [r1, #4]
+ 786:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 787:Src/pwm_curr_fdbk.c ****   }
+ 788:Src/pwm_curr_fdbk.c **** #endif
+ 789:Src/pwm_curr_fdbk.c **** }
+ 1448              		.loc 1 789 1 view .LVU430
+ 1449 0002 7047     		bx	lr
+ 1450              		.cfi_endproc
+ 1451              	.LFE1459:
+ 1453              		.section	.text.PWMC_RegisterSwitchonPwmCallBack,"ax",%progbits
+ 1454              		.align	1
+ 1455              		.weak	PWMC_RegisterSwitchonPwmCallBack
+ 1456              		.syntax unified
+ 1457              		.thumb
+ 1458              		.thumb_func
+ 1459              		.fpu fpv4-sp-d16
+ 1461              	PWMC_RegisterSwitchonPwmCallBack:
+ 1462              	.LVL131:
+ 1463              	.LFB1460:
+ 790:Src/pwm_curr_fdbk.c **** 
+ 791:Src/pwm_curr_fdbk.c **** /**
+ 792:Src/pwm_curr_fdbk.c ****  * @brief Sets the Callback that the PWMC component shall invoke to switch PWM
+ 793:Src/pwm_curr_fdbk.c ****  *        generation on.
+ 794:Src/pwm_curr_fdbk.c ****  * @param pCallBack pointer on the callback
+ 795:Src/pwm_curr_fdbk.c ****  * @param pHandle pointer on the handle structure of the PWMC instance
+ 796:Src/pwm_curr_fdbk.c ****  *
+ 797:Src/pwm_curr_fdbk.c ****  */
+ 798:Src/pwm_curr_fdbk.c **** __weak void PWMC_RegisterSwitchonPwmCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_Handle_t *pHandle)
+ 799:Src/pwm_curr_fdbk.c **** {
+ 1464              		.loc 1 799 1 is_stmt 1 view -0
+ 1465              		.cfi_startproc
+ 1466              		@ args = 0, pretend = 0, frame = 0
+ 1467              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1468              		@ link register save eliminated.
+ 800:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 801:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 802:Src/pwm_curr_fdbk.c ****   {
+ 803:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 804:Src/pwm_curr_fdbk.c ****   }
+ 805:Src/pwm_curr_fdbk.c ****   else
+ 806:Src/pwm_curr_fdbk.c ****   {
+ 807:Src/pwm_curr_fdbk.c **** #endif
+ 808:Src/pwm_curr_fdbk.c ****     pHandle->pFctSwitchOnPwm = pCallBack;
+ 1469              		.loc 1 808 5 view .LVU432
+ 1470              		.loc 1 808 30 is_stmt 0 view .LVU433
+ 1471 0000 8860     		str	r0, [r1, #8]
+ 809:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 810:Src/pwm_curr_fdbk.c ****   }
+ 811:Src/pwm_curr_fdbk.c **** #endif
+ 812:Src/pwm_curr_fdbk.c **** }
+ 1472              		.loc 1 812 1 view .LVU434
+ 1473 0002 7047     		bx	lr
+ 1474              		.cfi_endproc
+ 1475              	.LFE1460:
+ 1477              		.section	.text.PWMC_RegisterReadingCalibrationCallBack,"ax",%progbits
+ARM GAS  /tmp/ccwRyL58.s 			page 44
+
+
+ 1478              		.align	1
+ 1479              		.weak	PWMC_RegisterReadingCalibrationCallBack
+ 1480              		.syntax unified
+ 1481              		.thumb
+ 1482              		.thumb_func
+ 1483              		.fpu fpv4-sp-d16
+ 1485              	PWMC_RegisterReadingCalibrationCallBack:
+ 1486              	.LVL132:
+ 1487              	.LFB1461:
+ 813:Src/pwm_curr_fdbk.c **** 
+ 814:Src/pwm_curr_fdbk.c **** /**
+ 815:Src/pwm_curr_fdbk.c ****  * @brief Sets the Callback that the PWMC component shall invoke to execute a calibration
+ 816:Src/pwm_curr_fdbk.c ****  *        of the current sensing system.
+ 817:Src/pwm_curr_fdbk.c ****  * @param pCallBack pointer on the callback
+ 818:Src/pwm_curr_fdbk.c ****  * @param pHandle pointer on the handle structure of the PWMC instance
+ 819:Src/pwm_curr_fdbk.c ****  *
+ 820:Src/pwm_curr_fdbk.c ****  */
+ 821:Src/pwm_curr_fdbk.c **** __weak void PWMC_RegisterReadingCalibrationCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_Handle_t *pHa
+ 822:Src/pwm_curr_fdbk.c **** {
+ 1488              		.loc 1 822 1 is_stmt 1 view -0
+ 1489              		.cfi_startproc
+ 1490              		@ args = 0, pretend = 0, frame = 0
+ 1491              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1492              		@ link register save eliminated.
+ 823:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 824:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 825:Src/pwm_curr_fdbk.c ****   {
+ 826:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 827:Src/pwm_curr_fdbk.c ****   }
+ 828:Src/pwm_curr_fdbk.c ****   else
+ 829:Src/pwm_curr_fdbk.c ****   {
+ 830:Src/pwm_curr_fdbk.c **** #endif
+ 831:Src/pwm_curr_fdbk.c ****     pHandle->pFctCurrReadingCalib = pCallBack;
+ 1493              		.loc 1 831 5 view .LVU436
+ 1494              		.loc 1 831 35 is_stmt 0 view .LVU437
+ 1495 0000 C860     		str	r0, [r1, #12]
+ 832:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 833:Src/pwm_curr_fdbk.c ****   }
+ 834:Src/pwm_curr_fdbk.c **** #endif
+ 835:Src/pwm_curr_fdbk.c **** }
+ 1496              		.loc 1 835 1 view .LVU438
+ 1497 0002 7047     		bx	lr
+ 1498              		.cfi_endproc
+ 1499              	.LFE1461:
+ 1501              		.section	.text.PWMC_RegisterTurnOnLowSidesCallBack,"ax",%progbits
+ 1502              		.align	1
+ 1503              		.weak	PWMC_RegisterTurnOnLowSidesCallBack
+ 1504              		.syntax unified
+ 1505              		.thumb
+ 1506              		.thumb_func
+ 1507              		.fpu fpv4-sp-d16
+ 1509              	PWMC_RegisterTurnOnLowSidesCallBack:
+ 1510              	.LVL133:
+ 1511              	.LFB1462:
+ 836:Src/pwm_curr_fdbk.c **** 
+ 837:Src/pwm_curr_fdbk.c **** /**
+ 838:Src/pwm_curr_fdbk.c ****  * @brief Sets the Callback that the PWMC component shall invoke to turn low sides on.
+ARM GAS  /tmp/ccwRyL58.s 			page 45
+
+
+ 839:Src/pwm_curr_fdbk.c ****  * @param pCallBack pointer on the callback
+ 840:Src/pwm_curr_fdbk.c ****  * @param pHandle pointer on the handle structure of the PWMC instance
+ 841:Src/pwm_curr_fdbk.c ****  *
+ 842:Src/pwm_curr_fdbk.c ****  */
+ 843:Src/pwm_curr_fdbk.c **** __weak void PWMC_RegisterTurnOnLowSidesCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_Handle_t *pHandle
+ 844:Src/pwm_curr_fdbk.c **** {
+ 1512              		.loc 1 844 1 is_stmt 1 view -0
+ 1513              		.cfi_startproc
+ 1514              		@ args = 0, pretend = 0, frame = 0
+ 1515              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1516              		@ link register save eliminated.
+ 845:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 846:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 847:Src/pwm_curr_fdbk.c ****   {
+ 848:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 849:Src/pwm_curr_fdbk.c ****   }
+ 850:Src/pwm_curr_fdbk.c ****   else
+ 851:Src/pwm_curr_fdbk.c ****   {
+ 852:Src/pwm_curr_fdbk.c **** #endif
+ 853:Src/pwm_curr_fdbk.c ****     pHandle->pFctTurnOnLowSides = pCallBack;
+ 1517              		.loc 1 853 5 view .LVU440
+ 1518              		.loc 1 853 33 is_stmt 0 view .LVU441
+ 1519 0000 0861     		str	r0, [r1, #16]
+ 854:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 855:Src/pwm_curr_fdbk.c ****   }
+ 856:Src/pwm_curr_fdbk.c **** #endif
+ 857:Src/pwm_curr_fdbk.c **** }
+ 1520              		.loc 1 857 1 view .LVU442
+ 1521 0002 7047     		bx	lr
+ 1522              		.cfi_endproc
+ 1523              	.LFE1462:
+ 1525              		.section	.text.PWMC_RegisterSampPointSectXCallBack,"ax",%progbits
+ 1526              		.align	1
+ 1527              		.weak	PWMC_RegisterSampPointSectXCallBack
+ 1528              		.syntax unified
+ 1529              		.thumb
+ 1530              		.thumb_func
+ 1531              		.fpu fpv4-sp-d16
+ 1533              	PWMC_RegisterSampPointSectXCallBack:
+ 1534              	.LVL134:
+ 1535              	.LFB1463:
+ 858:Src/pwm_curr_fdbk.c **** 
+ 859:Src/pwm_curr_fdbk.c **** /**
+ 860:Src/pwm_curr_fdbk.c ****  * @brief Sets the Callback that the PWMC component shall invoke to compute ADC sampling point
+ 861:Src/pwm_curr_fdbk.c ****  * @param pCallBack pointer on the callback
+ 862:Src/pwm_curr_fdbk.c ****  * @param pHandle pointer on the handle structure of the PWMC instance
+ 863:Src/pwm_curr_fdbk.c ****  *
+ 864:Src/pwm_curr_fdbk.c ****  */
+ 865:Src/pwm_curr_fdbk.c **** __weak void PWMC_RegisterSampPointSectXCallBack(PWMC_SetSampPointSectX_Cb_t pCallBack, PWMC_Handle_
+ 866:Src/pwm_curr_fdbk.c **** {
+ 1536              		.loc 1 866 1 is_stmt 1 view -0
+ 1537              		.cfi_startproc
+ 1538              		@ args = 0, pretend = 0, frame = 0
+ 1539              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1540              		@ link register save eliminated.
+ 867:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 868:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ARM GAS  /tmp/ccwRyL58.s 			page 46
+
+
+ 869:Src/pwm_curr_fdbk.c ****   {
+ 870:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 871:Src/pwm_curr_fdbk.c ****   }
+ 872:Src/pwm_curr_fdbk.c ****   else
+ 873:Src/pwm_curr_fdbk.c ****   {
+ 874:Src/pwm_curr_fdbk.c **** #endif
+ 875:Src/pwm_curr_fdbk.c ****     pHandle->pFctSetADCSampPointSectX = pCallBack;
+ 1541              		.loc 1 875 5 view .LVU444
+ 1542              		.loc 1 875 39 is_stmt 0 view .LVU445
+ 1543 0000 4861     		str	r0, [r1, #20]
+ 876:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 877:Src/pwm_curr_fdbk.c ****   }
+ 878:Src/pwm_curr_fdbk.c **** #endif
+ 879:Src/pwm_curr_fdbk.c **** }
+ 1544              		.loc 1 879 1 view .LVU446
+ 1545 0002 7047     		bx	lr
+ 1546              		.cfi_endproc
+ 1547              	.LFE1463:
+ 1549              		.section	.text.PWMC_RegisterIsOverCurrentOccurredCallBack,"ax",%progbits
+ 1550              		.align	1
+ 1551              		.weak	PWMC_RegisterIsOverCurrentOccurredCallBack
+ 1552              		.syntax unified
+ 1553              		.thumb
+ 1554              		.thumb_func
+ 1555              		.fpu fpv4-sp-d16
+ 1557              	PWMC_RegisterIsOverCurrentOccurredCallBack:
+ 1558              	.LVL135:
+ 1559              	.LFB1464:
+ 880:Src/pwm_curr_fdbk.c **** 
+ 881:Src/pwm_curr_fdbk.c **** /**
+ 882:Src/pwm_curr_fdbk.c ****  * @brief Sets the Callback that the PWMC component shall invoke to the overcurrent status
+ 883:Src/pwm_curr_fdbk.c ****  * @param pCallBack pointer on the callback
+ 884:Src/pwm_curr_fdbk.c ****  * @param pHandle pointer on the handle structure of the PWMC instance
+ 885:Src/pwm_curr_fdbk.c ****  *
+ 886:Src/pwm_curr_fdbk.c ****  */
+ 887:Src/pwm_curr_fdbk.c **** __weak void PWMC_RegisterIsOverCurrentOccurredCallBack(PWMC_OverCurr_Cb_t pCallBack, PWMC_Handle_t 
+ 888:Src/pwm_curr_fdbk.c **** {
+ 1560              		.loc 1 888 1 is_stmt 1 view -0
+ 1561              		.cfi_startproc
+ 1562              		@ args = 0, pretend = 0, frame = 0
+ 1563              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1564              		@ link register save eliminated.
+ 889:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 890:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 891:Src/pwm_curr_fdbk.c ****   {
+ 892:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 893:Src/pwm_curr_fdbk.c ****   }
+ 894:Src/pwm_curr_fdbk.c ****   else
+ 895:Src/pwm_curr_fdbk.c ****   {
+ 896:Src/pwm_curr_fdbk.c **** #endif
+ 897:Src/pwm_curr_fdbk.c ****     pHandle->pFctIsOverCurrentOccurred = pCallBack;
+ 1565              		.loc 1 897 5 view .LVU448
+ 1566              		.loc 1 897 40 is_stmt 0 view .LVU449
+ 1567 0000 8861     		str	r0, [r1, #24]
+ 898:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 899:Src/pwm_curr_fdbk.c ****   }
+ 900:Src/pwm_curr_fdbk.c **** #endif
+ARM GAS  /tmp/ccwRyL58.s 			page 47
+
+
+ 901:Src/pwm_curr_fdbk.c **** }
+ 1568              		.loc 1 901 1 view .LVU450
+ 1569 0002 7047     		bx	lr
+ 1570              		.cfi_endproc
+ 1571              	.LFE1464:
+ 1573              		.section	.text.PWMC_RegisterOCPSetRefVoltageCallBack,"ax",%progbits
+ 1574              		.align	1
+ 1575              		.weak	PWMC_RegisterOCPSetRefVoltageCallBack
+ 1576              		.syntax unified
+ 1577              		.thumb
+ 1578              		.thumb_func
+ 1579              		.fpu fpv4-sp-d16
+ 1581              	PWMC_RegisterOCPSetRefVoltageCallBack:
+ 1582              	.LVL136:
+ 1583              	.LFB1465:
+ 902:Src/pwm_curr_fdbk.c **** 
+ 903:Src/pwm_curr_fdbk.c **** /**
+ 904:Src/pwm_curr_fdbk.c ****  * @brief Sets the Callback that the PWMC component shall invoke to set the reference
+ 905:Src/pwm_curr_fdbk.c ****  *        voltage for the over current protection
+ 906:Src/pwm_curr_fdbk.c ****  * @param pHandle pointer on the handle structure of the PWMC instance
+ 907:Src/pwm_curr_fdbk.c ****  *
+ 908:Src/pwm_curr_fdbk.c ****  */
+ 909:Src/pwm_curr_fdbk.c **** __weak void PWMC_RegisterOCPSetRefVoltageCallBack(PWMC_SetOcpRefVolt_Cb_t pCallBack, PWMC_Handle_t 
+ 910:Src/pwm_curr_fdbk.c **** {
+ 1584              		.loc 1 910 1 is_stmt 1 view -0
+ 1585              		.cfi_startproc
+ 1586              		@ args = 0, pretend = 0, frame = 0
+ 1587              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1588              		@ link register save eliminated.
+ 911:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 912:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 913:Src/pwm_curr_fdbk.c ****   {
+ 914:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 915:Src/pwm_curr_fdbk.c ****   }
+ 916:Src/pwm_curr_fdbk.c ****   else
+ 917:Src/pwm_curr_fdbk.c ****   {
+ 918:Src/pwm_curr_fdbk.c **** #endif
+ 919:Src/pwm_curr_fdbk.c ****     pHandle->pFctOCPSetReferenceVoltage = pCallBack;
+ 1589              		.loc 1 919 5 view .LVU452
+ 1590              		.loc 1 919 41 is_stmt 0 view .LVU453
+ 1591 0000 C861     		str	r0, [r1, #28]
+ 920:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 921:Src/pwm_curr_fdbk.c ****   }
+ 922:Src/pwm_curr_fdbk.c **** #endif
+ 923:Src/pwm_curr_fdbk.c **** }
+ 1592              		.loc 1 923 1 view .LVU454
+ 1593 0002 7047     		bx	lr
+ 1594              		.cfi_endproc
+ 1595              	.LFE1465:
+ 1597              		.section	.text.PWMC_RegisterRLDetectionModeEnableCallBack,"ax",%progbits
+ 1598              		.align	1
+ 1599              		.weak	PWMC_RegisterRLDetectionModeEnableCallBack
+ 1600              		.syntax unified
+ 1601              		.thumb
+ 1602              		.thumb_func
+ 1603              		.fpu fpv4-sp-d16
+ 1605              	PWMC_RegisterRLDetectionModeEnableCallBack:
+ARM GAS  /tmp/ccwRyL58.s 			page 48
+
+
+ 1606              	.LVL137:
+ 1607              	.LFB1466:
+ 924:Src/pwm_curr_fdbk.c **** 
+ 925:Src/pwm_curr_fdbk.c **** /**
+ 926:Src/pwm_curr_fdbk.c ****  * @brief Sets the Callback that the PWMC component shall invoke to enable the R/L detection mode
+ 927:Src/pwm_curr_fdbk.c ****  * @param pHandle pointer on the handle structure of the PWMC instance
+ 928:Src/pwm_curr_fdbk.c ****  *
+ 929:Src/pwm_curr_fdbk.c ****  */
+ 930:Src/pwm_curr_fdbk.c **** __weak void PWMC_RegisterRLDetectionModeEnableCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_Handle_t *
+ 931:Src/pwm_curr_fdbk.c **** {
+ 1608              		.loc 1 931 1 is_stmt 1 view -0
+ 1609              		.cfi_startproc
+ 1610              		@ args = 0, pretend = 0, frame = 0
+ 1611              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1612              		@ link register save eliminated.
+ 932:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 933:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 934:Src/pwm_curr_fdbk.c ****   {
+ 935:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 936:Src/pwm_curr_fdbk.c ****   }
+ 937:Src/pwm_curr_fdbk.c ****   else
+ 938:Src/pwm_curr_fdbk.c ****   {
+ 939:Src/pwm_curr_fdbk.c **** #endif
+ 940:Src/pwm_curr_fdbk.c ****     pHandle->pFctRLDetectionModeEnable = pCallBack;
+ 1613              		.loc 1 940 5 view .LVU456
+ 1614              		.loc 1 940 40 is_stmt 0 view .LVU457
+ 1615 0000 0862     		str	r0, [r1, #32]
+ 941:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 942:Src/pwm_curr_fdbk.c ****   }
+ 943:Src/pwm_curr_fdbk.c **** #endif
+ 944:Src/pwm_curr_fdbk.c **** }
+ 1616              		.loc 1 944 1 view .LVU458
+ 1617 0002 7047     		bx	lr
+ 1618              		.cfi_endproc
+ 1619              	.LFE1466:
+ 1621              		.section	.text.PWMC_RegisterRLDetectionModeDisableCallBack,"ax",%progbits
+ 1622              		.align	1
+ 1623              		.weak	PWMC_RegisterRLDetectionModeDisableCallBack
+ 1624              		.syntax unified
+ 1625              		.thumb
+ 1626              		.thumb_func
+ 1627              		.fpu fpv4-sp-d16
+ 1629              	PWMC_RegisterRLDetectionModeDisableCallBack:
+ 1630              	.LVL138:
+ 1631              	.LFB1467:
+ 945:Src/pwm_curr_fdbk.c **** 
+ 946:Src/pwm_curr_fdbk.c **** /**
+ 947:Src/pwm_curr_fdbk.c ****  * @brief Sets the Callback wIch PWMC shall invoke to disable the R/L detection mode
+ 948:Src/pwm_curr_fdbk.c ****  * @param pHandle pointer on the handle structure of the PWMC instance
+ 949:Src/pwm_curr_fdbk.c ****  *
+ 950:Src/pwm_curr_fdbk.c ****  */
+ 951:Src/pwm_curr_fdbk.c **** __weak void PWMC_RegisterRLDetectionModeDisableCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_Handle_t 
+ 952:Src/pwm_curr_fdbk.c **** {
+ 1632              		.loc 1 952 1 is_stmt 1 view -0
+ 1633              		.cfi_startproc
+ 1634              		@ args = 0, pretend = 0, frame = 0
+ 1635              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccwRyL58.s 			page 49
+
+
+ 1636              		@ link register save eliminated.
+ 953:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 954:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 955:Src/pwm_curr_fdbk.c ****   {
+ 956:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 957:Src/pwm_curr_fdbk.c ****   }
+ 958:Src/pwm_curr_fdbk.c ****   else
+ 959:Src/pwm_curr_fdbk.c ****   {
+ 960:Src/pwm_curr_fdbk.c **** #endif
+ 961:Src/pwm_curr_fdbk.c ****     pHandle->pFctRLDetectionModeDisable = pCallBack;
+ 1637              		.loc 1 961 5 view .LVU460
+ 1638              		.loc 1 961 41 is_stmt 0 view .LVU461
+ 1639 0000 4862     		str	r0, [r1, #36]
+ 962:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 963:Src/pwm_curr_fdbk.c ****   }
+ 964:Src/pwm_curr_fdbk.c **** #endif
+ 965:Src/pwm_curr_fdbk.c **** }
+ 1640              		.loc 1 965 1 view .LVU462
+ 1641 0002 7047     		bx	lr
+ 1642              		.cfi_endproc
+ 1643              	.LFE1467:
+ 1645              		.section	.text.PWMC_RegisterRLDetectionModeSetDutyCallBack,"ax",%progbits
+ 1646              		.align	1
+ 1647              		.weak	PWMC_RegisterRLDetectionModeSetDutyCallBack
+ 1648              		.syntax unified
+ 1649              		.thumb
+ 1650              		.thumb_func
+ 1651              		.fpu fpv4-sp-d16
+ 1653              	PWMC_RegisterRLDetectionModeSetDutyCallBack:
+ 1654              	.LVL139:
+ 1655              	.LFB1468:
+ 966:Src/pwm_curr_fdbk.c **** 
+ 967:Src/pwm_curr_fdbk.c **** /**
+ 968:Src/pwm_curr_fdbk.c ****  * @brief Sets the Callback that the PWMC component shall invoke to set the duty cycle
+ 969:Src/pwm_curr_fdbk.c ****  *        for the R/L detection mode
+ 970:Src/pwm_curr_fdbk.c ****  * @param pHandle pointer on the handle structure of the PWMC instance
+ 971:Src/pwm_curr_fdbk.c ****  *
+ 972:Src/pwm_curr_fdbk.c ****  */
+ 973:Src/pwm_curr_fdbk.c **** __weak void PWMC_RegisterRLDetectionModeSetDutyCallBack(PWMC_RLDetectSetDuty_Cb_t pCallBack, PWMC_H
+ 974:Src/pwm_curr_fdbk.c **** {
+ 1656              		.loc 1 974 1 is_stmt 1 view -0
+ 1657              		.cfi_startproc
+ 1658              		@ args = 0, pretend = 0, frame = 0
+ 1659              		@ frame_needed = 0, uses_anonymous_args = 0
+ 1660              		@ link register save eliminated.
+ 975:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 976:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
+ 977:Src/pwm_curr_fdbk.c ****   {
+ 978:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
+ 979:Src/pwm_curr_fdbk.c ****   }
+ 980:Src/pwm_curr_fdbk.c ****   else
+ 981:Src/pwm_curr_fdbk.c ****   {
+ 982:Src/pwm_curr_fdbk.c **** #endif
+ 983:Src/pwm_curr_fdbk.c ****     pHandle->pFctRLDetectionModeSetDuty = pCallBack;
+ 1661              		.loc 1 983 5 view .LVU464
+ 1662              		.loc 1 983 41 is_stmt 0 view .LVU465
+ 1663 0000 8862     		str	r0, [r1, #40]
+ARM GAS  /tmp/ccwRyL58.s 			page 50
+
+
+ 984:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
+ 985:Src/pwm_curr_fdbk.c ****   }
+ 986:Src/pwm_curr_fdbk.c **** #endif
+ 987:Src/pwm_curr_fdbk.c **** }
+ 1664              		.loc 1 987 1 view .LVU466
+ 1665 0002 7047     		bx	lr
+ 1666              		.cfi_endproc
+ 1667              	.LFE1468:
+ 1669              		.text
+ 1670              	.Letext0:
+ 1671              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 1672              		.file 3 "Drivers/CMSIS/Include/core_cm4.h"
+ 1673              		.file 4 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h"
+ 1674              		.file 5 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
+ 1675              		.file 6 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h"
+ 1676              		.file 7 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
+ 1677              		.file 8 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h"
+ 1678              		.file 9 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h"
+ 1679              		.file 10 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h"
+ 1680              		.file 11 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
+ 1681              		.file 12 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h"
+ 1682              		.file 13 "Inc/mc_math.h"
+ARM GAS  /tmp/ccwRyL58.s 			page 51
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 pwm_curr_fdbk.c
+     /tmp/ccwRyL58.s:18     .text.PWMC_Clear:0000000000000000 $t
+     /tmp/ccwRyL58.s:26     .text.PWMC_Clear:0000000000000000 PWMC_Clear
+     /tmp/ccwRyL58.s:57     .text.PWMC_SetOffsetCalib:0000000000000000 $t
+     /tmp/ccwRyL58.s:64     .text.PWMC_SetOffsetCalib:0000000000000000 PWMC_SetOffsetCalib
+     /tmp/ccwRyL58.s:98     .text.PWMC_GetOffsetCalib:0000000000000000 $t
+     /tmp/ccwRyL58.s:105    .text.PWMC_GetOffsetCalib:0000000000000000 PWMC_GetOffsetCalib
+     /tmp/ccwRyL58.s:139    .text.PWMC_GetPhaseCurrents:0000000000000000 $t
+     /tmp/ccwRyL58.s:146    .text.PWMC_GetPhaseCurrents:0000000000000000 PWMC_GetPhaseCurrents
+     /tmp/ccwRyL58.s:170    .text.PWMC_SetPhaseVoltage:0000000000000000 $t
+     /tmp/ccwRyL58.s:177    .text.PWMC_SetPhaseVoltage:0000000000000000 PWMC_SetPhaseVoltage
+     /tmp/ccwRyL58.s:804    .text.PWMC_SwitchOffPWM:0000000000000000 $t
+     /tmp/ccwRyL58.s:811    .text.PWMC_SwitchOffPWM:0000000000000000 PWMC_SwitchOffPWM
+     /tmp/ccwRyL58.s:835    .text.PWMC_SwitchOnPWM:0000000000000000 $t
+     /tmp/ccwRyL58.s:842    .text.PWMC_SwitchOnPWM:0000000000000000 PWMC_SwitchOnPWM
+     /tmp/ccwRyL58.s:866    .text.PWMC_CurrentReadingCalibr:0000000000000000 $t
+     /tmp/ccwRyL58.s:873    .text.PWMC_CurrentReadingCalibr:0000000000000000 PWMC_CurrentReadingCalibr
+     /tmp/ccwRyL58.s:962    .text.PWMC_CalcPhaseCurrentsEst:0000000000000000 $t
+     /tmp/ccwRyL58.s:969    .text.PWMC_CalcPhaseCurrentsEst:0000000000000000 PWMC_CalcPhaseCurrentsEst
+     /tmp/ccwRyL58.s:1096   .text.PWMC_TurnOnLowSides:0000000000000000 $t
+     /tmp/ccwRyL58.s:1103   .text.PWMC_TurnOnLowSides:0000000000000000 PWMC_TurnOnLowSides
+     /tmp/ccwRyL58.s:1127   .text.PWMC_CheckOverCurrent:0000000000000000 $t
+     /tmp/ccwRyL58.s:1134   .text.PWMC_CheckOverCurrent:0000000000000000 PWMC_CheckOverCurrent
+     /tmp/ccwRyL58.s:1158   .text.PWMC_OCPSetReferenceVoltage:0000000000000000 $t
+     /tmp/ccwRyL58.s:1165   .text.PWMC_OCPSetReferenceVoltage:0000000000000000 PWMC_OCPSetReferenceVoltage
+     /tmp/ccwRyL58.s:1189   .text.PWMC_GetTurnOnLowSidesAction:0000000000000000 $t
+     /tmp/ccwRyL58.s:1196   .text.PWMC_GetTurnOnLowSidesAction:0000000000000000 PWMC_GetTurnOnLowSidesAction
+     /tmp/ccwRyL58.s:1214   .text.PWMC_DPWM_ModeEnable:0000000000000000 $t
+     /tmp/ccwRyL58.s:1221   .text.PWMC_DPWM_ModeEnable:0000000000000000 PWMC_DPWM_ModeEnable
+     /tmp/ccwRyL58.s:1239   .text.PWMC_DPWM_ModeDisable:0000000000000000 $t
+     /tmp/ccwRyL58.s:1246   .text.PWMC_DPWM_ModeDisable:0000000000000000 PWMC_DPWM_ModeDisable
+     /tmp/ccwRyL58.s:1264   .text.PWMC_GetDPWM_Mode:0000000000000000 $t
+     /tmp/ccwRyL58.s:1271   .text.PWMC_GetDPWM_Mode:0000000000000000 PWMC_GetDPWM_Mode
+     /tmp/ccwRyL58.s:1289   .text.PWMC_RLDetectionModeEnable:0000000000000000 $t
+     /tmp/ccwRyL58.s:1296   .text.PWMC_RLDetectionModeEnable:0000000000000000 PWMC_RLDetectionModeEnable
+     /tmp/ccwRyL58.s:1320   .text.PWMC_RLDetectionModeDisable:0000000000000000 $t
+     /tmp/ccwRyL58.s:1327   .text.PWMC_RLDetectionModeDisable:0000000000000000 PWMC_RLDetectionModeDisable
+     /tmp/ccwRyL58.s:1351   .text.PWMC_RLDetectionModeSetDuty:0000000000000000 $t
+     /tmp/ccwRyL58.s:1358   .text.PWMC_RLDetectionModeSetDuty:0000000000000000 PWMC_RLDetectionModeSetDuty
+     /tmp/ccwRyL58.s:1382   .text.PWMC_SetAlignFlag:0000000000000000 $t
+     /tmp/ccwRyL58.s:1389   .text.PWMC_SetAlignFlag:0000000000000000 PWMC_SetAlignFlag
+     /tmp/ccwRyL58.s:1406   .text.PWMC_RegisterGetPhaseCurrentsCallBack:0000000000000000 $t
+     /tmp/ccwRyL58.s:1413   .text.PWMC_RegisterGetPhaseCurrentsCallBack:0000000000000000 PWMC_RegisterGetPhaseCurrentsCallBack
+     /tmp/ccwRyL58.s:1430   .text.PWMC_RegisterSwitchOffPwmCallBack:0000000000000000 $t
+     /tmp/ccwRyL58.s:1437   .text.PWMC_RegisterSwitchOffPwmCallBack:0000000000000000 PWMC_RegisterSwitchOffPwmCallBack
+     /tmp/ccwRyL58.s:1454   .text.PWMC_RegisterSwitchonPwmCallBack:0000000000000000 $t
+     /tmp/ccwRyL58.s:1461   .text.PWMC_RegisterSwitchonPwmCallBack:0000000000000000 PWMC_RegisterSwitchonPwmCallBack
+     /tmp/ccwRyL58.s:1478   .text.PWMC_RegisterReadingCalibrationCallBack:0000000000000000 $t
+     /tmp/ccwRyL58.s:1485   .text.PWMC_RegisterReadingCalibrationCallBack:0000000000000000 PWMC_RegisterReadingCalibrationCallBack
+     /tmp/ccwRyL58.s:1502   .text.PWMC_RegisterTurnOnLowSidesCallBack:0000000000000000 $t
+     /tmp/ccwRyL58.s:1509   .text.PWMC_RegisterTurnOnLowSidesCallBack:0000000000000000 PWMC_RegisterTurnOnLowSidesCallBack
+     /tmp/ccwRyL58.s:1526   .text.PWMC_RegisterSampPointSectXCallBack:0000000000000000 $t
+     /tmp/ccwRyL58.s:1533   .text.PWMC_RegisterSampPointSectXCallBack:0000000000000000 PWMC_RegisterSampPointSectXCallBack
+     /tmp/ccwRyL58.s:1550   .text.PWMC_RegisterIsOverCurrentOccurredCallBack:0000000000000000 $t
+     /tmp/ccwRyL58.s:1557   .text.PWMC_RegisterIsOverCurrentOccurredCallBack:0000000000000000 PWMC_RegisterIsOverCurrentOccurredCallBack
+     /tmp/ccwRyL58.s:1574   .text.PWMC_RegisterOCPSetRefVoltageCallBack:0000000000000000 $t
+ARM GAS  /tmp/ccwRyL58.s 			page 52
+
+
+     /tmp/ccwRyL58.s:1581   .text.PWMC_RegisterOCPSetRefVoltageCallBack:0000000000000000 PWMC_RegisterOCPSetRefVoltageCallBack
+     /tmp/ccwRyL58.s:1598   .text.PWMC_RegisterRLDetectionModeEnableCallBack:0000000000000000 $t
+     /tmp/ccwRyL58.s:1605   .text.PWMC_RegisterRLDetectionModeEnableCallBack:0000000000000000 PWMC_RegisterRLDetectionModeEnableCallBack
+     /tmp/ccwRyL58.s:1622   .text.PWMC_RegisterRLDetectionModeDisableCallBack:0000000000000000 $t
+     /tmp/ccwRyL58.s:1629   .text.PWMC_RegisterRLDetectionModeDisableCallBack:0000000000000000 PWMC_RegisterRLDetectionModeDisableCallBack
+     /tmp/ccwRyL58.s:1646   .text.PWMC_RegisterRLDetectionModeSetDutyCallBack:0000000000000000 $t
+     /tmp/ccwRyL58.s:1653   .text.PWMC_RegisterRLDetectionModeSetDutyCallBack:0000000000000000 PWMC_RegisterRLDetectionModeSetDutyCallBack
+
+UNDEFINED SYMBOLS
+MCM_Rev_Park

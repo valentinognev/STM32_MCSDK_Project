@@ -74,8 +74,8 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
+#define ENC_PULSE_NBR 1999
 #define M1_ENC_IC_FILTER 12
-#define M1_ENC_NBR 1999
 #define M1_PWM_UL_Pin LL_GPIO_PIN_13
 #define M1_PWM_UL_GPIO_Port GPIOC
 #define M1_BUS_VOLTAGE_Pin LL_GPIO_PIN_0
@@ -127,7 +127,6 @@ void Error_Handler(void);
 #define M1_ENCODER_B_GPIO_Port GPIOB
 #define M1_ENCODER_I_Pin LL_GPIO_PIN_8
 #define M1_ENCODER_I_GPIO_Port GPIOB
-#define M1_ENCODER_I_EXTI_IRQn EXTI9_5_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

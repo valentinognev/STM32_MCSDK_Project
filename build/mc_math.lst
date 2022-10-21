@@ -1,0 +1,2199 @@
+ARM GAS  /tmp/ccTHPLPa.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"mc_math.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.MCM_Clarke,"ax",%progbits
+  18              		.align	1
+  19              		.weak	MCM_Clarke
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	MCM_Clarke:
+  27              	.LFB1437:
+  28              		.file 1 "Src/mc_math.c"
+   1:Src/mc_math.c **** /**
+   2:Src/mc_math.c ****   ******************************************************************************
+   3:Src/mc_math.c ****   * @file    mc_math.c
+   4:Src/mc_math.c ****   * @author  Motor Control SDK Team, ST Microelectronics
+   5:Src/mc_math.c ****   * @brief   This file provides mathematics functions useful for and specific to
+   6:Src/mc_math.c ****   *          Motor Control.
+   7:Src/mc_math.c ****   *
+   8:Src/mc_math.c ****   ******************************************************************************
+   9:Src/mc_math.c ****   * @attention
+  10:Src/mc_math.c ****   *
+  11:Src/mc_math.c ****   * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
+  12:Src/mc_math.c ****   * All rights reserved.</center></h2>
+  13:Src/mc_math.c ****   *
+  14:Src/mc_math.c ****   * This software component is licensed by ST under Ultimate Liberty license
+  15:Src/mc_math.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
+  16:Src/mc_math.c ****   * the License. You may obtain a copy of the License at:
+  17:Src/mc_math.c ****   *                             www.st.com/SLA0044
+  18:Src/mc_math.c ****   *
+  19:Src/mc_math.c ****   ******************************************************************************
+  20:Src/mc_math.c ****   */
+  21:Src/mc_math.c **** /* Includes ------------------------------------------------------------------*/
+  22:Src/mc_math.c **** #include "mc_math.h"
+  23:Src/mc_math.c **** #include "mc_type.h"
+  24:Src/mc_math.c **** 
+  25:Src/mc_math.c **** /** @addtogroup MCSDK
+  26:Src/mc_math.c ****   * @{
+  27:Src/mc_math.c ****   */
+  28:Src/mc_math.c **** 
+  29:Src/mc_math.c **** /** @defgroup MC_Math Motor Control Math functions
+  30:Src/mc_math.c ****   * @brief Motor Control Mathematic functions of the Motor Control SDK
+ARM GAS  /tmp/ccTHPLPa.s 			page 2
+
+
+  31:Src/mc_math.c ****   *
+  32:Src/mc_math.c ****   * @todo Document the Motor Control Math "module".
+  33:Src/mc_math.c ****   *
+  34:Src/mc_math.c ****   * @{
+  35:Src/mc_math.c ****   */
+  36:Src/mc_math.c **** 
+  37:Src/mc_math.c **** /* Private macro -------------------------------------------------------------*/
+  38:Src/mc_math.c **** 
+  39:Src/mc_math.c **** #define divSQRT_3 (int32_t)0x49E6    /* 1/sqrt(3) in q1.15 format=0.5773315*/
+  40:Src/mc_math.c **** 
+  41:Src/mc_math.c **** #if defined (CCMRAM)
+  42:Src/mc_math.c **** #if defined (__ICCARM__)
+  43:Src/mc_math.c **** #pragma location = ".ccmram"
+  44:Src/mc_math.c **** #elif defined (__CC_ARM) || defined(__GNUC__)
+  45:Src/mc_math.c **** __attribute__( ( section ( ".ccmram" ) ) )
+  46:Src/mc_math.c **** #endif
+  47:Src/mc_math.c **** #endif
+  48:Src/mc_math.c **** /**
+  49:Src/mc_math.c ****   * @brief  This function transforms stator values a and b (which are
+  50:Src/mc_math.c ****   *         directed along axes each displaced by 120 degrees) into values
+  51:Src/mc_math.c ****   *         alpha and beta in a stationary qd reference frame.
+  52:Src/mc_math.c ****   *                               alpha = a
+  53:Src/mc_math.c ****   *                       beta = -(2*b+a)/sqrt(3)
+  54:Src/mc_math.c ****   * @param  Input: stator values a and b in ab_t format
+  55:Src/mc_math.c ****   * @retval Stator values alpha and beta in alphabeta_t format
+  56:Src/mc_math.c ****   */
+  57:Src/mc_math.c **** __weak alphabeta_t MCM_Clarke(ab_t Input)
+  58:Src/mc_math.c **** {
+  29              		.loc 1 58 1 view -0
+  30              		.cfi_startproc
+  31              		@ args = 0, pretend = 0, frame = 16
+  32              		@ frame_needed = 0, uses_anonymous_args = 0
+  33              		@ link register save eliminated.
+  34 0000 84B0     		sub	sp, sp, #16
+  35              		.cfi_def_cfa_offset 16
+  59:Src/mc_math.c ****   alphabeta_t Output;
+  36              		.loc 1 59 3 view .LVU1
+  60:Src/mc_math.c **** 
+  61:Src/mc_math.c ****   int32_t a_divSQRT3_tmp;
+  37              		.loc 1 61 3 view .LVU2
+  62:Src/mc_math.c ****   int32_t b_divSQRT3_tmp;
+  38              		.loc 1 62 3 view .LVU3
+  63:Src/mc_math.c ****   int32_t wbeta_tmp;
+  39              		.loc 1 63 3 view .LVU4
+  64:Src/mc_math.c ****   int16_t hbeta_tmp;
+  40              		.loc 1 64 3 view .LVU5
+  65:Src/mc_math.c **** 
+  66:Src/mc_math.c ****   /* qIalpha = qIas*/
+  67:Src/mc_math.c ****   Output.alpha = Input.a;
+  41              		.loc 1 67 3 view .LVU6
+  42              		.loc 1 67 23 is_stmt 0 view .LVU7
+  43 0002 03B2     		sxth	r3, r0
+  44              		.loc 1 67 16 view .LVU8
+  45 0004 ADF80830 		strh	r3, [sp, #8]	@ movhi
+  68:Src/mc_math.c **** 
+  69:Src/mc_math.c ****   a_divSQRT3_tmp = divSQRT_3 * ((int32_t)Input.a);
+  46              		.loc 1 69 3 is_stmt 1 view .LVU9
+ARM GAS  /tmp/ccTHPLPa.s 			page 3
+
+
+  47              		.loc 1 69 18 is_stmt 0 view .LVU10
+  48 0008 44F6E612 		movw	r2, #18918
+  49 000c 02FB03F3 		mul	r3, r2, r3
+  50              	.LVL0:
+  70:Src/mc_math.c **** 
+  71:Src/mc_math.c ****   b_divSQRT3_tmp = divSQRT_3 * ((int32_t)Input.b);
+  51              		.loc 1 71 3 is_stmt 1 view .LVU11
+  52              		.loc 1 71 47 is_stmt 0 view .LVU12
+  53 0010 0014     		asrs	r0, r0, #16
+  54              		.loc 1 71 18 view .LVU13
+  55 0012 02FB00F2 		mul	r2, r2, r0
+  56              	.LVL1:
+  72:Src/mc_math.c **** 
+  73:Src/mc_math.c ****   /*qIbeta = -(2*qIbs+qIas)/sqrt(3)*/
+  74:Src/mc_math.c **** #ifndef FULL_MISRA_C_COMPLIANCY_MC_MATH
+  75:Src/mc_math.c ****   /* WARNING: the below instruction is not MISRA compliant, user should verify
+  76:Src/mc_math.c ****     that Cortex-M3 assembly instruction ASR (arithmetic shift right) is used by
+  77:Src/mc_math.c ****     the compiler to perform the shift (instead of LSR logical shift right) */
+  78:Src/mc_math.c ****   //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+  79:Src/mc_math.c ****   wbeta_tmp = (-(a_divSQRT3_tmp) - (b_divSQRT3_tmp) - (b_divSQRT3_tmp)) >> 15;
+  57              		.loc 1 79 3 is_stmt 1 view .LVU14
+  58              		.loc 1 79 16 is_stmt 0 view .LVU15
+  59 0016 5B42     		rsbs	r3, r3, #0
+  60              	.LVL2:
+  61              		.loc 1 79 53 view .LVU16
+  62 0018 A3EB4203 		sub	r3, r3, r2, lsl #1
+  63              	.LVL3:
+  80:Src/mc_math.c **** #else
+  81:Src/mc_math.c ****   wbeta_tmp = (-(a_divSQRT3_tmp) - (b_divSQRT3_tmp) - (b_divSQRT3_tmp)) / 32768;
+  82:Src/mc_math.c **** #endif
+  83:Src/mc_math.c **** 
+  84:Src/mc_math.c ****   /* Check saturation of Ibeta */
+  85:Src/mc_math.c ****   if (wbeta_tmp > INT16_MAX)
+  64              		.loc 1 85 3 is_stmt 1 view .LVU17
+  65              		.loc 1 85 6 is_stmt 0 view .LVU18
+  66 001c B3F1804F 		cmp	r3, #1073741824
+  67 0020 05DA     		bge	.L4
+  68 0022 DA13     		asrs	r2, r3, #15
+  69              	.LVL4:
+  86:Src/mc_math.c ****   {
+  87:Src/mc_math.c ****     hbeta_tmp = INT16_MAX;
+  88:Src/mc_math.c ****   }
+  89:Src/mc_math.c ****   else if (wbeta_tmp < (-32768))
+  70              		.loc 1 89 8 is_stmt 1 view .LVU19
+  71              		.loc 1 89 11 is_stmt 0 view .LVU20
+  72 0024 12F5004F 		cmn	r2, #32768
+  73 0028 12DB     		blt	.L5
+  90:Src/mc_math.c ****   {
+  91:Src/mc_math.c ****     hbeta_tmp =  ((int16_t)-32768);
+  92:Src/mc_math.c ****   }
+  93:Src/mc_math.c ****   else
+  94:Src/mc_math.c ****   {
+  95:Src/mc_math.c ****     hbeta_tmp = ((int16_t)wbeta_tmp);
+  74              		.loc 1 95 5 is_stmt 1 view .LVU21
+  75              		.loc 1 95 15 is_stmt 0 view .LVU22
+  76 002a 12B2     		sxth	r2, r2
+  77              	.LVL5:
+ARM GAS  /tmp/ccTHPLPa.s 			page 4
+
+
+  78              		.loc 1 95 15 view .LVU23
+  79 002c 01E0     		b	.L2
+  80              	.LVL6:
+  81              	.L4:
+  87:Src/mc_math.c ****   }
+  82              		.loc 1 87 15 view .LVU24
+  83 002e 47F6FF72 		movw	r2, #32767
+  84              	.LVL7:
+  85              	.L2:
+  96:Src/mc_math.c ****   }
+  97:Src/mc_math.c **** 
+  98:Src/mc_math.c ****   Output.beta = hbeta_tmp;
+  86              		.loc 1 98 3 is_stmt 1 view .LVU25
+  87              		.loc 1 98 15 is_stmt 0 view .LVU26
+  88 0032 ADF80A20 		strh	r2, [sp, #10]	@ movhi
+  99:Src/mc_math.c **** 
+ 100:Src/mc_math.c ****   if (((int16_t )-32768) == Output.beta)
+  89              		.loc 1 100 3 is_stmt 1 view .LVU27
+  90              		.loc 1 100 6 is_stmt 0 view .LVU28
+  91 0036 12F5004F 		cmn	r2, #32768
+  92 003a 0BD0     		beq	.L7
+  93              	.LVL8:
+  94              	.L3:
+ 101:Src/mc_math.c ****   {
+ 102:Src/mc_math.c ****     Output.beta = -32767;
+ 103:Src/mc_math.c ****   }
+ 104:Src/mc_math.c **** 
+ 105:Src/mc_math.c ****   return (Output);
+  95              		.loc 1 105 3 is_stmt 1 view .LVU29
+  96              		.loc 1 105 10 is_stmt 0 view .LVU30
+  97 003c 029B     		ldr	r3, [sp, #8]
+  98 003e 0020     		movs	r0, #0
+  99              	.LVL9:
+ 100              		.loc 1 105 10 view .LVU31
+ 101 0040 9AB2     		uxth	r2, r3
+ 102              	.LVL10:
+ 103              		.loc 1 105 10 view .LVU32
+ 104 0042 62F30F00 		bfi	r0, r2, #0, #16
+ 105 0046 1B0C     		lsrs	r3, r3, #16
+ 106 0048 63F31F40 		bfi	r0, r3, #16, #16
+ 106:Src/mc_math.c **** }
+ 107              		.loc 1 106 1 view .LVU33
+ 108 004c 04B0     		add	sp, sp, #16
+ 109              		.cfi_remember_state
+ 110              		.cfi_def_cfa_offset 0
+ 111              		@ sp needed
+ 112 004e 7047     		bx	lr
+ 113              	.LVL11:
+ 114              	.L5:
+ 115              		.cfi_restore_state
+  91:Src/mc_math.c ****   }
+ 116              		.loc 1 91 15 view .LVU34
+ 117 0050 034A     		ldr	r2, .L8
+ 118              	.LVL12:
+  91:Src/mc_math.c ****   }
+ 119              		.loc 1 91 15 view .LVU35
+ 120 0052 EEE7     		b	.L2
+ARM GAS  /tmp/ccTHPLPa.s 			page 5
+
+
+ 121              	.LVL13:
+ 122              	.L7:
+ 102:Src/mc_math.c ****   }
+ 123              		.loc 1 102 5 is_stmt 1 view .LVU36
+ 102:Src/mc_math.c ****   }
+ 124              		.loc 1 102 17 is_stmt 0 view .LVU37
+ 125 0054 48F20103 		movw	r3, #32769
+ 126              	.LVL14:
+ 102:Src/mc_math.c ****   }
+ 127              		.loc 1 102 17 view .LVU38
+ 128 0058 ADF80A30 		strh	r3, [sp, #10]	@ movhi
+ 129 005c EEE7     		b	.L3
+ 130              	.L9:
+ 131 005e 00BF     		.align	2
+ 132              	.L8:
+ 133 0060 0080FFFF 		.word	-32768
+ 134              		.cfi_endproc
+ 135              	.LFE1437:
+ 137              		.section	.text.MCM_Trig_Functions,"ax",%progbits
+ 138              		.align	1
+ 139              		.weak	MCM_Trig_Functions
+ 140              		.syntax unified
+ 141              		.thumb
+ 142              		.thumb_func
+ 143              		.fpu fpv4-sp-d16
+ 145              	MCM_Trig_Functions:
+ 146              	.LVL15:
+ 147              	.LFB1440:
+ 107:Src/mc_math.c **** 
+ 108:Src/mc_math.c **** #if defined (CCMRAM)
+ 109:Src/mc_math.c **** #if defined (__ICCARM__)
+ 110:Src/mc_math.c **** #pragma location = ".ccmram"
+ 111:Src/mc_math.c **** #elif defined (__CC_ARM) || defined(__GNUC__)
+ 112:Src/mc_math.c **** __attribute__( ( section ( ".ccmram" ) ) )
+ 113:Src/mc_math.c **** #endif
+ 114:Src/mc_math.c **** #endif
+ 115:Src/mc_math.c **** /**
+ 116:Src/mc_math.c ****   * @brief  This function transforms stator values alpha and beta, which
+ 117:Src/mc_math.c ****   *         belong to a stationary qd reference frame, to a rotor flux
+ 118:Src/mc_math.c ****   *         synchronous reference frame (properly oriented), so as q and d.
+ 119:Src/mc_math.c ****   *                   d= alpha *sin(theta)+ beta *cos(Theta)
+ 120:Src/mc_math.c ****   *                   q= alpha *cos(Theta)- beta *sin(Theta)
+ 121:Src/mc_math.c ****   * @param  Input: stator values alpha and beta in alphabeta_t format
+ 122:Src/mc_math.c ****   * @param  Theta: rotating frame angular position in q1.15 format
+ 123:Src/mc_math.c ****   * @retval Stator values q and d in qd_t format
+ 124:Src/mc_math.c ****   */
+ 125:Src/mc_math.c **** __weak qd_t MCM_Park(alphabeta_t Input, int16_t Theta)
+ 126:Src/mc_math.c **** {
+ 127:Src/mc_math.c ****   qd_t Output;
+ 128:Src/mc_math.c ****   int32_t d_tmp_1;
+ 129:Src/mc_math.c ****   int32_t d_tmp_2;
+ 130:Src/mc_math.c ****   int32_t q_tmp_1;
+ 131:Src/mc_math.c ****   int32_t q_tmp_2;
+ 132:Src/mc_math.c ****   int32_t wqd_tmp;
+ 133:Src/mc_math.c ****   int16_t hqd_tmp;
+ 134:Src/mc_math.c ****   Trig_Components Local_Vector_Components;
+ 135:Src/mc_math.c **** 
+ARM GAS  /tmp/ccTHPLPa.s 			page 6
+
+
+ 136:Src/mc_math.c ****   Local_Vector_Components = MCM_Trig_Functions(Theta);
+ 137:Src/mc_math.c **** 
+ 138:Src/mc_math.c ****   /*No overflow guaranteed*/
+ 139:Src/mc_math.c ****   q_tmp_1 = Input.alpha * ((int32_t )Local_Vector_Components.hCos);
+ 140:Src/mc_math.c **** 
+ 141:Src/mc_math.c ****   /*No overflow guaranteed*/
+ 142:Src/mc_math.c ****   q_tmp_2 = Input.beta * ((int32_t)Local_Vector_Components.hSin);
+ 143:Src/mc_math.c **** 
+ 144:Src/mc_math.c ****   /*Iq component in Q1.15 Format */
+ 145:Src/mc_math.c **** #ifndef FULL_MISRA_C_COMPLIANCY_MC_MATH
+ 146:Src/mc_math.c ****   /* WARNING: the below instruction is not MISRA compliant, user should verify
+ 147:Src/mc_math.c ****     that Cortex-M3 assembly instruction ASR (arithmetic shift right) is used by
+ 148:Src/mc_math.c ****     the compiler to perform the shift (instead of LSR logical shift right) */
+ 149:Src/mc_math.c ****   wqd_tmp = (q_tmp_1 - q_tmp_2) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Ru
+ 150:Src/mc_math.c **** #else
+ 151:Src/mc_math.c ****   wqd_tmp = (q_tmp_1 - q_tmp_2) / 32768;
+ 152:Src/mc_math.c **** #endif
+ 153:Src/mc_math.c **** 
+ 154:Src/mc_math.c ****   /* Check saturation of Iq */
+ 155:Src/mc_math.c ****   if (wqd_tmp > INT16_MAX)
+ 156:Src/mc_math.c ****   {
+ 157:Src/mc_math.c ****     hqd_tmp = INT16_MAX;
+ 158:Src/mc_math.c ****   }
+ 159:Src/mc_math.c ****   else if (wqd_tmp < (-32768))
+ 160:Src/mc_math.c ****   {
+ 161:Src/mc_math.c ****     hqd_tmp = ((int16_t)-32768);
+ 162:Src/mc_math.c ****   }
+ 163:Src/mc_math.c ****   else
+ 164:Src/mc_math.c ****   {
+ 165:Src/mc_math.c ****     hqd_tmp = ((int16_t)wqd_tmp);
+ 166:Src/mc_math.c ****   }
+ 167:Src/mc_math.c **** 
+ 168:Src/mc_math.c ****   Output.q = hqd_tmp;
+ 169:Src/mc_math.c **** 
+ 170:Src/mc_math.c ****   if (((int16_t )-32768) == Output.q)
+ 171:Src/mc_math.c ****   {
+ 172:Src/mc_math.c ****     Output.q = -32767;
+ 173:Src/mc_math.c ****   }
+ 174:Src/mc_math.c **** 
+ 175:Src/mc_math.c ****   /*No overflow guaranteed*/
+ 176:Src/mc_math.c ****   d_tmp_1 = Input.alpha * ((int32_t )Local_Vector_Components.hSin);
+ 177:Src/mc_math.c **** 
+ 178:Src/mc_math.c ****   /*No overflow guaranteed*/
+ 179:Src/mc_math.c ****   d_tmp_2 = Input.beta * ((int32_t )Local_Vector_Components.hCos);
+ 180:Src/mc_math.c **** 
+ 181:Src/mc_math.c ****   /*Id component in Q1.15 Format */
+ 182:Src/mc_math.c **** #ifndef FULL_MISRA_C_COMPLIANCY_MC_MATH
+ 183:Src/mc_math.c ****   /* WARNING: the below instruction is not MISRA compliant, user should verify
+ 184:Src/mc_math.c ****     that Cortex-M3 assembly instruction ASR (arithmetic shift right) is used by
+ 185:Src/mc_math.c ****     the compiler to perform the shift (instead of LSR logical shift right) */
+ 186:Src/mc_math.c ****   wqd_tmp = (d_tmp_1 + d_tmp_2) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Ru
+ 187:Src/mc_math.c **** #else
+ 188:Src/mc_math.c ****   wqd_tmp = (d_tmp_1 + d_tmp_2) / 32768;
+ 189:Src/mc_math.c **** #endif
+ 190:Src/mc_math.c **** 
+ 191:Src/mc_math.c ****   /* Check saturation of Id */
+ 192:Src/mc_math.c ****   if (wqd_tmp > INT16_MAX)
+ARM GAS  /tmp/ccTHPLPa.s 			page 7
+
+
+ 193:Src/mc_math.c ****   {
+ 194:Src/mc_math.c ****     hqd_tmp = INT16_MAX;
+ 195:Src/mc_math.c ****   }
+ 196:Src/mc_math.c ****   else if (wqd_tmp < (-32768))
+ 197:Src/mc_math.c ****   {
+ 198:Src/mc_math.c ****     hqd_tmp = ((int16_t)-32768);
+ 199:Src/mc_math.c ****   }
+ 200:Src/mc_math.c ****   else
+ 201:Src/mc_math.c ****   {
+ 202:Src/mc_math.c ****     hqd_tmp = ((int16_t)wqd_tmp);
+ 203:Src/mc_math.c ****   }
+ 204:Src/mc_math.c **** 
+ 205:Src/mc_math.c ****   Output.d = hqd_tmp;
+ 206:Src/mc_math.c **** 
+ 207:Src/mc_math.c ****   if (((int16_t)-32768) == Output.d)
+ 208:Src/mc_math.c ****   {
+ 209:Src/mc_math.c ****     Output.d = -32767;
+ 210:Src/mc_math.c ****   }
+ 211:Src/mc_math.c **** 
+ 212:Src/mc_math.c ****   return (Output);
+ 213:Src/mc_math.c **** }
+ 214:Src/mc_math.c **** 
+ 215:Src/mc_math.c **** #if defined (CCMRAM)
+ 216:Src/mc_math.c **** #if defined (__ICCARM__)
+ 217:Src/mc_math.c **** #pragma location = ".ccmram"
+ 218:Src/mc_math.c **** #elif defined (__CC_ARM) || defined(__GNUC__)
+ 219:Src/mc_math.c **** __attribute__( ( section ( ".ccmram" ) ) )
+ 220:Src/mc_math.c **** #endif
+ 221:Src/mc_math.c **** #endif
+ 222:Src/mc_math.c **** /**
+ 223:Src/mc_math.c ****   * @brief  This function transforms stator voltage qVq and qVd, that belong to
+ 224:Src/mc_math.c ****   *         a rotor flux synchronous rotating frame, to a stationary reference
+ 225:Src/mc_math.c ****   *         frame, so as to obtain qValpha and qVbeta:
+ 226:Src/mc_math.c ****   *                  Valfa= Vq*Cos(theta)+ Vd*Sin(theta)
+ 227:Src/mc_math.c ****   *                  Vbeta=-Vq*Sin(theta)+ Vd*Cos(theta)
+ 228:Src/mc_math.c ****   * @param  Input: stator voltage Vq and Vd in qd_t format
+ 229:Src/mc_math.c ****   * @param  Theta: rotating frame angular position in q1.15 format
+ 230:Src/mc_math.c ****   * @retval Stator voltage Valpha and Vbeta in qd_t format
+ 231:Src/mc_math.c ****   */
+ 232:Src/mc_math.c **** __weak alphabeta_t MCM_Rev_Park(qd_t Input, int16_t Theta)
+ 233:Src/mc_math.c **** {
+ 234:Src/mc_math.c ****   int32_t alpha_tmp1;
+ 235:Src/mc_math.c ****   int32_t alpha_tmp2;
+ 236:Src/mc_math.c ****   int32_t beta_tmp1;
+ 237:Src/mc_math.c ****   int32_t beta_tmp2;
+ 238:Src/mc_math.c ****   Trig_Components Local_Vector_Components;
+ 239:Src/mc_math.c ****   alphabeta_t Output;
+ 240:Src/mc_math.c **** 
+ 241:Src/mc_math.c ****   Local_Vector_Components = MCM_Trig_Functions(Theta);
+ 242:Src/mc_math.c **** 
+ 243:Src/mc_math.c ****   /*No overflow guaranteed*/
+ 244:Src/mc_math.c ****   alpha_tmp1 = Input.q * ((int32_t)Local_Vector_Components.hCos);
+ 245:Src/mc_math.c ****   alpha_tmp2 = Input.d * ((int32_t)Local_Vector_Components.hSin);
+ 246:Src/mc_math.c **** 
+ 247:Src/mc_math.c **** #ifndef FULL_MISRA_C_COMPLIANCY_MC_MATH
+ 248:Src/mc_math.c ****   /* WARNING: the below instruction is not MISRA compliant, user should verify
+ 249:Src/mc_math.c ****     that Cortex-M3 assembly instruction ASR (arithmetic shift right) is used by
+ARM GAS  /tmp/ccTHPLPa.s 			page 8
+
+
+ 250:Src/mc_math.c ****     the compiler to perform the shift (instead of LSR logical shift right) */
+ 251:Src/mc_math.c ****   //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 252:Src/mc_math.c ****   Output.alpha = (int16_t)(((alpha_tmp1) + (alpha_tmp2)) >> 15);
+ 253:Src/mc_math.c **** #else
+ 254:Src/mc_math.c ****   Output.alpha = (int16_t)(((alpha_tmp1) + (alpha_tmp2)) / 32768);
+ 255:Src/mc_math.c **** #endif
+ 256:Src/mc_math.c **** 
+ 257:Src/mc_math.c ****   beta_tmp1 = Input.q * ((int32_t)Local_Vector_Components.hSin);
+ 258:Src/mc_math.c ****   beta_tmp2 = Input.d * ((int32_t)Local_Vector_Components.hCos);
+ 259:Src/mc_math.c **** 
+ 260:Src/mc_math.c **** #ifndef FULL_MISRA_C_COMPLIANCY_MC_MATH
+ 261:Src/mc_math.c ****   /* WARNING: the below instruction is not MISRA compliant, user should verify
+ 262:Src/mc_math.c ****   that Cortex-M3 assembly instruction ASR (arithmetic shift right) is used by
+ 263:Src/mc_math.c ****   the compiler to perform the shift (instead of LSR logical shift right) */
+ 264:Src/mc_math.c ****   //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
+ 265:Src/mc_math.c ****   Output.beta = (int16_t)((beta_tmp2 - beta_tmp1) >> 15);
+ 266:Src/mc_math.c **** #else
+ 267:Src/mc_math.c ****   Output.beta = (int16_t)((beta_tmp2 - beta_tmp1) / 32768);
+ 268:Src/mc_math.c **** #endif
+ 269:Src/mc_math.c **** 
+ 270:Src/mc_math.c ****   return (Output);
+ 271:Src/mc_math.c **** }
+ 272:Src/mc_math.c **** 
+ 273:Src/mc_math.c **** #if defined (CCMRAM)
+ 274:Src/mc_math.c **** #if defined (__ICCARM__)
+ 275:Src/mc_math.c **** #pragma location = ".ccmram"
+ 276:Src/mc_math.c **** #elif defined (__CC_ARM) || defined(__GNUC__)
+ 277:Src/mc_math.c **** __attribute__( ( section ( ".ccmram" ) ) )
+ 278:Src/mc_math.c **** #endif
+ 279:Src/mc_math.c **** #endif
+ 280:Src/mc_math.c **** /**
+ 281:Src/mc_math.c ****   * @brief  This function returns cosine and sine functions of the angle fed in
+ 282:Src/mc_math.c ****   *         input
+ 283:Src/mc_math.c ****   * @param  hAngle: angle in q1.15 format
+ 284:Src/mc_math.c ****   * @retval Sin(angle) and Cos(angle) in Trig_Components format
+ 285:Src/mc_math.c ****   */
+ 286:Src/mc_math.c **** 
+ 287:Src/mc_math.c **** __weak Trig_Components MCM_Trig_Functions(int16_t hAngle)
+ 288:Src/mc_math.c **** {
+ 148              		.loc 1 288 1 is_stmt 1 view -0
+ 149              		.cfi_startproc
+ 150              		@ args = 0, pretend = 0, frame = 16
+ 151              		@ frame_needed = 0, uses_anonymous_args = 0
+ 152              		@ link register save eliminated.
+ 153              		.loc 1 288 1 is_stmt 0 view .LVU40
+ 154 0000 84B0     		sub	sp, sp, #16
+ 155              		.cfi_def_cfa_offset 16
+ 289:Src/mc_math.c ****   /* MISRAC2012-violation Rule 19.2. The union keyword should not be used.
+ 290:Src/mc_math.c ****    * If this rule is not followed, the kinds of behavior that need to be determined
+ 291:Src/mc_math.c ****    * are:
+ 292:Src/mc_math.c ****    * Padding — how much padding is inserted at the end of the union;
+ 293:Src/mc_math.c ****    * Alignment — how are members of any structures within the union aligned;
+ 294:Src/mc_math.c ****    * Endianness — is the most significant byte of a word stored at the lowest or
+ 295:Src/mc_math.c ****    *              highest memory address;
+ 296:Src/mc_math.c ****    * Bit-order — how are bits numbered within bytes and how are bits allocated to
+ 297:Src/mc_math.c ****    *             bit fields.
+ 298:Src/mc_math.c ****    * Low. Use of union (u32toi16x2). */
+ARM GAS  /tmp/ccTHPLPa.s 			page 9
+
+
+ 299:Src/mc_math.c ****   //cstat -MISRAC2012-Rule-19.2
+ 300:Src/mc_math.c ****   union u32toi16x2 {
+ 156              		.loc 1 300 3 is_stmt 1 view .LVU41
+ 301:Src/mc_math.c ****     uint32_t CordicRdata;
+ 302:Src/mc_math.c ****     Trig_Components Components;
+ 303:Src/mc_math.c ****   } CosSin;
+ 304:Src/mc_math.c ****   //cstat +MISRAC2012-Rule-19.2
+ 305:Src/mc_math.c ****   /* Configure CORDIC */
+ 306:Src/mc_math.c ****   /* Misra  violation Rule 11.4 A Conversion should not be performed between a 
+ 307:Src/mc_math.c ****    * pointer to object and an integer type */
+ 308:Src/mc_math.c ****   WRITE_REG(CORDIC->CSR, CORDIC_CONFIG_COSINE);
+ 157              		.loc 1 308 3 view .LVU42
+ 158 0002 094B     		ldr	r3, .L12
+ 159 0004 4FF06012 		mov	r2, #6291552
+ 160 0008 1A60     		str	r2, [r3]
+ 309:Src/mc_math.c ****   /* Misra  violation Rule 11.4 A Conversion should not be performed between a 
+ 310:Src/mc_math.c ****    * pointer to object and an integer type */
+ 311:Src/mc_math.c ****   LL_CORDIC_WriteData(CORDIC, ((uint32_t)0x7FFF0000) + ((uint32_t)hAngle));
+ 161              		.loc 1 311 3 view .LVU43
+ 162 000a 00F1FF40 		add	r0, r0, #2139095040
+ 163              	.LVL16:
+ 164              		.loc 1 311 3 is_stmt 0 view .LVU44
+ 165 000e 00F5FE00 		add	r0, r0, #8323072
+ 166              	.LVL17:
+ 167              	.LBB20:
+ 168              	.LBI20:
+ 169              		.file 2 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h"
+   1:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+   2:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   ******************************************************************************
+   3:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @file    stm32g4xx_ll_cordic.h
+   4:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @author  MCD Application Team
+   5:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief   Header file of CORDIC LL module.
+   6:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   ******************************************************************************
+   7:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @attention
+   8:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *
+   9:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * Copyright (c) 2019 STMicroelectronics.
+  10:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * All rights reserved.
+  11:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *
+  12:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * This software is licensed under terms that can be found in the LICENSE file
+  13:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * in the root directory of this software component.
+  14:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *
+  16:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   ******************************************************************************
+  17:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+  18:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  19:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /* Define to prevent recursive inclusion -------------------------------------*/
+  20:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #ifndef STM32G4xx_LL_CORDIC_H
+  21:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define STM32G4xx_LL_CORDIC_H
+  22:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  23:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #ifdef __cplusplus
+  24:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** extern "C" {
+  25:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #endif
+  26:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  27:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /* Includes ------------------------------------------------------------------*/
+  28:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #include "stm32g4xx.h"
+  29:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  30:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @addtogroup STM32G4xx_LL_Driver
+ARM GAS  /tmp/ccTHPLPa.s 			page 10
+
+
+  31:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+  32:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+  33:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  34:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #if defined(CORDIC)
+  35:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  36:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL CORDIC
+  37:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+  38:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+  39:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  40:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /* Private variables ---------------------------------------------------------*/
+  41:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  42:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /* Private constants ---------------------------------------------------------*/
+  43:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  44:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /* Private macros ------------------------------------------------------------*/
+  45:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  46:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /* Exported types ------------------------------------------------------------*/
+  47:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  48:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /* Exported constants --------------------------------------------------------*/
+  49:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_Exported_Constants CORDIC Exported Constants
+  50:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+  51:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+  52:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  53:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EC_GET_FLAG Get Flags Defines
+  54:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief    Flags defines which can be used with LL_CORDIC_ReadReg function.
+  55:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+  56:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+  57:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_FLAG_RRDY                CORDIC_CSR_RRDY
+  58:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+  59:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+  60:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+  61:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  62:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EC_IT IT Defines
+  63:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief    IT defines which can be used with LL_CORDIC_ReadReg and LL_CORDIC_WriteReg functions.
+  64:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+  65:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+  66:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_IT_IEN                   CORDIC_CSR_IEN            /*!< Result Ready interrupt en
+  67:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+  68:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+  69:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+  70:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+  71:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EC_FUNCTION FUNCTION
+  72:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+  73:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+  74:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_FUNCTION_COSINE          (0x00000000U)                                           
+  75:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_FUNCTION_SINE            ((uint32_t)(CORDIC_CSR_FUNC_0))                         
+  76:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_FUNCTION_PHASE           ((uint32_t)(CORDIC_CSR_FUNC_1))                         
+  77:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_FUNCTION_MODULUS         ((uint32_t)(CORDIC_CSR_FUNC_1 | CORDIC_CSR_FUNC_0))     
+  78:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_FUNCTION_ARCTANGENT      ((uint32_t)(CORDIC_CSR_FUNC_2))                         
+  79:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_FUNCTION_HCOSINE         ((uint32_t)(CORDIC_CSR_FUNC_2 | CORDIC_CSR_FUNC_0))     
+  80:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_FUNCTION_HSINE           ((uint32_t)(CORDIC_CSR_FUNC_2 | CORDIC_CSR_FUNC_1))     
+  81:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_FUNCTION_HARCTANGENT     ((uint32_t)(CORDIC_CSR_FUNC_2 | CORDIC_CSR_FUNC_1 | CORD
+  82:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_FUNCTION_NATURALLOG      ((uint32_t)(CORDIC_CSR_FUNC_3))                         
+  83:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_FUNCTION_SQUAREROOT      ((uint32_t)(CORDIC_CSR_FUNC_3 | CORDIC_CSR_FUNC_0))     
+  84:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+  85:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+  86:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+  87:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ARM GAS  /tmp/ccTHPLPa.s 			page 11
+
+
+  88:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EC_PRECISION PRECISION
+  89:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+  90:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+  91:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_1CYCLE         ((uint32_t)(CORDIC_CSR_PRECISION_0))
+  92:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_2CYCLES        ((uint32_t)(CORDIC_CSR_PRECISION_1))
+  93:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_3CYCLES        ((uint32_t)(CORDIC_CSR_PRECISION_1 | CORDIC_CSR_PRECISIO
+  94:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_4CYCLES        ((uint32_t)(CORDIC_CSR_PRECISION_2))
+  95:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_5CYCLES        ((uint32_t)(CORDIC_CSR_PRECISION_2 | CORDIC_CSR_PRECISIO
+  96:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_6CYCLES        ((uint32_t)(CORDIC_CSR_PRECISION_2 | CORDIC_CSR_PRECISIO
+  97:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_7CYCLES        ((uint32_t)(CORDIC_CSR_PRECISION_2\
+  98:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                        | CORDIC_CSR_PRECISION_1 | CORDIC_CSR_PRECIS
+  99:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_8CYCLES        ((uint32_t)(CORDIC_CSR_PRECISION_3))
+ 100:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_9CYCLES        ((uint32_t)(CORDIC_CSR_PRECISION_3 | CORDIC_CSR_PRECISIO
+ 101:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_10CYCLES       ((uint32_t)(CORDIC_CSR_PRECISION_3 | CORDIC_CSR_PRECISIO
+ 102:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_11CYCLES       ((uint32_t)(CORDIC_CSR_PRECISION_3\
+ 103:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                        | CORDIC_CSR_PRECISION_1 | CORDIC_CSR_PRECIS
+ 104:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_12CYCLES       ((uint32_t)(CORDIC_CSR_PRECISION_3 | CORDIC_CSR_PRECISIO
+ 105:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_13CYCLES       ((uint32_t)(CORDIC_CSR_PRECISION_3\
+ 106:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                        | CORDIC_CSR_PRECISION_2 | CORDIC_CSR_PRECIS
+ 107:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_14CYCLES       ((uint32_t)(CORDIC_CSR_PRECISION_3\
+ 108:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                        | CORDIC_CSR_PRECISION_2 | CORDIC_CSR_PRECIS
+ 109:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_15CYCLES       ((uint32_t)(CORDIC_CSR_PRECISION_3\
+ 110:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                        | CORDIC_CSR_PRECISION_2 | CORDIC_CSR_PRECIS
+ 111:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                        | CORDIC_CSR_PRECISION_0))
+ 112:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 113:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 114:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 115:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 116:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EC_SCALE SCALE
+ 117:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 118:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 119:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_SCALE_0                  (0x00000000U)
+ 120:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_SCALE_1                  ((uint32_t)(CORDIC_CSR_SCALE_0))
+ 121:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_SCALE_2                  ((uint32_t)(CORDIC_CSR_SCALE_1))
+ 122:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_SCALE_3                  ((uint32_t)(CORDIC_CSR_SCALE_1 | CORDIC_CSR_SCALE_0))
+ 123:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_SCALE_4                  ((uint32_t)(CORDIC_CSR_SCALE_2))
+ 124:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_SCALE_5                  ((uint32_t)(CORDIC_CSR_SCALE_2 | CORDIC_CSR_SCALE_0))
+ 125:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_SCALE_6                  ((uint32_t)(CORDIC_CSR_SCALE_2 | CORDIC_CSR_SCALE_1))
+ 126:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_SCALE_7                  ((uint32_t)(CORDIC_CSR_SCALE_2 | CORDIC_CSR_SCALE_1 | CO
+ 127:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 128:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 129:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 130:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 131:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EC_NBWRITE NBWRITE
+ 132:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 133:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 134:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_NBWRITE_1                (0x00000000U)             /*!< One 32-bits write contain
+ 135:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                                           32-bit data input (Q1.31 
+ 136:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                                           16-bit data input (Q1.15 
+ 137:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                                           in one 32 bits Data */
+ 138:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_NBWRITE_2                CORDIC_CSR_NARGS          /*!< Two 32-bit write containi
+ 139:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                                           (Q1.31 format) */
+ 140:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 141:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 142:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 143:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 144:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EC_NBREAD NBREAD
+ARM GAS  /tmp/ccTHPLPa.s 			page 12
+
+
+ 145:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 146:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 147:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_NBREAD_1                 (0x00000000U)             /*!< One 32-bits read containi
+ 148:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                                           32-bit data output (Q1.31
+ 149:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                                           16-bit data output (Q1.15
+ 150:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                                           in one 32 bits Data */
+ 151:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_NBREAD_2                 CORDIC_CSR_NRES           /*!< Two 32-bit Data containin
+ 152:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                                           (Q1.31 format) */
+ 153:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 154:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 155:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 156:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 157:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EC_INSIZE INSIZE
+ 158:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 159:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 160:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_INSIZE_32BITS            (0x00000000U)             /*!< 32 bits input data size (
+ 161:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_INSIZE_16BITS            CORDIC_CSR_ARGSIZE        /*!< 16 bits input data size (
+ 162:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 163:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 164:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 165:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 166:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EC_OUTSIZE OUTSIZE
+ 167:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 168:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 169:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_OUTSIZE_32BITS           (0x00000000U)             /*!< 32 bits output data size 
+ 170:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_OUTSIZE_16BITS           CORDIC_CSR_RESSIZE        /*!< 16 bits output data size 
+ 171:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 172:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 173:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 174:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 175:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EC_DMA_REG_DATA DMA register data
+ 176:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 177:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 178:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_DMA_REG_DATA_IN          (0x00000000U)             /*!< Get address of input data
+ 179:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_DMA_REG_DATA_OUT         (0x00000001U)             /*!< Get address of output dat
+ 180:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 181:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 182:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 183:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 184:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 185:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 186:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 187:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 188:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /* Exported macro ------------------------------------------------------------*/
+ 189:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_Exported_Macros CORDIC Exported Macros
+ 190:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 191:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 192:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 193:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EM_WRITE_READ Common Write and read registers Macros
+ 194:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 195:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 196:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 197:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 198:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Write a value in CORDIC register.
+ 199:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  __INSTANCE__ CORDIC Instance
+ 200:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  __REG__ Register to be written
+ 201:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  __VALUE__ Value to be written in the register
+ARM GAS  /tmp/ccTHPLPa.s 			page 13
+
+
+ 202:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 203:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 204:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_WriteReg(__INSTANCE__, __REG__, __VALUE__) WRITE_REG(__INSTANCE__->__REG__, (__VA
+ 205:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 206:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 207:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Read a value in CORDIC register.
+ 208:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  __INSTANCE__ CORDIC Instance
+ 209:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  __REG__ Register to be read
+ 210:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval Register value
+ 211:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 212:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_ReadReg(__INSTANCE__, __REG__) READ_REG(__INSTANCE__->__REG__)
+ 213:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 214:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 215:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 216:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 217:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 218:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 219:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 220:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 221:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 222:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /* Exported functions --------------------------------------------------------*/
+ 223:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 224:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_Exported_Functions CORDIC Exported Functions
+ 225:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 226:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 227:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 228:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EF_Configuration CORDIC Configuration functions
+ 229:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 230:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 231:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 232:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 233:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Configure the CORDIC processing.
+ 234:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @note   This function set all parameters of CORDIC processing.
+ 235:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         These parameters can also be set individually using
+ 236:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         dedicated functions:
+ 237:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         - @ref LL_CORDIC_SetFunction()
+ 238:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         - @ref LL_CORDIC_SetPrecision()
+ 239:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         - @ref LL_CORDIC_SetScale()
+ 240:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         - @ref LL_CORDIC_SetNbWrite()
+ 241:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         - @ref LL_CORDIC_SetNbRead()
+ 242:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         - @ref LL_CORDIC_SetInSize()
+ 243:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         - @ref LL_CORDIC_SetOutSize()
+ 244:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          FUNC          LL_CORDIC_Configure\n
+ 245:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         CSR          PRECISION     LL_CORDIC_Configure\n
+ 246:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         CSR          SCALE         LL_CORDIC_Configure\n
+ 247:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         CSR          NARGS         LL_CORDIC_Configure\n
+ 248:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         CSR          NRES          LL_CORDIC_Configure\n
+ 249:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         CSR          ARGSIZE       LL_CORDIC_Configure\n
+ 250:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         CSR          RESIZE        LL_CORDIC_Configure
+ 251:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC instance
+ 252:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  Function parameter can be one of the following values:
+ 253:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_COSINE
+ 254:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_SINE
+ 255:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_PHASE
+ 256:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_MODULUS
+ 257:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_ARCTANGENT
+ 258:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_HCOSINE
+ARM GAS  /tmp/ccTHPLPa.s 			page 14
+
+
+ 259:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_HSINE
+ 260:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_HARCTANGENT
+ 261:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_NATURALLOG
+ 262:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_SQUAREROOT
+ 263:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  Precision parameter can be one of the following values:
+ 264:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_1CYCLE
+ 265:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_2CYCLES
+ 266:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_3CYCLES
+ 267:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_4CYCLES
+ 268:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_5CYCLES
+ 269:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_6CYCLES
+ 270:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_7CYCLES
+ 271:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_8CYCLES
+ 272:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_9CYCLES
+ 273:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_10CYCLES
+ 274:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_11CYCLES
+ 275:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_12CYCLES
+ 276:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_13CYCLES
+ 277:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_14CYCLES
+ 278:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_15CYCLES
+ 279:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  Scale parameter can be one of the following values:
+ 280:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_0
+ 281:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_1
+ 282:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_2
+ 283:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_3
+ 284:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_4
+ 285:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_5
+ 286:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_6
+ 287:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_7
+ 288:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  NbWrite parameter can be one of the following values:
+ 289:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_NBWRITE_1
+ 290:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_NBWRITE_2
+ 291:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  NbRead parameter can be one of the following values:
+ 292:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_NBREAD_1
+ 293:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_NBREAD_2
+ 294:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  InSize parameter can be one of the following values:
+ 295:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_INSIZE_32BITS
+ 296:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_INSIZE_16BITS
+ 297:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  OutSize parameter can be one of the following values:
+ 298:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_OUTSIZE_32BITS
+ 299:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_OUTSIZE_16BITS
+ 300:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 301:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 302:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_Config(CORDIC_TypeDef *CORDICx, uint32_t Function, uint32_t Precisio
+ 303:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                       uint32_t NbWrite, uint32_t NbRead, uint32_t InSize, uint32_t 
+ 304:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 305:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   MODIFY_REG(CORDICx->CSR,
+ 306:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****              CORDIC_CSR_FUNC | CORDIC_CSR_PRECISION | CORDIC_CSR_SCALE |
+ 307:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****              CORDIC_CSR_NARGS | CORDIC_CSR_NRES | CORDIC_CSR_ARGSIZE | CORDIC_CSR_RESSIZE,
+ 308:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****              Function | Precision | Scale |
+ 309:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****              NbWrite | NbRead | InSize | OutSize);
+ 310:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 311:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 312:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 313:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Configure function.
+ 314:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          FUNC          LL_CORDIC_SetFunction
+ 315:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ARM GAS  /tmp/ccTHPLPa.s 			page 15
+
+
+ 316:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  Function parameter can be one of the following values:
+ 317:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_COSINE
+ 318:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_SINE
+ 319:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_PHASE
+ 320:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_MODULUS
+ 321:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_ARCTANGENT
+ 322:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_HCOSINE
+ 323:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_HSINE
+ 324:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_HARCTANGENT
+ 325:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_NATURALLOG
+ 326:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_SQUAREROOT
+ 327:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 328:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 329:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_SetFunction(CORDIC_TypeDef *CORDICx, uint32_t Function)
+ 330:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 331:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   MODIFY_REG(CORDICx->CSR, CORDIC_CSR_FUNC, Function);
+ 332:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 333:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 334:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 335:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Return function.
+ 336:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          FUNC          LL_CORDIC_GetFunction
+ 337:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 338:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval Returned value can be one of the following values:
+ 339:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_COSINE
+ 340:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_SINE
+ 341:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_PHASE
+ 342:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_MODULUS
+ 343:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_ARCTANGENT
+ 344:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_HCOSINE
+ 345:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_HSINE
+ 346:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_HARCTANGENT
+ 347:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_NATURALLOG
+ 348:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_SQUAREROOT
+ 349:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 350:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_GetFunction(CORDIC_TypeDef *CORDICx)
+ 351:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 352:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return (uint32_t)(READ_BIT(CORDICx->CSR, CORDIC_CSR_FUNC));
+ 353:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 354:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 355:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 356:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Configure precision in cycles number.
+ 357:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          PRECISION     LL_CORDIC_SetPrecision
+ 358:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 359:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  Precision parameter can be one of the following values:
+ 360:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_1CYCLE
+ 361:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_2CYCLES
+ 362:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_3CYCLES
+ 363:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_4CYCLES
+ 364:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_5CYCLES
+ 365:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_6CYCLES
+ 366:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_7CYCLES
+ 367:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_8CYCLES
+ 368:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_9CYCLES
+ 369:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_10CYCLES
+ 370:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_11CYCLES
+ 371:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_12CYCLES
+ 372:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_13CYCLES
+ARM GAS  /tmp/ccTHPLPa.s 			page 16
+
+
+ 373:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_14CYCLES
+ 374:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_15CYCLES
+ 375:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 376:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 377:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_SetPrecision(CORDIC_TypeDef *CORDICx, uint32_t Precision)
+ 378:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 379:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   MODIFY_REG(CORDICx->CSR, CORDIC_CSR_PRECISION, Precision);
+ 380:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 381:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 382:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 383:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Return precision in cycles number.
+ 384:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          PRECISION     LL_CORDIC_GetPrecision
+ 385:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 386:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval Returned value can be one of the following values:
+ 387:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_1CYCLE
+ 388:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_2CYCLES
+ 389:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_3CYCLES
+ 390:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_4CYCLES
+ 391:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_5CYCLES
+ 392:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_6CYCLES
+ 393:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_7CYCLES
+ 394:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_8CYCLES
+ 395:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_9CYCLES
+ 396:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_10CYCLES
+ 397:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_11CYCLES
+ 398:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_12CYCLES
+ 399:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_13CYCLES
+ 400:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_14CYCLES
+ 401:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_15CYCLES
+ 402:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 403:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_GetPrecision(CORDIC_TypeDef *CORDICx)
+ 404:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 405:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return (uint32_t)(READ_BIT(CORDICx->CSR, CORDIC_CSR_PRECISION));
+ 406:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 407:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 408:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 409:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Configure scaling factor.
+ 410:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          SCALE         LL_CORDIC_SetScale
+ 411:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 412:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  Scale parameter can be one of the following values:
+ 413:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_0
+ 414:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_1
+ 415:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_2
+ 416:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_3
+ 417:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_4
+ 418:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_5
+ 419:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_6
+ 420:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_7
+ 421:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 422:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 423:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_SetScale(CORDIC_TypeDef *CORDICx, uint32_t Scale)
+ 424:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 425:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   MODIFY_REG(CORDICx->CSR, CORDIC_CSR_SCALE, Scale);
+ 426:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 427:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 428:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 429:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Return scaling factor.
+ARM GAS  /tmp/ccTHPLPa.s 			page 17
+
+
+ 430:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          SCALE         LL_CORDIC_GetScale
+ 431:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 432:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval Returned value can be one of the following values:
+ 433:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_0
+ 434:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_1
+ 435:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_2
+ 436:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_3
+ 437:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_4
+ 438:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_5
+ 439:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_6
+ 440:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_7
+ 441:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 442:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_GetScale(CORDIC_TypeDef *CORDICx)
+ 443:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 444:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return (uint32_t)(READ_BIT(CORDICx->CSR, CORDIC_CSR_SCALE));
+ 445:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 446:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 447:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 448:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Configure number of 32-bit write expected for one calculation.
+ 449:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          NARGS         LL_CORDIC_SetNbWrite
+ 450:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 451:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  NbWrite parameter can be one of the following values:
+ 452:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_NBWRITE_1
+ 453:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_NBWRITE_2
+ 454:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 455:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 456:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_SetNbWrite(CORDIC_TypeDef *CORDICx, uint32_t NbWrite)
+ 457:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 458:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   MODIFY_REG(CORDICx->CSR, CORDIC_CSR_NARGS, NbWrite);
+ 459:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 460:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 461:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 462:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Return number of 32-bit write expected for one calculation.
+ 463:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          NARGS         LL_CORDIC_GetNbWrite
+ 464:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 465:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval Returned value can be one of the following values:
+ 466:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_NBWRITE_1
+ 467:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_NBWRITE_2
+ 468:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 469:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_GetNbWrite(CORDIC_TypeDef *CORDICx)
+ 470:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 471:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return (uint32_t)(READ_BIT(CORDICx->CSR, CORDIC_CSR_NARGS));
+ 472:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 473:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 474:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 475:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Configure number of 32-bit read expected after one calculation.
+ 476:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          NRES          LL_CORDIC_SetNbRead
+ 477:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 478:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  NbRead parameter can be one of the following values:
+ 479:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_NBREAD_1
+ 480:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_NBREAD_2
+ 481:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 482:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 483:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_SetNbRead(CORDIC_TypeDef *CORDICx, uint32_t NbRead)
+ 484:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 485:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   MODIFY_REG(CORDICx->CSR, CORDIC_CSR_NRES, NbRead);
+ 486:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ARM GAS  /tmp/ccTHPLPa.s 			page 18
+
+
+ 487:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 488:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 489:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Return number of 32-bit read expected after one calculation.
+ 490:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          NRES          LL_CORDIC_GetNbRead
+ 491:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 492:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval Returned value can be one of the following values:
+ 493:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_NBREAD_1
+ 494:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_NBREAD_2
+ 495:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 496:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_GetNbRead(CORDIC_TypeDef *CORDICx)
+ 497:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 498:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return (uint32_t)(READ_BIT(CORDICx->CSR, CORDIC_CSR_NRES));
+ 499:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 500:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 501:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 502:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Configure width of input data.
+ 503:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          ARGSIZE       LL_CORDIC_SetInSize
+ 504:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 505:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  InSize parameter can be one of the following values:
+ 506:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_INSIZE_32BITS
+ 507:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_INSIZE_16BITS
+ 508:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 509:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 510:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_SetInSize(CORDIC_TypeDef *CORDICx, uint32_t InSize)
+ 511:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 512:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   MODIFY_REG(CORDICx->CSR, CORDIC_CSR_ARGSIZE, InSize);
+ 513:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 514:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 515:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 516:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Return width of input data.
+ 517:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          ARGSIZE       LL_CORDIC_GetInSize
+ 518:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 519:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval Returned value can be one of the following values:
+ 520:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_INSIZE_32BITS
+ 521:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_INSIZE_16BITS
+ 522:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 523:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_GetInSize(CORDIC_TypeDef *CORDICx)
+ 524:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 525:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return (uint32_t)(READ_BIT(CORDICx->CSR, CORDIC_CSR_ARGSIZE));
+ 526:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 527:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 528:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 529:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Configure width of output data.
+ 530:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          RESIZE       LL_CORDIC_SetOutSize
+ 531:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 532:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  OutSize parameter can be one of the following values:
+ 533:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_OUTSIZE_32BITS
+ 534:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_OUTSIZE_16BITS
+ 535:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 536:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 537:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_SetOutSize(CORDIC_TypeDef *CORDICx, uint32_t OutSize)
+ 538:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 539:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   MODIFY_REG(CORDICx->CSR, CORDIC_CSR_RESSIZE, OutSize);
+ 540:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 541:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 542:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 543:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Return width of output data.
+ARM GAS  /tmp/ccTHPLPa.s 			page 19
+
+
+ 544:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          RESIZE       LL_CORDIC_GetOutSize
+ 545:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 546:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval Returned value can be one of the following values:
+ 547:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_OUTSIZE_32BITS
+ 548:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_OUTSIZE_16BITS
+ 549:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 550:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_GetOutSize(CORDIC_TypeDef *CORDICx)
+ 551:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 552:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return (uint32_t)(READ_BIT(CORDICx->CSR, CORDIC_CSR_RESSIZE));
+ 553:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 554:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 555:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 556:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 557:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 558:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 559:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EF_IT_Management IT_Management
+ 560:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 561:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 562:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 563:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 564:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Enable CORDIC result ready interrupt
+ 565:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          IEN           LL_CORDIC_EnableIT
+ 566:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 567:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 568:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 569:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_EnableIT(CORDIC_TypeDef *CORDICx)
+ 570:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 571:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   SET_BIT(CORDICx->CSR, CORDIC_CSR_IEN);
+ 572:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 573:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 574:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 575:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Disable CORDIC result ready interrupt
+ 576:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          IEN           LL_CORDIC_DisableIT
+ 577:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 578:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 579:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 580:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_DisableIT(CORDIC_TypeDef *CORDICx)
+ 581:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 582:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   CLEAR_BIT(CORDICx->CSR, CORDIC_CSR_IEN);
+ 583:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 584:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 585:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 586:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Check CORDIC result ready interrupt state.
+ 587:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          IEN           LL_CORDIC_IsEnabledIT
+ 588:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 589:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval State of bit (1 or 0).
+ 590:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 591:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_IsEnabledIT(CORDIC_TypeDef *CORDICx)
+ 592:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 593:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return ((READ_BIT(CORDICx->CSR, CORDIC_CSR_IEN) == (CORDIC_CSR_IEN)) ? 1U : 0U);
+ 594:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 595:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 596:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 597:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 598:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 599:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 600:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EF_DMA_Management DMA_Management
+ARM GAS  /tmp/ccTHPLPa.s 			page 20
+
+
+ 601:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 602:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 603:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 604:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 605:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Enable CORDIC DMA read channel request.
+ 606:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          DMAREN        LL_CORDIC_EnableDMAReq_RD
+ 607:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 608:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 609:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 610:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_EnableDMAReq_RD(CORDIC_TypeDef *CORDICx)
+ 611:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 612:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   SET_BIT(CORDICx->CSR, CORDIC_CSR_DMAREN);
+ 613:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 614:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 615:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 616:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Disable CORDIC DMA read channel request.
+ 617:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          DMAREN        LL_CORDIC_DisableDMAReq_RD
+ 618:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 619:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 620:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 621:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_DisableDMAReq_RD(CORDIC_TypeDef *CORDICx)
+ 622:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 623:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   CLEAR_BIT(CORDICx->CSR, CORDIC_CSR_DMAREN);
+ 624:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 625:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 626:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 627:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Check CORDIC DMA read channel request state.
+ 628:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          DMAREN        LL_CORDIC_IsEnabledDMAReq_RD
+ 629:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 630:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval State of bit (1 or 0).
+ 631:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 632:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_IsEnabledDMAReq_RD(CORDIC_TypeDef *CORDICx)
+ 633:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 634:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return ((READ_BIT(CORDICx->CSR, CORDIC_CSR_DMAREN) == (CORDIC_CSR_DMAREN)) ? 1U : 0U);
+ 635:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 636:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 637:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 638:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Enable CORDIC DMA write channel request.
+ 639:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          DMAWEN        LL_CORDIC_EnableDMAReq_WR
+ 640:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 641:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 642:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 643:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_EnableDMAReq_WR(CORDIC_TypeDef *CORDICx)
+ 644:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 645:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   SET_BIT(CORDICx->CSR, CORDIC_CSR_DMAWEN);
+ 646:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 647:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 648:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 649:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Disable CORDIC DMA write channel request.
+ 650:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          DMAWEN        LL_CORDIC_DisableDMAReq_WR
+ 651:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 652:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 653:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 654:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_DisableDMAReq_WR(CORDIC_TypeDef *CORDICx)
+ 655:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 656:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   CLEAR_BIT(CORDICx->CSR, CORDIC_CSR_DMAWEN);
+ 657:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ARM GAS  /tmp/ccTHPLPa.s 			page 21
+
+
+ 658:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 659:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 660:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Check CORDIC DMA write channel request state.
+ 661:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          DMAWEN        LL_CORDIC_IsEnabledDMAReq_WR
+ 662:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 663:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval State of bit (1 or 0).
+ 664:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 665:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_IsEnabledDMAReq_WR(CORDIC_TypeDef *CORDICx)
+ 666:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 667:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return ((READ_BIT(CORDICx->CSR, CORDIC_CSR_DMAWEN) == (CORDIC_CSR_DMAWEN)) ? 1U : 0U);
+ 668:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 669:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 670:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 671:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Get the CORDIC data register address used for DMA transfer.
+ 672:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll RDATA        RES           LL_CORDIC_DMA_GetRegAddr\n
+ 673:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll WDATA        ARG           LL_CORDIC_DMA_GetRegAddr
+ 674:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 675:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  Direction parameter can be one of the following values:
+ 676:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_DMA_REG_DATA_IN
+ 677:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_DMA_REG_DATA_OUT
+ 678:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval Address of data register
+ 679:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 680:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_DMA_GetRegAddr(CORDIC_TypeDef *CORDICx, uint32_t Direction)
+ 681:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 682:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   uint32_t data_reg_addr;
+ 683:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 684:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   if (Direction == LL_CORDIC_DMA_REG_DATA_OUT)
+ 685:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   {
+ 686:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****     /* return address of RDATA register */
+ 687:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****     data_reg_addr = (uint32_t) &(CORDICx->RDATA);
+ 688:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   }
+ 689:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   else
+ 690:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   {
+ 691:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****     /* return address of WDATA register */
+ 692:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****     data_reg_addr = (uint32_t) &(CORDICx->WDATA);
+ 693:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   }
+ 694:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 695:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return data_reg_addr;
+ 696:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 697:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 698:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 699:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 700:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 701:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 702:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EF_FLAG_Management FLAG_Management
+ 703:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 704:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 705:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 706:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 707:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Check CORDIC result ready flag state.
+ 708:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          RRDY          LL_CORDIC_IsActiveFlag_RRDY
+ 709:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 710:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval State of bit (1 or 0).
+ 711:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 712:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_IsActiveFlag_RRDY(CORDIC_TypeDef *CORDICx)
+ 713:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 714:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return ((READ_BIT(CORDICx->CSR, CORDIC_CSR_RRDY) == (CORDIC_CSR_RRDY)) ? 1U : 0U);
+ARM GAS  /tmp/ccTHPLPa.s 			page 22
+
+
+ 715:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 716:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 717:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 718:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
+ 719:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 720:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 721:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EF_Data_Management Data_Management
+ 722:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
+ 723:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 724:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 725:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 726:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Write 32-bit input data for the CORDIC processing.
+ 727:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll WDATA        ARG           LL_CORDIC_WriteData
+ 728:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 729:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  InData 0 .. 0xFFFFFFFF : 32-bit value to be provided as input data for CORDIC processin
+ 730:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
+ 731:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 732:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_WriteData(CORDIC_TypeDef *CORDICx, uint32_t InData)
+ 170              		.loc 2 732 22 is_stmt 1 view .LVU45
+ 171              	.LBB21:
+ 733:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 734:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   WRITE_REG(CORDICx->WDATA, InData);
+ 172              		.loc 2 734 3 view .LVU46
+ 173 0012 5860     		str	r0, [r3, #4]
+ 174              	.LVL18:
+ 175              		.loc 2 734 3 is_stmt 0 view .LVU47
+ 176              	.LBE21:
+ 177              	.LBE20:
+ 312:Src/mc_math.c ****   /* Read angle */
+ 313:Src/mc_math.c ****   /* Misra  violation Rule 11.4 A Conversion should not be performed between a 
+ 314:Src/mc_math.c ****    * pointer to object and an integer type */
+ 315:Src/mc_math.c ****   CosSin.CordicRdata = LL_CORDIC_ReadData(CORDIC);
+ 178              		.loc 1 315 3 is_stmt 1 view .LVU48
+ 179              	.LBB22:
+ 180              	.LBI22:
+ 735:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 736:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
+ 737:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
+ 738:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Return 32-bit output data of CORDIC processing.
+ 739:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll RDATA        RES           LL_CORDIC_ReadData
+ 740:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
+ 741:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval 32-bit output data of CORDIC processing.
+ 742:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
+ 743:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_ReadData(CORDIC_TypeDef *CORDICx)
+ 181              		.loc 2 743 26 view .LVU49
+ 182              	.LBB23:
+ 744:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 745:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return (uint32_t)(READ_REG(CORDICx->RDATA));
+ 183              		.loc 2 745 3 view .LVU50
+ 184              		.loc 2 745 10 is_stmt 0 view .LVU51
+ 185 0014 9B68     		ldr	r3, [r3, #8]
+ 186              	.LVL19:
+ 187              		.loc 2 745 10 view .LVU52
+ 188              	.LBE23:
+ 189              	.LBE22:
+ 316:Src/mc_math.c ****   return (CosSin.Components); //cstat !UNION-type-punning
+ 190              		.loc 1 316 3 is_stmt 1 view .LVU53
+ARM GAS  /tmp/ccTHPLPa.s 			page 23
+
+
+ 191              		.loc 1 316 17 is_stmt 0 view .LVU54
+ 192 0016 0020     		movs	r0, #0
+ 193 0018 9AB2     		uxth	r2, r3
+ 194 001a 62F30F00 		bfi	r0, r2, #0, #16
+ 195 001e 1B0C     		lsrs	r3, r3, #16
+ 196 0020 63F31F40 		bfi	r0, r3, #16, #16
+ 317:Src/mc_math.c **** }
+ 197              		.loc 1 317 1 view .LVU55
+ 198 0024 04B0     		add	sp, sp, #16
+ 199              		.cfi_def_cfa_offset 0
+ 200              		@ sp needed
+ 201 0026 7047     		bx	lr
+ 202              	.L13:
+ 203              		.align	2
+ 204              	.L12:
+ 205 0028 000C0240 		.word	1073875968
+ 206              		.cfi_endproc
+ 207              	.LFE1440:
+ 209              		.section	.text.MCM_Park,"ax",%progbits
+ 210              		.align	1
+ 211              		.weak	MCM_Park
+ 212              		.syntax unified
+ 213              		.thumb
+ 214              		.thumb_func
+ 215              		.fpu fpv4-sp-d16
+ 217              	MCM_Park:
+ 218              	.LVL20:
+ 219              	.LFB1438:
+ 126:Src/mc_math.c ****   qd_t Output;
+ 220              		.loc 1 126 1 is_stmt 1 view -0
+ 221              		.cfi_startproc
+ 222              		@ args = 0, pretend = 0, frame = 24
+ 223              		@ frame_needed = 0, uses_anonymous_args = 0
+ 126:Src/mc_math.c ****   qd_t Output;
+ 224              		.loc 1 126 1 is_stmt 0 view .LVU57
+ 225 0000 30B5     		push	{r4, r5, lr}
+ 226              		.cfi_def_cfa_offset 12
+ 227              		.cfi_offset 4, -12
+ 228              		.cfi_offset 5, -8
+ 229              		.cfi_offset 14, -4
+ 230 0002 87B0     		sub	sp, sp, #28
+ 231              		.cfi_def_cfa_offset 40
+ 232 0004 0190     		str	r0, [sp, #4]
+ 127:Src/mc_math.c ****   int32_t d_tmp_1;
+ 233              		.loc 1 127 3 is_stmt 1 view .LVU58
+ 128:Src/mc_math.c ****   int32_t d_tmp_2;
+ 234              		.loc 1 128 3 view .LVU59
+ 129:Src/mc_math.c ****   int32_t q_tmp_1;
+ 235              		.loc 1 129 3 view .LVU60
+ 130:Src/mc_math.c ****   int32_t q_tmp_2;
+ 236              		.loc 1 130 3 view .LVU61
+ 131:Src/mc_math.c ****   int32_t wqd_tmp;
+ 237              		.loc 1 131 3 view .LVU62
+ 132:Src/mc_math.c ****   int16_t hqd_tmp;
+ 238              		.loc 1 132 3 view .LVU63
+ 133:Src/mc_math.c ****   Trig_Components Local_Vector_Components;
+ 239              		.loc 1 133 3 view .LVU64
+ARM GAS  /tmp/ccTHPLPa.s 			page 24
+
+
+ 134:Src/mc_math.c **** 
+ 240              		.loc 1 134 3 view .LVU65
+ 136:Src/mc_math.c **** 
+ 241              		.loc 1 136 3 view .LVU66
+ 136:Src/mc_math.c **** 
+ 242              		.loc 1 136 29 is_stmt 0 view .LVU67
+ 243 0006 0846     		mov	r0, r1
+ 244 0008 FFF7FEFF 		bl	MCM_Trig_Functions
+ 245              	.LVL21:
+ 139:Src/mc_math.c **** 
+ 246              		.loc 1 139 3 is_stmt 1 view .LVU68
+ 139:Src/mc_math.c **** 
+ 247              		.loc 1 139 18 is_stmt 0 view .LVU69
+ 248 000c BDF90430 		ldrsh	r3, [sp, #4]
+ 139:Src/mc_math.c **** 
+ 249              		.loc 1 139 61 view .LVU70
+ 250 0010 05B2     		sxth	r5, r0
+ 139:Src/mc_math.c **** 
+ 251              		.loc 1 139 11 view .LVU71
+ 252 0012 05FB03F1 		mul	r1, r5, r3
+ 253              	.LVL22:
+ 142:Src/mc_math.c **** 
+ 254              		.loc 1 142 3 is_stmt 1 view .LVU72
+ 142:Src/mc_math.c **** 
+ 255              		.loc 1 142 18 is_stmt 0 view .LVU73
+ 256 0016 BDF90620 		ldrsh	r2, [sp, #6]
+ 142:Src/mc_math.c **** 
+ 257              		.loc 1 142 59 view .LVU74
+ 258 001a 0014     		asrs	r0, r0, #16
+ 259              	.LVL23:
+ 149:Src/mc_math.c **** #else
+ 260              		.loc 1 149 3 is_stmt 1 view .LVU75
+ 149:Src/mc_math.c **** #else
+ 261              		.loc 1 149 22 is_stmt 0 view .LVU76
+ 262 001c 00FB1211 		mls	r1, r0, r2, r1
+ 263              	.LVL24:
+ 155:Src/mc_math.c ****   {
+ 264              		.loc 1 155 3 is_stmt 1 view .LVU77
+ 155:Src/mc_math.c ****   {
+ 265              		.loc 1 155 6 is_stmt 0 view .LVU78
+ 266 0020 B1F1804F 		cmp	r1, #1073741824
+ 267 0024 05DA     		bge	.L19
+ 268 0026 CC13     		asrs	r4, r1, #15
+ 269              	.LVL25:
+ 159:Src/mc_math.c ****   {
+ 270              		.loc 1 159 8 is_stmt 1 view .LVU79
+ 159:Src/mc_math.c ****   {
+ 271              		.loc 1 159 11 is_stmt 0 view .LVU80
+ 272 0028 14F5004F 		cmn	r4, #32768
+ 273 002c 15DB     		blt	.L20
+ 165:Src/mc_math.c ****   }
+ 274              		.loc 1 165 5 is_stmt 1 view .LVU81
+ 165:Src/mc_math.c ****   }
+ 275              		.loc 1 165 13 is_stmt 0 view .LVU82
+ 276 002e 24B2     		sxth	r4, r4
+ 277              	.LVL26:
+ 165:Src/mc_math.c ****   }
+ARM GAS  /tmp/ccTHPLPa.s 			page 25
+
+
+ 278              		.loc 1 165 13 view .LVU83
+ 279 0030 01E0     		b	.L15
+ 280              	.LVL27:
+ 281              	.L19:
+ 157:Src/mc_math.c ****   }
+ 282              		.loc 1 157 13 view .LVU84
+ 283 0032 47F6FF74 		movw	r4, #32767
+ 284              	.L15:
+ 285              	.LVL28:
+ 168:Src/mc_math.c **** 
+ 286              		.loc 1 168 3 is_stmt 1 view .LVU85
+ 168:Src/mc_math.c **** 
+ 287              		.loc 1 168 12 is_stmt 0 view .LVU86
+ 288 0036 ADF81040 		strh	r4, [sp, #16]	@ movhi
+ 170:Src/mc_math.c ****   {
+ 289              		.loc 1 170 3 is_stmt 1 view .LVU87
+ 170:Src/mc_math.c ****   {
+ 290              		.loc 1 170 6 is_stmt 0 view .LVU88
+ 291 003a 14F5004F 		cmn	r4, #32768
+ 292 003e 0ED0     		beq	.L24
+ 293              	.LVL29:
+ 294              	.L16:
+ 176:Src/mc_math.c **** 
+ 295              		.loc 1 176 3 is_stmt 1 view .LVU89
+ 179:Src/mc_math.c **** 
+ 296              		.loc 1 179 3 view .LVU90
+ 179:Src/mc_math.c **** 
+ 297              		.loc 1 179 11 is_stmt 0 view .LVU91
+ 298 0040 02FB05F2 		mul	r2, r2, r5
+ 299              	.LVL30:
+ 186:Src/mc_math.c **** #else
+ 300              		.loc 1 186 3 is_stmt 1 view .LVU92
+ 186:Src/mc_math.c **** #else
+ 301              		.loc 1 186 22 is_stmt 0 view .LVU93
+ 302 0044 00FB0320 		mla	r0, r0, r3, r2
+ 303              	.LVL31:
+ 186:Src/mc_math.c **** #else
+ 304              		.loc 1 186 11 view .LVU94
+ 305 0048 C313     		asrs	r3, r0, #15
+ 306              	.LVL32:
+ 192:Src/mc_math.c ****   {
+ 307              		.loc 1 192 3 is_stmt 1 view .LVU95
+ 192:Src/mc_math.c ****   {
+ 308              		.loc 1 192 6 is_stmt 0 view .LVU96
+ 309 004a B0F1804F 		cmp	r0, #1073741824
+ 310 004e 0BDA     		bge	.L21
+ 196:Src/mc_math.c ****   {
+ 311              		.loc 1 196 8 is_stmt 1 view .LVU97
+ 196:Src/mc_math.c ****   {
+ 312              		.loc 1 196 11 is_stmt 0 view .LVU98
+ 313 0050 13F5004F 		cmn	r3, #32768
+ 314 0054 19DB     		blt	.L22
+ 202:Src/mc_math.c ****   }
+ 315              		.loc 1 202 5 is_stmt 1 view .LVU99
+ 202:Src/mc_math.c ****   }
+ 316              		.loc 1 202 13 is_stmt 0 view .LVU100
+ 317 0056 1BB2     		sxth	r3, r3
+ARM GAS  /tmp/ccTHPLPa.s 			page 26
+
+
+ 318              	.LVL33:
+ 202:Src/mc_math.c ****   }
+ 319              		.loc 1 202 13 view .LVU101
+ 320 0058 08E0     		b	.L17
+ 321              	.LVL34:
+ 322              	.L20:
+ 161:Src/mc_math.c ****   }
+ 323              		.loc 1 161 13 view .LVU102
+ 324 005a 0F4C     		ldr	r4, .L26
+ 325              	.LVL35:
+ 161:Src/mc_math.c ****   }
+ 326              		.loc 1 161 13 view .LVU103
+ 327 005c EBE7     		b	.L15
+ 328              	.LVL36:
+ 329              	.L24:
+ 172:Src/mc_math.c ****   }
+ 330              		.loc 1 172 5 is_stmt 1 view .LVU104
+ 172:Src/mc_math.c ****   }
+ 331              		.loc 1 172 14 is_stmt 0 view .LVU105
+ 332 005e 48F20101 		movw	r1, #32769
+ 333              	.LVL37:
+ 172:Src/mc_math.c ****   }
+ 334              		.loc 1 172 14 view .LVU106
+ 335 0062 ADF81010 		strh	r1, [sp, #16]	@ movhi
+ 336 0066 EBE7     		b	.L16
+ 337              	.LVL38:
+ 338              	.L21:
+ 194:Src/mc_math.c ****   }
+ 339              		.loc 1 194 13 view .LVU107
+ 340 0068 47F6FF73 		movw	r3, #32767
+ 341              	.LVL39:
+ 342              	.L17:
+ 205:Src/mc_math.c **** 
+ 343              		.loc 1 205 3 is_stmt 1 view .LVU108
+ 205:Src/mc_math.c **** 
+ 344              		.loc 1 205 12 is_stmt 0 view .LVU109
+ 345 006c ADF81230 		strh	r3, [sp, #18]	@ movhi
+ 207:Src/mc_math.c ****   {
+ 346              		.loc 1 207 3 is_stmt 1 view .LVU110
+ 207:Src/mc_math.c ****   {
+ 347              		.loc 1 207 6 is_stmt 0 view .LVU111
+ 348 0070 13F5004F 		cmn	r3, #32768
+ 349 0074 0BD0     		beq	.L25
+ 350              	.LVL40:
+ 351              	.L18:
+ 212:Src/mc_math.c **** }
+ 352              		.loc 1 212 3 is_stmt 1 view .LVU112
+ 212:Src/mc_math.c **** }
+ 353              		.loc 1 212 10 is_stmt 0 view .LVU113
+ 354 0076 049B     		ldr	r3, [sp, #16]
+ 355 0078 0020     		movs	r0, #0
+ 356              	.LVL41:
+ 212:Src/mc_math.c **** }
+ 357              		.loc 1 212 10 view .LVU114
+ 358 007a 9AB2     		uxth	r2, r3
+ 359              	.LVL42:
+ 212:Src/mc_math.c **** }
+ARM GAS  /tmp/ccTHPLPa.s 			page 27
+
+
+ 360              		.loc 1 212 10 view .LVU115
+ 361 007c 62F30F00 		bfi	r0, r2, #0, #16
+ 362 0080 1B0C     		lsrs	r3, r3, #16
+ 363 0082 63F31F40 		bfi	r0, r3, #16, #16
+ 213:Src/mc_math.c **** 
+ 364              		.loc 1 213 1 view .LVU116
+ 365 0086 07B0     		add	sp, sp, #28
+ 366              		.cfi_remember_state
+ 367              		.cfi_def_cfa_offset 12
+ 368              		@ sp needed
+ 369 0088 30BD     		pop	{r4, r5, pc}
+ 370              	.LVL43:
+ 371              	.L22:
+ 372              		.cfi_restore_state
+ 198:Src/mc_math.c ****   }
+ 373              		.loc 1 198 13 view .LVU117
+ 374 008a 034B     		ldr	r3, .L26
+ 375              	.LVL44:
+ 198:Src/mc_math.c ****   }
+ 376              		.loc 1 198 13 view .LVU118
+ 377 008c EEE7     		b	.L17
+ 378              	.LVL45:
+ 379              	.L25:
+ 209:Src/mc_math.c ****   }
+ 380              		.loc 1 209 5 is_stmt 1 view .LVU119
+ 209:Src/mc_math.c ****   }
+ 381              		.loc 1 209 14 is_stmt 0 view .LVU120
+ 382 008e 48F20103 		movw	r3, #32769
+ 383              	.LVL46:
+ 209:Src/mc_math.c ****   }
+ 384              		.loc 1 209 14 view .LVU121
+ 385 0092 ADF81230 		strh	r3, [sp, #18]	@ movhi
+ 386              	.LVL47:
+ 209:Src/mc_math.c ****   }
+ 387              		.loc 1 209 14 view .LVU122
+ 388 0096 EEE7     		b	.L18
+ 389              	.L27:
+ 390              		.align	2
+ 391              	.L26:
+ 392 0098 0080FFFF 		.word	-32768
+ 393              		.cfi_endproc
+ 394              	.LFE1438:
+ 396              		.section	.text.MCM_Rev_Park,"ax",%progbits
+ 397              		.align	1
+ 398              		.weak	MCM_Rev_Park
+ 399              		.syntax unified
+ 400              		.thumb
+ 401              		.thumb_func
+ 402              		.fpu fpv4-sp-d16
+ 404              	MCM_Rev_Park:
+ 405              	.LVL48:
+ 406              	.LFB1439:
+ 233:Src/mc_math.c ****   int32_t alpha_tmp1;
+ 407              		.loc 1 233 1 is_stmt 1 view -0
+ 408              		.cfi_startproc
+ 409              		@ args = 0, pretend = 0, frame = 24
+ 410              		@ frame_needed = 0, uses_anonymous_args = 0
+ARM GAS  /tmp/ccTHPLPa.s 			page 28
+
+
+ 233:Src/mc_math.c ****   int32_t alpha_tmp1;
+ 411              		.loc 1 233 1 is_stmt 0 view .LVU124
+ 412 0000 10B5     		push	{r4, lr}
+ 413              		.cfi_def_cfa_offset 8
+ 414              		.cfi_offset 4, -8
+ 415              		.cfi_offset 14, -4
+ 416 0002 86B0     		sub	sp, sp, #24
+ 417              		.cfi_def_cfa_offset 32
+ 418 0004 0190     		str	r0, [sp, #4]
+ 234:Src/mc_math.c ****   int32_t alpha_tmp2;
+ 419              		.loc 1 234 3 is_stmt 1 view .LVU125
+ 235:Src/mc_math.c ****   int32_t beta_tmp1;
+ 420              		.loc 1 235 3 view .LVU126
+ 236:Src/mc_math.c ****   int32_t beta_tmp2;
+ 421              		.loc 1 236 3 view .LVU127
+ 237:Src/mc_math.c ****   Trig_Components Local_Vector_Components;
+ 422              		.loc 1 237 3 view .LVU128
+ 238:Src/mc_math.c ****   alphabeta_t Output;
+ 423              		.loc 1 238 3 view .LVU129
+ 239:Src/mc_math.c **** 
+ 424              		.loc 1 239 3 view .LVU130
+ 241:Src/mc_math.c **** 
+ 425              		.loc 1 241 3 view .LVU131
+ 241:Src/mc_math.c **** 
+ 426              		.loc 1 241 29 is_stmt 0 view .LVU132
+ 427 0006 0846     		mov	r0, r1
+ 428 0008 FFF7FEFF 		bl	MCM_Trig_Functions
+ 429              	.LVL49:
+ 244:Src/mc_math.c ****   alpha_tmp2 = Input.d * ((int32_t)Local_Vector_Components.hSin);
+ 430              		.loc 1 244 3 is_stmt 1 view .LVU133
+ 244:Src/mc_math.c ****   alpha_tmp2 = Input.d * ((int32_t)Local_Vector_Components.hSin);
+ 431              		.loc 1 244 21 is_stmt 0 view .LVU134
+ 432 000c BDF90430 		ldrsh	r3, [sp, #4]
+ 244:Src/mc_math.c ****   alpha_tmp2 = Input.d * ((int32_t)Local_Vector_Components.hSin);
+ 433              		.loc 1 244 59 view .LVU135
+ 434 0010 04B2     		sxth	r4, r0
+ 435              	.LVL50:
+ 245:Src/mc_math.c **** 
+ 436              		.loc 1 245 3 is_stmt 1 view .LVU136
+ 245:Src/mc_math.c **** 
+ 437              		.loc 1 245 21 is_stmt 0 view .LVU137
+ 438 0012 BDF90610 		ldrsh	r1, [sp, #6]
+ 245:Src/mc_math.c **** 
+ 439              		.loc 1 245 59 view .LVU138
+ 440 0016 0014     		asrs	r0, r0, #16
+ 245:Src/mc_math.c **** 
+ 441              		.loc 1 245 14 view .LVU139
+ 442 0018 00FB01F2 		mul	r2, r0, r1
+ 443              	.LVL51:
+ 252:Src/mc_math.c **** #else
+ 444              		.loc 1 252 3 is_stmt 1 view .LVU140
+ 252:Src/mc_math.c **** #else
+ 445              		.loc 1 252 42 is_stmt 0 view .LVU141
+ 446 001c 04FB0322 		mla	r2, r4, r3, r2
+ 447              	.LVL52:
+ 252:Src/mc_math.c **** #else
+ 448              		.loc 1 252 18 view .LVU142
+ARM GAS  /tmp/ccTHPLPa.s 			page 29
+
+
+ 449 0020 42F3CF32 		sbfx	r2, r2, #15, #16
+ 252:Src/mc_math.c **** #else
+ 450              		.loc 1 252 16 view .LVU143
+ 451 0024 ADF80C20 		strh	r2, [sp, #12]	@ movhi
+ 257:Src/mc_math.c ****   beta_tmp2 = Input.d * ((int32_t)Local_Vector_Components.hCos);
+ 452              		.loc 1 257 3 is_stmt 1 view .LVU144
+ 453              	.LVL53:
+ 258:Src/mc_math.c **** 
+ 454              		.loc 1 258 3 view .LVU145
+ 258:Src/mc_math.c **** 
+ 455              		.loc 1 258 13 is_stmt 0 view .LVU146
+ 456 0028 01FB04F1 		mul	r1, r1, r4
+ 457              	.LVL54:
+ 265:Src/mc_math.c **** #else
+ 458              		.loc 1 265 3 is_stmt 1 view .LVU147
+ 265:Src/mc_math.c **** #else
+ 459              		.loc 1 265 38 is_stmt 0 view .LVU148
+ 460 002c 00FB1310 		mls	r0, r0, r3, r1
+ 461              	.LVL55:
+ 265:Src/mc_math.c **** #else
+ 462              		.loc 1 265 17 view .LVU149
+ 463 0030 40F3CF30 		sbfx	r0, r0, #15, #16
+ 265:Src/mc_math.c **** #else
+ 464              		.loc 1 265 15 view .LVU150
+ 465 0034 ADF80E00 		strh	r0, [sp, #14]	@ movhi
+ 270:Src/mc_math.c **** }
+ 466              		.loc 1 270 3 is_stmt 1 view .LVU151
+ 270:Src/mc_math.c **** }
+ 467              		.loc 1 270 10 is_stmt 0 view .LVU152
+ 468 0038 039B     		ldr	r3, [sp, #12]
+ 469              	.LVL56:
+ 270:Src/mc_math.c **** }
+ 470              		.loc 1 270 10 view .LVU153
+ 471 003a 0020     		movs	r0, #0
+ 472 003c 9AB2     		uxth	r2, r3
+ 473 003e 62F30F00 		bfi	r0, r2, #0, #16
+ 474 0042 1B0C     		lsrs	r3, r3, #16
+ 475 0044 63F31F40 		bfi	r0, r3, #16, #16
+ 271:Src/mc_math.c **** 
+ 476              		.loc 1 271 1 view .LVU154
+ 477 0048 06B0     		add	sp, sp, #24
+ 478              		.cfi_def_cfa_offset 8
+ 479              		@ sp needed
+ 480 004a 10BD     		pop	{r4, pc}
+ 271:Src/mc_math.c **** 
+ 481              		.loc 1 271 1 view .LVU155
+ 482              		.cfi_endproc
+ 483              	.LFE1439:
+ 485              		.section	.text.MCM_Sqrt,"ax",%progbits
+ 486              		.align	1
+ 487              		.weak	MCM_Sqrt
+ 488              		.syntax unified
+ 489              		.thumb
+ 490              		.thumb_func
+ 491              		.fpu fpv4-sp-d16
+ 493              	MCM_Sqrt:
+ 494              	.LVL57:
+ARM GAS  /tmp/ccTHPLPa.s 			page 30
+
+
+ 495              	.LFB1441:
+ 318:Src/mc_math.c **** 
+ 319:Src/mc_math.c **** #if defined (CCMRAM)
+ 320:Src/mc_math.c **** #if defined (__ICCARM__)
+ 321:Src/mc_math.c **** #pragma location = ".ccmram"
+ 322:Src/mc_math.c **** #elif defined (__CC_ARM) || defined(__GNUC__)
+ 323:Src/mc_math.c **** __attribute__( ( section ( ".ccmram" ) ) )
+ 324:Src/mc_math.c **** #endif
+ 325:Src/mc_math.c **** #endif
+ 326:Src/mc_math.c **** /**
+ 327:Src/mc_math.c ****   * @brief  It calculates the square root of a non-negative int32_t. It returns 0
+ 328:Src/mc_math.c ****   *         for negative int32_t.
+ 329:Src/mc_math.c ****   * @param  Input int32_t number
+ 330:Src/mc_math.c ****   * @retval int32_t Square root of Input (0 if Input<0)
+ 331:Src/mc_math.c ****   */
+ 332:Src/mc_math.c **** __weak int32_t MCM_Sqrt(int32_t wInput)
+ 333:Src/mc_math.c **** {
+ 496              		.loc 1 333 1 is_stmt 1 view -0
+ 497              		.cfi_startproc
+ 498              		@ args = 0, pretend = 0, frame = 0
+ 499              		@ frame_needed = 0, uses_anonymous_args = 0
+ 500              		@ link register save eliminated.
+ 334:Src/mc_math.c ****   int32_t wtemprootnew;
+ 501              		.loc 1 334 3 view .LVU157
+ 335:Src/mc_math.c **** 
+ 336:Src/mc_math.c ****   if (wInput > 0)
+ 502              		.loc 1 336 3 view .LVU158
+ 503              		.loc 1 336 6 is_stmt 0 view .LVU159
+ 504 0000 0028     		cmp	r0, #0
+ 505              		.loc 1 336 6 view .LVU160
+ 506 0002 09DD     		ble	.L32
+ 507              	.LBB24:
+ 337:Src/mc_math.c ****   {
+ 338:Src/mc_math.c ****     uint32_t retVal;
+ 508              		.loc 1 338 5 is_stmt 1 view .LVU161
+ 339:Src/mc_math.c ****     /* disable Irq as sqrt is used in MF and HF task */
+ 340:Src/mc_math.c ****     __disable_irq();
+ 509              		.loc 1 340 5 view .LVU162
+ 510              	.LBB25:
+ 511              	.LBI25:
+ 512              		.file 3 "Drivers/CMSIS/Include/cmsis_gcc.h"
+   1:Drivers/CMSIS/Include/cmsis_gcc.h **** /**************************************************************************//**
+   2:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @file     cmsis_gcc.h
+   3:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @brief    CMSIS compiler GCC header file
+   4:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @version  V5.2.0
+   5:Drivers/CMSIS/Include/cmsis_gcc.h ****  * @date     08. May 2019
+   6:Drivers/CMSIS/Include/cmsis_gcc.h ****  ******************************************************************************/
+   7:Drivers/CMSIS/Include/cmsis_gcc.h **** /*
+   8:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Copyright (c) 2009-2019 Arm Limited. All rights reserved.
+   9:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  10:Drivers/CMSIS/Include/cmsis_gcc.h ****  * SPDX-License-Identifier: Apache-2.0
+  11:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  12:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Licensed under the Apache License, Version 2.0 (the License); you may
+  13:Drivers/CMSIS/Include/cmsis_gcc.h ****  * not use this file except in compliance with the License.
+  14:Drivers/CMSIS/Include/cmsis_gcc.h ****  * You may obtain a copy of the License at
+  15:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  16:Drivers/CMSIS/Include/cmsis_gcc.h ****  * www.apache.org/licenses/LICENSE-2.0
+ARM GAS  /tmp/ccTHPLPa.s 			page 31
+
+
+  17:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
+  18:Drivers/CMSIS/Include/cmsis_gcc.h ****  * Unless required by applicable law or agreed to in writing, software
+  19:Drivers/CMSIS/Include/cmsis_gcc.h ****  * distributed under the License is distributed on an AS IS BASIS, WITHOUT
+  20:Drivers/CMSIS/Include/cmsis_gcc.h ****  * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  21:Drivers/CMSIS/Include/cmsis_gcc.h ****  * See the License for the specific language governing permissions and
+  22:Drivers/CMSIS/Include/cmsis_gcc.h ****  * limitations under the License.
+  23:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+  24:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  25:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __CMSIS_GCC_H
+  26:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_H
+  27:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  28:Drivers/CMSIS/Include/cmsis_gcc.h **** /* ignore some GCC warnings */
+  29:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic push
+  30:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wsign-conversion"
+  31:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wconversion"
+  32:Drivers/CMSIS/Include/cmsis_gcc.h **** #pragma GCC diagnostic ignored "-Wunused-parameter"
+  33:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  34:Drivers/CMSIS/Include/cmsis_gcc.h **** /* Fallback for __has_builtin */
+  35:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __has_builtin
+  36:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __has_builtin(x) (0)
+  37:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  38:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+  39:Drivers/CMSIS/Include/cmsis_gcc.h **** /* CMSIS compiler specific defines */
+  40:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __ASM
+  41:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __ASM                                  __asm
+  42:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  43:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __INLINE
+  44:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __INLINE                               inline
+  45:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  46:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_INLINE
+  47:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_INLINE                        static inline
+  48:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  49:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __STATIC_FORCEINLINE                 
+  50:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __STATIC_FORCEINLINE                   __attribute__((always_inline)) static inline
+  51:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif                                           
+  52:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __NO_RETURN
+  53:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __NO_RETURN                            __attribute__((__noreturn__))
+  54:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  55:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __USED
+  56:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __USED                                 __attribute__((used))
+  57:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  58:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __WEAK
+  59:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __WEAK                                 __attribute__((weak))
+  60:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  61:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED
+  62:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED                               __attribute__((packed, aligned(1)))
+  63:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  64:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED_STRUCT
+  65:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED_STRUCT                        struct __attribute__((packed, aligned(1)))
+  66:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  67:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __PACKED_UNION
+  68:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __PACKED_UNION                         union __attribute__((packed, aligned(1)))
+  69:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  70:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32        /* deprecated */
+  71:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  72:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  73:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+ARM GAS  /tmp/ccTHPLPa.s 			page 32
+
+
+  74:Drivers/CMSIS/Include/cmsis_gcc.h ****   struct __attribute__((packed)) T_UINT32 { uint32_t v; };
+  75:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  76:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32(x)                  (((struct T_UINT32 *)(x))->v)
+  77:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  78:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_WRITE
+  79:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  80:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  81:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  82:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_WRITE { uint16_t v; };
+  83:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  84:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT16_WRITE(addr, val)    (void)((((struct T_UINT16_WRITE *)(void *)(addr))-
+  85:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  86:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT16_READ
+  87:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  88:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  89:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  90:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT16_READ { uint16_t v; };
+  91:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+  92:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT16_READ(addr)          (((const struct T_UINT16_READ *)(const void *)(add
+  93:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+  94:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_WRITE
+  95:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+  96:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+  97:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+  98:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_WRITE { uint32_t v; };
+  99:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 100:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))-
+ 101:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 102:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __UNALIGNED_UINT32_READ
+ 103:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
+ 104:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
+ 105:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
+ 106:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_READ { uint32_t v; };
+ 107:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
+ 108:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_READ(addr)          (((const struct T_UINT32_READ *)(const void *)(add
+ 109:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 110:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __ALIGNED
+ 111:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __ALIGNED(x)                           __attribute__((aligned(x)))
+ 112:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 113:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __RESTRICT
+ 114:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __RESTRICT                             __restrict
+ 115:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 116:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __COMPILER_BARRIER
+ 117:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __COMPILER_BARRIER()                   __ASM volatile("":::"memory")
+ 118:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 119:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 120:Drivers/CMSIS/Include/cmsis_gcc.h **** /* #########################  Startup and Lowlevel Init  ######################## */
+ 121:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 122:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __PROGRAM_START
+ 123:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 124:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 125:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Initializes data and bss sections
+ 126:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details This default implementations initialized all data and additional bss
+ 127:Drivers/CMSIS/Include/cmsis_gcc.h ****            sections relying on .copy.table and .zero.table specified properly
+ 128:Drivers/CMSIS/Include/cmsis_gcc.h ****            in the used linker script.
+ 129:Drivers/CMSIS/Include/cmsis_gcc.h ****   
+ 130:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ARM GAS  /tmp/ccTHPLPa.s 			page 33
+
+
+ 131:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE __NO_RETURN void __cmsis_start(void)
+ 132:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 133:Drivers/CMSIS/Include/cmsis_gcc.h ****   extern void _start(void) __NO_RETURN;
+ 134:Drivers/CMSIS/Include/cmsis_gcc.h ****   
+ 135:Drivers/CMSIS/Include/cmsis_gcc.h ****   typedef struct {
+ 136:Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t const* src;
+ 137:Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t* dest;
+ 138:Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t  wlen;
+ 139:Drivers/CMSIS/Include/cmsis_gcc.h ****   } __copy_table_t;
+ 140:Drivers/CMSIS/Include/cmsis_gcc.h ****   
+ 141:Drivers/CMSIS/Include/cmsis_gcc.h ****   typedef struct {
+ 142:Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t* dest;
+ 143:Drivers/CMSIS/Include/cmsis_gcc.h ****     uint32_t  wlen;
+ 144:Drivers/CMSIS/Include/cmsis_gcc.h ****   } __zero_table_t;
+ 145:Drivers/CMSIS/Include/cmsis_gcc.h ****   
+ 146:Drivers/CMSIS/Include/cmsis_gcc.h ****   extern const __copy_table_t __copy_table_start__;
+ 147:Drivers/CMSIS/Include/cmsis_gcc.h ****   extern const __copy_table_t __copy_table_end__;
+ 148:Drivers/CMSIS/Include/cmsis_gcc.h ****   extern const __zero_table_t __zero_table_start__;
+ 149:Drivers/CMSIS/Include/cmsis_gcc.h ****   extern const __zero_table_t __zero_table_end__;
+ 150:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 151:Drivers/CMSIS/Include/cmsis_gcc.h ****   for (__copy_table_t const* pTable = &__copy_table_start__; pTable < &__copy_table_end__; ++pTable
+ 152:Drivers/CMSIS/Include/cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 153:Drivers/CMSIS/Include/cmsis_gcc.h ****       pTable->dest[i] = pTable->src[i];
+ 154:Drivers/CMSIS/Include/cmsis_gcc.h ****     }
+ 155:Drivers/CMSIS/Include/cmsis_gcc.h ****   }
+ 156:Drivers/CMSIS/Include/cmsis_gcc.h ****  
+ 157:Drivers/CMSIS/Include/cmsis_gcc.h ****   for (__zero_table_t const* pTable = &__zero_table_start__; pTable < &__zero_table_end__; ++pTable
+ 158:Drivers/CMSIS/Include/cmsis_gcc.h ****     for(uint32_t i=0u; i<pTable->wlen; ++i) {
+ 159:Drivers/CMSIS/Include/cmsis_gcc.h ****       pTable->dest[i] = 0u;
+ 160:Drivers/CMSIS/Include/cmsis_gcc.h ****     }
+ 161:Drivers/CMSIS/Include/cmsis_gcc.h ****   }
+ 162:Drivers/CMSIS/Include/cmsis_gcc.h ****  
+ 163:Drivers/CMSIS/Include/cmsis_gcc.h ****   _start();
+ 164:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 165:Drivers/CMSIS/Include/cmsis_gcc.h ****   
+ 166:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __PROGRAM_START           __cmsis_start
+ 167:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 168:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 169:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __INITIAL_SP
+ 170:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __INITIAL_SP              __StackTop
+ 171:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 172:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 173:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __STACK_LIMIT
+ 174:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __STACK_LIMIT             __StackLimit
+ 175:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 176:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 177:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __VECTOR_TABLE
+ 178:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __VECTOR_TABLE            __Vectors
+ 179:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 180:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 181:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef __VECTOR_TABLE_ATTRIBUTE
+ 182:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __VECTOR_TABLE_ATTRIBUTE  __attribute((used, section(".vectors")))
+ 183:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
+ 184:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 185:Drivers/CMSIS/Include/cmsis_gcc.h **** /* ###########################  Core Function Access  ########################### */
+ 186:Drivers/CMSIS/Include/cmsis_gcc.h **** /** \ingroup  CMSIS_Core_FunctionInterface
+ 187:Drivers/CMSIS/Include/cmsis_gcc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
+ARM GAS  /tmp/ccTHPLPa.s 			page 34
+
+
+ 188:Drivers/CMSIS/Include/cmsis_gcc.h ****   @{
+ 189:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 190:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 191:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 192:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Enable IRQ Interrupts
+ 193:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Enables IRQ interrupts by clearing the I-bit in the CPSR.
+ 194:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 195:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 196:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __enable_irq(void)
+ 197:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 198:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsie i" : : : "memory");
+ 199:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 200:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 201:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 202:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
+ 203:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Disable IRQ Interrupts
+ 204:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Disables IRQ interrupts by setting the I-bit in the CPSR.
+ 205:Drivers/CMSIS/Include/cmsis_gcc.h ****            Can only be executed in Privileged modes.
+ 206:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
+ 207:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __disable_irq(void)
+ 513              		.loc 3 207 27 view .LVU163
+ 514              	.LBB26:
+ 208:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 209:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("cpsid i" : : : "memory");
+ 515              		.loc 3 209 3 view .LVU164
+ 516              		.syntax unified
+ 517              	@ 209 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 518 0004 72B6     		cpsid i
+ 519              	@ 0 "" 2
+ 520              		.thumb
+ 521              		.syntax unified
+ 522              	.LBE26:
+ 523              	.LBE25:
+ 341:Src/mc_math.c ****     /* Configure CORDIC */
+ 342:Src/mc_math.c ****     WRITE_REG(CORDIC->CSR, CORDIC_CONFIG_SQRT);
+ 524              		.loc 1 342 5 view .LVU165
+ 525 0006 054B     		ldr	r3, .L33
+ 526 0008 40F26912 		movw	r2, #361
+ 527 000c 1A60     		str	r2, [r3]
+ 343:Src/mc_math.c ****     LL_CORDIC_WriteData(CORDIC, ((uint32_t)wInput));
+ 528              		.loc 1 343 5 view .LVU166
+ 529              	.LVL58:
+ 530              	.LBB27:
+ 531              	.LBI27:
+ 732:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 532              		.loc 2 732 22 view .LVU167
+ 533              	.LBB28:
+ 734:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 534              		.loc 2 734 3 view .LVU168
+ 535 000e 5860     		str	r0, [r3, #4]
+ 536              	.LVL59:
+ 734:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
+ 537              		.loc 2 734 3 is_stmt 0 view .LVU169
+ 538              	.LBE28:
+ 539              	.LBE27:
+ 344:Src/mc_math.c ****     /* Read sqrt and return */
+ 345:Src/mc_math.c **** #ifndef FULL_MISRA_C_COMPLIANCY_MC_MATH
+ARM GAS  /tmp/ccTHPLPa.s 			page 35
+
+
+ 346:Src/mc_math.c ****     retVal = (LL_CORDIC_ReadData(CORDIC)) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MIS
+ 540              		.loc 1 346 5 is_stmt 1 view .LVU170
+ 541              	.LBB29:
+ 542              	.LBI29:
+ 743:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
+ 543              		.loc 2 743 26 view .LVU171
+ 544              	.LBB30:
+ 545              		.loc 2 745 3 view .LVU172
+ 546              		.loc 2 745 10 is_stmt 0 view .LVU173
+ 547 0010 9868     		ldr	r0, [r3, #8]
+ 548              	.LVL60:
+ 549              		.loc 2 745 10 view .LVU174
+ 550              	.LBE30:
+ 551              	.LBE29:
+ 552              		.loc 1 346 12 view .LVU175
+ 553 0012 C00B     		lsrs	r0, r0, #15
+ 347:Src/mc_math.c **** #else
+ 348:Src/mc_math.c ****     retVal = (LL_CORDIC_ReadData(CORDIC)) / 32768U;
+ 349:Src/mc_math.c **** #endif
+ 350:Src/mc_math.c ****     wtemprootnew = (int32_t)retVal;
+ 554              		.loc 1 350 5 is_stmt 1 view .LVU176
+ 555              	.LVL61:
+ 351:Src/mc_math.c ****     __enable_irq();
+ 556              		.loc 1 351 5 view .LVU177
+ 557              	.LBB31:
+ 558              	.LBI31:
+ 196:Drivers/CMSIS/Include/cmsis_gcc.h **** {
+ 559              		.loc 3 196 27 view .LVU178
+ 560              	.LBB32:
+ 198:Drivers/CMSIS/Include/cmsis_gcc.h **** }
+ 561              		.loc 3 198 3 view .LVU179
+ 562              		.syntax unified
+ 563              	@ 198 "Drivers/CMSIS/Include/cmsis_gcc.h" 1
+ 564 0014 62B6     		cpsie i
+ 565              	@ 0 "" 2
+ 199:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 566              		.loc 3 199 1 is_stmt 0 view .LVU180
+ 567              		.thumb
+ 568              		.syntax unified
+ 569 0016 7047     		bx	lr
+ 570              	.LVL62:
+ 571              	.L32:
+ 199:Drivers/CMSIS/Include/cmsis_gcc.h **** 
+ 572              		.loc 3 199 1 view .LVU181
+ 573              	.LBE32:
+ 574              	.LBE31:
+ 575              	.LBE24:
+ 352:Src/mc_math.c **** 
+ 353:Src/mc_math.c ****   }
+ 354:Src/mc_math.c ****   else
+ 355:Src/mc_math.c ****   {
+ 356:Src/mc_math.c ****     wtemprootnew = (int32_t)0;
+ 576              		.loc 1 356 18 view .LVU182
+ 577 0018 0020     		movs	r0, #0
+ 578              	.LVL63:
+ 357:Src/mc_math.c ****   }
+ 358:Src/mc_math.c **** 
+ARM GAS  /tmp/ccTHPLPa.s 			page 36
+
+
+ 359:Src/mc_math.c ****   return (wtemprootnew);
+ 579              		.loc 1 359 3 is_stmt 1 view .LVU183
+ 360:Src/mc_math.c **** }
+ 580              		.loc 1 360 1 is_stmt 0 view .LVU184
+ 581 001a 7047     		bx	lr
+ 582              	.L34:
+ 583              		.align	2
+ 584              	.L33:
+ 585 001c 000C0240 		.word	1073875968
+ 586              		.cfi_endproc
+ 587              	.LFE1441:
+ 589              		.section	.text.MCM_floatToIntBit,"ax",%progbits
+ 590              		.align	1
+ 591              		.weak	MCM_floatToIntBit
+ 592              		.syntax unified
+ 593              		.thumb
+ 594              		.thumb_func
+ 595              		.fpu fpv4-sp-d16
+ 597              	MCM_floatToIntBit:
+ 598              	.LVL64:
+ 599              	.LFB1442:
+ 361:Src/mc_math.c **** 
+ 362:Src/mc_math.c **** /**
+ 363:Src/mc_math.c ****   * @brief  This function codify a floating point number into the relative
+ 364:Src/mc_math.c ****   *         32bit integer.
+ 365:Src/mc_math.c ****   * @param  float Floating point number to be coded.
+ 366:Src/mc_math.c ****   * @retval uint32_t Coded 32bit integer.
+ 367:Src/mc_math.c ****   */
+ 368:Src/mc_math.c **** __weak uint32_t MCM_floatToIntBit( float_t x ) //cstat !MISRAC2012-Dir-4.6_a
+ 369:Src/mc_math.c **** {
+ 600              		.loc 1 369 1 is_stmt 1 view -0
+ 601              		.cfi_startproc
+ 602              		@ args = 0, pretend = 0, frame = 8
+ 603              		@ frame_needed = 0, uses_anonymous_args = 0
+ 604              		@ link register save eliminated.
+ 605              		.loc 1 369 1 is_stmt 0 view .LVU186
+ 606 0000 82B0     		sub	sp, sp, #8
+ 607              		.cfi_def_cfa_offset 8
+ 608 0002 8DED010A 		vstr.32	s0, [sp, #4]
+ 370:Src/mc_math.c ****   uint32_t *pInt;
+ 609              		.loc 1 370 3 is_stmt 1 view .LVU187
+ 371:Src/mc_math.c ****   pInt = (uint32_t *)(&x); //cstat !MISRAC2012-Rule-11.3
+ 610              		.loc 1 371 3 view .LVU188
+ 611              	.LVL65:
+ 372:Src/mc_math.c ****   return (*pInt);
+ 612              		.loc 1 372 3 view .LVU189
+ 613              		.loc 1 372 11 is_stmt 0 view .LVU190
+ 614 0006 0198     		ldr	r0, [sp, #4]
+ 373:Src/mc_math.c **** }
+ 615              		.loc 1 373 1 view .LVU191
+ 616 0008 02B0     		add	sp, sp, #8
+ 617              		.cfi_def_cfa_offset 0
+ 618              		@ sp needed
+ 619 000a 7047     		bx	lr
+ 620              		.cfi_endproc
+ 621              	.LFE1442:
+ 623              		.text
+ARM GAS  /tmp/ccTHPLPa.s 			page 37
+
+
+ 624              	.Letext0:
+ 625              		.file 4 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 626              		.file 5 "Drivers/CMSIS/Include/core_cm4.h"
+ 627              		.file 6 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h"
+ 628              		.file 7 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h"
+ 629              		.file 8 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
+ 630              		.file 9 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h"
+ 631              		.file 10 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
+ 632              		.file 11 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h"
+ 633              		.file 12 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h"
+ 634              		.file 13 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h"
+ 635              		.file 14 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
+ 636              		.file 15 "Inc/mc_math.h"
+ARM GAS  /tmp/ccTHPLPa.s 			page 38
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 mc_math.c
+     /tmp/ccTHPLPa.s:18     .text.MCM_Clarke:0000000000000000 $t
+     /tmp/ccTHPLPa.s:26     .text.MCM_Clarke:0000000000000000 MCM_Clarke
+     /tmp/ccTHPLPa.s:133    .text.MCM_Clarke:0000000000000060 $d
+     /tmp/ccTHPLPa.s:138    .text.MCM_Trig_Functions:0000000000000000 $t
+     /tmp/ccTHPLPa.s:145    .text.MCM_Trig_Functions:0000000000000000 MCM_Trig_Functions
+     /tmp/ccTHPLPa.s:205    .text.MCM_Trig_Functions:0000000000000028 $d
+     /tmp/ccTHPLPa.s:210    .text.MCM_Park:0000000000000000 $t
+     /tmp/ccTHPLPa.s:217    .text.MCM_Park:0000000000000000 MCM_Park
+     /tmp/ccTHPLPa.s:392    .text.MCM_Park:0000000000000098 $d
+     /tmp/ccTHPLPa.s:397    .text.MCM_Rev_Park:0000000000000000 $t
+     /tmp/ccTHPLPa.s:404    .text.MCM_Rev_Park:0000000000000000 MCM_Rev_Park
+     /tmp/ccTHPLPa.s:486    .text.MCM_Sqrt:0000000000000000 $t
+     /tmp/ccTHPLPa.s:493    .text.MCM_Sqrt:0000000000000000 MCM_Sqrt
+     /tmp/ccTHPLPa.s:585    .text.MCM_Sqrt:000000000000001c $d
+     /tmp/ccTHPLPa.s:590    .text.MCM_floatToIntBit:0000000000000000 $t
+     /tmp/ccTHPLPa.s:597    .text.MCM_floatToIntBit:0000000000000000 MCM_floatToIntBit
+
+NO UNDEFINED SYMBOLS

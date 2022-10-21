@@ -2,7 +2,7 @@
     "configurations": [
         {
             "cwd": "${workspaceFolder}",
-            "executable": "./build/STM32_MCSDK.elf",
+            "executable": "./build/STM32_MCSDK_Project.elf",
             "name": "JTAG DEBUGGING ",
             "request": "launch",
             "type": "cortex-debug",
@@ -25,7 +25,7 @@
        {
             "showDevDebugOutput": "parsed",
             "cwd": "${workspaceRoot}",
-            "executable": "./build/STM32_MCSDK.elf",
+            "executable": "./build/STM32_MCSDK_Project.elf",
             "name": "Debug STM32",
             "request": "launch",
             "type": "cortex-debug",
@@ -40,7 +40,7 @@
         {
             "showDevDebugOutput": "parsed",
             "cwd": "${workspaceRoot}",
-            "executable": "./build/STM32_MCSDK.elf",
+            "executable": "./build/STM32_MCSDK_Project.elf",
             "name": "Attach STM32",
             "request": "attach",
             "type": "cortex-debug",

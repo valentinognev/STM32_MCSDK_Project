@@ -253,12 +253,6 @@
 
 /******************************   ADDITIONAL FEATURES   **********************/
 
-/*  Feed-forward parameters */
-#define FEED_FORWARD_CURRENT_REG_ENABLING ENABLE
-#define CONSTANT1_Q                    72307
-#define CONSTANT1_D                    72307
-#define CONSTANT2_QD                   2257
-
 /*** On the fly start-up ***/
 
 /**************************

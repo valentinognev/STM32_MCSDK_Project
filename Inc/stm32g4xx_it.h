@@ -46,7 +46,7 @@
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
-void EXTI9_5_IRQHandler(void);
+
 /* USER CODE BEGIN EFP */
 
 /* USER CODE END EFP */

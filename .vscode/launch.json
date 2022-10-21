@@ -1,0 +1,56 @@
+{
+    "configurations": [
+        {
+            "cwd": "${workspaceFolder}",
+            "executable": "./build/STM32_MCSDK.elf",
+            "name": "JTAG DEBUGGING ",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "interface": "swd",
+            "svdFile": "${workspaceRoot}/STM32G431xx.svd",
+         //   "runToEntryPoint": "main",
+            "configFiles": [
+                "interface/stlink.cfg",
+                "target/stm32g4x.cfg"
+            ],
+            "preRestartCommands": [
+                "load",
+                "enable breakpoint",
+                "monitor reset"
+            ],
+            "showDevDebugOutput": true
+          
+       },
+       {
+            "showDevDebugOutput": "parsed",
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/STM32_MCSDK.elf",
+            "name": "Debug STM32",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "preLaunchTask": "Build STM",
+            "device": "stm32g431",
+            "configFiles": [
+                "openocd.cfg"
+            ],
+            "svdFile": "${workspaceRoot}/STM32G431xx.svd"
+        },
+        {
+            "showDevDebugOutput": "parsed",
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/STM32_MCSDK.elf",
+            "name": "Attach STM32",
+            "request": "attach",
+            "type": "cortex-debug",
+            "servertype": "openocd",
+            "preLaunchTask": "Build STM",
+            "device": "stm32g431",
+            "configFiles": [
+                "openocd.cfg"
+            ],
+            "svdFile": "${workspaceRoot}/STM32G431xx.svd"
+        }
+    ]
+}

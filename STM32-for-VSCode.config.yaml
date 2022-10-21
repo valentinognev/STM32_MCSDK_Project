@@ -1,0 +1,180 @@
+# Configuration file for the STM32 for VSCode extension
+# Arrays can be inputted in two ways. One is: [entry_1, entry_2, ..., entry_final]
+# or by adding an indented list below the variable name e.g.:
+# VARIABLE:
+# - entry_1
+# - entry_2
+
+# The project name
+target: STM32_MCSDK
+# Can be C or C++
+language: C
+
+optimization: Og
+
+# MCU settings
+targetMCU: stm32g4x
+cpu: cortex-m4 # type of cpu e.g. cortex-m4
+fpu: fpv4-sp-d16 # Defines how floating points are defined. Can be left empty.
+floatAbi: -mfloat-abi=hard
+ldscript: STM32G431CBUx_FLASH.ld # linker script
+
+# Compiler definitions. The -D prefix for the compiler will be automatically added.
+cDefinitions: 
+  - ARM_MATH_CM4
+  - USE_FULL_LL_DRIVER
+  - USE_HAL_DRIVER
+  - STM32G431xx
+
+cxxDefinitions: 
+  - ARM_MATH_CM4
+  - USE_FULL_LL_DRIVER
+  - USE_HAL_DRIVER
+  - STM32G431xx
+
+asDefinitions: []
+
+# Compiler definition files. you can add a single files or an array of files for different definitions.
+# The file is expected to have a definition each new line.
+# This allows to include for example a .definition file which can be ignored in git and can contain
+# This can be convenient for passing along secrets at compile time, or generating a file for per device setup.
+cDefinitionsFile:
+cxxDefinitionsFile:
+asDefinitionsFile:
+
+# Compiler flags
+cFlags: []
+cxxFlags: []
+assemblyFlags: []
+linkerFlags: 
+  - -specs=nano.specs
+
+
+# libraries to be included. The -l prefix to the library will be automatically added.
+libraries: 
+  - c
+  - m
+  - nosys
+
+# Library directories. Folders can be added here that contain custom libraries.
+libraryDirectories: []
+
+# Files or folders that will be excluded from compilation.
+# Glob patterns (https://www.wikiwand.com/en/Glob_(programming)) can be used.
+# Do mind that double stars are reserved in yaml
+# these should be escaped with a: \ or the name should be in double quotes e.g. "**.test.**"
+excludes: 
+  - "**/Examples/**"
+  - "**/examples/**"
+  - "**/Example/**"
+  - "**/example/**"
+  - "**_template.*"
+
+
+# Include directories (directories containing .h or .hpp files)
+# If a CubeMX makefile is present it will automatically include the include directories from that makefile.
+includeDirectories: 
+  - Inc
+  - Drivers/STM32G4xx_HAL_Driver/Inc
+  - Drivers/STM32G4xx_HAL_Driver/Inc/Legacy
+  - ../MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc
+  - ../MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc
+  - Drivers/CMSIS/Device/ST/STM32G4xx/Include
+  - Drivers/CMSIS/Include
+  - Inc/**
+  - Core/Inc/**
+  - Core/Lib/**
+  - Src/**
+  - Core/Src/**
+  - Core/Lib/**
+
+
+# Files that should be included in the compilation.
+# If a CubeMX makefile is present it will automatically include the  c and cpp/cxx files from that makefile.
+# Glob patterns (https://www.wikiwand.com/en/Glob_(programming)) can be used.
+# Do mind that double stars are reserved in yaml
+# these should be escaped with a: \ or the name should be in double quotes e.g. "HARDWARE_DRIVER*.c"
+sourceFiles:  
+  - startup_stm32g431xx.s
+  - Src/main.c
+  - Src/motorcontrol.c
+  - Src/mc_api.c
+  - Src/mc_config.c
+  - Src/mcp_config.c
+  - Src/mc_tasks.c
+  - Src/pwm_curr_fdbk.c
+  - Src/regular_conversion_manager.c
+  - Src/mc_math.c
+  - Src/mc_interface.c
+  - Src/stm32g4xx_mc_it.c
+  - Src/mc_parameters.c
+  - Src/register_interface.c
+  - Src/mc_perf.c
+  - Src/usart_aspep_driver.c
+  - Src/mc_configuration_registers.c
+  - Src/aspep.c
+  - Src/stm32g4xx_it.c
+  - Src/stm32g4xx_hal_msp.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_utils.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_exti.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_gpio.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_adc.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_dma.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ex.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_flash_ramfunc.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_gpio.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_exti.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_dma_ex.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_pwr_ex.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_cortex.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_cordic.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_opamp.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_tim.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.c
+  - Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_rcc.c
+  - Src/system_stm32g4xx.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/bus_voltage_sensor.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/circle_limitation.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/feed_forward_ctrl.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/pid_regulator.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/pqd_motor_power_measurement.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/pwm_common.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/r_divider_bus_voltage_sensor.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/speed_pos_fdbk.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/speed_torq_ctrl.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Src/r3_2_g4xx_pwm_curr_fdbk.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c
+  - MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcpa.c
+  - Src/**
+  - Core/Src/**
+  - Core/Lib/**
+
+
+# When no makefile is present it will show a warning pop-up.
+# However when compilation without the CubeMX Makefile is desired, this can be turned of.
+suppressMakefileWarning: false
+
+# Custom makefile rules
+# Here custom makefile rules can be added to the STM32Make.make file
+# an example of how this can be used is commented out below.
+customMakefileRules:
+# - command: sayhello
+#   rule: echo "hello"
+#   dependsOn: $(BUILD_DIR)/$(TARGET).elf # can be left out    
+    

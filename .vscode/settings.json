@@ -1,0 +1,10 @@
+{
+    "cortex-debug.openocdPath": "/usr/local/bin/openocd",
+    "cortex-debug.armToolchainPath": "/usr/bin",
+    "files.associations": {
+        "mc_interface.h": "c",
+        "motorcontrol.h": "c",
+        "mcpa.h": "c",
+        "sto_cordic_speed_pos_fdbk.h": "c"
+    }
+}

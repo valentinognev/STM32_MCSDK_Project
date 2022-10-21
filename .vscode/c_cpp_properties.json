@@ -1,0 +1,29 @@
+{
+  "configurations": [
+    {
+      "name": "STM32",
+      "includePath": [
+        "../Drivers/CMSIS/DSP/Include/",
+        "../MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc",
+        "../MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc",
+        "Drivers/CMSIS/DSP/Include/",
+        "Drivers/CMSIS/Device/ST/STM32G4xx/Include",
+        "Drivers/CMSIS/Include",
+        "Drivers/STM32G4xx_HAL_Driver/Inc",
+        "Drivers/STM32G4xx_HAL_Driver/Inc/Legacy",
+        "Inc",
+        "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc",
+        "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc"
+      ],
+      "defines": [
+        "ARM_MATH_CM4",
+        "STM32G431xx",
+        "USE_FULL_LL_DRIVER",
+        "USE_HAL_DRIVER"
+      ],
+      "compilerPath": "/usr/bin/arm-none-eabi-gcc",
+      "configurationProvider": "ms-vscode.makefile-tools"
+    }
+  ],
+  "version": 4
+}

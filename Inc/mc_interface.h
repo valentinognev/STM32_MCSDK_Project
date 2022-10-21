@@ -57,8 +57,8 @@ typedef enum
   MCI_NOCOMMANDSYET,        /*!< No command has been set by the user.*/
   MCI_CMD_EXECSPEEDRAMP,        /*!< ExecSpeedRamp command coming from the user.*/
   MCI_CMD_EXECTORQUERAMP,       /*!< ExecTorqueRamp command coming from the user.*/
-  MCI_CMD_SETCURRENTREFERENCES, /*!< SetCurrentReferences command coming from the
-                                 user.*/
+  MCI_CMD_SETCURRENTREFERENCES, /*!< SetCurrentReferences command coming from the user.*/
+  MCI_CMD_EXECSPEEDSIN,        /*!< ExecSpeedSin command coming from the user.*/
   MCI_CMD_SETOPENLOOPCURRENT, /*!< set open loop current .*/
   MCI_CMD_SETOPENLOOPVOLTAGE, /*!< set open loop voltage .*/
 } MCI_UserCommands_t;
@@ -132,6 +132,8 @@ typedef struct
   PWMC_Handle_t *pPWM;    /*!< Pointer to PWM handle structure.*/
   MCI_UserCommands_t lastCommand; /*!< Last command coming from the user.*/
   int16_t hFinalSpeed;        /*!< Final speed of last ExecSpeedRamp command.*/
+  int16_t hSpeedPhase;
+  int16_t hSpeedAmp;
   int16_t hFinalTorque;       /*!< Final torque of last ExecTorqueRamp
                                    command.*/
   qd_t Iqdref;     /*!< Current component of last
@@ -151,6 +153,7 @@ typedef struct
 void MCI_Init( MCI_Handle_t * pHandle, SpeednTorqCtrl_Handle_t * pSTC, pFOCVars_t pFOCVars, PWMC_Handle_t *pPWMHandle );
 void MCI_ExecBufferedCommands( MCI_Handle_t * pHandle );
 void MCI_ExecSpeedRamp( MCI_Handle_t * pHandle,  int16_t hFinalSpeed, uint16_t hDurationms );
+void MCI_ExecSpeedSin( MCI_Handle_t * pHandle,  const int16_t hFinalSpeedMean, const uint16_t hFinalSpeedAmp, const int16_t hPhase );
 void MCI_ExecSpeedRamp_F( MCI_Handle_t * pHandle, const float FinalSpeed, uint16_t hDurationms );
 
 void MCI_ExecTorqueRamp( MCI_Handle_t * pHandle,  int16_t hFinalTorque, uint16_t hDurationms );
@@ -171,6 +174,7 @@ void MCI_FaultProcessing(  MCI_Handle_t * pHandle, uint16_t hSetErrors, uint16_t
                                   hResetErrors );
 uint32_t MCI_GetFaultState( MCI_Handle_t * pHandle );
 MCI_CommandState_t  MCI_IsCommandAcknowledged( MCI_Handle_t * pHandle );
+MCI_UserCommands_t  MCI_GetLastCommand( MCI_Handle_t * pHandle );
 MCI_State_t MCI_GetSTMState( MCI_Handle_t * pHandle );
 uint16_t MCI_GetOccurredFaults( MCI_Handle_t * pHandle );
 uint16_t MCI_GetCurrentFaults( MCI_Handle_t * pHandle );

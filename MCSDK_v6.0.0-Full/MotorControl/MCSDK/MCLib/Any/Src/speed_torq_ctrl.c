@@ -24,7 +24,15 @@
 #include "speed_pos_fdbk.h"
 
 #include "mc_type.h"
+#include "mc_math.h"
+#include "virtual_speed_sensor.h"
+#include "sto_speed_pos_fdbk.h"
+#include "debug_scope.h"
+#include "parameters_conversion.h"
 
+extern VirtualSpeedSensor_Handle_t VirtualSpeedSensorM1;
+extern DebugScope_Handle_t debugScopeM1; 
+extern STO_Handle_t STO_M1;
 #define CHECK_BOUNDARY
 
 /** @addtogroup MCSDK
@@ -358,6 +366,76 @@ __weak bool STC_ExecRamp(SpeednTorqCtrl_Handle_t *pHandle, int16_t hTargetFinal,
         wAux1 /= ((int32_t)pHandle->RampRemainingStep);
         pHandle->IncDecAmount = wAux1;
       }
+    }
+#ifdef NULL_PTR_SPD_TRQ_CTL
+  }
+#endif
+  return (allowedRange);
+}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* Starts the execution of a sin speed. */
+__weak bool STC_ExecSin(SpeednTorqCtrl_Handle_t *pHandle, int16_t hMean, int16_t hAmp, int16_t hPhase)
+{
+  static int16_t prevAngle = 0;
+  static int16_t sectionCounter = 0;
+  bool allowedRange = true;
+#ifdef NULL_PTR_SPD_TRQ_CTL
+  if (MC_NULL == pHandle)
+  {
+    allowedRange = false;
+  }
+  else
+  {
+#endif
+#ifdef CHECK_BOUNDARY
+    if ((int32_t)(hMean + hAmp) > (int32_t)pHandle->MaxAppPositiveMecSpeedUnit)
+    {
+      allowedRange = false;
+    }
+    else if (-(hMean + hAmp) < pHandle->MinAppNegativeMecSpeedUnit)
+    {
+      allowedRange = false;
+    }
+    else if ((int32_t)(hMean - hAmp) < (int32_t)pHandle->MinAppPositiveMecSpeedUnit)
+    {
+      if (-(hMean - hAmp) > pHandle->MaxAppNegativeMecSpeedUnit)
+      {
+        allowedRange = false;
+      }
+    }
+    else
+    {
+      /* Nothing to do */
+    }
+#endif
+    if (true == allowedRange)
+    {
+      /* Interrupts the execution of any previous ramp command */
+ 
+      sectionCounter += (prevAngle > STO_M1._Super->hElAngle)?1:0;
+      if (sectionCounter == STO_M1._Super->bElToMecRatio)
+        sectionCounter = 0; 
+      prevAngle = STO_M1._Super->hElAngle;
+      int32_t localElAngle =  (STO_M1._Super->hElAngle - INT16_MIN);
+      int16_t phase = 0;
+      int32_t angle = (localElAngle+UINT16_MAX*sectionCounter)/STO_M1._Super->bElToMecRatio; //VirtualSpeedSensorM1._Super.hMecAngle;
+      int32_t totalAngle = (int32_t)angle + phase;
+      if (totalAngle > INT16_MAX)
+        totalAngle -= UINT16_MAX;
+      Trig_Components Local_Vector_Components;
+      Local_Vector_Components = MCM_Trig_Functions((int16_t)totalAngle);
+      int32_t SinAngleplusPhase = Local_Vector_Components.hCos;
+      pHandle->SpeedRefUnitExt = (int32_t)(hMean + hAmp * SinAngleplusPhase / 65536) * 65536;
+      int32_t desiredspeed = (int32_t)(hMean + hAmp * SinAngleplusPhase / 65536 /2) * 65536;
+      //int32_t sensorSpeed = (int32_t)STO_M1._Super->hElSpeedDpp*MEDIUM_FREQUENCY_TASK_RATE/65536*10;
+      if (debugScopeM1.i2 == 100)
+         debugScopeM1.i2 = 100;
+         
+      DebugScopeInsertData(&debugScopeM1, 1, angle);
+      DebugScopeInsertData(&debugScopeM1, 2, desiredspeed / 65536);
+      DebugScopeInsertData(&debugScopeM1, 3, STO_M1._Super->hElAngle);
+      pHandle->RampRemainingStep = 0U;
+      pHandle->IncDecAmount = 0;
     }
 #ifdef NULL_PTR_SPD_TRQ_CTL
   }

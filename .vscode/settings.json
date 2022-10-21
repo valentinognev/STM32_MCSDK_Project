@@ -5,6 +5,7 @@
         "mc_interface.h": "c",
         "motorcontrol.h": "c",
         "mcpa.h": "c",
-        "sto_cordic_speed_pos_fdbk.h": "c"
+        "sto_cordic_speed_pos_fdbk.h": "c",
+        "mcp.h": "c"
     }
 }

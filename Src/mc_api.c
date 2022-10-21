@@ -21,7 +21,9 @@
 #include "mc_interface.h"
 #include "mc_api.h"
 #include "mc_config.h"
+#include "debug_scope.h"
 
+static int64_t startMotorTime = -1;
 /** @addtogroup MCSDK
   * @{
   */
@@ -41,6 +43,10 @@
   *  The current Motor Control API can cope with up to 2 motors.
   * @{
   */
+int64_t getStartMotorTick()
+{
+  return startMotorTime;
+}
 
 /**
   * @brief  Initiates the start-up procedure for Motor 1
@@ -67,6 +73,7 @@
   */
 __weak bool MC_StartMotor1(void)
 {
+  startMotorTime = getTickMSCounter();
 	return MCI_StartMotor( pMCI[M1] );
 }
 
@@ -126,6 +133,10 @@ __weak void MC_ProgramSpeedRampMotor1( int16_t hFinalSpeed, uint16_t hDurationms
 	MCI_ExecSpeedRamp( pMCI[M1], hFinalSpeed, hDurationms );
 }
 
+__weak void MC_ProgramSpeedSinMotor1( const int16_t hFinalSpeedMean, const uint16_t hFinalSpeedAmp, const int16_t hPhase )
+{
+	MCI_ExecSpeedSin( pMCI[M1], hFinalSpeedMean, hFinalSpeedAmp, hPhase );
+}
 /**
   * @brief Programs a speed ramp for Motor 1 for later or immediate execution.
   *

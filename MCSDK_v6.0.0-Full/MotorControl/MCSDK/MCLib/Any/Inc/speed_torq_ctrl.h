@@ -128,6 +128,8 @@ MC_ControlMode_t STC_GetControlMode(SpeednTorqCtrl_Handle_t *pHandle);
 /* Starts the execution of a ramp using new target and duration. */
 bool STC_ExecRamp(SpeednTorqCtrl_Handle_t *pHandle, int16_t hTargetFinal, uint32_t hDurationms);
 
+/* Starts the execution of a sin speed. */
+bool STC_ExecSin(SpeednTorqCtrl_Handle_t *pHandle, int16_t hMean, int16_t hAmp,  int16_t hPhase);
 /* It interrupts the execution of any previous ramp command.*/
 void STC_StopRamp(SpeednTorqCtrl_Handle_t *pHandle);
 

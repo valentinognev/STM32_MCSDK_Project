@@ -39,6 +39,7 @@ C_SOURCES =  \
 Src/main.c \
 Src/motorcontrol.c \
 Src/mc_api.c \
+Src/debug_scope.c \
 Src/mc_config.c \
 Src/mcp_config.c \
 Src/mc_tasks.c \

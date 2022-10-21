@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "debug_scope.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -43,6 +43,8 @@
 TIM_HandleTypeDef htim4;
 
 /* USER CODE BEGIN PV */
+extern OuterControlParameters_Handle_t outerControlParametersM1;
+extern MCI_Handle_t* pMCI[NBR_OF_MOTORS];
 
 /* USER CODE END PV */
 

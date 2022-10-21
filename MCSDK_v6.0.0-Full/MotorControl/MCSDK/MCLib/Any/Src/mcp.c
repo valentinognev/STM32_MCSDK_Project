@@ -24,6 +24,8 @@
 #include "register_interface.h"
 #include "mc_config.h"
 #include "mcp_config.h"
+#include "debug_scope.h"
+extern DebugScope_Handle_t debugScopeM1;
 
 void MCP_ReceivedPacket(MCP_Handle_t *pHandle)
 {
@@ -129,6 +131,14 @@ void MCP_ReceivedPacket(MCP_Handle_t *pHandle)
       case IQDREF_CLEAR:
       {
         MCI_Clear_Iqdref(pMCI);
+        MCPResponse = MCP_CMD_OK;
+        break;
+      }
+      case GET_DBG_DATA:
+      {
+        MCI_State_t state = MCI_GetSTMState(pHandle);
+        if (state == IDLE || state == FAULT_NOW)
+          UASPEP_SEND_PACKET(aspepOverUartA.HWIp, debugScopeM1.Ch1, sizeof(debugScopeM1.Ch1) * DEBUGSCOPENUMOFCH);
         MCPResponse = MCP_CMD_OK;
         break;
       }

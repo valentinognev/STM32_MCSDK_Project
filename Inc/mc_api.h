@@ -37,6 +37,7 @@
 /** @addtogroup MCIAPI
   * @{
   */
+int64_t getStartMotorTick();
 
 /* Starts Motor 1 */
 bool MC_StartMotor1(void);
@@ -47,6 +48,7 @@ bool MC_StopMotor1(void);
 /* Programs a Speed ramp for Motor 1 */
 void MC_ProgramSpeedRampMotor1( int16_t hFinalSpeed, uint16_t hDurationms );
 
+void MC_ProgramSpeedSinMotor1(const int16_t hFinalSpeedMean, const uint16_t hFinalSpeedAmp, const int16_t hPhase );
 /* Programs a Speed ramp for Motor 1 */
 void MC_ProgramSpeedRampMotor1_F( float FinalSpeed, uint16_t hDurationms );
 
@@ -64,6 +66,8 @@ void MC_SetCurrentReferenceMotor1_F( qd_f_t IqdRef );
 
 /* Returns the state of the last submited command for Motor 1 */
 MCI_CommandState_t  MC_GetCommandStateMotor1( void);
+/* Returns the last command submited for Motor 1 */
+MCI_UserCommands_t  MC_GetLastCommandMotor1( void );
 
 /* Stops the execution of the current speed ramp for Motor 1 if any */
 bool MC_StopSpeedRampMotor1(void);

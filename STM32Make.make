@@ -81,6 +81,7 @@ MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c \
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c \
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Src/r3_2_g4xx_pwm_curr_fdbk.c \
 Src/aspep.c \
+Src/debug_scope.c \
 Src/main.c \
 Src/mc_api.c \
 Src/mc_config.c \

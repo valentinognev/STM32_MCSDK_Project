@@ -21,7 +21,7 @@
 
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
-
+#include "debug_scope.h"
 /* USER CODE END Includes */
 
 /* Private typedef -----------------------------------------------------------*/
@@ -43,6 +43,8 @@
 TIM_HandleTypeDef htim4;
 
 /* USER CODE BEGIN PV */
+extern OuterControlParameters_Handle_t outerControlParametersM1;
+extern MCI_Handle_t* pMCI[NBR_OF_MOTORS];
 
 /* USER CODE END PV */
 
@@ -120,6 +122,15 @@ int main(void)
   while (1)
   {
     /* USER CODE END WHILE */
+    // if (MC_GetLastCommandMotor1() == MCI_CMD_EXECSPEEDRAMP && 
+    //     MC_GetCommandStateMotor1() == MCI_BUFFER_EMPTY &&
+    //     getTickMSCounter()-getStartMotorTick() > 2000)
+    // {
+    //   int16_t hFinalSpeedMean = MC_GetMecSpeedAverageMotor1();
+    //   MCI_GetLastRampFinalSpeed(pMCI[M1]);
+    //   int16_t hFinalSpeedAmp = hFinalSpeedMean/5;
+    //   int16_t hPhase = 0;
+    //   MC_ProgramSpeedSinMotor1(hFinalSpeedMean, hFinalSpeedAmp, hPhase);
 
     /* USER CODE BEGIN 3 */
   }

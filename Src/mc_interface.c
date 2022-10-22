@@ -26,6 +26,7 @@
 #include "speed_torq_ctrl.h"
 #include "mc_interface.h"
 #include "motorcontrol.h"
+#include "debug_scope.h"
 
 #define ROUNDING_OFF
 
@@ -43,6 +44,7 @@
 /* Private macros ------------------------------------------------------------*/
 
 #define round(x) ((x)>=0?(int32_t)((x)+0.5):(int32_t)((x)-0.5))
+extern DebugScope_Handle_t debugScopeM1;
 
 /* Functions -----------------------------------------------*/
 
@@ -114,7 +116,27 @@ __weak void MCI_ExecSpeedRamp(MCI_Handle_t *pHandle,  int16_t hFinalSpeed, uint1
     pHandle->hDurationms = hDurationms;
     pHandle->CommandState = MCI_COMMAND_NOT_ALREADY_EXECUTED;
     pHandle->LastModalitySetByUser = MCM_SPEED_MODE;
+#ifdef NULL_PTR_MC_INT
+  }
+#endif
+}
 
+__weak void MCI_ExecSpeedSin( MCI_Handle_t * pHandle,  const int16_t hFinalSpeedMean, const uint16_t hFinalSpeedAmp, const int16_t hPhase )
+{
+#ifdef NULL_PTR_MC_INT
+  if (MC_NULL == pHandle)
+  {
+    /* Nothing to do */
+  }
+  else
+  {
+#endif
+    pHandle->lastCommand = MCI_CMD_EXECSPEEDSIN;
+    pHandle->hFinalSpeed = hFinalSpeedMean;
+    pHandle->hSpeedAmp = hFinalSpeedAmp;
+    pHandle->hSpeedPhase = hPhase;
+    pHandle->CommandState = MCI_COMMAND_NOT_ALREADY_EXECUTED;
+    pHandle->LastModalitySetByUser = MCM_SPEED_MODE;
 #ifdef NULL_PTR_MC_INT
   }
 #endif
@@ -637,6 +659,13 @@ __weak void MCI_ExecBufferedCommands(MCI_Handle_t *pHandle)
           STC_SetControlMode(pHandle->pSTC, MCM_SPEED_MODE);
           commandHasBeenExecuted = STC_ExecRamp(pHandle->pSTC, pHandle->hFinalSpeed, pHandle->hDurationms);
           break;
+        } 
+        case MCI_CMD_EXECSPEEDSIN:
+        {
+          pHandle->pFOCVars->bDriveInput = INTERNAL;
+          STC_SetControlMode(pHandle->pSTC, MCM_SPEED_MODE);
+          commandHasBeenExecuted = STC_ExecSin(pHandle->pSTC, pHandle->hFinalSpeed, pHandle->hSpeedAmp, pHandle->hSpeedPhase);
+          break;
         }
 
         case MCI_CMD_EXECTORQUERAMP:
@@ -707,6 +736,31 @@ __weak MCI_CommandState_t  MCI_IsCommandAcknowledged(MCI_Handle_t *pHandle)
     {
       /* Nothing to do */
     }
+#ifdef NULL_PTR_MC_INT
+  }
+#endif
+  return (retVal);
+}
+/**
+  * @brief  It returns information about the state of the last buffered command.
+  * @param  pHandle Pointer on the component instance to work on.
+  * @retval CommandState_t  It can be one of the following codes:
+  *         - MCI_NOCOMMANDSYET 
+  *         - MCI_CMD_EXECSPEEDRAMP 
+  *         - MCI_CMD_EXECTORQUERAMP 
+  *         - MCI_CMD_SETCURRENTREFERENCES 
+  *         - MCI_CMD_EXECSPEEDSIN
+  */
+__weak MCI_UserCommands_t  MCI_GetLastCommand(MCI_Handle_t *pHandle)
+{
+  MCI_UserCommands_t retVal;
+#ifdef NULL_PTR_MC_INT
+  if (MC_NULL == pHandle)
+  {
+    retVal = MCI_NOCOMMANDSYET;
+  }
+#endif
+    retVal = pHandle->lastCommand;
 #ifdef NULL_PTR_MC_INT
   }
 #endif
@@ -810,7 +864,8 @@ __weak int16_t MCI_GetImposedMotorDirection(MCI_Handle_t *pHandle)
 #endif
     switch (pHandle->lastCommand)
     {
-      case MCI_CMD_EXECSPEEDRAMP:
+       case MCI_CMD_EXECSPEEDSIN:
+       case MCI_CMD_EXECSPEEDRAMP:
         if (pHandle->hFinalSpeed < 0)
         {
 

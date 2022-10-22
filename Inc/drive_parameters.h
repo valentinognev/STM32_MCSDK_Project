@@ -58,7 +58,7 @@
 #define PLL_KIDIV     65535
 #define PLL_KIDIV_LOG LOG2((PLL_KIDIV))
 
-#define OBS_MEAS_ERRORS_BEFORE_FAULTS    100  /*!< Number of consecutive errors
+#define OBS_MEAS_ERRORS_BEFORE_FAULTS    3  /*!< Number of consecutive errors
                                                            on variance test before a speed
                                                            feedback error is reported */
 #define STO_FIFO_DEPTH_DPP               64  /*!< Depth of the FIFO used
@@ -87,7 +87,7 @@
 #define CORD_GAIN1                       -21504
 #define CORD_GAIN2                       20035
 
-#define CORD_MEAS_ERRORS_BEFORE_FAULTS   3  /*!< Number of consecutive errors
+#define CORD_MEAS_ERRORS_BEFORE_FAULTS   100  /*!< Number of consecutive errors
                                                            on variance test before a speed
                                                            feedback error is reported */
 #define CORD_FIFO_DEPTH_DPP              64  /*!< Depth of the FIFO used

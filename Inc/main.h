@@ -127,6 +127,7 @@ void Error_Handler(void);
 #define M1_ENCODER_B_GPIO_Port GPIOB
 #define M1_ENCODER_I_Pin LL_GPIO_PIN_8
 #define M1_ENCODER_I_GPIO_Port GPIOB
+#define M1_ENCODER_I_EXTI_IRQn EXTI9_5_IRQn
 /* USER CODE BEGIN Private defines */
 
 /* USER CODE END Private defines */

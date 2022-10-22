@@ -170,10 +170,9 @@
 #define DIFFTERM_ENABLE
 
 /* Sensors setting */
+#define MAIN_SCFG UI_SCODE_STO_PLL
 
-#define MAIN_SCFG UI_SCODE_STO_CR
-
-#define AUX_SCFG UI_SCODE_STO_PLL
+#define AUX_SCFG UI_SCODE_STO_CR
 
 #define PLLTUNING_ENABLE
 

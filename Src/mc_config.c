@@ -268,6 +268,15 @@ STO_PLL_Handle_t STO_PLL_M1 =
  .hForcedDirection                   =  0x0000U
 };
 
+STO_Handle_t STO_M1 =
+{
+  ._Super                        = (SpeednPosFdbk_Handle_t*)&STO_PLL_M1, //cstat !MISRAC2012-Rule-11.3
+  .pFctForceConvergency1         = &STO_PLL_ForceConvergency1,
+  .pFctForceConvergency2         = &STO_PLL_ForceConvergency2,
+  .pFctStoOtfResetPLL            = &STO_OTF_ResetPLL,
+  .pFctSTO_SpeedReliabilityCheck = &STO_PLL_IsVarianceTight
+};
+
 /**
   * @brief  SpeedNPosition sensor parameters Motor 1 - State Observer + CORDIC
   */
@@ -305,16 +314,6 @@ STO_CR_Handle_t STO_CR_M1 =
   .F1LOG                              =	CORD_F1_LOG,
   .F2LOG                              =	CORD_F2_LOG,
   .SpeedBufferSizedppLOG              =	CORD_FIFO_DEPTH_DPP_LOG
-};
-
-STO_Handle_t STO_M1 =
-{
-  ._Super                        = (SpeednPosFdbk_Handle_t*)&STO_CR_M1, //cstat !MISRAC2012-Rule-11.3
-  .pFctForceConvergency1         = &STO_CR_ForceConvergency1,
-  .pFctForceConvergency2         = &STO_CR_ForceConvergency2,
-  .pFctStoOtfResetPLL            = MC_NULL,
-  .pFctSTO_SpeedReliabilityCheck = &STO_CR_IsSpeedReliable
-
 };
 
 /**

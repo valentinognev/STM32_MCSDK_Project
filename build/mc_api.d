@@ -64,7 +64,8 @@ build/mc_api.o: Src/mc_api.c Inc/mc_interface.h \
  MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/circle_limitation.h \
  MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h \
  MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_pll_speed_pos_fdbk.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_cordic_speed_pos_fdbk.h
+ MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_cordic_speed_pos_fdbk.h \
+ Inc/debug_scope.h
 
 Inc/mc_interface.h:
 
@@ -209,3 +210,5 @@ MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h:
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_pll_speed_pos_fdbk.h:
 
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_cordic_speed_pos_fdbk.h:
+
+Inc/debug_scope.h:

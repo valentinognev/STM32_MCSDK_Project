@@ -43,7 +43,13 @@ build/speed_torq_ctrl.o: \
  MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h \
  MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h \
  MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h
+ MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
+ Inc/mc_math.h \
+ MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h \
+ MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h \
+ Inc/debug_scope.h Inc/parameters_conversion.h Inc/mc_math.h \
+ Inc/parameters_conversion_g4xx.h Inc/pmsm_motor_parameters.h \
+ Inc/drive_parameters.h Inc/power_stage_parameters.h
 
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h:
 
@@ -138,3 +144,23 @@ MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h:
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h:
 
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
+
+Inc/mc_math.h:
+
+MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h:
+
+MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h:
+
+Inc/debug_scope.h:
+
+Inc/parameters_conversion.h:
+
+Inc/mc_math.h:
+
+Inc/parameters_conversion_g4xx.h:
+
+Inc/pmsm_motor_parameters.h:
+
+Inc/drive_parameters.h:
+
+Inc/power_stage_parameters.h:

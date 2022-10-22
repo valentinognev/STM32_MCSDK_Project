@@ -73,7 +73,7 @@ build/register_interface.o: Src/register_interface.c \
  Inc/drive_parameters.h Inc/power_stage_parameters.h \
  MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcptl.h \
  MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcpa.h \
- Inc/mc_configuration_registers.h
+ Inc/mc_configuration_registers.h Inc/debug_scope.h
 
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
 
@@ -242,3 +242,5 @@ MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcptl.h:
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcpa.h:
 
 Inc/mc_configuration_registers.h:
+
+Inc/debug_scope.h:

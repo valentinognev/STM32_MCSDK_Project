@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccQ1O98r.s 			page 1
+ARM GAS  /tmp/ccLjXLyq.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
   28:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   *    microprocessor devices manufactured by or for STMicroelectronics.
   29:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   * 5. Redistribution and use of this software other than as permitted under
   30:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   *    this license is void and will automatically terminate your rights under
-ARM GAS  /tmp/ccQ1O98r.s 			page 2
+ARM GAS  /tmp/ccLjXLyq.s 			page 2
 
 
   31:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   *    this license.
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
   85:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   * @param  pHandle: handler of the current instance of the STO CORDIC component
   86:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   * @retval none
   87:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   */
-ARM GAS  /tmp/ccQ1O98r.s 			page 3
+ARM GAS  /tmp/ccLjXLyq.s 			page 3
 
 
   88:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** __weak void STO_CR_Init(STO_CR_Handle_t *pHandle)
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  142:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   * @retval int16_t rotor electrical angle (s16Degrees)
  143:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   */
  144:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** __weak int16_t STO_CR_CalcElAngle(STO_CR_Handle_t *pHandle, Observer_Inputs_t *pInputs)
-ARM GAS  /tmp/ccQ1O98r.s 			page 4
+ARM GAS  /tmp/ccLjXLyq.s 			page 4
 
 
  145:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** {
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  199:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****       hAux_Beta = (int16_t)(pHandle->wBemf_beta_est >> pHandle->F2LOG);
  200:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #else
  201:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****       hAux_Beta = (int16_t)(pHandle->wBemf_beta_est / pHandle->hF2);
-ARM GAS  /tmp/ccQ1O98r.s 			page 5
+ARM GAS  /tmp/ccLjXLyq.s 			page 5
 
 
  202:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #endif
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  256:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
  257:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #ifndef FULL_MISRA_C_COMPLIANCY_STO_CORDIC
  258:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     hVbeta = (int16_t)(wAux >> 16); //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-
-ARM GAS  /tmp/ccQ1O98r.s 			page 6
+ARM GAS  /tmp/ccLjXLyq.s 			page 6
 
 
  259:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #else
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  313:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
  314:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     wAux = (int32_t)(pHandle->hC3) * hAux_Beta;
  315:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     wIbeta_est_Next -= wAux;
-ARM GAS  /tmp/ccQ1O98r.s 			page 7
+ARM GAS  /tmp/ccLjXLyq.s 			page 7
 
 
  316:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  370:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****         {
  371:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****           pHandle->_Super.hElAngle = hRotor_Angle;
  372:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****         }
-ARM GAS  /tmp/ccQ1O98r.s 			page 8
+ARM GAS  /tmp/ccLjXLyq.s 			page 8
 
 
  373:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****       }
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  427:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   * @brief Computes the rotor average mechanical speed in the unit defined by
  428:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   *        #SPEED_UNIT and writes it in pMecSpeedUnit
  429:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   *
-ARM GAS  /tmp/ccQ1O98r.s 			page 9
+ARM GAS  /tmp/ccLjXLyq.s 			page 9
 
 
  430:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   *  This method must be called - at least - with the same periodicity
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  484:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****       wAvrSpeed_dpp = wAvrSpeed_dpp / (int16_t)bSpeedBufferSizeUnit;
  485:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     }
  486:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
-ARM GAS  /tmp/ccQ1O98r.s 			page 10
+ARM GAS  /tmp/ccLjXLyq.s 			page 10
 
 
  487:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  541:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****         wObsBemfSq += wObsBemf * wObsBemf;
  542:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
  543:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****         /*Computation of Estimated back-emf*/
-ARM GAS  /tmp/ccQ1O98r.s 			page 11
+ARM GAS  /tmp/ccLjXLyq.s 			page 11
 
 
  544:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****         wEstBemf = (wAux * 32767) / (int16_t)(pHandle->_Super.hMaxReliableMecSpeedUnit);
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  598:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****         pHandle->ReliabilityCounter = 0U;
  599:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****         bAux = SPD_IsMecSpeedReliable (&pHandle->_Super, pMecSpeedUnit);
  600:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****       }
-ARM GAS  /tmp/ccQ1O98r.s 			page 12
+ARM GAS  /tmp/ccLjXLyq.s 			page 12
 
 
  601:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     }
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  655:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
  656:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   bBuffer_index++;
  657:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   if (bBuffer_index == pHandle->SpeedBufferSizeUnit)
-ARM GAS  /tmp/ccQ1O98r.s 			page 13
+ARM GAS  /tmp/ccLjXLyq.s 			page 13
 
 
  658:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   {
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
   52              		.loc 1 688 5 is_stmt 1 discriminator 3 view .LVU9
   53              		.loc 1 688 32 is_stmt 0 discriminator 3 view .LVU10
   54 000c 03F12402 		add	r2, r3, #36
-ARM GAS  /tmp/ccQ1O98r.s 			page 14
+ARM GAS  /tmp/ccLjXLyq.s 			page 14
 
 
   55 0010 0021     		movs	r1, #0
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
   99              		.thumb_func
  100              		.fpu fpv4-sp-d16
  102              	STO_CR_CalcElAngle:
-ARM GAS  /tmp/ccQ1O98r.s 			page 15
+ARM GAS  /tmp/ccLjXLyq.s 			page 15
 
 
  103              	.LVL7:
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  166:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     {
  143              		.loc 1 166 5 is_stmt 1 view .LVU40
  166:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     {
-ARM GAS  /tmp/ccQ1O98r.s 			page 16
+ARM GAS  /tmp/ccLjXLyq.s 			page 16
 
 
  144              		.loc 1 166 16 is_stmt 0 view .LVU41
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  199:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #else
  180              		.loc 1 199 36 is_stmt 0 view .LVU60
  181 003e D0F84080 		ldr	r8, [r0, #64]
-ARM GAS  /tmp/ccQ1O98r.s 			page 17
+ARM GAS  /tmp/ccLjXLyq.s 			page 17
 
 
  199:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #else
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  217 0066 B0F87CE1 		ldrh	lr, [r0, #380]
  232:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #else
  218              		.loc 1 232 47 view .LVU80
-ARM GAS  /tmp/ccQ1O98r.s 			page 18
+ARM GAS  /tmp/ccLjXLyq.s 			page 18
 
 
  219 006a 43FA0EF2 		asr	r2, r3, lr
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  250:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #else
  256              		.loc 1 250 12 is_stmt 0 view .LVU98
  257 009a 2D14     		asrs	r5, r5, #16
-ARM GAS  /tmp/ccQ1O98r.s 			page 19
+ARM GAS  /tmp/ccLjXLyq.s 			page 19
 
 
  258              	.LVL18:
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  294              		.loc 1 278 5 is_stmt 1 view .LVU116
  278:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
  295              		.loc 1 278 21 is_stmt 0 view .LVU117
-ARM GAS  /tmp/ccQ1O98r.s 			page 20
+ARM GAS  /tmp/ccLjXLyq.s 			page 20
 
 
  296 00c0 CDF808C0 		str	ip, [sp, #8]
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  333              		.loc 1 295 5 view .LVU134
  295:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
  334              		.loc 1 295 25 is_stmt 0 view .LVU135
-ARM GAS  /tmp/ccQ1O98r.s 			page 21
+ARM GAS  /tmp/ccLjXLyq.s 			page 21
 
 
  335 00ea 009B     		ldr	r3, [sp]
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  322:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #else
  372              		.loc 1 322 10 is_stmt 0 view .LVU153
  373 0112 47FA01F1 		asr	r1, r7, r1
-ARM GAS  /tmp/ccQ1O98r.s 			page 22
+ARM GAS  /tmp/ccLjXLyq.s 			page 22
 
 
  374              	.LVL42:
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  410              		.loc 1 348 5 is_stmt 1 view .LVU171
  348:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
  411              		.loc 1 348 20 is_stmt 0 view .LVU172
-ARM GAS  /tmp/ccQ1O98r.s 			page 23
+ARM GAS  /tmp/ccLjXLyq.s 			page 23
 
 
  412 013e 6442     		rsbs	r4, r4, #0
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
   50:Inc/mc_math.h ****          LL_CORDIC_INSIZE_32BITS | LL_CORDIC_OUTSIZE_32BITS)
   51:Inc/mc_math.h **** 
   52:Inc/mc_math.h **** /* CORDIC FUNCTION: COSINE q1.15 */
-ARM GAS  /tmp/ccQ1O98r.s 			page 24
+ARM GAS  /tmp/ccLjXLyq.s 			page 24
 
 
   53:Inc/mc_math.h **** #define CORDIC_CONFIG_COSINE    (LL_CORDIC_FUNCTION_COSINE | LL_CORDIC_PRECISION_6CYCLES | LL_CORDI
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  107:Inc/mc_math.h ****   *         synchronous reference frame (properly oriented), so as Iq and Id.
  108:Inc/mc_math.h ****   *                   Id= Ialpha *sin(theta)+qIbeta *cos(Theta)
  109:Inc/mc_math.h ****   *                   Iq=qIalpha *cos(Theta)-qIbeta *sin(Theta)
-ARM GAS  /tmp/ccQ1O98r.s 			page 25
+ARM GAS  /tmp/ccLjXLyq.s 			page 25
 
 
  110:Inc/mc_math.h ****   * @param  Curr_Input: stator values alpha and beta in alphabeta_t format
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  164:Inc/mc_math.h ****      11217 , 11263 , 11310 , 11356 , 11402 , 11448 , 11494 , 11539,\
  165:Inc/mc_math.h ****      11584 , 11630 , 11675 , 11719 , 11764 , 11808 , 11853 , 11897,\
  166:Inc/mc_math.h ****      11941 , 11985 , 12028 , 12072 , 12115 , 12158 , 12201 , 12244,\
-ARM GAS  /tmp/ccQ1O98r.s 			page 26
+ARM GAS  /tmp/ccLjXLyq.s 			page 26
 
 
  167:Inc/mc_math.h ****      12287 , 12330 , 12372 , 12414 , 12457 , 12499 , 12541 , 12582,\
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  221:Inc/mc_math.h ****      24575 , 24596 , 24617 , 24639 , 24660 , 24681 , 24702 , 24724,\
  222:Inc/mc_math.h ****      24745 , 24766 , 24787 , 24808 , 24829 , 24851 , 24872 , 24893,\
  223:Inc/mc_math.h ****      24914 , 24935 , 24956 , 24977 , 24998 , 25019 , 25040 , 25061,\
-ARM GAS  /tmp/ccQ1O98r.s 			page 27
+ARM GAS  /tmp/ccLjXLyq.s 			page 27
 
 
  224:Inc/mc_math.h ****      25082 , 25102 , 25123 , 25144 , 25165 , 25186 , 25207 , 25227,\
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  278:Inc/mc_math.h **** 
  279:Inc/mc_math.h **** #define ATAN1DIV1     (int16_t)8192
  280:Inc/mc_math.h **** #define ATAN1DIV2     (int16_t)4836
-ARM GAS  /tmp/ccQ1O98r.s 			page 28
+ARM GAS  /tmp/ccLjXLyq.s 			page 28
 
 
  281:Inc/mc_math.h **** #define ATAN1DIV4     (int16_t)2555
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  422              		.loc 2 329 3 is_stmt 0 view .LVU175
  423 0142 DFF824E1 		ldr	lr, .L31+4
  424 0146 C7F800E0 		str	lr, [r7]
-ARM GAS  /tmp/ccQ1O98r.s 			page 29
+ARM GAS  /tmp/ccLjXLyq.s 			page 29
 
 
  425              	.LVL51:
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
   49:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_Exported_Constants CORDIC Exported Constants
   50:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
   51:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
-ARM GAS  /tmp/ccQ1O98r.s 			page 30
+ARM GAS  /tmp/ccLjXLyq.s 			page 30
 
 
   52:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  106:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                        | CORDIC_CSR_PRECISION_2 | CORDIC_CSR_PRECIS
  107:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_14CYCLES       ((uint32_t)(CORDIC_CSR_PRECISION_3\
  108:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****                                                        | CORDIC_CSR_PRECISION_2 | CORDIC_CSR_PRECIS
-ARM GAS  /tmp/ccQ1O98r.s 			page 31
+ARM GAS  /tmp/ccLjXLyq.s 			page 31
 
 
  109:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #define LL_CORDIC_PRECISION_15CYCLES       ((uint32_t)(CORDIC_CSR_PRECISION_3\
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  163:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
  164:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
  165:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
-ARM GAS  /tmp/ccQ1O98r.s 			page 32
+ARM GAS  /tmp/ccLjXLyq.s 			page 32
 
 
  166:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EC_OUTSIZE OUTSIZE
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  220:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
  221:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
  222:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /* Exported functions --------------------------------------------------------*/
-ARM GAS  /tmp/ccQ1O98r.s 			page 33
+ARM GAS  /tmp/ccLjXLyq.s 			page 33
 
 
  223:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  277:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_14CYCLES
  278:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_15CYCLES
  279:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  Scale parameter can be one of the following values:
-ARM GAS  /tmp/ccQ1O98r.s 			page 34
+ARM GAS  /tmp/ccLjXLyq.s 			page 34
 
 
  280:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_SCALE_0
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  334:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
  335:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Return function.
  336:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          FUNC          LL_CORDIC_GetFunction
-ARM GAS  /tmp/ccQ1O98r.s 			page 35
+ARM GAS  /tmp/ccLjXLyq.s 			page 35
 
 
  337:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  391:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_5CYCLES
  392:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_6CYCLES
  393:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_7CYCLES
-ARM GAS  /tmp/ccQ1O98r.s 			page 36
+ARM GAS  /tmp/ccLjXLyq.s 			page 36
 
 
  394:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_8CYCLES
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  448:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Configure number of 32-bit write expected for one calculation.
  449:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          NARGS         LL_CORDIC_SetNbWrite
  450:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
-ARM GAS  /tmp/ccQ1O98r.s 			page 37
+ARM GAS  /tmp/ccLjXLyq.s 			page 37
 
 
  451:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  NbWrite parameter can be one of the following values:
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  505:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  InSize parameter can be one of the following values:
  506:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_INSIZE_32BITS
  507:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_INSIZE_16BITS
-ARM GAS  /tmp/ccQ1O98r.s 			page 38
+ARM GAS  /tmp/ccLjXLyq.s 			page 38
 
 
  508:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  562:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
  563:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
  564:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Enable CORDIC result ready interrupt
-ARM GAS  /tmp/ccQ1O98r.s 			page 39
+ARM GAS  /tmp/ccLjXLyq.s 			page 39
 
 
  565:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          IEN           LL_CORDIC_EnableIT
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  619:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
  620:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
  621:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE void LL_CORDIC_DisableDMAReq_RD(CORDIC_TypeDef *CORDICx)
-ARM GAS  /tmp/ccQ1O98r.s 			page 40
+ARM GAS  /tmp/ccLjXLyq.s 			page 40
 
 
  622:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  676:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_DMA_REG_DATA_IN
  677:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_DMA_REG_DATA_OUT
  678:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval Address of data register
-ARM GAS  /tmp/ccQ1O98r.s 			page 41
+ARM GAS  /tmp/ccLjXLyq.s 			page 41
 
 
  679:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  430              		.loc 3 732 22 view .LVU177
  431              	.LBB21:
  733:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
-ARM GAS  /tmp/ccQ1O98r.s 			page 42
+ARM GAS  /tmp/ccLjXLyq.s 			page 42
 
 
  734:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   WRITE_REG(CORDICx->WDATA, InData);
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  467              	.LBE19:
  468              	.LBE18:
  350:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     hRotor_Acceleration = hOrRotor_Speed - hPrev_Rotor_Speed;
-ARM GAS  /tmp/ccQ1O98r.s 			page 43
+ARM GAS  /tmp/ccLjXLyq.s 			page 43
 
 
  469              		.loc 1 350 5 is_stmt 1 view .LVU193
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  399:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     }
  507              		.loc 1 399 22 view .LVU210
  508 017e 24B2     		sxth	r4, r4
-ARM GAS  /tmp/ccQ1O98r.s 			page 44
+ARM GAS  /tmp/ccLjXLyq.s 			page 44
 
 
  509              	.LVL61:
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  546 01a0 00EB4707 		add	r7, r0, r7, lsl #1
  547 01a4 B7F90680 		ldrsh	r8, [r7, #6]
  667:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
-ARM GAS  /tmp/ccQ1O98r.s 			page 45
+ARM GAS  /tmp/ccLjXLyq.s 			page 45
 
 
  548              		.loc 1 667 36 view .LVU228
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  583 01c4 09B0     		add	sp, sp, #36
  584              		.cfi_remember_state
  585              		.cfi_def_cfa_offset 36
-ARM GAS  /tmp/ccQ1O98r.s 			page 46
+ARM GAS  /tmp/ccLjXLyq.s 			page 46
 
 
  586              		@ sp needed
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  625              	.L13:
  221:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     {
  626              		.loc 1 221 10 is_stmt 1 view .LVU263
-ARM GAS  /tmp/ccQ1O98r.s 			page 47
+ARM GAS  /tmp/ccLjXLyq.s 			page 47
 
 
  221:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     {
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  665 0222 A8E7     		b	.L17
  666              	.LVL77:
  667              	.L18:
-ARM GAS  /tmp/ccQ1O98r.s 			page 48
+ARM GAS  /tmp/ccLjXLyq.s 			page 48
 
 
  371:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****         }
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  706              	.LVL86:
  353:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
  707              		.loc 1 353 18 view .LVU296
-ARM GAS  /tmp/ccQ1O98r.s 			page 49
+ARM GAS  /tmp/ccLjXLyq.s 			page 49
 
 
  708 0246 A446     		mov	ip, r4
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  751              	.LFE1438:
  753              		.section	.text.STO_CR_CalcAvrgMecSpeedUnit,"ax",%progbits
  754              		.align	1
-ARM GAS  /tmp/ccQ1O98r.s 			page 50
+ARM GAS  /tmp/ccLjXLyq.s 			page 50
 
 
  755              		.weak	STO_CR_CalcAvrgMecSpeedUnit
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  471:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
  796              		.loc 1 471 5 view .LVU322
  473:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     {
-ARM GAS  /tmp/ccQ1O98r.s 			page 51
+ARM GAS  /tmp/ccLjXLyq.s 			page 51
 
 
  797              		.loc 1 473 5 view .LVU323
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  834              		.loc 1 464 13 is_stmt 0 view .LVU340
  835 0026 0026     		movs	r6, #0
  492:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     {
-ARM GAS  /tmp/ccQ1O98r.s 			page 52
+ARM GAS  /tmp/ccLjXLyq.s 			page 52
 
 
  836              		.loc 1 492 12 view .LVU341
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  505:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     wAvrSquareSpeed = lAvrSquareSpeed / (int16_t)128;
  874              		.loc 1 505 5 is_stmt 1 view .LVU358
  505:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     wAvrSquareSpeed = lAvrSquareSpeed / (int16_t)128;
-ARM GAS  /tmp/ccQ1O98r.s 			page 53
+ARM GAS  /tmp/ccLjXLyq.s 			page 53
 
 
  875              		.loc 1 505 31 is_stmt 0 view .LVU359
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  519:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     wAux = wAux / (int32_t)(pHandle->_Super.DPPConvFactor);
  915              		.loc 1 519 5 is_stmt 1 view .LVU374
  519:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     wAux = wAux / (int32_t)(pHandle->_Super.DPPConvFactor);
-ARM GAS  /tmp/ccQ1O98r.s 			page 54
+ARM GAS  /tmp/ccLjXLyq.s 			page 54
 
 
  916              		.loc 1 519 45 is_stmt 0 view .LVU375
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  952              		.loc 1 533 7 is_stmt 1 view .LVU393
  533:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
  953              		.loc 1 533 12 is_stmt 0 view .LVU394
-ARM GAS  /tmp/ccQ1O98r.s 			page 55
+ARM GAS  /tmp/ccLjXLyq.s 			page 55
 
 
  954 009c 002B     		cmp	r3, #0
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  991              		.loc 1 545 51 is_stmt 0 view .LVU411
  992 00c6 90F87941 		ldrb	r4, [r0, #377]	@ zero_extendqisi2
  545:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****         wEstBemfSq *= wEstBemf;
-ARM GAS  /tmp/ccQ1O98r.s 			page 56
+ARM GAS  /tmp/ccLjXLyq.s 			page 56
 
 
  993              		.loc 1 545 32 view .LVU412
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1034 00fa 0125     		movs	r5, #1
  1035 00fc B9E7     		b	.L40
  1036              	.LVL134:
-ARM GAS  /tmp/ccQ1O98r.s 			page 57
+ARM GAS  /tmp/ccLjXLyq.s 			page 57
 
 
  1037              	.L56:
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  582:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****       {
  1075              		.loc 1 582 10 is_stmt 0 view .LVU442
  1076 0120 05B1     		cbz	r5, .L47
-ARM GAS  /tmp/ccQ1O98r.s 			page 58
+ARM GAS  /tmp/ccLjXLyq.s 			page 58
 
 
  582:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****       {
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1114 0148 0122     		movs	r2, #1
  1115 014a E6E7     		b	.L41
  1116              	.LVL143:
-ARM GAS  /tmp/ccQ1O98r.s 			page 59
+ARM GAS  /tmp/ccLjXLyq.s 			page 59
 
 
  1117              	.L58:
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1161              		@ frame_needed = 0, uses_anonymous_args = 0
  613:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #ifdef NULL_PTR_STO_COR_SPD_POS_FDB
  1162              		.loc 1 613 1 is_stmt 0 view .LVU472
-ARM GAS  /tmp/ccQ1O98r.s 			page 60
+ARM GAS  /tmp/ccLjXLyq.s 			page 60
 
 
  1163 0000 08B5     		push	{r3, lr}
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1197 001c 80F8CC20 		strb	r2, [r0, #204]
  632:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     pHandle->Obs_Bemf_Level = (int32_t)0;
  1198              		.loc 1 632 5 is_stmt 1 view .LVU493
-ARM GAS  /tmp/ccQ1O98r.s 			page 61
+ARM GAS  /tmp/ccLjXLyq.s 			page 61
 
 
  632:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     pHandle->Obs_Bemf_Level = (int32_t)0;
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1239              		.cfi_startproc
  1240              		@ args = 0, pretend = 0, frame = 0
  1241              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccQ1O98r.s 			page 62
+ARM GAS  /tmp/ccLjXLyq.s 			page 62
 
 
   89:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #ifdef NULL_PTR_STO_COR_SPD_POS_FDB
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  111:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****       wAux *= (int32_t)2;
  1279              		.loc 1 111 7 view .LVU527
  111:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****       wAux *= (int32_t)2;
-ARM GAS  /tmp/ccQ1O98r.s 			page 63
+ARM GAS  /tmp/ccLjXLyq.s 			page 63
 
 
  1280              		.loc 1 111 14 is_stmt 0 view .LVU528
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1318              		.loc 1 118 18 view .LVU544
  1319 0048 6185     		strh	r1, [r4, #42]	@ movhi
  120:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
-ARM GAS  /tmp/ccQ1O98r.s 			page 64
+ARM GAS  /tmp/ccLjXLyq.s 			page 64
 
 
  1320              		.loc 1 120 5 is_stmt 1 view .LVU545
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1353              		@ args = 0, pretend = 0, frame = 0
  1354              		@ frame_needed = 0, uses_anonymous_args = 0
  1355              		@ link register save eliminated.
-ARM GAS  /tmp/ccQ1O98r.s 			page 65
+ARM GAS  /tmp/ccLjXLyq.s 			page 65
 
 
  1356              		.loc 1 714 1 is_stmt 0 view .LVU551
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  743:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****       bAux = true;
  1382              		.loc 1 743 7 is_stmt 1 view .LVU567
  1383              	.LVL168:
-ARM GAS  /tmp/ccQ1O98r.s 			page 66
+ARM GAS  /tmp/ccLjXLyq.s 			page 66
 
 
  744:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****       pHandle->IsAlgorithmConverged = true;
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  789:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
  790:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****                 /*... for hConsistencyThreshold consecutive times... */
  791:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****                 if (pHandle->ConsistencyCounter >= pHandle->StartUpConsistThreshold)
-ARM GAS  /tmp/ccQ1O98r.s 			page 67
+ARM GAS  /tmp/ccLjXLyq.s 			page 67
 
 
  792:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****                 {
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  750:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
  1410              		.loc 1 750 13 is_stmt 0 view .LVU578
  1411 0024 01FB05F2 		mul	r2, r1, r5
-ARM GAS  /tmp/ccQ1O98r.s 			page 68
+ARM GAS  /tmp/ccLjXLyq.s 			page 68
 
 
  1412              	.LVL172:
@@ -4078,7 +4078,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  775:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****         hLowerThreshold = (int16_t)(wAux / (int32_t)16);
  1449              		.loc 1 775 14 view .LVU596
  1450 004a 02FB06F2 		mul	r2, r2, r6
-ARM GAS  /tmp/ccQ1O98r.s 			page 69
+ARM GAS  /tmp/ccLjXLyq.s 			page 69
 
 
  776:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
@@ -4138,7 +4138,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  791:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****                 {
  1488              		.loc 1 791 17 is_stmt 1 view .LVU614
  791:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****                 {
-ARM GAS  /tmp/ccQ1O98r.s 			page 70
+ARM GAS  /tmp/ccLjXLyq.s 			page 70
 
 
  1489              		.loc 1 791 59 is_stmt 0 view .LVU615
@@ -4198,7 +4198,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1528 009a CBE7     		b	.L73
  1529              	.LVL185:
  1530              	.L85:
-ARM GAS  /tmp/ccQ1O98r.s 			page 71
+ARM GAS  /tmp/ccLjXLyq.s 			page 71
 
 
  773:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
@@ -4258,7 +4258,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  816:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****         }
  1572              		.loc 1 816 39 view .LVU644
  1573 00be 83F8CA20 		strb	r2, [r3, #202]
-ARM GAS  /tmp/ccQ1O98r.s 			page 72
+ARM GAS  /tmp/ccLjXLyq.s 			page 72
 
 
  715:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #ifdef NULL_PTR_STO_COR_SPD_POS_FDB
@@ -4318,7 +4318,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  841:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   }
  842:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   else
  843:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   {
-ARM GAS  /tmp/ccQ1O98r.s 			page 73
+ARM GAS  /tmp/ccLjXLyq.s 			page 73
 
 
  844:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #endif
@@ -4378,7 +4378,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1651              		.loc 1 860 1 is_stmt 1 view -0
  1652              		.cfi_startproc
  1653              		@ args = 0, pretend = 0, frame = 8
-ARM GAS  /tmp/ccQ1O98r.s 			page 74
+ARM GAS  /tmp/ccLjXLyq.s 			page 74
 
 
  1654              		@ frame_needed = 0, uses_anonymous_args = 0
@@ -4438,7 +4438,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1681              		.loc 1 887 10 view .LVU676
  1682 001a 9AB2     		uxth	r2, r3
  1683 001c 62F30F00 		bfi	r0, r2, #0, #16
-ARM GAS  /tmp/ccQ1O98r.s 			page 75
+ARM GAS  /tmp/ccLjXLyq.s 			page 75
 
 
  1684 0020 1B0C     		lsrs	r3, r3, #16
@@ -4498,7 +4498,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1718              		.loc 1 909 11 view .LVU684
  1719 000a 1380     		strh	r3, [r2]	@ movhi
  910:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #ifdef NULL_PTR_STO_COR_SPD_POS_FDB
-ARM GAS  /tmp/ccQ1O98r.s 			page 76
+ARM GAS  /tmp/ccLjXLyq.s 			page 76
 
 
  911:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   }
@@ -4558,7 +4558,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1749              		.cfi_endproc
  1750              	.LFE1447:
  1752              		.section	.text.STO_CR_CalcAvrgElSpeedDpp,"ax",%progbits
-ARM GAS  /tmp/ccQ1O98r.s 			page 77
+ARM GAS  /tmp/ccLjXLyq.s 			page 77
 
 
  1753              		.align	1
@@ -4618,7 +4618,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  967:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     int32_t wSumOrig = pHandle->DppOrigBufferSum;
  1779              		.loc 1 967 5 is_stmt 1 view .LVU696
  1780              		.loc 1 967 13 is_stmt 0 view .LVU697
-ARM GAS  /tmp/ccQ1O98r.s 			page 78
+ARM GAS  /tmp/ccLjXLyq.s 			page 78
 
 
  1781 0006 D0F86451 		ldr	r5, [r0, #356]
@@ -4678,7 +4678,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1822 002e E41A     		subs	r4, r4, r3
  1823              	.LVL212:
  981:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****       wSumOrig = wSumOrig + pHandle->Orig_Speed_Buffer[hIndexNew] - pHandle->OrigSpeedBufferOldestE
-ARM GAS  /tmp/ccQ1O98r.s 			page 79
+ARM GAS  /tmp/ccLjXLyq.s 			page 79
 
 
  1824              		.loc 1 981 7 is_stmt 1 view .LVU719
@@ -4738,7 +4738,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1853              	.LVL217:
 1007:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #else
 1008:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     if (hSpeedBufferSizedpp != 0)
-ARM GAS  /tmp/ccQ1O98r.s 			page 80
+ARM GAS  /tmp/ccLjXLyq.s 			page 80
 
 
 1009:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     {
@@ -4798,7 +4798,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1884              		.loc 1 985 21 view .LVU744
  1885 0064 1BB2     		sxth	r3, r3
  1886              	.LVL222:
-ARM GAS  /tmp/ccQ1O98r.s 			page 81
+ARM GAS  /tmp/ccLjXLyq.s 			page 81
 
 
  987:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****       {
@@ -4858,7 +4858,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1924              		.loc 1 998 27 view .LVU761
  1925 008c 2A44     		add	r2, r2, r5
  998:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****     }
-ARM GAS  /tmp/ccQ1O98r.s 			page 82
+ARM GAS  /tmp/ccLjXLyq.s 			page 82
 
 
  1926              		.loc 1 998 95 view .LVU762
@@ -4918,7 +4918,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  1966              		.align	1
  1967              		.weak	STO_CR_GetObservedBemfLevel
  1968              		.syntax unified
-ARM GAS  /tmp/ccQ1O98r.s 			page 83
+ARM GAS  /tmp/ccLjXLyq.s 			page 83
 
 
  1969              		.thumb
@@ -4978,7 +4978,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  2004              		@ frame_needed = 0, uses_anonymous_args = 0
  2005              		@ link register save eliminated.
 1065:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** #ifdef NULL_PTR_STO_COR_SPD_POS_FDB
-ARM GAS  /tmp/ccQ1O98r.s 			page 84
+ARM GAS  /tmp/ccLjXLyq.s 			page 84
 
 
 1066:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c ****   if (NULL == pHandle)
@@ -5038,7 +5038,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  2036              		.cfi_endproc
  2037              	.LFE1452:
  2039              		.section	.text.STO_CR_IsSpeedReliable,"ax",%progbits
-ARM GAS  /tmp/ccQ1O98r.s 			page 85
+ARM GAS  /tmp/ccLjXLyq.s 			page 85
 
 
  2040              		.align	1
@@ -5098,7 +5098,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  2068              	.LFE1453:
  2070              		.section	.text.STO_CR_ForceConvergency1,"ax",%progbits
  2071              		.align	1
-ARM GAS  /tmp/ccQ1O98r.s 			page 86
+ARM GAS  /tmp/ccLjXLyq.s 			page 86
 
 
  2072              		.weak	STO_CR_ForceConvergency1
@@ -5158,7 +5158,7 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  2108              	.LVL244:
  2109              	.LFB1455:
 1140:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** 
-ARM GAS  /tmp/ccQ1O98r.s 			page 87
+ARM GAS  /tmp/ccLjXLyq.s 			page 87
 
 
 1141:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c **** /* @brief  It forces the state-observer to declare converged
@@ -5214,49 +5214,49 @@ ARM GAS  /tmp/ccQ1O98r.s 			page 1
  2141              		.file 15 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h"
  2142              		.file 16 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h"
  2143              		.file 17 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_cordic_speed_pos_fdbk.h"
-ARM GAS  /tmp/ccQ1O98r.s 			page 88
+ARM GAS  /tmp/ccLjXLyq.s 			page 88
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 sto_cordic_speed_pos_fdbk.c
-     /tmp/ccQ1O98r.s:18     .text.STO_CR_InitSpeedBuffer:0000000000000000 $t
-     /tmp/ccQ1O98r.s:25     .text.STO_CR_InitSpeedBuffer:0000000000000000 STO_CR_InitSpeedBuffer
-     /tmp/ccQ1O98r.s:95     .text.STO_CR_CalcElAngle:0000000000000000 $t
-     /tmp/ccQ1O98r.s:102    .text.STO_CR_CalcElAngle:0000000000000000 STO_CR_CalcElAngle
-     /tmp/ccQ1O98r.s:746    .text.STO_CR_CalcElAngle:0000000000000264 $d
-     /tmp/ccQ1O98r.s:754    .text.STO_CR_CalcAvrgMecSpeedUnit:0000000000000000 $t
-     /tmp/ccQ1O98r.s:761    .text.STO_CR_CalcAvrgMecSpeedUnit:0000000000000000 STO_CR_CalcAvrgMecSpeedUnit
-     /tmp/ccQ1O98r.s:1148   .text.STO_CR_Clear:0000000000000000 $t
-     /tmp/ccQ1O98r.s:1155   .text.STO_CR_Clear:0000000000000000 STO_CR_Clear
-     /tmp/ccQ1O98r.s:1228   .text.STO_CR_Init:0000000000000000 $t
-     /tmp/ccQ1O98r.s:1235   .text.STO_CR_Init:0000000000000000 STO_CR_Init
-     /tmp/ccQ1O98r.s:1335   .text.STO_CR_Init:0000000000000058 $d
-     /tmp/ccQ1O98r.s:1341   .text.STO_CR_IsObserverConverged:0000000000000000 $t
-     /tmp/ccQ1O98r.s:1348   .text.STO_CR_IsObserverConverged:0000000000000000 STO_CR_IsObserverConverged
-     /tmp/ccQ1O98r.s:1593   .text.STO_CR_GetEstimatedBemf:0000000000000000 $t
-     /tmp/ccQ1O98r.s:1600   .text.STO_CR_GetEstimatedBemf:0000000000000000 STO_CR_GetEstimatedBemf
-     /tmp/ccQ1O98r.s:1641   .text.STO_CR_GetEstimatedCurrent:0000000000000000 $t
-     /tmp/ccQ1O98r.s:1648   .text.STO_CR_GetEstimatedCurrent:0000000000000000 STO_CR_GetEstimatedCurrent
-     /tmp/ccQ1O98r.s:1695   .text.STO_CR_GetObserverGains:0000000000000000 $t
-     /tmp/ccQ1O98r.s:1702   .text.STO_CR_GetObserverGains:0000000000000000 STO_CR_GetObserverGains
-     /tmp/ccQ1O98r.s:1726   .text.STO_CR_SetObserverGains:0000000000000000 $t
-     /tmp/ccQ1O98r.s:1733   .text.STO_CR_SetObserverGains:0000000000000000 STO_CR_SetObserverGains
-     /tmp/ccQ1O98r.s:1753   .text.STO_CR_CalcAvrgElSpeedDpp:0000000000000000 $t
-     /tmp/ccQ1O98r.s:1760   .text.STO_CR_CalcAvrgElSpeedDpp:0000000000000000 STO_CR_CalcAvrgElSpeedDpp
-     /tmp/ccQ1O98r.s:1941   .text.STO_CR_GetEstimatedBemfLevel:0000000000000000 $t
-     /tmp/ccQ1O98r.s:1948   .text.STO_CR_GetEstimatedBemfLevel:0000000000000000 STO_CR_GetEstimatedBemfLevel
-     /tmp/ccQ1O98r.s:1966   .text.STO_CR_GetObservedBemfLevel:0000000000000000 $t
-     /tmp/ccQ1O98r.s:1973   .text.STO_CR_GetObservedBemfLevel:0000000000000000 STO_CR_GetObservedBemfLevel
-     /tmp/ccQ1O98r.s:1991   .text.STO_CR_BemfConsistencyCheckSwitch:0000000000000000 $t
-     /tmp/ccQ1O98r.s:1998   .text.STO_CR_BemfConsistencyCheckSwitch:0000000000000000 STO_CR_BemfConsistencyCheckSwitch
-     /tmp/ccQ1O98r.s:2015   .text.STO_CR_IsBemfConsistent:0000000000000000 $t
-     /tmp/ccQ1O98r.s:2022   .text.STO_CR_IsBemfConsistent:0000000000000000 STO_CR_IsBemfConsistent
-     /tmp/ccQ1O98r.s:2040   .text.STO_CR_IsSpeedReliable:0000000000000000 $t
-     /tmp/ccQ1O98r.s:2047   .text.STO_CR_IsSpeedReliable:0000000000000000 STO_CR_IsSpeedReliable
-     /tmp/ccQ1O98r.s:2071   .text.STO_CR_ForceConvergency1:0000000000000000 $t
-     /tmp/ccQ1O98r.s:2078   .text.STO_CR_ForceConvergency1:0000000000000000 STO_CR_ForceConvergency1
-     /tmp/ccQ1O98r.s:2100   .text.STO_CR_ForceConvergency2:0000000000000000 $t
-     /tmp/ccQ1O98r.s:2107   .text.STO_CR_ForceConvergency2:0000000000000000 STO_CR_ForceConvergency2
+     /tmp/ccLjXLyq.s:18     .text.STO_CR_InitSpeedBuffer:0000000000000000 $t
+     /tmp/ccLjXLyq.s:25     .text.STO_CR_InitSpeedBuffer:0000000000000000 STO_CR_InitSpeedBuffer
+     /tmp/ccLjXLyq.s:95     .text.STO_CR_CalcElAngle:0000000000000000 $t
+     /tmp/ccLjXLyq.s:102    .text.STO_CR_CalcElAngle:0000000000000000 STO_CR_CalcElAngle
+     /tmp/ccLjXLyq.s:746    .text.STO_CR_CalcElAngle:0000000000000264 $d
+     /tmp/ccLjXLyq.s:754    .text.STO_CR_CalcAvrgMecSpeedUnit:0000000000000000 $t
+     /tmp/ccLjXLyq.s:761    .text.STO_CR_CalcAvrgMecSpeedUnit:0000000000000000 STO_CR_CalcAvrgMecSpeedUnit
+     /tmp/ccLjXLyq.s:1148   .text.STO_CR_Clear:0000000000000000 $t
+     /tmp/ccLjXLyq.s:1155   .text.STO_CR_Clear:0000000000000000 STO_CR_Clear
+     /tmp/ccLjXLyq.s:1228   .text.STO_CR_Init:0000000000000000 $t
+     /tmp/ccLjXLyq.s:1235   .text.STO_CR_Init:0000000000000000 STO_CR_Init
+     /tmp/ccLjXLyq.s:1335   .text.STO_CR_Init:0000000000000058 $d
+     /tmp/ccLjXLyq.s:1341   .text.STO_CR_IsObserverConverged:0000000000000000 $t
+     /tmp/ccLjXLyq.s:1348   .text.STO_CR_IsObserverConverged:0000000000000000 STO_CR_IsObserverConverged
+     /tmp/ccLjXLyq.s:1593   .text.STO_CR_GetEstimatedBemf:0000000000000000 $t
+     /tmp/ccLjXLyq.s:1600   .text.STO_CR_GetEstimatedBemf:0000000000000000 STO_CR_GetEstimatedBemf
+     /tmp/ccLjXLyq.s:1641   .text.STO_CR_GetEstimatedCurrent:0000000000000000 $t
+     /tmp/ccLjXLyq.s:1648   .text.STO_CR_GetEstimatedCurrent:0000000000000000 STO_CR_GetEstimatedCurrent
+     /tmp/ccLjXLyq.s:1695   .text.STO_CR_GetObserverGains:0000000000000000 $t
+     /tmp/ccLjXLyq.s:1702   .text.STO_CR_GetObserverGains:0000000000000000 STO_CR_GetObserverGains
+     /tmp/ccLjXLyq.s:1726   .text.STO_CR_SetObserverGains:0000000000000000 $t
+     /tmp/ccLjXLyq.s:1733   .text.STO_CR_SetObserverGains:0000000000000000 STO_CR_SetObserverGains
+     /tmp/ccLjXLyq.s:1753   .text.STO_CR_CalcAvrgElSpeedDpp:0000000000000000 $t
+     /tmp/ccLjXLyq.s:1760   .text.STO_CR_CalcAvrgElSpeedDpp:0000000000000000 STO_CR_CalcAvrgElSpeedDpp
+     /tmp/ccLjXLyq.s:1941   .text.STO_CR_GetEstimatedBemfLevel:0000000000000000 $t
+     /tmp/ccLjXLyq.s:1948   .text.STO_CR_GetEstimatedBemfLevel:0000000000000000 STO_CR_GetEstimatedBemfLevel
+     /tmp/ccLjXLyq.s:1966   .text.STO_CR_GetObservedBemfLevel:0000000000000000 $t
+     /tmp/ccLjXLyq.s:1973   .text.STO_CR_GetObservedBemfLevel:0000000000000000 STO_CR_GetObservedBemfLevel
+     /tmp/ccLjXLyq.s:1991   .text.STO_CR_BemfConsistencyCheckSwitch:0000000000000000 $t
+     /tmp/ccLjXLyq.s:1998   .text.STO_CR_BemfConsistencyCheckSwitch:0000000000000000 STO_CR_BemfConsistencyCheckSwitch
+     /tmp/ccLjXLyq.s:2015   .text.STO_CR_IsBemfConsistent:0000000000000000 $t
+     /tmp/ccLjXLyq.s:2022   .text.STO_CR_IsBemfConsistent:0000000000000000 STO_CR_IsBemfConsistent
+     /tmp/ccLjXLyq.s:2040   .text.STO_CR_IsSpeedReliable:0000000000000000 $t
+     /tmp/ccLjXLyq.s:2047   .text.STO_CR_IsSpeedReliable:0000000000000000 STO_CR_IsSpeedReliable
+     /tmp/ccLjXLyq.s:2071   .text.STO_CR_ForceConvergency1:0000000000000000 $t
+     /tmp/ccLjXLyq.s:2078   .text.STO_CR_ForceConvergency1:0000000000000000 STO_CR_ForceConvergency1
+     /tmp/ccLjXLyq.s:2100   .text.STO_CR_ForceConvergency2:0000000000000000 $t
+     /tmp/ccLjXLyq.s:2107   .text.STO_CR_ForceConvergency2:0000000000000000 STO_CR_ForceConvergency2
 
 UNDEFINED SYMBOLS
 SPD_IsMecSpeedReliable

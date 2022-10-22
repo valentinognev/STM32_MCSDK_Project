@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccL6vaUJ.s 			page 1
+ARM GAS  /tmp/cc9Hewlw.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
   32              		@ args = 0, pretend = 0, frame = 0
   33              		@ frame_needed = 0, uses_anonymous_args = 0
   34              		@ link register save eliminated.
-ARM GAS  /tmp/ccL6vaUJ.s 			page 2
+ARM GAS  /tmp/cc9Hewlw.s 			page 2
 
 
   25:Src/mc_perf.c ****   uint8_t  i;
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
   75              		.loc 1 36 28 is_stmt 0 discriminator 3 view .LVU18
   76 0024 CA60     		str	r2, [r1, #12]
   37:Src/mc_perf.c ****     pHdl->min = UINT32_MAX;
-ARM GAS  /tmp/ccL6vaUJ.s 			page 3
+ARM GAS  /tmp/cc9Hewlw.s 			page 3
 
 
   77              		.loc 1 37 5 is_stmt 1 discriminator 3 view .LVU19
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
  118 0048 0370     		strb	r3, [r0]
   41:Src/mc_perf.c ****   pHandle->AccHighFreqTasksCnt = 0;
  119              		.loc 1 41 3 is_stmt 1 view .LVU37
-ARM GAS  /tmp/ccL6vaUJ.s 			page 4
+ARM GAS  /tmp/cc9Hewlw.s 			page 4
 
 
   41:Src/mc_perf.c ****   pHandle->AccHighFreqTasksCnt = 0;
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
  165              		.loc 1 52 28 is_stmt 0 discriminator 3 view .LVU49
  166 0008 00EB0311 		add	r1, r0, r3, lsl #4
  167 000c 0022     		movs	r2, #0
-ARM GAS  /tmp/ccL6vaUJ.s 			page 5
+ARM GAS  /tmp/cc9Hewlw.s 			page 5
 
 
  168 000e CA60     		str	r2, [r1, #12]
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
   61:Src/mc_perf.c ****  * @param  CodeSection: code section to measure
   62:Src/mc_perf.c ****  */
   63:Src/mc_perf.c **** void  MC_Perf_Measure_Start (MC_Perf_Handle_t *pHandle, uint8_t  CodeSection)
-ARM GAS  /tmp/ccL6vaUJ.s 			page 6
+ARM GAS  /tmp/cc9Hewlw.s 			page 6
 
 
   64:Src/mc_perf.c **** {
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
  255 0000 0123     		movs	r3, #1
  256 0002 0370     		strb	r3, [r0]
   77:Src/mc_perf.c ****   pHandle->AccHighFreqTasksCnt = 0;
-ARM GAS  /tmp/ccL6vaUJ.s 			page 7
+ARM GAS  /tmp/cc9Hewlw.s 			page 7
 
 
  257              		.loc 1 77 3 is_stmt 1 view .LVU71
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
   92:Src/mc_perf.c ****   StopMeasure = DWT->CYCCNT;
  299              		.loc 1 92 3 view .LVU82
  300              		.loc 1 92 15 is_stmt 0 view .LVU83
-ARM GAS  /tmp/ccL6vaUJ.s 			page 8
+ARM GAS  /tmp/cc9Hewlw.s 			page 8
 
 
  301 0000 184B     		ldr	r3, .L31
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
  337              		.loc 1 110 11 is_stmt 0 view .LVU99
  338 0028 4B1C     		adds	r3, r1, #1
  339 002a 00EB0313 		add	r3, r0, r3, lsl #4
-ARM GAS  /tmp/ccL6vaUJ.s 			page 9
+ARM GAS  /tmp/cc9Hewlw.s 			page 9
 
 
  340 002e 5A68     		ldr	r2, [r3, #4]
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
  388              	.L31:
  389 0064 001000E0 		.word	-536866816
  390              		.cfi_endproc
-ARM GAS  /tmp/ccL6vaUJ.s 			page 10
+ARM GAS  /tmp/cc9Hewlw.s 			page 10
 
 
  391              	.LFE1441:
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
  430 0010 9A42     		cmp	r2, r3
  431 0012 29D9     		bls	.L34
  131:Src/mc_perf.c ****   {
-ARM GAS  /tmp/ccL6vaUJ.s 			page 11
+ARM GAS  /tmp/cc9Hewlw.s 			page 11
 
 
  132:Src/mc_perf.c ****     pHdl->DeltaTimeInCycle = (UINT32_MAX - pHdl->StartMeasure) + StopMeasure;
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
  144:Src/mc_perf.c ****   if (pHdl->min > pHdl->DeltaTimeInCycle) { pHdl->min = pHdl->DeltaTimeInCycle; }
  474              		.loc 1 144 3 is_stmt 1 view .LVU143
  475              		.loc 1 144 11 is_stmt 0 view .LVU144
-ARM GAS  /tmp/ccL6vaUJ.s 			page 12
+ARM GAS  /tmp/cc9Hewlw.s 			page 12
 
 
  476 004c 4B1C     		adds	r3, r1, #1
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
  527              	MC_Perf_GetCPU_Load:
  528              	.LVL33:
  529              	.LFB1443:
-ARM GAS  /tmp/ccL6vaUJ.s 			page 13
+ARM GAS  /tmp/cc9Hewlw.s 			page 13
 
 
  147:Src/mc_perf.c **** 
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
  568              		.loc 1 162 1 view .LVU171
  569 003c 7047     		bx	lr
  570              	.L44:
-ARM GAS  /tmp/ccL6vaUJ.s 			page 14
+ARM GAS  /tmp/cc9Hewlw.s 			page 14
 
 
  571 003e 00BF     		.align	2
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
  614 0020 90ED057A 		vldr.32	s14, [r0, #20]	@ int
  615              		.loc 1 175 20 view .LVU182
  616 0024 B8EE477A 		vcvt.f32.u32	s14, s14
-ARM GAS  /tmp/ccL6vaUJ.s 			page 15
+ARM GAS  /tmp/cc9Hewlw.s 			page 15
 
 
  617              		.loc 1 175 88 view .LVU183
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
  190:Src/mc_perf.c ****   MFT_cpu_load = (((float)pHandle->MC_Perf_TraceLog[MEASURE_TSK_MediumFrequencyTaskM1].min / SYSCLK
  659              		.loc 1 190 3 view .LVU192
  660              		.loc 1 190 20 is_stmt 0 view .LVU193
-ARM GAS  /tmp/ccL6vaUJ.s 			page 16
+ARM GAS  /tmp/cc9Hewlw.s 			page 16
 
 
  661 0000 D0ED087A 		vldr.32	s15, [r0, #32]	@ int
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
  705 004a F9E7     		b	.L49
  706              	.L53:
  707              		.align	2
-ARM GAS  /tmp/ccL6vaUJ.s 			page 17
+ARM GAS  /tmp/cc9Hewlw.s 			page 17
 
 
  708              	.L52:
@@ -981,36 +981,36 @@ ARM GAS  /tmp/ccL6vaUJ.s 			page 1
  726              		.file 9 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h"
  727              		.file 10 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h"
  728              		.file 11 "Inc/mc_perf.h"
-ARM GAS  /tmp/ccL6vaUJ.s 			page 18
+ARM GAS  /tmp/cc9Hewlw.s 			page 18
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 mc_perf.c
-     /tmp/ccL6vaUJ.s:18     .text.MC_Perf_Measure_Init:0000000000000000 $t
-     /tmp/ccL6vaUJ.s:26     .text.MC_Perf_Measure_Init:0000000000000000 MC_Perf_Measure_Init
-     /tmp/ccL6vaUJ.s:126    .text.MC_Perf_Measure_Init:0000000000000050 $d
-     /tmp/ccL6vaUJ.s:131    .text.MC_Perf_Clear:0000000000000000 $t
-     /tmp/ccL6vaUJ.s:138    .text.MC_Perf_Clear:0000000000000000 MC_Perf_Clear
-     /tmp/ccL6vaUJ.s:202    .text.MC_Perf_Measure_Start:0000000000000000 $t
-     /tmp/ccL6vaUJ.s:209    .text.MC_Perf_Measure_Start:0000000000000000 MC_Perf_Measure_Start
-     /tmp/ccL6vaUJ.s:233    .text.MC_Perf_Measure_Start:000000000000000c $d
-     /tmp/ccL6vaUJ.s:238    .text.MC_BG_Perf_Measure_Start:0000000000000000 $t
-     /tmp/ccL6vaUJ.s:245    .text.MC_BG_Perf_Measure_Start:0000000000000000 MC_BG_Perf_Measure_Start
-     /tmp/ccL6vaUJ.s:277    .text.MC_BG_Perf_Measure_Start:0000000000000014 $d
-     /tmp/ccL6vaUJ.s:282    .text.MC_Perf_Measure_Stop:0000000000000000 $t
-     /tmp/ccL6vaUJ.s:289    .text.MC_Perf_Measure_Stop:0000000000000000 MC_Perf_Measure_Stop
-     /tmp/ccL6vaUJ.s:389    .text.MC_Perf_Measure_Stop:0000000000000064 $d
-     /tmp/ccL6vaUJ.s:394    .text.MC_BG_Perf_Measure_Stop:0000000000000000 $t
-     /tmp/ccL6vaUJ.s:401    .text.MC_BG_Perf_Measure_Stop:0000000000000000 MC_BG_Perf_Measure_Stop
-     /tmp/ccL6vaUJ.s:515    .text.MC_BG_Perf_Measure_Stop:0000000000000074 $d
-     /tmp/ccL6vaUJ.s:520    .text.MC_Perf_GetCPU_Load:0000000000000000 $t
-     /tmp/ccL6vaUJ.s:527    .text.MC_Perf_GetCPU_Load:0000000000000000 MC_Perf_GetCPU_Load
-     /tmp/ccL6vaUJ.s:573    .text.MC_Perf_GetCPU_Load:0000000000000040 $d
-     /tmp/ccL6vaUJ.s:581    .text.MC_Perf_GetMaxCPU_Load:0000000000000000 $t
-     /tmp/ccL6vaUJ.s:588    .text.MC_Perf_GetMaxCPU_Load:0000000000000000 MC_Perf_GetMaxCPU_Load
-     /tmp/ccL6vaUJ.s:634    .text.MC_Perf_GetMaxCPU_Load:0000000000000040 $d
-     /tmp/ccL6vaUJ.s:642    .text.MC_Perf_GetMinCPU_Load:0000000000000000 $t
-     /tmp/ccL6vaUJ.s:649    .text.MC_Perf_GetMinCPU_Load:0000000000000000 MC_Perf_GetMinCPU_Load
-     /tmp/ccL6vaUJ.s:709    .text.MC_Perf_GetMinCPU_Load:000000000000004c $d
+     /tmp/cc9Hewlw.s:18     .text.MC_Perf_Measure_Init:0000000000000000 $t
+     /tmp/cc9Hewlw.s:26     .text.MC_Perf_Measure_Init:0000000000000000 MC_Perf_Measure_Init
+     /tmp/cc9Hewlw.s:126    .text.MC_Perf_Measure_Init:0000000000000050 $d
+     /tmp/cc9Hewlw.s:131    .text.MC_Perf_Clear:0000000000000000 $t
+     /tmp/cc9Hewlw.s:138    .text.MC_Perf_Clear:0000000000000000 MC_Perf_Clear
+     /tmp/cc9Hewlw.s:202    .text.MC_Perf_Measure_Start:0000000000000000 $t
+     /tmp/cc9Hewlw.s:209    .text.MC_Perf_Measure_Start:0000000000000000 MC_Perf_Measure_Start
+     /tmp/cc9Hewlw.s:233    .text.MC_Perf_Measure_Start:000000000000000c $d
+     /tmp/cc9Hewlw.s:238    .text.MC_BG_Perf_Measure_Start:0000000000000000 $t
+     /tmp/cc9Hewlw.s:245    .text.MC_BG_Perf_Measure_Start:0000000000000000 MC_BG_Perf_Measure_Start
+     /tmp/cc9Hewlw.s:277    .text.MC_BG_Perf_Measure_Start:0000000000000014 $d
+     /tmp/cc9Hewlw.s:282    .text.MC_Perf_Measure_Stop:0000000000000000 $t
+     /tmp/cc9Hewlw.s:289    .text.MC_Perf_Measure_Stop:0000000000000000 MC_Perf_Measure_Stop
+     /tmp/cc9Hewlw.s:389    .text.MC_Perf_Measure_Stop:0000000000000064 $d
+     /tmp/cc9Hewlw.s:394    .text.MC_BG_Perf_Measure_Stop:0000000000000000 $t
+     /tmp/cc9Hewlw.s:401    .text.MC_BG_Perf_Measure_Stop:0000000000000000 MC_BG_Perf_Measure_Stop
+     /tmp/cc9Hewlw.s:515    .text.MC_BG_Perf_Measure_Stop:0000000000000074 $d
+     /tmp/cc9Hewlw.s:520    .text.MC_Perf_GetCPU_Load:0000000000000000 $t
+     /tmp/cc9Hewlw.s:527    .text.MC_Perf_GetCPU_Load:0000000000000000 MC_Perf_GetCPU_Load
+     /tmp/cc9Hewlw.s:573    .text.MC_Perf_GetCPU_Load:0000000000000040 $d
+     /tmp/cc9Hewlw.s:581    .text.MC_Perf_GetMaxCPU_Load:0000000000000000 $t
+     /tmp/cc9Hewlw.s:588    .text.MC_Perf_GetMaxCPU_Load:0000000000000000 MC_Perf_GetMaxCPU_Load
+     /tmp/cc9Hewlw.s:634    .text.MC_Perf_GetMaxCPU_Load:0000000000000040 $d
+     /tmp/cc9Hewlw.s:642    .text.MC_Perf_GetMinCPU_Load:0000000000000000 $t
+     /tmp/cc9Hewlw.s:649    .text.MC_Perf_GetMinCPU_Load:0000000000000000 MC_Perf_GetMinCPU_Load
+     /tmp/cc9Hewlw.s:709    .text.MC_Perf_GetMinCPU_Load:000000000000004c $d
 
 NO UNDEFINED SYMBOLS

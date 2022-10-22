@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccuRjOod.s 			page 1
+ARM GAS  /tmp/cc47mRH9.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
   27:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   *    derived from this software without specific written permission.
   28:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   * 4. This software, including modifications and/or derivative works of this
   29:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   *    software, must execute solely and exclusively on microcontroller or
-ARM GAS  /tmp/ccuRjOod.s 			page 2
+ARM GAS  /tmp/cc47mRH9.s 			page 2
 
 
   30:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   *    microprocessor devices manufactured by or for STMicroelectronics.
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
   84:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** #define RUC_OTF_PLL_RESET_TIMEOUT 100u
   85:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** 
   86:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** /* Private functions ----------------------------------------------------------*/
-ARM GAS  /tmp/ccuRjOod.s 			page 3
+ARM GAS  /tmp/cc47mRH9.s 			page 3
 
 
   87:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** int16_t RUC_GetPhaseFinalMecSpeed01Hz(RevUpCtrl_Handle_t *pHandle, uint8_t bPhase);
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
   55 000c 019B     		ldr	r3, [sp, #4]
   56              	.LVL2:
   57              		.loc 1 115 19 view .LVU13
-ARM GAS  /tmp/ccuRjOod.s 			page 4
+ARM GAS  /tmp/cc47mRH9.s 			page 4
 
 
   58 000e 4367     		str	r3, [r0, #116]
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
   95              		.loc 1 132 46 view .LVU31
   96 002c 02EB4202 		add	r2, r2, r2, lsl #1
   97 0030 00EB8202 		add	r2, r0, r2, lsl #2
-ARM GAS  /tmp/ccuRjOod.s 			page 5
+ARM GAS  /tmp/cc47mRH9.s 			page 5
 
 
   98 0034 0021     		movs	r1, #0
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  145              	RUC_Clear:
  146              	.LVL13:
  147              	.LFB1436:
-ARM GAS  /tmp/ccuRjOod.s 			page 6
+ARM GAS  /tmp/cc47mRH9.s 			page 6
 
 
  142:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** 
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  178 0012 80F85560 		strb	r6, [r0, #85]
  166:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** 
  167:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****     /*Initializes the rev up stages counter.*/
-ARM GAS  /tmp/ccuRjOod.s 			page 7
+ARM GAS  /tmp/cc47mRH9.s 			page 7
 
 
  168:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****     pHandle->bStageCnt = 0U;
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  184:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****     /* Gives the first command to STC and VSS.*/
  185:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****     (void)STC_ExecRamp(pSTC, pPhaseParams->hFinalTorque * hMotorDirection, (uint32_t)(pPhaseParams-
  217              		.loc 1 185 5 is_stmt 1 view .LVU70
-ARM GAS  /tmp/ccuRjOod.s 			page 8
+ARM GAS  /tmp/cc47mRH9.s 			page 8
 
 
  218              		.loc 1 185 42 is_stmt 0 view .LVU71
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  259 0082 A360     		str	r3, [r4, #8]
  198:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** 
  199:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****     /*Timeout counter for PLL reset during OTF.*/
-ARM GAS  /tmp/ccuRjOod.s 			page 9
+ARM GAS  /tmp/cc47mRH9.s 			page 9
 
 
  200:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****     pHandle->bResetPLLCnt = 0U;
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  215:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** #ifdef NULL_PTR_REV_UP_CTL
  216:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   if (MC_NULL == pHandle)
  217:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   {
-ARM GAS  /tmp/ccuRjOod.s 			page 10
+ARM GAS  /tmp/cc47mRH9.s 			page 10
 
 
  218:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****     /* Nothing to do */
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  334              		.loc 1 238 20 is_stmt 0 view .LVU114
  335 002a 94F85730 		ldrb	r3, [r4, #87]	@ zero_extendqisi2
  336              		.loc 1 238 34 view .LVU115
-ARM GAS  /tmp/ccuRjOod.s 			page 11
+ARM GAS  /tmp/cc47mRH9.s 			page 11
 
 
  337 002e 0133     		adds	r3, r3, #1
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  253:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****               pHandle->bOTFRelCounter++;
  377              		.loc 1 253 15 is_stmt 1 view .LVU135
  378              		.loc 1 253 38 is_stmt 0 view .LVU136
-ARM GAS  /tmp/ccuRjOod.s 			page 12
+ARM GAS  /tmp/cc47mRH9.s 			page 12
 
 
  379 005c 0133     		adds	r3, r3, #1
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  407              		.loc 1 279 13 view .LVU148
  408              		.loc 1 279 37 is_stmt 0 view .LVU149
  409 007e 1868     		ldr	r0, [r3]
-ARM GAS  /tmp/ccuRjOod.s 			page 13
+ARM GAS  /tmp/cc47mRH9.s 			page 13
 
 
  410              	.LVL30:
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  437              		.loc 1 305 62 is_stmt 0 view .LVU160
  438 009e B4F84A30 		ldrh	r3, [r4, #74]
  439              		.loc 1 305 18 view .LVU161
-ARM GAS  /tmp/ccuRjOod.s 			page 14
+ARM GAS  /tmp/cc47mRH9.s 			page 14
 
 
  440 00a2 9A42     		cmp	r2, r3
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  311:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****               else if ((uint16_t)(hObsSpeedUnitAbsValue) > pHandle->hMinStartUpFlySpeed)
  482              		.loc 1 311 20 is_stmt 1 view .LVU176
  483              		.loc 1 311 67 is_stmt 0 view .LVU177
-ARM GAS  /tmp/ccuRjOod.s 			page 15
+ARM GAS  /tmp/cc47mRH9.s 			page 15
 
 
  484 00ca B4F84C30 		ldrh	r3, [r4, #76]
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  328:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****                 else
  329:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****                 {
  330:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****                   while (pHandle->pCurrentPhaseParams->hFinalMecSpeedUnit < hObsSpeedUnitAbsValue)
-ARM GAS  /tmp/ccuRjOod.s 			page 16
+ARM GAS  /tmp/cc47mRH9.s 			page 16
 
 
  520              		.loc 1 330 25 is_stmt 1 view .LVU195
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  326:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****                 }
  555              		.loc 1 326 49 is_stmt 0 view .LVU213
  556 010a 0020     		movs	r0, #0
-ARM GAS  /tmp/ccuRjOod.s 			page 17
+ARM GAS  /tmp/cc47mRH9.s 			page 17
 
 
  557 010c A080     		strh	r0, [r4, #4]	@ movhi
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  359:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** 
  360:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****                   if ((int32_t)0 == wDeltaSpeedRevUp)
  592              		.loc 1 360 19 is_stmt 1 view .LVU230
-ARM GAS  /tmp/ccuRjOod.s 			page 18
+ARM GAS  /tmp/cc47mRH9.s 			page 18
 
 
  593              		.loc 1 360 22 is_stmt 0 view .LVU231
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  369:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****                   }
  626              		.loc 1 369 62 is_stmt 0 view .LVU245
  627 014c E388     		ldrh	r3, [r4, #6]
-ARM GAS  /tmp/ccuRjOod.s 			page 19
+ARM GAS  /tmp/cc47mRH9.s 			page 19
 
 
  628              	.LVL57:
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  660              		.loc 1 392 5 is_stmt 1 view .LVU256
  661              		.loc 1 392 22 is_stmt 0 view .LVU257
  662 0164 A388     		ldrh	r3, [r4, #4]
-ARM GAS  /tmp/ccuRjOod.s 			page 20
+ARM GAS  /tmp/cc47mRH9.s 			page 20
 
 
  663              		.loc 1 392 8 view .LVU258
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  694 0186 09B2     		sxth	r1, r1
  695 0188 A06E     		ldr	r0, [r4, #104]
  696 018a FFF7FEFF 		bl	STC_ExecRamp
-ARM GAS  /tmp/ccuRjOod.s 			page 21
+ARM GAS  /tmp/cc47mRH9.s 			page 21
 
 
  697              	.LVL65:
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  429:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** 
  430:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****         /*Increases the rev up stages counter.*/
  431:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****         pHandle->bStageCnt++;
-ARM GAS  /tmp/ccuRjOod.s 			page 22
+ARM GAS  /tmp/cc47mRH9.s 			page 22
 
 
  736              		.loc 1 431 9 is_stmt 1 view .LVU292
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  776 01f4 94F85820 		ldrb	r2, [r4, #88]	@ zero_extendqisi2
  777              		.loc 1 435 43 view .LVU307
  778 01f8 94F84830 		ldrb	r3, [r4, #72]	@ zero_extendqisi2
-ARM GAS  /tmp/ccuRjOod.s 			page 23
+ARM GAS  /tmp/cc47mRH9.s 			page 23
 
 
  779              		.loc 1 435 55 view .LVU308
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  811              	.LVL71:
  812              	.L36:
  437:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****         }
-ARM GAS  /tmp/ccuRjOod.s 			page 24
+ARM GAS  /tmp/cc47mRH9.s 			page 24
 
 
  813              		.loc 1 437 18 view .LVU322
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  473:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****     {
  474:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****       /* Decrease the hPhaseRemainingTicks.*/
  475:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****       pHandle->hPhaseRemainingTicks--;
-ARM GAS  /tmp/ccuRjOod.s 			page 25
+ARM GAS  /tmp/cc47mRH9.s 			page 25
 
 
  851              		.loc 1 475 7 is_stmt 1 view .LVU329
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  890              		.loc 1 488 9 view .LVU348
  891 0030 1A88     		ldrh	r2, [r3]
  892 0032 09B2     		sxth	r1, r1
-ARM GAS  /tmp/ccuRjOod.s 			page 26
+ARM GAS  /tmp/cc47mRH9.s 			page 26
 
 
  893 0034 E06E     		ldr	r0, [r4, #108]
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  932              	.LVL78:
  933              	.L49:
  502:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****       }
-ARM GAS  /tmp/ccuRjOod.s 			page 27
+ARM GAS  /tmp/cc47mRH9.s 			page 27
 
 
  503:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****       else
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  523:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   {
  524:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** #endif
  525:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****     hRetVal = pHandle->ParamsData[bPhase].hFinalMecSpeedUnit;
-ARM GAS  /tmp/ccuRjOod.s 			page 28
+ARM GAS  /tmp/cc47mRH9.s 			page 28
 
 
  968              		.loc 1 525 5 view .LVU372
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  544:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   }
  545:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   else
  546:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   {
-ARM GAS  /tmp/ccuRjOod.s 			page 29
+ARM GAS  /tmp/cc47mRH9.s 			page 29
 
 
  547:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** #endif
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  563:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   *  @retval Boolean set to true when entire revup phases have been completed.
  564:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   */
  565:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** __weak bool RUC_Completed(RevUpCtrl_Handle_t *pHandle)
-ARM GAS  /tmp/ccuRjOod.s 			page 30
+ARM GAS  /tmp/cc47mRH9.s 			page 30
 
 
  566:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** {
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  1078              	RUC_Stop:
  1079              	.LVL95:
  1080              	.LFB1442:
-ARM GAS  /tmp/ccuRjOod.s 			page 31
+ARM GAS  /tmp/cc47mRH9.s 			page 31
 
 
  585:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** 
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  606:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   }
  607:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** #endif
  608:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** }
-ARM GAS  /tmp/ccuRjOod.s 			page 32
+ARM GAS  /tmp/cc47mRH9.s 			page 32
 
 
  1114              		.loc 1 608 1 view .LVU411
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  1144 000a 01D2     		bcs	.L67
  625:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   bool retVal = false;
  1145              		.loc 1 625 8 view .LVU419
-ARM GAS  /tmp/ccuRjOod.s 			page 33
+ARM GAS  /tmp/cc47mRH9.s 			page 33
 
 
  1146 000c 0020     		movs	r0, #0
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  659:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   }
  660:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   else
  661:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   {
-ARM GAS  /tmp/ccuRjOod.s 			page 34
+ARM GAS  /tmp/cc47mRH9.s 			page 34
 
 
  662:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** #endif
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  1206              		.loc 1 688 52 is_stmt 0 view .LVU431
  1207 0000 01EB4101 		add	r1, r1, r1, lsl #1
  1208              	.LVL107:
-ARM GAS  /tmp/ccuRjOod.s 			page 35
+ARM GAS  /tmp/cc47mRH9.s 			page 35
 
 
  1209              		.loc 1 688 52 view .LVU432
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  714:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   }
  715:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** #endif
  716:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** }
-ARM GAS  /tmp/ccuRjOod.s 			page 36
+ARM GAS  /tmp/cc47mRH9.s 			page 36
 
 
  1240              		.loc 1 716 1 view .LVU438
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  1277              		.loc 1 735 57 view .LVU447
  1278 0014 DC81     		strh	r4, [r3, #14]	@ movhi
  736:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****     pHandle->ParamsData[phaseNumber].hDurationms = phaseData->hDurationms;
-ARM GAS  /tmp/ccuRjOod.s 			page 37
+ARM GAS  /tmp/cc47mRH9.s 			page 37
 
 
  1279              		.loc 1 736 5 is_stmt 1 view .LVU448
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  1316              		.loc 1 755 3 view .LVU456
  1317              		.loc 1 755 11 is_stmt 0 view .LVU457
  1318 0000 01EB4101 		add	r1, r1, r1, lsl #1
-ARM GAS  /tmp/ccuRjOod.s 			page 38
+ARM GAS  /tmp/cc47mRH9.s 			page 38
 
 
  1319              	.LVL115:
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  1357              		.cfi_endproc
  1358              	.LFE1449:
  1360              		.section	.text.RUC_GetPhaseFinalTorque,"ax",%progbits
-ARM GAS  /tmp/ccuRjOod.s 			page 39
+ARM GAS  /tmp/cc47mRH9.s 			page 39
 
 
  1361              		.align	1
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  791:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** /**
  792:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   * @brief  Allow to read total number of programmed phases.
  793:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   * @param  pHandle: Pointer on Handle structure of RevUp controller.
-ARM GAS  /tmp/ccuRjOod.s 			page 40
+ARM GAS  /tmp/cc47mRH9.s 			page 40
 
 
  794:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   *  @retval Returns number of phases relative to the programmed revup.
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  814:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   if ((MC_NULL == pHandle) || (MC_NULL == phaseData))
  815:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   {
  816:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****     retValue = false;
-ARM GAS  /tmp/ccuRjOod.s 			page 41
+ARM GAS  /tmp/cc47mRH9.s 			page 41
 
 
  817:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   }
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  829:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** 
  830:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c **** /**
  831:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   * @brief  Allow to read status of On The Fly (OTF) feature.
-ARM GAS  /tmp/ccuRjOod.s 			page 42
+ARM GAS  /tmp/cc47mRH9.s 			page 42
 
 
  832:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c ****   * @param  pHandle: Pointer on Handle structure of RevUp controller.
@@ -2504,53 +2504,53 @@ ARM GAS  /tmp/ccuRjOod.s 			page 1
  1511              		.file 16 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h"
  1512              		.file 17 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h"
  1513              		.file 18 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/revup_ctrl.h"
-ARM GAS  /tmp/ccuRjOod.s 			page 43
+ARM GAS  /tmp/cc47mRH9.s 			page 43
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 revup_ctrl.c
-     /tmp/ccuRjOod.s:18     .text.RUC_Init:0000000000000000 $t
-     /tmp/ccuRjOod.s:26     .text.RUC_Init:0000000000000000 RUC_Init
-     /tmp/ccuRjOod.s:133    .text.RUC_Init:0000000000000058 $d
-     /tmp/ccuRjOod.s:138    .text.RUC_Clear:0000000000000000 $t
-     /tmp/ccuRjOod.s:145    .text.RUC_Clear:0000000000000000 RUC_Clear
-     /tmp/ccuRjOod.s:270    .text.RUC_Clear:000000000000008c $d
-     /tmp/ccuRjOod.s:275    .text.RUC_OTF_Exec:0000000000000000 $t
-     /tmp/ccuRjOod.s:282    .text.RUC_OTF_Exec:0000000000000000 RUC_OTF_Exec
-     /tmp/ccuRjOod.s:819    .text.RUC_OTF_Exec:0000000000000220 $d
-     /tmp/ccuRjOod.s:824    .text.RUC_Exec:0000000000000000 $t
-     /tmp/ccuRjOod.s:831    .text.RUC_Exec:0000000000000000 RUC_Exec
-     /tmp/ccuRjOod.s:947    .text.RUC_Exec:000000000000006c $d
-     /tmp/ccuRjOod.s:952    .text.RUC_GetPhaseFinalMecSpeed01Hz:0000000000000000 $t
-     /tmp/ccuRjOod.s:959    .text.RUC_GetPhaseFinalMecSpeed01Hz:0000000000000000 RUC_GetPhaseFinalMecSpeed01Hz
-     /tmp/ccuRjOod.s:985    .text.RUC_IsAlignStageNow:0000000000000000 $t
-     /tmp/ccuRjOod.s:992    .text.RUC_IsAlignStageNow:0000000000000000 RUC_IsAlignStageNow
-     /tmp/ccuRjOod.s:1033   .text.RUC_Completed:0000000000000000 $t
-     /tmp/ccuRjOod.s:1040   .text.RUC_Completed:0000000000000000 RUC_Completed
-     /tmp/ccuRjOod.s:1071   .text.RUC_Stop:0000000000000000 $t
-     /tmp/ccuRjOod.s:1078   .text.RUC_Stop:0000000000000000 RUC_Stop
-     /tmp/ccuRjOod.s:1121   .text.RUC_FirstAccelerationStageReached:0000000000000000 $t
-     /tmp/ccuRjOod.s:1128   .text.RUC_FirstAccelerationStageReached:0000000000000000 RUC_FirstAccelerationStageReached
-     /tmp/ccuRjOod.s:1162   .text.RUC_SetPhaseDurationms:0000000000000000 $t
-     /tmp/ccuRjOod.s:1169   .text.RUC_SetPhaseDurationms:0000000000000000 RUC_SetPhaseDurationms
-     /tmp/ccuRjOod.s:1190   .text.RUC_SetPhaseFinalMecSpeedUnit:0000000000000000 $t
-     /tmp/ccuRjOod.s:1197   .text.RUC_SetPhaseFinalMecSpeedUnit:0000000000000000 RUC_SetPhaseFinalMecSpeedUnit
-     /tmp/ccuRjOod.s:1218   .text.RUC_SetPhaseFinalTorque:0000000000000000 $t
-     /tmp/ccuRjOod.s:1225   .text.RUC_SetPhaseFinalTorque:0000000000000000 RUC_SetPhaseFinalTorque
-     /tmp/ccuRjOod.s:1246   .text.RUC_SetPhase:0000000000000000 $t
-     /tmp/ccuRjOod.s:1253   .text.RUC_SetPhase:0000000000000000 RUC_SetPhase
-     /tmp/ccuRjOod.s:1301   .text.RUC_GetPhaseDurationms:0000000000000000 $t
-     /tmp/ccuRjOod.s:1308   .text.RUC_GetPhaseDurationms:0000000000000000 RUC_GetPhaseDurationms
-     /tmp/ccuRjOod.s:1331   .text.RUC_GetPhaseFinalMecSpeedUnit:0000000000000000 $t
-     /tmp/ccuRjOod.s:1338   .text.RUC_GetPhaseFinalMecSpeedUnit:0000000000000000 RUC_GetPhaseFinalMecSpeedUnit
-     /tmp/ccuRjOod.s:1361   .text.RUC_GetPhaseFinalTorque:0000000000000000 $t
-     /tmp/ccuRjOod.s:1368   .text.RUC_GetPhaseFinalTorque:0000000000000000 RUC_GetPhaseFinalTorque
-     /tmp/ccuRjOod.s:1391   .text.RUC_GetNumberOfPhases:0000000000000000 $t
-     /tmp/ccuRjOod.s:1398   .text.RUC_GetNumberOfPhases:0000000000000000 RUC_GetNumberOfPhases
-     /tmp/ccuRjOod.s:1416   .text.RUC_GetPhase:0000000000000000 $t
-     /tmp/ccuRjOod.s:1423   .text.RUC_GetPhase:0000000000000000 RUC_GetPhase
-     /tmp/ccuRjOod.s:1471   .text.RUC_Get_SCLowsideOTF_Status:0000000000000000 $t
-     /tmp/ccuRjOod.s:1478   .text.RUC_Get_SCLowsideOTF_Status:0000000000000000 RUC_Get_SCLowsideOTF_Status
+     /tmp/cc47mRH9.s:18     .text.RUC_Init:0000000000000000 $t
+     /tmp/cc47mRH9.s:26     .text.RUC_Init:0000000000000000 RUC_Init
+     /tmp/cc47mRH9.s:133    .text.RUC_Init:0000000000000058 $d
+     /tmp/cc47mRH9.s:138    .text.RUC_Clear:0000000000000000 $t
+     /tmp/cc47mRH9.s:145    .text.RUC_Clear:0000000000000000 RUC_Clear
+     /tmp/cc47mRH9.s:270    .text.RUC_Clear:000000000000008c $d
+     /tmp/cc47mRH9.s:275    .text.RUC_OTF_Exec:0000000000000000 $t
+     /tmp/cc47mRH9.s:282    .text.RUC_OTF_Exec:0000000000000000 RUC_OTF_Exec
+     /tmp/cc47mRH9.s:819    .text.RUC_OTF_Exec:0000000000000220 $d
+     /tmp/cc47mRH9.s:824    .text.RUC_Exec:0000000000000000 $t
+     /tmp/cc47mRH9.s:831    .text.RUC_Exec:0000000000000000 RUC_Exec
+     /tmp/cc47mRH9.s:947    .text.RUC_Exec:000000000000006c $d
+     /tmp/cc47mRH9.s:952    .text.RUC_GetPhaseFinalMecSpeed01Hz:0000000000000000 $t
+     /tmp/cc47mRH9.s:959    .text.RUC_GetPhaseFinalMecSpeed01Hz:0000000000000000 RUC_GetPhaseFinalMecSpeed01Hz
+     /tmp/cc47mRH9.s:985    .text.RUC_IsAlignStageNow:0000000000000000 $t
+     /tmp/cc47mRH9.s:992    .text.RUC_IsAlignStageNow:0000000000000000 RUC_IsAlignStageNow
+     /tmp/cc47mRH9.s:1033   .text.RUC_Completed:0000000000000000 $t
+     /tmp/cc47mRH9.s:1040   .text.RUC_Completed:0000000000000000 RUC_Completed
+     /tmp/cc47mRH9.s:1071   .text.RUC_Stop:0000000000000000 $t
+     /tmp/cc47mRH9.s:1078   .text.RUC_Stop:0000000000000000 RUC_Stop
+     /tmp/cc47mRH9.s:1121   .text.RUC_FirstAccelerationStageReached:0000000000000000 $t
+     /tmp/cc47mRH9.s:1128   .text.RUC_FirstAccelerationStageReached:0000000000000000 RUC_FirstAccelerationStageReached
+     /tmp/cc47mRH9.s:1162   .text.RUC_SetPhaseDurationms:0000000000000000 $t
+     /tmp/cc47mRH9.s:1169   .text.RUC_SetPhaseDurationms:0000000000000000 RUC_SetPhaseDurationms
+     /tmp/cc47mRH9.s:1190   .text.RUC_SetPhaseFinalMecSpeedUnit:0000000000000000 $t
+     /tmp/cc47mRH9.s:1197   .text.RUC_SetPhaseFinalMecSpeedUnit:0000000000000000 RUC_SetPhaseFinalMecSpeedUnit
+     /tmp/cc47mRH9.s:1218   .text.RUC_SetPhaseFinalTorque:0000000000000000 $t
+     /tmp/cc47mRH9.s:1225   .text.RUC_SetPhaseFinalTorque:0000000000000000 RUC_SetPhaseFinalTorque
+     /tmp/cc47mRH9.s:1246   .text.RUC_SetPhase:0000000000000000 $t
+     /tmp/cc47mRH9.s:1253   .text.RUC_SetPhase:0000000000000000 RUC_SetPhase
+     /tmp/cc47mRH9.s:1301   .text.RUC_GetPhaseDurationms:0000000000000000 $t
+     /tmp/cc47mRH9.s:1308   .text.RUC_GetPhaseDurationms:0000000000000000 RUC_GetPhaseDurationms
+     /tmp/cc47mRH9.s:1331   .text.RUC_GetPhaseFinalMecSpeedUnit:0000000000000000 $t
+     /tmp/cc47mRH9.s:1338   .text.RUC_GetPhaseFinalMecSpeedUnit:0000000000000000 RUC_GetPhaseFinalMecSpeedUnit
+     /tmp/cc47mRH9.s:1361   .text.RUC_GetPhaseFinalTorque:0000000000000000 $t
+     /tmp/cc47mRH9.s:1368   .text.RUC_GetPhaseFinalTorque:0000000000000000 RUC_GetPhaseFinalTorque
+     /tmp/cc47mRH9.s:1391   .text.RUC_GetNumberOfPhases:0000000000000000 $t
+     /tmp/cc47mRH9.s:1398   .text.RUC_GetNumberOfPhases:0000000000000000 RUC_GetNumberOfPhases
+     /tmp/cc47mRH9.s:1416   .text.RUC_GetPhase:0000000000000000 $t
+     /tmp/cc47mRH9.s:1423   .text.RUC_GetPhase:0000000000000000 RUC_GetPhase
+     /tmp/cc47mRH9.s:1471   .text.RUC_Get_SCLowsideOTF_Status:0000000000000000 $t
+     /tmp/cc47mRH9.s:1478   .text.RUC_Get_SCLowsideOTF_Status:0000000000000000 RUC_Get_SCLowsideOTF_Status
 
 UNDEFINED SYMBOLS
 VSS_Clear

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccPxECkd.s 			page 1
+ARM GAS  /tmp/ccNxYV96.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
   27:Src/usart_aspep_driver.c **** void UASPEP_DAMCONFIG_TX(UASPEP_Handle_t *pHandle);
   28:Src/usart_aspep_driver.c **** void UASPEP_DAMCONFIG_RX(UASPEP_Handle_t *pHandle);
   29:Src/usart_aspep_driver.c **** 
-ARM GAS  /tmp/ccPxECkd.s 			page 2
+ARM GAS  /tmp/ccNxYV96.s 			page 2
 
 
   30:Src/usart_aspep_driver.c **** void UASPEP_INIT(void *pHWHandle)
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
   21:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** #define STM32G4xx_LL_USART_H
   22:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
   23:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** #ifdef __cplusplus
-ARM GAS  /tmp/ccPxECkd.s 			page 3
+ARM GAS  /tmp/ccNxYV96.s 			page 3
 
 
   24:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** extern "C" {
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
   78:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /** @defgroup USART_LL_ES_INIT USART Exported Init structures
   79:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @{
   80:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
-ARM GAS  /tmp/ccPxECkd.s 			page 4
+ARM GAS  /tmp/ccNxYV96.s 			page 4
 
 
   81:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  135:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
  136:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
  137:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief LL USART Clock Init Structure definition
-ARM GAS  /tmp/ccPxECkd.s 			page 5
+ARM GAS  /tmp/ccNxYV96.s 			page 5
 
 
  138:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  192:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** #define LL_USART_ICR_TCCF                       USART_ICR_TCCF                /*!< Transmission com
  193:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** #define LL_USART_ICR_TCBGTCF                    USART_ICR_TCBGTCF             /*!< Transmission com
  194:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** #define LL_USART_ICR_LBDCF                      USART_ICR_LBDCF               /*!< LIN break detect
-ARM GAS  /tmp/ccPxECkd.s 			page 6
+ARM GAS  /tmp/ccNxYV96.s 			page 6
 
 
  195:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** #define LL_USART_ICR_CTSCF                      USART_ICR_CTSCF               /*!< CTS clear flag *
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  249:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** #define LL_USART_CR1_PEIE                       USART_CR1_PEIE                /*!< Parity error */
  250:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** #define LL_USART_CR1_CMIE                       USART_CR1_CMIE                /*!< Character match 
  251:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** #define LL_USART_CR1_RTOIE                      USART_CR1_RTOIE               /*!< Receiver timeout
-ARM GAS  /tmp/ccPxECkd.s 			page 7
+ARM GAS  /tmp/ccNxYV96.s 			page 7
 
 
  252:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** #define LL_USART_CR1_EOBIE                      USART_CR1_EOBIE               /*!< End of Block int
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  306:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @}
  307:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
  308:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
-ARM GAS  /tmp/ccPxECkd.s 			page 8
+ARM GAS  /tmp/ccNxYV96.s 			page 8
 
 
  309:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /** @defgroup USART_LL_EC_DATAWIDTH Datawidth
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  363:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
  364:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @}
  365:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
-ARM GAS  /tmp/ccPxECkd.s 			page 9
+ARM GAS  /tmp/ccNxYV96.s 			page 9
 
 
  366:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  420:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
  421:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @}
  422:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
-ARM GAS  /tmp/ccPxECkd.s 			page 10
+ARM GAS  /tmp/ccNxYV96.s 			page 10
 
 
  423:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  477:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** #define LL_USART_WAKEUP_ON_STARTBIT             USART_CR3_WUS_1                         /*!< Wake u
  478:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** #define LL_USART_WAKEUP_ON_RXNE                 (USART_CR3_WUS_0 | USART_CR3_WUS_1)     /*!< Wake u
  479:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
-ARM GAS  /tmp/ccPxECkd.s 			page 11
+ARM GAS  /tmp/ccNxYV96.s 			page 11
 
 
  480:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @}
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  534:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  __INSTANCE__ USART Instance
  535:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  __REG__ Register to be written
  536:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  __VALUE__ Value to be written in the register
-ARM GAS  /tmp/ccPxECkd.s 			page 12
+ARM GAS  /tmp/ccNxYV96.s 			page 12
 
 
  537:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval None
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  591:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_PRESCALER_DIV12
  592:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_PRESCALER_DIV16
  593:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_PRESCALER_DIV32
-ARM GAS  /tmp/ccPxECkd.s 			page 13
+ARM GAS  /tmp/ccNxYV96.s 			page 13
 
 
  594:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_PRESCALER_DIV64
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  648:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Indicate if USART is enabled
  649:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR1          UE            LL_USART_IsEnabled
  650:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
-ARM GAS  /tmp/ccPxECkd.s 			page 14
+ARM GAS  /tmp/ccNxYV96.s 			page 14
 
 
  651:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval State of bit (1 or 0).
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  705:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_FIFOTHRESHOLD_1_4
  706:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_FIFOTHRESHOLD_1_2
  707:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_FIFOTHRESHOLD_3_4
-ARM GAS  /tmp/ccPxECkd.s 			page 15
+ARM GAS  /tmp/ccNxYV96.s 			page 15
 
 
  708:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_FIFOTHRESHOLD_7_8
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  762:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval Returned value can be one of the following values:
  763:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_FIFOTHRESHOLD_1_8
  764:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_FIFOTHRESHOLD_1_4
-ARM GAS  /tmp/ccPxECkd.s 			page 16
+ARM GAS  /tmp/ccNxYV96.s 			page 16
 
 
  765:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_FIFOTHRESHOLD_1_2
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  819:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
  820:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  USART disabled in STOP Mode.
  821:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   When this function is disabled, USART is not able to wake up the MCU from Stop mode
-ARM GAS  /tmp/ccPxECkd.s 			page 17
+ARM GAS  /tmp/ccNxYV96.s 			page 17
 
 
  822:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   Macro IS_UART_WAKEUP_FROMSTOP_INSTANCE(USARTx) can be used to check whether or not
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  876:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   ATOMIC_SET_BIT(USARTx->CR1, USART_CR1_TE);
  877:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
  878:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
-ARM GAS  /tmp/ccPxECkd.s 			page 18
+ARM GAS  /tmp/ccNxYV96.s 			page 18
 
 
  879:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  933:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_PARITY_NONE
  934:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_PARITY_EVEN
  935:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_PARITY_ODD
-ARM GAS  /tmp/ccPxECkd.s 			page 19
+ARM GAS  /tmp/ccNxYV96.s 			page 19
 
 
  936:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval None
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  990:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  DataWidth This parameter can be one of the following values:
  991:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_DATAWIDTH_7B
  992:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_DATAWIDTH_8B
-ARM GAS  /tmp/ccPxECkd.s 			page 20
+ARM GAS  /tmp/ccNxYV96.s 			page 20
 
 
  993:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_DATAWIDTH_9B
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1047:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
 1048:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
 1049:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
-ARM GAS  /tmp/ccPxECkd.s 			page 21
+ARM GAS  /tmp/ccNxYV96.s 			page 21
 
 
 1050:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Set Oversampling to 8-bit or 16-bit mode
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1104:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
 1105:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   return (uint32_t)(READ_BIT(USARTx->CR2, USART_CR2_LBCL));
 1106:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
-ARM GAS  /tmp/ccPxECkd.s 			page 22
+ARM GAS  /tmp/ccNxYV96.s 			page 22
 
 
 1107:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1161:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval Returned value can be one of the following values:
 1162:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_POLARITY_LOW
 1163:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_POLARITY_HIGH
-ARM GAS  /tmp/ccPxECkd.s 			page 23
+ARM GAS  /tmp/ccNxYV96.s 			page 23
 
 
 1164:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1218:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
 1219:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** __STATIC_INLINE void LL_USART_SetPrescaler(USART_TypeDef *USARTx, uint32_t PrescalerValue)
 1220:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
-ARM GAS  /tmp/ccPxECkd.s 			page 24
+ARM GAS  /tmp/ccNxYV96.s 			page 24
 
 
 1221:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   MODIFY_REG(USARTx->PRESC, USART_PRESC_PRESCALER, (uint16_t)PrescalerValue);
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1275:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
 1276:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Indicate if Clock output on SCLK pin is enabled
 1277:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   Macro IS_USART_INSTANCE(USARTx) can be used to check whether or not
-ARM GAS  /tmp/ccPxECkd.s 			page 25
+ARM GAS  /tmp/ccNxYV96.s 			page 25
 
 
 1278:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         Synchronous mode is supported by the USARTx instance.
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1332:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_DATAWIDTH_7B
 1333:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_DATAWIDTH_8B
 1334:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_DATAWIDTH_9B
-ARM GAS  /tmp/ccPxECkd.s 			page 26
+ARM GAS  /tmp/ccNxYV96.s 			page 26
 
 
 1335:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  Parity This parameter can be one of the following values:
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1389:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** __STATIC_INLINE void LL_USART_SetRXPinLevel(USART_TypeDef *USARTx, uint32_t PinInvMethod)
 1390:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
 1391:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   MODIFY_REG(USARTx->CR2, USART_CR2_RXINV, PinInvMethod);
-ARM GAS  /tmp/ccPxECkd.s 			page 27
+ARM GAS  /tmp/ccNxYV96.s 			page 27
 
 
 1392:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1446:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
 1447:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   MODIFY_REG(USARTx->CR2, USART_CR2_DATAINV, DataLogic);
 1448:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
-ARM GAS  /tmp/ccPxECkd.s 			page 28
+ARM GAS  /tmp/ccNxYV96.s 			page 28
 
 
 1449:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1503:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
 1504:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   SET_BIT(USARTx->CR2, USART_CR2_ABREN);
 1505:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
-ARM GAS  /tmp/ccPxECkd.s 			page 29
+ARM GAS  /tmp/ccNxYV96.s 			page 29
 
 
 1506:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1560:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_AUTOBAUD_DETECT_ON_7F_FRAME
 1561:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_AUTOBAUD_DETECT_ON_55_FRAME
 1562:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
-ARM GAS  /tmp/ccPxECkd.s 			page 30
+ARM GAS  /tmp/ccNxYV96.s 			page 30
 
 
 1563:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** __STATIC_INLINE uint32_t LL_USART_GetAutoBaudRateMode(USART_TypeDef *USARTx)
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1617:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
 1618:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  AddressLen This parameter can be one of the following values:
 1619:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_ADDRESS_DETECT_4B
-ARM GAS  /tmp/ccPxECkd.s 			page 31
+ARM GAS  /tmp/ccNxYV96.s 			page 31
 
 
 1620:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_ADDRESS_DETECT_7B
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1674:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         Hardware Flow control feature is supported by the USARTx instance.
 1675:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR3          RTSE          LL_USART_DisableRTSHWFlowCtrl
 1676:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
-ARM GAS  /tmp/ccPxECkd.s 			page 32
+ARM GAS  /tmp/ccNxYV96.s 			page 32
 
 
 1677:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval None
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1731:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   Macro IS_UART_HWFLOW_INSTANCE(USARTx) can be used to check whether or not
 1732:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         Hardware Flow control feature is supported by the USARTx instance.
 1733:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR3          RTSE          LL_USART_GetHWFlowCtrl\n
-ARM GAS  /tmp/ccPxECkd.s 			page 33
+ARM GAS  /tmp/ccNxYV96.s 			page 33
 
 
 1734:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         CR3          CTSE          LL_USART_GetHWFlowCtrl
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1788:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   CLEAR_BIT(USARTx->CR3, USART_CR3_OVRDIS);
 1789:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
 1790:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
-ARM GAS  /tmp/ccPxECkd.s 			page 34
+ARM GAS  /tmp/ccNxYV96.s 			page 34
 
 
 1791:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1845:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
 1846:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
 1847:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Configure USART BRR register for achieving expected Baud Rate value.
-ARM GAS  /tmp/ccPxECkd.s 			page 35
+ARM GAS  /tmp/ccNxYV96.s 			page 35
 
 
 1848:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   Compute and set USARTDIV value in BRR Register (full BRR content)
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1902:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
 1903:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
 1904:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Return current Baud Rate value, according to USARTDIV present in BRR register
-ARM GAS  /tmp/ccPxECkd.s 			page 36
+ARM GAS  /tmp/ccNxYV96.s 			page 36
 
 
 1905:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         (full BRR content), and to used Peripheral Clock and Oversampling mode values
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1959:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
 1960:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
 1961:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Set Receiver Time Out Value (expressed in nb of bits duration)
-ARM GAS  /tmp/ccPxECkd.s 			page 37
+ARM GAS  /tmp/ccNxYV96.s 			page 37
 
 
 1962:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll RTOR         RTO           LL_USART_SetRxTimeout
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2016:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   Macro IS_IRDA_INSTANCE(USARTx) can be used to check whether or not
 2017:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         IrDA feature is supported by the USARTx instance.
 2018:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR3          IREN          LL_USART_EnableIrda
-ARM GAS  /tmp/ccPxECkd.s 			page 38
+ARM GAS  /tmp/ccNxYV96.s 			page 38
 
 
 2019:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2073:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR3          IRLP          LL_USART_GetIrdaPowerMode
 2074:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
 2075:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval Returned value can be one of the following values:
-ARM GAS  /tmp/ccPxECkd.s 			page 39
+ARM GAS  /tmp/ccNxYV96.s 			page 39
 
 
 2076:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         @arg @ref LL_USART_IRDA_POWER_NORMAL
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2130:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
 2131:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   SET_BIT(USARTx->CR3, USART_CR3_NACK);
 2132:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
-ARM GAS  /tmp/ccPxECkd.s 			page 40
+ARM GAS  /tmp/ccNxYV96.s 			page 40
 
 
 2133:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2187:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Indicate if Smartcard mode is enabled
 2188:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   Macro IS_SMARTCARD_INSTANCE(USARTx) can be used to check whether or not
 2189:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         Smartcard feature is supported by the USARTx instance.
-ARM GAS  /tmp/ccPxECkd.s 			page 41
+ARM GAS  /tmp/ccNxYV96.s 			page 41
 
 
 2190:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR3          SCEN          LL_USART_IsEnabledSmartcard
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2244:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
 2245:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
 2246:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
-ARM GAS  /tmp/ccPxECkd.s 			page 42
+ARM GAS  /tmp/ccNxYV96.s 			page 42
 
 
 2247:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Return Smartcard prescaler value, used for dividing the USART clock
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2301:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR3          HDSEL         LL_USART_EnableHalfDuplex
 2302:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
 2303:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval None
-ARM GAS  /tmp/ccPxECkd.s 			page 43
+ARM GAS  /tmp/ccNxYV96.s 			page 43
 
 
 2304:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2358:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   Macro IS_UART_SPI_SLAVE_INSTANCE(USARTx) can be used to check whether or not
 2359:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         SPI Slave mode feature is supported by the USARTx instance.
 2360:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR2          SLVEN         LL_USART_DisableSPISlave
-ARM GAS  /tmp/ccPxECkd.s 			page 44
+ARM GAS  /tmp/ccNxYV96.s 			page 44
 
 
 2361:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2415:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR2          DIS_NSS       LL_USART_IsEnabledSPISlaveSelect
 2416:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
 2417:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval State of bit (1 or 0).
-ARM GAS  /tmp/ccPxECkd.s 			page 45
+ARM GAS  /tmp/ccNxYV96.s 			page 45
 
 
 2418:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2472:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
 2473:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   SET_BIT(USARTx->CR2, USART_CR2_LINEN);
 2474:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
-ARM GAS  /tmp/ccPxECkd.s 			page 46
+ARM GAS  /tmp/ccNxYV96.s 			page 46
 
 
 2475:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2529:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
 2530:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval Time value expressed on 5 bits ([4:0] bits) : Value between Min_Data=0 and Max_Data=31
 2531:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
-ARM GAS  /tmp/ccPxECkd.s 			page 47
+ARM GAS  /tmp/ccNxYV96.s 			page 47
 
 
 2532:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** __STATIC_INLINE uint32_t LL_USART_GetDEDeassertionTime(USART_TypeDef *USARTx)
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2586:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
 2587:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   CLEAR_BIT(USARTx->CR3, USART_CR3_DEM);
 2588:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
-ARM GAS  /tmp/ccPxECkd.s 			page 48
+ARM GAS  /tmp/ccNxYV96.s 			page 48
 
 
 2589:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2643:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Perform basic configuration of USART for enabling use in Asynchronous Mode (UART)
 2644:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   In UART mode, the following bits must be kept cleared:
 2645:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *           - LINEN bit in the USART_CR2 register,
-ARM GAS  /tmp/ccPxECkd.s 			page 49
+ARM GAS  /tmp/ccNxYV96.s 			page 49
 
 
 2646:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *           - CLKEN bit in the USART_CR2 register,
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2700:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         CR3          HDSEL         LL_USART_ConfigSyncMode
 2701:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
 2702:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval None
-ARM GAS  /tmp/ccPxECkd.s 			page 50
+ARM GAS  /tmp/ccNxYV96.s 			page 50
 
 
 2703:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2757:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
 2758:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Perform basic configuration of USART for enabling use in Half Duplex Mode
 2759:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   In Half Duplex mode, the following bits must be kept cleared:
-ARM GAS  /tmp/ccPxECkd.s 			page 51
+ARM GAS  /tmp/ccNxYV96.s 			page 51
 
 
 2760:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *           - LINEN bit in the USART_CR2 register,
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2814:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   Other remaining configurations items related to Smartcard Mode
 2815:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         (as Baud Rate, Word length, Parity, ...) should be set using
 2816:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         dedicated functions
-ARM GAS  /tmp/ccPxECkd.s 			page 52
+ARM GAS  /tmp/ccNxYV96.s 			page 52
 
 
 2817:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR2          LINEN         LL_USART_ConfigSmartcardMode\n
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2871:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   /* In IRDA mode, the following bits must be kept cleared:
 2872:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   - LINEN, STOP and CLKEN bits in the USART_CR2 register,
 2873:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   - SCEN and HDSEL bits in the USART_CR3 register.
-ARM GAS  /tmp/ccPxECkd.s 			page 53
+ARM GAS  /tmp/ccNxYV96.s 			page 53
 
 
 2874:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2928:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll ISR          PE            LL_USART_IsActiveFlag_PE
 2929:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
 2930:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval State of bit (1 or 0).
-ARM GAS  /tmp/ccPxECkd.s 			page 54
+ARM GAS  /tmp/ccNxYV96.s 			page 54
 
 
 2931:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2985:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Check if the USART Read Data Register or USART RX FIFO Not Empty Flag is set or not
 2986:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   Macro IS_UART_FIFO_INSTANCE(USARTx) can be used to check whether or not
 2987:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         FIFO mode feature is supported by the USARTx instance.
-ARM GAS  /tmp/ccPxECkd.s 			page 55
+ARM GAS  /tmp/ccNxYV96.s 			page 55
 
 
 2988:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll ISR          RXNE_RXFNE    LL_USART_IsActiveFlag_RXNE_RXFNE
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3042:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
 3043:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval State of bit (1 or 0).
 3044:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
-ARM GAS  /tmp/ccPxECkd.s 			page 56
+ARM GAS  /tmp/ccNxYV96.s 			page 56
 
 
 3045:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** __STATIC_INLINE uint32_t LL_USART_IsActiveFlag_nCTS(USART_TypeDef *USARTx)
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3099:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
 3100:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
 3101:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Check if the USART Auto-Baud Rate Error Flag is set or not
-ARM GAS  /tmp/ccPxECkd.s 			page 57
+ARM GAS  /tmp/ccNxYV96.s 			page 57
 
 
 3102:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   Macro IS_USART_AUTOBAUDRATE_DETECTION_INSTANCE(USARTx) can be used to check whether or 
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3156:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   return ((READ_BIT(USARTx->ISR, USART_ISR_SBKF) == (USART_ISR_SBKF)) ? 1UL : 0UL);
 3157:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
 3158:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
-ARM GAS  /tmp/ccPxECkd.s 			page 58
+ARM GAS  /tmp/ccNxYV96.s 			page 58
 
 
 3159:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3213:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** __STATIC_INLINE uint32_t LL_USART_IsActiveFlag_TXFE(USART_TypeDef *USARTx)
 3214:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
 3215:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   return ((READ_BIT(USARTx->ISR, USART_ISR_TXFE) == (USART_ISR_TXFE)) ? 1UL : 0UL);
-ARM GAS  /tmp/ccPxECkd.s 			page 59
+ARM GAS  /tmp/ccNxYV96.s 			page 59
 
 
 3216:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3270:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll ICR          PECF          LL_USART_ClearFlag_PE
 3271:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
 3272:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval None
-ARM GAS  /tmp/ccPxECkd.s 			page 60
+ARM GAS  /tmp/ccNxYV96.s 			page 60
 
 
 3273:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3327:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll ICR          TXFECF        LL_USART_ClearFlag_TXFE
 3328:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
 3329:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval None
-ARM GAS  /tmp/ccPxECkd.s 			page 61
+ARM GAS  /tmp/ccNxYV96.s 			page 61
 
 
 3330:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3369:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
 3370:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
 3371:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
-ARM GAS  /tmp/ccPxECkd.s 			page 62
+ARM GAS  /tmp/ccNxYV96.s 			page 62
 
 
 3372:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Clear CTS Interrupt Flag
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3426:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
 3427:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** __STATIC_INLINE void LL_USART_ClearFlag_CM(USART_TypeDef *USARTx)
 3428:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
-ARM GAS  /tmp/ccPxECkd.s 			page 63
+ARM GAS  /tmp/ccNxYV96.s 			page 63
 
 
 3429:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   WRITE_REG(USARTx->ICR, USART_ICR_CMCF);
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3483:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
 3484:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval None
 3485:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
-ARM GAS  /tmp/ccPxECkd.s 			page 64
+ARM GAS  /tmp/ccNxYV96.s 			page 64
 
 
 3486:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** __STATIC_INLINE void LL_USART_EnableIT_TC(USART_TypeDef *USARTx)
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
   40:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __ASM
   41:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __ASM                                  __asm
   42:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/ccPxECkd.s 			page 65
+ARM GAS  /tmp/ccNxYV96.s 			page 65
 
 
   43:Drivers/CMSIS/Include/cmsis_gcc.h **** #ifndef   __INLINE
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
   97:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
   98:Drivers/CMSIS/Include/cmsis_gcc.h ****   __PACKED_STRUCT T_UINT32_WRITE { uint32_t v; };
   99:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic pop
-ARM GAS  /tmp/ccPxECkd.s 			page 66
+ARM GAS  /tmp/ccNxYV96.s 			page 66
 
 
  100:Drivers/CMSIS/Include/cmsis_gcc.h ****   #define __UNALIGNED_UINT32_WRITE(addr, val)    (void)((((struct T_UINT32_WRITE *)(void *)(addr))-
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  154:Drivers/CMSIS/Include/cmsis_gcc.h ****     }
  155:Drivers/CMSIS/Include/cmsis_gcc.h ****   }
  156:Drivers/CMSIS/Include/cmsis_gcc.h ****  
-ARM GAS  /tmp/ccPxECkd.s 			page 67
+ARM GAS  /tmp/ccNxYV96.s 			page 67
 
 
  157:Drivers/CMSIS/Include/cmsis_gcc.h ****   for (__zero_table_t const* pTable = &__zero_table_start__; pTable < &__zero_table_end__; ++pTable
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  211:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  212:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  213:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/ccPxECkd.s 			page 68
+ARM GAS  /tmp/ccNxYV96.s 			page 68
 
 
  214:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Control Register
@@ -4078,7 +4078,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  268:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get IPSR Register
  269:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the content of the IPSR Register.
  270:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               IPSR Register value
-ARM GAS  /tmp/ccPxECkd.s 			page 69
+ARM GAS  /tmp/ccNxYV96.s 			page 69
 
 
  271:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
@@ -4138,7 +4138,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  325:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Get Process Stack Pointer (non-secure)
  326:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Returns the current value of the non-secure Process Stack Pointer (PSP) when in secure s
  327:Drivers/CMSIS/Include/cmsis_gcc.h ****   \return               PSP Register value
-ARM GAS  /tmp/ccPxECkd.s 			page 70
+ARM GAS  /tmp/ccNxYV96.s 			page 70
 
 
  328:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
@@ -4198,7 +4198,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  382:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  383:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE uint32_t __TZ_get_MSP_NS(void)
  384:Drivers/CMSIS/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/ccPxECkd.s 			page 71
+ARM GAS  /tmp/ccNxYV96.s 			page 71
 
 
  385:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
@@ -4258,7 +4258,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  439:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MSR sp_ns, %0" : : "r" (topOfStack) : );
  440:Drivers/CMSIS/Include/cmsis_gcc.h **** }
  441:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/ccPxECkd.s 			page 72
+ARM GAS  /tmp/ccNxYV96.s 			page 72
 
 
  442:Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -4318,7 +4318,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  496:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  497:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  498:Drivers/CMSIS/Include/cmsis_gcc.h **** #if ((defined (__ARM_ARCH_7M__      ) && (__ARM_ARCH_7M__      == 1)) || \
-ARM GAS  /tmp/ccPxECkd.s 			page 73
+ARM GAS  /tmp/ccNxYV96.s 			page 73
 
 
  499:Drivers/CMSIS/Include/cmsis_gcc.h ****      (defined (__ARM_ARCH_7EM__     ) && (__ARM_ARCH_7EM__     == 1)) || \
@@ -4378,7 +4378,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  553:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
  554:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Base Priority
  555:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Assigns the given value to the Base Priority register.
-ARM GAS  /tmp/ccPxECkd.s 			page 74
+ARM GAS  /tmp/ccNxYV96.s 			page 74
 
 
  556:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    basePri  Base Priority value to set
@@ -4438,7 +4438,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  610:Drivers/CMSIS/Include/cmsis_gcc.h **** {
  611:Drivers/CMSIS/Include/cmsis_gcc.h ****   uint32_t result;
  612:Drivers/CMSIS/Include/cmsis_gcc.h **** 
-ARM GAS  /tmp/ccPxECkd.s 			page 75
+ARM GAS  /tmp/ccNxYV96.s 			page 75
 
 
  613:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, faultmask_ns" : "=r" (result) );
@@ -4498,7 +4498,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  667:Drivers/CMSIS/Include/cmsis_gcc.h ****   __ASM volatile ("MRS %0, psplim"  : "=r" (result) );
  668:Drivers/CMSIS/Include/cmsis_gcc.h ****   return result;
  669:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/ccPxECkd.s 			page 76
+ARM GAS  /tmp/ccNxYV96.s 			page 76
 
 
  670:Drivers/CMSIS/Include/cmsis_gcc.h **** }
@@ -4558,7 +4558,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  724:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
  725:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __TZ_set_PSPLIM_NS(uint32_t ProcStackPtrLimit)
  726:Drivers/CMSIS/Include/cmsis_gcc.h **** {
-ARM GAS  /tmp/ccPxECkd.s 			page 77
+ARM GAS  /tmp/ccNxYV96.s 			page 77
 
 
  727:Drivers/CMSIS/Include/cmsis_gcc.h **** #if (!(defined (__ARM_ARCH_8M_MAIN__ ) && (__ARM_ARCH_8M_MAIN__ == 1)))
@@ -4618,7 +4618,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  781:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  782:Drivers/CMSIS/Include/cmsis_gcc.h **** 
  783:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
-ARM GAS  /tmp/ccPxECkd.s 			page 78
+ARM GAS  /tmp/ccNxYV96.s 			page 78
 
 
  784:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   Set Main Stack Pointer Limit
@@ -4678,7 +4678,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  838:Drivers/CMSIS/Include/cmsis_gcc.h **** // Re-enable using built-in when GCC has been fixed
  839:Drivers/CMSIS/Include/cmsis_gcc.h **** // || (__GNUC__ > 7) || (__GNUC__ == 7 && __GNUC_MINOR__ >= 2)
  840:Drivers/CMSIS/Include/cmsis_gcc.h ****   /* see https://gcc.gnu.org/ml/gcc-patches/2017-04/msg00443.html */
-ARM GAS  /tmp/ccPxECkd.s 			page 79
+ARM GAS  /tmp/ccNxYV96.s 			page 79
 
 
  841:Drivers/CMSIS/Include/cmsis_gcc.h ****   return __builtin_arm_get_fpscr();
@@ -4738,7 +4738,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  895:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_RW_REG(r) "+r" (r)
  896:Drivers/CMSIS/Include/cmsis_gcc.h **** #define __CMSIS_GCC_USE_REG(r) "r" (r)
  897:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
-ARM GAS  /tmp/ccPxECkd.s 			page 80
+ARM GAS  /tmp/ccNxYV96.s 			page 80
 
 
  898:Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -4798,7 +4798,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  952:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Ensures the apparent order of the explicit memory operations before
  953:Drivers/CMSIS/Include/cmsis_gcc.h ****            and after the instruction, without ensuring their completion.
  954:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
-ARM GAS  /tmp/ccPxECkd.s 			page 81
+ARM GAS  /tmp/ccNxYV96.s 			page 81
 
 
  955:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE void __DMB(void)
@@ -4858,7 +4858,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1009:Drivers/CMSIS/Include/cmsis_gcc.h ****   return result;
 1010:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
 1011:Drivers/CMSIS/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/ccPxECkd.s 			page 82
+ARM GAS  /tmp/ccNxYV96.s 			page 82
 
 
 1012:Drivers/CMSIS/Include/cmsis_gcc.h **** 
@@ -4918,7 +4918,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1066:Drivers/CMSIS/Include/cmsis_gcc.h ****   result <<= s;                        /* shift when v's highest bits are zero */
 1067:Drivers/CMSIS/Include/cmsis_gcc.h **** #endif
 1068:Drivers/CMSIS/Include/cmsis_gcc.h ****   return result;
-ARM GAS  /tmp/ccPxECkd.s 			page 83
+ARM GAS  /tmp/ccNxYV96.s 			page 83
 
 
 1069:Drivers/CMSIS/Include/cmsis_gcc.h **** }
@@ -4978,7 +4978,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1123:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
 1124:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   LDR Exclusive (16 bit)
 1125:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Executes a exclusive LDR instruction for 16 bit values.
-ARM GAS  /tmp/ccPxECkd.s 			page 84
+ARM GAS  /tmp/ccNxYV96.s 			page 84
 
 
 1126:Drivers/CMSIS/Include/cmsis_gcc.h ****   \param [in]    ptr  Pointer to data
@@ -5038,7 +5038,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1159:Drivers/CMSIS/Include/cmsis_gcc.h **** 
 1160:Drivers/CMSIS/Include/cmsis_gcc.h **** /**
 1161:Drivers/CMSIS/Include/cmsis_gcc.h ****   \brief   STR Exclusive (8 bit)
-ARM GAS  /tmp/ccPxECkd.s 			page 85
+ARM GAS  /tmp/ccNxYV96.s 			page 85
 
 
 1162:Drivers/CMSIS/Include/cmsis_gcc.h ****   \details Executes a exclusive STR instruction for 8 bit values.
@@ -5098,7 +5098,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1207:Drivers/CMSIS/Include/cmsis_gcc.h ****    return(result);
  101              		.loc 3 1207 4 view .LVU22
  102              		.loc 3 1207 4 is_stmt 0 view .LVU23
-ARM GAS  /tmp/ccPxECkd.s 			page 86
+ARM GAS  /tmp/ccNxYV96.s 			page 86
 
 
  103              		.thumb
@@ -5158,7 +5158,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3524:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** __STATIC_INLINE void LL_USART_EnableIT_CM(USART_TypeDef *USARTx)
 3525:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
 3526:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   ATOMIC_SET_BIT(USARTx->CR1, USART_CR1_CMIE);
-ARM GAS  /tmp/ccPxECkd.s 			page 87
+ARM GAS  /tmp/ccNxYV96.s 			page 87
 
 
 3527:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
@@ -5218,7 +5218,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3581:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR2          LBDIE         LL_USART_EnableIT_LBD
 3582:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
 3583:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval None
-ARM GAS  /tmp/ccPxECkd.s 			page 88
+ARM GAS  /tmp/ccNxYV96.s 			page 88
 
 
 3584:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
@@ -5278,7 +5278,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3638:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
 3639:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** __STATIC_INLINE void LL_USART_EnableIT_TXFT(USART_TypeDef *USARTx)
 3640:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
-ARM GAS  /tmp/ccPxECkd.s 			page 89
+ARM GAS  /tmp/ccNxYV96.s 			page 89
 
 
 3641:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   ATOMIC_SET_BIT(USARTx->CR3, USART_CR3_TXFTIE);
@@ -5338,7 +5338,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3695:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
 3696:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
 3697:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
-ARM GAS  /tmp/ccPxECkd.s 			page 90
+ARM GAS  /tmp/ccNxYV96.s 			page 90
 
 
 3698:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Disable Transmission Complete Interrupt
@@ -5398,7 +5398,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3752:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** __STATIC_INLINE void LL_USART_DisableIT_RTO(USART_TypeDef *USARTx)
 3753:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
 3754:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   ATOMIC_CLEAR_BIT(USARTx->CR1, USART_CR1_RTOIE);
-ARM GAS  /tmp/ccPxECkd.s 			page 91
+ARM GAS  /tmp/ccNxYV96.s 			page 91
 
 
 3755:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
@@ -5458,7 +5458,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3809:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
 3810:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Disable Error Interrupt
 3811:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @note   When set, Error Interrupt Enable Bit is enabling interrupt generation in case of a fram
-ARM GAS  /tmp/ccPxECkd.s 			page 92
+ARM GAS  /tmp/ccNxYV96.s 			page 92
 
 
 3812:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         error, overrun error or noise flag (FE=1 or ORE=1 or NF=1 in the USARTx_ISR register).
@@ -5518,7 +5518,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3866:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         Smartcard feature is supported by the USARTx instance.
 3867:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR3          TCBGTIE       LL_USART_DisableIT_TCBGT
 3868:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
-ARM GAS  /tmp/ccPxECkd.s 			page 93
+ARM GAS  /tmp/ccNxYV96.s 			page 93
 
 
 3869:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval None
@@ -5578,7 +5578,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3923:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** {
 3924:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   return ((READ_BIT(USARTx->CR1, USART_CR1_TCIE) == (USART_CR1_TCIE)) ? 1UL : 0UL);
 3925:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
-ARM GAS  /tmp/ccPxECkd.s 			page 94
+ARM GAS  /tmp/ccNxYV96.s 			page 94
 
 
 3926:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
@@ -5638,7 +5638,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3980:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR1          EOBIE         LL_USART_IsEnabledIT_EOB
 3981:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
 3982:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval State of bit (1 or 0).
-ARM GAS  /tmp/ccPxECkd.s 			page 95
+ARM GAS  /tmp/ccNxYV96.s 			page 95
 
 
 3983:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   */
@@ -5698,7 +5698,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 4037:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
 4038:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** 
 4039:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** /**
-ARM GAS  /tmp/ccPxECkd.s 			page 96
+ARM GAS  /tmp/ccNxYV96.s 			page 96
 
 
 4040:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @brief  Check if the USART CTS Interrupt is enabled or disabled.
@@ -5758,7 +5758,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 4094:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   *         FIFO mode feature is supported by the USARTx instance.
 4095:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @rmtoll CR3          RXFTIE        LL_USART_IsEnabledIT_RXFT
 4096:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @param  USARTx USART Instance
-ARM GAS  /tmp/ccPxECkd.s 			page 97
+ARM GAS  /tmp/ccNxYV96.s 			page 97
 
 
 4097:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h ****   * @retval State of bit (1 or 0).
@@ -5818,7 +5818,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 4151:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** __STATIC_INLINE void LL_USART_EnableDMAReq_TX(USART_TypeDef *USARTx)
  119              		.loc 2 4151 22 view .LVU27
  120              	.L3:
-ARM GAS  /tmp/ccPxECkd.s 			page 98
+ARM GAS  /tmp/ccNxYV96.s 			page 98
 
 
  121              	.LBE101:
@@ -5878,7 +5878,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  163 002c 44E80031 		strex r1, r3, [r4]
  164              	@ 0 "" 2
  165              	.LVL13:
-ARM GAS  /tmp/ccPxECkd.s 			page 99
+ARM GAS  /tmp/ccNxYV96.s 			page 99
 
 
  166              		.loc 3 1207 4 is_stmt 1 view .LVU44
@@ -5938,7 +5938,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
   26:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** 
   27:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /* Includes ------------------------------------------------------------------*/
   28:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** #include "stm32g4xx.h"
-ARM GAS  /tmp/ccPxECkd.s 			page 100
+ARM GAS  /tmp/ccNxYV96.s 			page 100
 
 
   29:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** #include "stm32g4xx_ll_dmamux.h"
@@ -5998,7 +5998,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
   83:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /** @defgroup DMA_LL_Private_Macros DMA Private Macros
   84:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @{
   85:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   */
-ARM GAS  /tmp/ccPxECkd.s 			page 101
+ARM GAS  /tmp/ccNxYV96.s 			page 101
 
 
   86:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /**
@@ -6058,7 +6058,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  140:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****                                         in case of memory to memory transfer direction.
  141:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****                                         This parameter can be a value of @ref DMA_LL_EC_MDATAALIGN
  142:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** 
-ARM GAS  /tmp/ccPxECkd.s 			page 102
+ARM GAS  /tmp/ccNxYV96.s 			page 102
 
 
  143:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****                                         This feature can be modified afterwards using unitary funct
@@ -6118,7 +6118,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  197:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** #define LL_DMA_IFCR_CTCIF6                DMA_IFCR_CTCIF6       /*!< Channel 6 transfer complete fl
  198:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** #define LL_DMA_IFCR_CHTIF6                DMA_IFCR_CHTIF6       /*!< Channel 6 half transfer flag  
  199:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** #define LL_DMA_IFCR_CTEIF6                DMA_IFCR_CTEIF6       /*!< Channel 6 transfer error flag 
-ARM GAS  /tmp/ccPxECkd.s 			page 103
+ARM GAS  /tmp/ccNxYV96.s 			page 103
 
 
  200:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** #if defined (DMA1_Channel7)
@@ -6178,7 +6178,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  254:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** #define LL_DMA_ISR_TEIF8                  DMA_ISR_TEIF8         /*!< Channel 8 transfer error flag 
  255:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** #endif /* DMA1_Channel8 */
  256:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /**
-ARM GAS  /tmp/ccPxECkd.s 			page 104
+ARM GAS  /tmp/ccNxYV96.s 			page 104
 
 
  257:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @}
@@ -6238,7 +6238,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  311:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** 
  312:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /** @defgroup DMA_LL_EC_PERIPH Peripheral increment mode
  313:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @{
-ARM GAS  /tmp/ccPxECkd.s 			page 105
+ARM GAS  /tmp/ccNxYV96.s 			page 105
 
 
  314:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   */
@@ -6298,7 +6298,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  368:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   */
  369:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** 
  370:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /** @defgroup DMA_LL_EM_WRITE_READ Common Write and read registers macros
-ARM GAS  /tmp/ccPxECkd.s 			page 106
+ARM GAS  /tmp/ccNxYV96.s 			page 106
 
 
  371:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @{
@@ -6358,7 +6358,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  425:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****    ((uint32_t)(__CHANNEL_INSTANCE__) == ((uint32_t)DMA1_Channel6)) ? LL_DMA_CHANNEL_6 : \
  426:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****    ((uint32_t)(__CHANNEL_INSTANCE__) == ((uint32_t)DMA2_Channel6)) ? LL_DMA_CHANNEL_6 : \
  427:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****    ((uint32_t)(__CHANNEL_INSTANCE__) == ((uint32_t)DMA1_Channel7)) ? LL_DMA_CHANNEL_7 : \
-ARM GAS  /tmp/ccPxECkd.s 			page 107
+ARM GAS  /tmp/ccNxYV96.s 			page 107
 
 
  428:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****    ((uint32_t)(__CHANNEL_INSTANCE__) == ((uint32_t)DMA2_Channel7)) ? LL_DMA_CHANNEL_7 : \
@@ -6418,7 +6418,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  482:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****    DMA2_Channel6)
  483:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** #endif /* DMA1_Channel8 */
  484:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** 
-ARM GAS  /tmp/ccPxECkd.s 			page 108
+ARM GAS  /tmp/ccNxYV96.s 			page 108
 
 
  485:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /**
@@ -6478,7 +6478,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  539:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** __STATIC_INLINE void LL_DMA_DisableChannel(DMA_TypeDef *DMAx, uint32_t Channel)
  540:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** {
  541:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   uint32_t dma_base_addr = (uint32_t)DMAx;
-ARM GAS  /tmp/ccPxECkd.s 			page 109
+ARM GAS  /tmp/ccNxYV96.s 			page 109
 
 
  542:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   CLEAR_BIT(((DMA_Channel_TypeDef *)((uint32_t)(dma_base_addr + CHANNEL_OFFSET_TAB[Channel])))->CCR
@@ -6538,7 +6538,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  596:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_PRIORITY_LOW or @ref LL_DMA_PRIORITY_MEDIUM or @ref LL_DMA_PRIORITY_HI
  597:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @retval None
  598:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   */
-ARM GAS  /tmp/ccPxECkd.s 			page 110
+ARM GAS  /tmp/ccNxYV96.s 			page 110
 
 
  599:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** __STATIC_INLINE void LL_DMA_ConfigTransfer(DMA_TypeDef *DMAx, uint32_t Channel, uint32_t Configurat
@@ -6598,7 +6598,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  653:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_DIRECTION_MEMORY_TO_MEMORY
  654:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   */
  655:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** __STATIC_INLINE uint32_t LL_DMA_GetDataTransferDirection(DMA_TypeDef *DMAx, uint32_t Channel)
-ARM GAS  /tmp/ccPxECkd.s 			page 111
+ARM GAS  /tmp/ccNxYV96.s 			page 111
 
 
  656:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** {
@@ -6658,7 +6658,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  710:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   uint32_t dma_base_addr = (uint32_t)DMAx;
  711:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   return (READ_BIT(((DMA_Channel_TypeDef *)((uint32_t)(dma_base_addr + CHANNEL_OFFSET_TAB[Channel])
  712:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****                    DMA_CCR_CIRC));
-ARM GAS  /tmp/ccPxECkd.s 			page 112
+ARM GAS  /tmp/ccNxYV96.s 			page 112
 
 
  713:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** }
@@ -6718,7 +6718,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  767:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @brief  Set Memory increment mode.
  768:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @rmtoll CCR          MINC          LL_DMA_SetMemoryIncMode
  769:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @param  DMAx DMAx Instance
-ARM GAS  /tmp/ccPxECkd.s 			page 113
+ARM GAS  /tmp/ccNxYV96.s 			page 113
 
 
  770:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @param  Channel This parameter can be one of the following values:
@@ -6778,7 +6778,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  824:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_3
  825:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_4
  826:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_5
-ARM GAS  /tmp/ccPxECkd.s 			page 114
+ARM GAS  /tmp/ccNxYV96.s 			page 114
 
 
  827:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_6
@@ -6838,7 +6838,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  881:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_7 (*)
  882:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_8 (*)
  883:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         (*) Not on all G4 devices
-ARM GAS  /tmp/ccPxECkd.s 			page 115
+ARM GAS  /tmp/ccNxYV96.s 			page 115
 
 
  884:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @param  MemoryOrM2MDstDataSize This parameter can be one of the following values:
@@ -6898,7 +6898,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  938:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_PRIORITY_LOW
  939:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_PRIORITY_MEDIUM
  940:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_PRIORITY_HIGH
-ARM GAS  /tmp/ccPxECkd.s 			page 116
+ARM GAS  /tmp/ccNxYV96.s 			page 116
 
 
  941:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_PRIORITY_VERYHIGH
@@ -6958,7 +6958,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  995:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @retval None
  996:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   */
  997:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** __STATIC_INLINE void LL_DMA_SetDataLength(DMA_TypeDef *DMAx, uint32_t Channel, uint32_t NbData)
-ARM GAS  /tmp/ccPxECkd.s 			page 117
+ARM GAS  /tmp/ccNxYV96.s 			page 117
 
 
  998:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** {
@@ -7018,7 +7018,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1052:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @retval None
 1053:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   */
 1054:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** __STATIC_INLINE void LL_DMA_ConfigAddresses(DMA_TypeDef *DMAx, uint32_t Channel, uint32_t SrcAddres
-ARM GAS  /tmp/ccPxECkd.s 			page 118
+ARM GAS  /tmp/ccNxYV96.s 			page 118
 
 
 1055:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****                                             uint32_t DstAddress, uint32_t Direction)
@@ -7078,7 +7078,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1109:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_5
 1110:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_6
 1111:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_7 (*)
-ARM GAS  /tmp/ccPxECkd.s 			page 119
+ARM GAS  /tmp/ccNxYV96.s 			page 119
 
 
 1112:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_8 (*)
@@ -7138,7 +7138,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  223              		.cfi_def_cfa_offset 0
  224 004e 7047     		bx	lr
  225              	.L6:
-ARM GAS  /tmp/ccPxECkd.s 			page 120
+ARM GAS  /tmp/ccNxYV96.s 			page 120
 
 
  226              		.align	2
@@ -7198,7 +7198,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1132:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_4
 1133:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_5
 1134:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_6
-ARM GAS  /tmp/ccPxECkd.s 			page 121
+ARM GAS  /tmp/ccNxYV96.s 			page 121
 
 
 1135:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_7 (*)
@@ -7258,7 +7258,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1189:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** {
 1190:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   uint32_t dma_base_addr = (uint32_t)DMAx;
 1191:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   WRITE_REG(((DMA_Channel_TypeDef *)((uint32_t)(dma_base_addr + CHANNEL_OFFSET_TAB[Channel])))->CPA
-ARM GAS  /tmp/ccPxECkd.s 			page 122
+ARM GAS  /tmp/ccNxYV96.s 			page 122
 
 
 1192:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** }
@@ -7318,7 +7318,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1246:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @param  DMAx DMAx Instance
 1247:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @param  Channel This parameter can be one of the following values:
 1248:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_1
-ARM GAS  /tmp/ccPxECkd.s 			page 123
+ARM GAS  /tmp/ccNxYV96.s 			page 123
 
 
 1249:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMA_CHANNEL_2
@@ -7378,7 +7378,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1303:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_I2C1_RX
 1304:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_I2C1_TX
 1305:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_I2C2_RX
-ARM GAS  /tmp/ccPxECkd.s 			page 124
+ARM GAS  /tmp/ccNxYV96.s 			page 124
 
 
 1306:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_I2C2_TX
@@ -7438,7 +7438,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1360:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_TIM5_CH2 (*)
 1361:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_TIM5_CH3 (*)
 1362:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_TIM5_CH4 (*)
-ARM GAS  /tmp/ccPxECkd.s 			page 125
+ARM GAS  /tmp/ccNxYV96.s 			page 125
 
 
 1363:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_TIM5_UP (*)
@@ -7498,7 +7498,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1417:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         CSELR        C4S           LL_DMA_GetPeriphRequest\n
 1418:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         CSELR        C5S           LL_DMA_GetPeriphRequest\n
 1419:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         CSELR        C6S           LL_DMA_GetPeriphRequest\n
-ARM GAS  /tmp/ccPxECkd.s 			page 126
+ARM GAS  /tmp/ccNxYV96.s 			page 126
 
 
 1420:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         CSELR        C7S           LL_DMA_GetPeriphRequest
@@ -7558,7 +7558,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1474:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_DAC2_CH1 (*)
 1475:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_TIM1_CH1
 1476:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_TIM1_CH2
-ARM GAS  /tmp/ccPxECkd.s 			page 127
+ARM GAS  /tmp/ccNxYV96.s 			page 127
 
 
 1477:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_TIM1_CH3
@@ -7618,7 +7618,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1531:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_HRTIM1_C (*)
 1532:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_HRTIM1_D (*)
 1533:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_HRTIM1_E (*)
-ARM GAS  /tmp/ccPxECkd.s 			page 128
+ARM GAS  /tmp/ccNxYV96.s 			page 128
 
 
 1534:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   *         @arg @ref LL_DMAMUX_REQ_HRTIM1_F (*)
@@ -7678,7 +7678,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1588:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @brief  Get Channel 3 global interrupt flag.
 1589:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @rmtoll ISR          GIF3          LL_DMA_IsActiveFlag_GI3
 1590:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @param  DMAx DMAx Instance
-ARM GAS  /tmp/ccPxECkd.s 			page 129
+ARM GAS  /tmp/ccNxYV96.s 			page 129
 
 
 1591:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @retval State of bit (1 or 0).
@@ -7738,7 +7738,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1645:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /**
 1646:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @brief  Get Channel 8 global interrupt flag.
 1647:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @rmtoll ISR          GIF8          LL_DMA_IsActiveFlag_GI8
-ARM GAS  /tmp/ccPxECkd.s 			page 130
+ARM GAS  /tmp/ccNxYV96.s 			page 130
 
 
 1648:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @param  DMAx DMAx Instance
@@ -7798,7 +7798,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1702:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @brief  Get Channel 5 transfer complete flag.
 1703:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @rmtoll ISR          TCIF5         LL_DMA_IsActiveFlag_TC5
 1704:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @param  DMAx DMAx Instance
-ARM GAS  /tmp/ccPxECkd.s 			page 131
+ARM GAS  /tmp/ccNxYV96.s 			page 131
 
 
 1705:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @retval State of bit (1 or 0).
@@ -7858,7 +7858,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1759:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** 
 1760:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /**
 1761:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @brief  Get Channel 2 half transfer flag.
-ARM GAS  /tmp/ccPxECkd.s 			page 132
+ARM GAS  /tmp/ccNxYV96.s 			page 132
 
 
 1762:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @rmtoll ISR          HTIF2         LL_DMA_IsActiveFlag_HT2
@@ -7918,7 +7918,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1816:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /**
 1817:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @brief  Get Channel 7 half transfer flag.
 1818:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @rmtoll ISR          HTIF7         LL_DMA_IsActiveFlag_HT7
-ARM GAS  /tmp/ccPxECkd.s 			page 133
+ARM GAS  /tmp/ccNxYV96.s 			page 133
 
 
 1819:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @param  DMAx DMAx Instance
@@ -7978,7 +7978,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1873:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** 
 1874:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /**
 1875:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @brief  Get Channel 4 transfer error flag.
-ARM GAS  /tmp/ccPxECkd.s 			page 134
+ARM GAS  /tmp/ccNxYV96.s 			page 134
 
 
 1876:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @rmtoll ISR          TEIF4         LL_DMA_IsActiveFlag_TE4
@@ -8038,7 +8038,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1930:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** }
 1931:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** #endif /* DMA1_Channel8 */
 1932:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** 
-ARM GAS  /tmp/ccPxECkd.s 			page 135
+ARM GAS  /tmp/ccNxYV96.s 			page 135
 
 
 1933:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /**
@@ -8098,7 +8098,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 1987:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   */
 1988:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** __STATIC_INLINE void LL_DMA_ClearFlag_GI4(DMA_TypeDef *DMAx)
 1989:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** {
-ARM GAS  /tmp/ccPxECkd.s 			page 136
+ARM GAS  /tmp/ccNxYV96.s 			page 136
 
 
 1990:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   WRITE_REG(DMAx->IFCR, DMA_IFCR_CGIF4);
@@ -8158,7 +8158,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2044:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****     Instead clear specific flags transfer complete, half transfer & transfer
 2045:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****     error flag with LL_DMA_ClearFlag_TC8, LL_DMA_ClearFlag_HT8,
 2046:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****     LL_DMA_ClearFlag_TE8. bug id 2.3.1 in Product Errata Sheet.
-ARM GAS  /tmp/ccPxECkd.s 			page 137
+ARM GAS  /tmp/ccNxYV96.s 			page 137
 
 
 2047:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @rmtoll IFCR         CGIF8         LL_DMA_ClearFlag_GI8
@@ -8218,7 +8218,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2101:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /**
 2102:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @brief  Clear Channel 5  transfer complete flag.
 2103:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @rmtoll IFCR         CTCIF5        LL_DMA_ClearFlag_TC5
-ARM GAS  /tmp/ccPxECkd.s 			page 138
+ARM GAS  /tmp/ccNxYV96.s 			page 138
 
 
 2104:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @param  DMAx DMAx Instance
@@ -8278,7 +8278,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2158:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** }
 2159:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** 
 2160:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /**
-ARM GAS  /tmp/ccPxECkd.s 			page 139
+ARM GAS  /tmp/ccNxYV96.s 			page 139
 
 
 2161:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @brief  Clear Channel 2  half transfer flag.
@@ -8338,7 +8338,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2215:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** #if defined (DMA1_Channel7)
 2216:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /**
 2217:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @brief  Clear Channel 7  half transfer flag.
-ARM GAS  /tmp/ccPxECkd.s 			page 140
+ARM GAS  /tmp/ccNxYV96.s 			page 140
 
 
 2218:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @rmtoll IFCR         CHTIF7        LL_DMA_ClearFlag_HT7
@@ -8398,7 +8398,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2272:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** }
 2273:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** 
 2274:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** /**
-ARM GAS  /tmp/ccPxECkd.s 			page 141
+ARM GAS  /tmp/ccNxYV96.s 			page 141
 
 
 2275:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   * @brief  Clear Channel 4 transfer error flag.
@@ -8458,7 +8458,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 2329:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   WRITE_REG(DMAx->IFCR, DMA_IFCR_CTEIF8);
 2330:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** }
 2331:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** #endif /* DMA1_Channel8 */
-ARM GAS  /tmp/ccPxECkd.s 			page 142
+ARM GAS  /tmp/ccNxYV96.s 			page 142
 
 
 2332:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h **** 
@@ -8518,7 +8518,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
 3602:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h **** }
  281              		.loc 2 3602 3 view .LVU72
  282              	.LBB120:
-ARM GAS  /tmp/ccPxECkd.s 			page 143
+ARM GAS  /tmp/ccNxYV96.s 			page 143
 
 
  283              	.LBB115:
@@ -8578,7 +8578,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  322 0024 44E80031 		strex r1, r3, [r4]
  323              	@ 0 "" 2
  324              	.LVL30:
-ARM GAS  /tmp/ccPxECkd.s 			page 144
+ARM GAS  /tmp/ccNxYV96.s 			page 144
 
 
  325              		.loc 3 1207 4 is_stmt 1 view .LVU88
@@ -8638,7 +8638,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
   89:Src/usart_aspep_driver.c ****     LL_USART_ClearFlag_TC(pHandle->USARTx);
  364              		.loc 1 89 5 is_stmt 1 view .LVU101
  365 003c 0368     		ldr	r3, [r0]
-ARM GAS  /tmp/ccPxECkd.s 			page 145
+ARM GAS  /tmp/ccNxYV96.s 			page 145
 
 
  366              	.LVL36:
@@ -8698,7 +8698,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  405              	@ 0 "" 2
  406              	.LVL40:
 1156:Drivers/CMSIS/Include/cmsis_gcc.h **** }
-ARM GAS  /tmp/ccPxECkd.s 			page 146
+ARM GAS  /tmp/ccNxYV96.s 			page 146
 
 
  407              		.loc 3 1156 4 is_stmt 1 view .LVU116
@@ -8758,7 +8758,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  449              	.L11:
  450 0064 00000000 		.word	.LANCHOR0
  451              		.cfi_endproc
-ARM GAS  /tmp/ccPxECkd.s 			page 147
+ARM GAS  /tmp/ccNxYV96.s 			page 147
 
 
  452              	.LFE1437:
@@ -8818,7 +8818,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
   98:Src/usart_aspep_driver.c **** {
  501              		.loc 1 98 1 is_stmt 1 view -0
  502              		.cfi_startproc
-ARM GAS  /tmp/ccPxECkd.s 			page 148
+ARM GAS  /tmp/ccNxYV96.s 			page 148
 
 
  503              		@ args = 0, pretend = 0, frame = 0
@@ -8878,7 +8878,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  543              		.loc 4 1092 22 view .LVU149
  544              	.LBB135:
 1094:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   WRITE_REG(((DMA_Channel_TypeDef *)((uint32_t)(dma_base_addr + CHANNEL_OFFSET_TAB[Channel])))->CMA
-ARM GAS  /tmp/ccPxECkd.s 			page 149
+ARM GAS  /tmp/ccNxYV96.s 			page 149
 
 
  545              		.loc 4 1094 3 view .LVU150
@@ -8938,7 +8938,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  587              		.loc 4 517 22 view .LVU163
  588              	.LBB139:
  519:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h ****   SET_BIT(((DMA_Channel_TypeDef *)((uint32_t)(dma_base_addr + CHANNEL_OFFSET_TAB[Channel])))->CCR, 
-ARM GAS  /tmp/ccPxECkd.s 			page 150
+ARM GAS  /tmp/ccNxYV96.s 			page 150
 
 
  589              		.loc 4 519 3 view .LVU164
@@ -8998,7 +8998,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  631              		.align	1
  632              		.global	UASPEP_RECEIVE_BUFFER
  633              		.syntax unified
-ARM GAS  /tmp/ccPxECkd.s 			page 151
+ARM GAS  /tmp/ccNxYV96.s 			page 151
 
 
  634              		.thumb
@@ -9058,7 +9058,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  677 0014 C568     		ldr	r5, [r0, #12]
  678              	.LVL71:
  679              	.LBB142:
-ARM GAS  /tmp/ccPxECkd.s 			page 152
+ARM GAS  /tmp/ccNxYV96.s 			page 152
 
 
  680              	.LBI142:
@@ -9118,7 +9118,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  721              	.LBE145:
  722              	.LBE144:
  123:Src/usart_aspep_driver.c ****   LL_DMA_EnableChannel(pHandle->rxDMA, pHandle->rxChannel);
-ARM GAS  /tmp/ccPxECkd.s 			page 153
+ARM GAS  /tmp/ccNxYV96.s 			page 153
 
 
  723              		.loc 1 123 3 is_stmt 1 view .LVU198
@@ -9178,7 +9178,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  127:Src/usart_aspep_driver.c **** {
  770              		.loc 1 127 1 is_stmt 1 view -0
  771              		.cfi_startproc
-ARM GAS  /tmp/ccPxECkd.s 			page 154
+ARM GAS  /tmp/ccNxYV96.s 			page 154
 
 
  772              		@ args = 0, pretend = 0, frame = 0
@@ -9238,7 +9238,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  812 0008 52E8003F 		ldrex r3, [r2]
  813              	@ 0 "" 2
  814              	.LVL88:
-ARM GAS  /tmp/ccPxECkd.s 			page 155
+ARM GAS  /tmp/ccNxYV96.s 			page 155
 
 
 1156:Drivers/CMSIS/Include/cmsis_gcc.h **** }
@@ -9298,7 +9298,7 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  862              		.file 6 "Drivers/CMSIS/Include/core_cm4.h"
  863              		.file 7 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h"
  864              		.file 8 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h"
-ARM GAS  /tmp/ccPxECkd.s 			page 156
+ARM GAS  /tmp/ccNxYV96.s 			page 156
 
 
  865              		.file 9 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
@@ -9306,28 +9306,28 @@ ARM GAS  /tmp/ccPxECkd.s 			page 1
  867              		.file 11 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
  868              		.file 12 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h"
  869              		.file 13 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/usart_aspep_driver.h"
-ARM GAS  /tmp/ccPxECkd.s 			page 157
+ARM GAS  /tmp/ccNxYV96.s 			page 157
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 usart_aspep_driver.c
-     /tmp/ccPxECkd.s:18     .text.UASPEP_DAMCONFIG_TX:0000000000000000 $t
-     /tmp/ccPxECkd.s:26     .text.UASPEP_DAMCONFIG_TX:0000000000000000 UASPEP_DAMCONFIG_TX
-     /tmp/ccPxECkd.s:228    .text.UASPEP_DAMCONFIG_TX:0000000000000050 $d
-     /tmp/ccPxECkd.s:233    .text.UASPEP_DAMCONFIG_RX:0000000000000000 $t
-     /tmp/ccPxECkd.s:240    .text.UASPEP_DAMCONFIG_RX:0000000000000000 UASPEP_DAMCONFIG_RX
-     /tmp/ccPxECkd.s:450    .text.UASPEP_DAMCONFIG_RX:0000000000000064 $d
-     /tmp/ccPxECkd.s:455    .text.UASPEP_INIT:0000000000000000 $t
-     /tmp/ccPxECkd.s:462    .text.UASPEP_INIT:0000000000000000 UASPEP_INIT
-     /tmp/ccPxECkd.s:491    .text.UASPEP_SEND_PACKET:0000000000000000 $t
-     /tmp/ccPxECkd.s:498    .text.UASPEP_SEND_PACKET:0000000000000000 UASPEP_SEND_PACKET
-     /tmp/ccPxECkd.s:626    .text.UASPEP_SEND_PACKET:0000000000000040 $d
-     /tmp/ccPxECkd.s:631    .text.UASPEP_RECEIVE_BUFFER:0000000000000000 $t
-     /tmp/ccPxECkd.s:638    .text.UASPEP_RECEIVE_BUFFER:0000000000000000 UASPEP_RECEIVE_BUFFER
-     /tmp/ccPxECkd.s:755    .text.UASPEP_RECEIVE_BUFFER:0000000000000040 $d
-     /tmp/ccPxECkd.s:760    .text.UASPEP_IDLE_ENABLE:0000000000000000 $t
-     /tmp/ccPxECkd.s:767    .text.UASPEP_IDLE_ENABLE:0000000000000000 UASPEP_IDLE_ENABLE
-     /tmp/ccPxECkd.s:853    .rodata.CHANNEL_OFFSET_TAB:0000000000000000 $d
-     /tmp/ccPxECkd.s:857    .rodata.CHANNEL_OFFSET_TAB:0000000000000000 CHANNEL_OFFSET_TAB
+     /tmp/ccNxYV96.s:18     .text.UASPEP_DAMCONFIG_TX:0000000000000000 $t
+     /tmp/ccNxYV96.s:26     .text.UASPEP_DAMCONFIG_TX:0000000000000000 UASPEP_DAMCONFIG_TX
+     /tmp/ccNxYV96.s:228    .text.UASPEP_DAMCONFIG_TX:0000000000000050 $d
+     /tmp/ccNxYV96.s:233    .text.UASPEP_DAMCONFIG_RX:0000000000000000 $t
+     /tmp/ccNxYV96.s:240    .text.UASPEP_DAMCONFIG_RX:0000000000000000 UASPEP_DAMCONFIG_RX
+     /tmp/ccNxYV96.s:450    .text.UASPEP_DAMCONFIG_RX:0000000000000064 $d
+     /tmp/ccNxYV96.s:455    .text.UASPEP_INIT:0000000000000000 $t
+     /tmp/ccNxYV96.s:462    .text.UASPEP_INIT:0000000000000000 UASPEP_INIT
+     /tmp/ccNxYV96.s:491    .text.UASPEP_SEND_PACKET:0000000000000000 $t
+     /tmp/ccNxYV96.s:498    .text.UASPEP_SEND_PACKET:0000000000000000 UASPEP_SEND_PACKET
+     /tmp/ccNxYV96.s:626    .text.UASPEP_SEND_PACKET:0000000000000040 $d
+     /tmp/ccNxYV96.s:631    .text.UASPEP_RECEIVE_BUFFER:0000000000000000 $t
+     /tmp/ccNxYV96.s:638    .text.UASPEP_RECEIVE_BUFFER:0000000000000000 UASPEP_RECEIVE_BUFFER
+     /tmp/ccNxYV96.s:755    .text.UASPEP_RECEIVE_BUFFER:0000000000000040 $d
+     /tmp/ccNxYV96.s:760    .text.UASPEP_IDLE_ENABLE:0000000000000000 $t
+     /tmp/ccNxYV96.s:767    .text.UASPEP_IDLE_ENABLE:0000000000000000 UASPEP_IDLE_ENABLE
+     /tmp/ccNxYV96.s:853    .rodata.CHANNEL_OFFSET_TAB:0000000000000000 $d
+     /tmp/ccNxYV96.s:857    .rodata.CHANNEL_OFFSET_TAB:0000000000000000 CHANNEL_OFFSET_TAB
 
 NO UNDEFINED SYMBOLS

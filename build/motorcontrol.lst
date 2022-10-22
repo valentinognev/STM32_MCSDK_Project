@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc1EHuZM.s 			page 1
+ARM GAS  /tmp/ccHxt58w.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc1EHuZM.s 			page 1
   28:Src/motorcontrol.c **** /** @addtogroup MCSDK
   29:Src/motorcontrol.c ****   * @{
   30:Src/motorcontrol.c ****   */
-ARM GAS  /tmp/cc1EHuZM.s 			page 2
+ARM GAS  /tmp/ccHxt58w.s 			page 2
 
 
   31:Src/motorcontrol.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc1EHuZM.s 			page 1
   57              	.LVL3:
   57:Src/motorcontrol.c ****   mc_lock_pins();
   58              		.loc 1 57 3 view .LVU6
-ARM GAS  /tmp/cc1EHuZM.s 			page 3
+ARM GAS  /tmp/ccHxt58w.s 			page 3
 
 
   59 0026 FFF7FEFF 		bl	mc_lock_pins
@@ -171,14 +171,14 @@ ARM GAS  /tmp/cc1EHuZM.s 			page 1
  106              		.file 33 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h"
  107              		.file 34 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_cortex.h"
  108              		.file 35 "Inc/mc_tasks.h"
-ARM GAS  /tmp/cc1EHuZM.s 			page 4
+ARM GAS  /tmp/ccHxt58w.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 motorcontrol.c
-     /tmp/cc1EHuZM.s:18     .text.MX_MotorControl_Init:0000000000000000 $t
-     /tmp/cc1EHuZM.s:26     .text.MX_MotorControl_Init:0000000000000000 MX_MotorControl_Init
-     /tmp/cc1EHuZM.s:66     .text.MX_MotorControl_Init:000000000000002c $d
+     /tmp/ccHxt58w.s:18     .text.MX_MotorControl_Init:0000000000000000 $t
+     /tmp/ccHxt58w.s:26     .text.MX_MotorControl_Init:0000000000000000 MX_MotorControl_Init
+     /tmp/ccHxt58w.s:66     .text.MX_MotorControl_Init:000000000000002c $d
                             *COM*:0000000000000004 pMCI
 
 UNDEFINED SYMBOLS

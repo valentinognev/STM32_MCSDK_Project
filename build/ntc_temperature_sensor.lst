@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccg9XKnr.s 			page 1
+ARM GAS  /tmp/cc4xKvQx.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccg9XKnr.s 			page 1
   27:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c **** 
   28:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c **** /** @defgroup TemperatureSensor NTC Temperature Sensor
   29:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c ****   * @brief Allows to read the temperature of the heat sink
-ARM GAS  /tmp/ccg9XKnr.s 			page 2
+ARM GAS  /tmp/cc4xKvQx.s 			page 2
 
 
   30:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c ****   *
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccg9XKnr.s 			page 1
   37              		.loc 1 76 16 is_stmt 0 view .LVU3
   38 0000 038A     		ldrh	r3, [r0, #16]
   39              		.loc 1 76 37 view .LVU4
-ARM GAS  /tmp/ccg9XKnr.s 			page 3
+ARM GAS  /tmp/cc4xKvQx.s 			page 3
 
 
   40 0002 428B     		ldrh	r2, [r0, #26]
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccg9XKnr.s 			page 1
   76              		.weak	NTC_Clear
   77              		.syntax unified
   78              		.thumb
-ARM GAS  /tmp/ccg9XKnr.s 			page 4
+ARM GAS  /tmp/cc4xKvQx.s 			page 4
 
 
   79              		.thumb_func
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccg9XKnr.s 			page 1
  137:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c ****   if (MC_NULL == pHandle)
  138:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c ****   {
  139:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c ****     /* nothing to do */
-ARM GAS  /tmp/ccg9XKnr.s 			page 5
+ARM GAS  /tmp/cc4xKvQx.s 			page 5
 
 
  140:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c ****   }
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccg9XKnr.s 			page 1
  129              		.loc 1 122 7 is_stmt 1 view .LVU28
  122:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c ****     }
  130              		.loc 1 122 35 is_stmt 0 view .LVU29
-ARM GAS  /tmp/ccg9XKnr.s 			page 6
+ARM GAS  /tmp/cc4xKvQx.s 			page 6
 
 
  131 000c 438A     		ldrh	r3, [r0, #18]
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccg9XKnr.s 			page 1
  170              		@ args = 0, pretend = 0, frame = 0
  171              		@ frame_needed = 0, uses_anonymous_args = 0
  172              		.loc 1 158 1 is_stmt 0 view .LVU38
-ARM GAS  /tmp/ccg9XKnr.s 			page 7
+ARM GAS  /tmp/cc4xKvQx.s 			page 7
 
 
  173 0000 10B5     		push	{r4, lr}
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccg9XKnr.s 			page 1
  195:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c **** #ifdef NULL_PTR_CHECK_NTC_TEMP_SENS
  196:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c ****   }
  197:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c **** #endif
-ARM GAS  /tmp/ccg9XKnr.s 			page 8
+ARM GAS  /tmp/cc4xKvQx.s 			page 8
 
 
  198:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c ****   return (returnValue);
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccg9XKnr.s 			page 1
  183:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c **** 
  228              		.loc 1 183 15 is_stmt 0 view .LVU63
  229 002a B0FBF2F0 		udiv	r0, r0, r2
-ARM GAS  /tmp/ccg9XKnr.s 			page 9
+ARM GAS  /tmp/cc4xKvQx.s 			page 9
 
 
  230              	.LVL21:
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccg9XKnr.s 			page 1
  266              		.loc 1 213 3 view .LVU71
  214:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c **** #endif
  215:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c **** }
-ARM GAS  /tmp/ccg9XKnr.s 			page 10
+ARM GAS  /tmp/cc4xKvQx.s 			page 10
 
 
  267              		.loc 1 215 1 is_stmt 0 view .LVU72
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccg9XKnr.s 			page 1
  299              		.loc 1 239 31 is_stmt 0 view .LVU81
  300 0004 038A     		ldrh	r3, [r0, #16]
  301              	.LVL27:
-ARM GAS  /tmp/ccg9XKnr.s 			page 11
+ARM GAS  /tmp/cc4xKvQx.s 			page 11
 
 
  240:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c ****       wTemp -= ((int32_t)pHandle->wV0);
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccg9XKnr.s 			page 1
  251:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c ****     }
  335              		.loc 1 251 31 view .LVU97
  336 001e FBE7     		b	.L20
-ARM GAS  /tmp/ccg9XKnr.s 			page 12
+ARM GAS  /tmp/cc4xKvQx.s 			page 12
 
 
  337              		.cfi_endproc
@@ -718,31 +718,31 @@ ARM GAS  /tmp/ccg9XKnr.s 			page 1
  374              		.file 9 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h"
  375              		.file 10 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h"
  376              		.file 11 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h"
-ARM GAS  /tmp/ccg9XKnr.s 			page 13
+ARM GAS  /tmp/cc4xKvQx.s 			page 13
 
 
  377              		.file 12 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
  378              		.file 13 "Inc/regular_conversion_manager.h"
  379              		.file 14 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ntc_temperature_sensor.h"
-ARM GAS  /tmp/ccg9XKnr.s 			page 14
+ARM GAS  /tmp/cc4xKvQx.s 			page 14
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 ntc_temperature_sensor.c
-     /tmp/ccg9XKnr.s:18     .text.NTC_SetFaultState:0000000000000000 $t
-     /tmp/ccg9XKnr.s:26     .text.NTC_SetFaultState:0000000000000000 NTC_SetFaultState
-     /tmp/ccg9XKnr.s:75     .text.NTC_Clear:0000000000000000 $t
-     /tmp/ccg9XKnr.s:82     .text.NTC_Clear:0000000000000000 NTC_Clear
-     /tmp/ccg9XKnr.s:100    .text.NTC_Init:0000000000000000 $t
-     /tmp/ccg9XKnr.s:107    .text.NTC_Init:0000000000000000 NTC_Init
-     /tmp/ccg9XKnr.s:158    .text.NTC_CalcAvTemp:0000000000000000 $t
-     /tmp/ccg9XKnr.s:165    .text.NTC_CalcAvTemp:0000000000000000 NTC_CalcAvTemp
-     /tmp/ccg9XKnr.s:251    .text.NTC_GetAvTemp_d:0000000000000000 $t
-     /tmp/ccg9XKnr.s:258    .text.NTC_GetAvTemp_d:0000000000000000 NTC_GetAvTemp_d
-     /tmp/ccg9XKnr.s:276    .text.NTC_GetAvTemp_C:0000000000000000 $t
-     /tmp/ccg9XKnr.s:283    .text.NTC_GetAvTemp_C:0000000000000000 NTC_GetAvTemp_C
-     /tmp/ccg9XKnr.s:341    .text.NTC_CheckTemp:0000000000000000 $t
-     /tmp/ccg9XKnr.s:348    .text.NTC_CheckTemp:0000000000000000 NTC_CheckTemp
+     /tmp/cc4xKvQx.s:18     .text.NTC_SetFaultState:0000000000000000 $t
+     /tmp/cc4xKvQx.s:26     .text.NTC_SetFaultState:0000000000000000 NTC_SetFaultState
+     /tmp/cc4xKvQx.s:75     .text.NTC_Clear:0000000000000000 $t
+     /tmp/cc4xKvQx.s:82     .text.NTC_Clear:0000000000000000 NTC_Clear
+     /tmp/cc4xKvQx.s:100    .text.NTC_Init:0000000000000000 $t
+     /tmp/cc4xKvQx.s:107    .text.NTC_Init:0000000000000000 NTC_Init
+     /tmp/cc4xKvQx.s:158    .text.NTC_CalcAvTemp:0000000000000000 $t
+     /tmp/cc4xKvQx.s:165    .text.NTC_CalcAvTemp:0000000000000000 NTC_CalcAvTemp
+     /tmp/cc4xKvQx.s:251    .text.NTC_GetAvTemp_d:0000000000000000 $t
+     /tmp/cc4xKvQx.s:258    .text.NTC_GetAvTemp_d:0000000000000000 NTC_GetAvTemp_d
+     /tmp/cc4xKvQx.s:276    .text.NTC_GetAvTemp_C:0000000000000000 $t
+     /tmp/cc4xKvQx.s:283    .text.NTC_GetAvTemp_C:0000000000000000 NTC_GetAvTemp_C
+     /tmp/cc4xKvQx.s:341    .text.NTC_CheckTemp:0000000000000000 $t
+     /tmp/cc4xKvQx.s:348    .text.NTC_CheckTemp:0000000000000000 NTC_CheckTemp
 
 UNDEFINED SYMBOLS
 RCM_RegisterRegConv

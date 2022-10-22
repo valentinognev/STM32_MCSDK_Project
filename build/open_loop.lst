@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccVs4uIN.s 			page 1
+ARM GAS  /tmp/cc7321y6.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
   27:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
   28:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
   29:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /** @defgroup OpenLoop Open Loop Control
-ARM GAS  /tmp/ccVs4uIN.s 			page 2
+ARM GAS  /tmp/cc7321y6.s 			page 2
 
 
   30:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief Open Loop component of the Motor Control SDK
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
   52              		.thumb
   53              		.thumb_func
   54              		.fpu fpv4-sp-d16
-ARM GAS  /tmp/ccVs4uIN.s 			page 3
+ARM GAS  /tmp/cc7321y6.s 			page 3
 
 
   56              	OL_VqdConditioning:
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
   93              	.LFE1436:
   95              		.section	.text.OL_UpdateVoltage,"ax",%progbits
   96              		.align	1
-ARM GAS  /tmp/ccVs4uIN.s 			page 4
+ARM GAS  /tmp/cc7321y6.s 			page 4
 
 
   97              		.weak	OL_UpdateVoltage
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
  104:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief  get open loop phase voltage.
  105:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pHandle: Pointer on Handle structure of OpenLoop feature.
  106:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @retval None
-ARM GAS  /tmp/ccVs4uIN.s 			page 5
+ARM GAS  /tmp/cc7321y6.s 			page 5
 
 
  107:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
  131:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   else
  132:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
  133:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
-ARM GAS  /tmp/ccVs4uIN.s 			page 6
+ARM GAS  /tmp/cc7321y6.s 			page 6
 
 
  134:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     if (true ==  pHandle->VFMode)
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
  145:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     }
  146:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
  147:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
-ARM GAS  /tmp/ccVs4uIN.s 			page 7
+ARM GAS  /tmp/cc7321y6.s 			page 7
 
 
  148:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
  238              		.file 4 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h"
  239              		.file 5 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
  240              		.file 6 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h"
-ARM GAS  /tmp/ccVs4uIN.s 			page 8
+ARM GAS  /tmp/cc7321y6.s 			page 8
 
 
  241              		.file 7 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
@@ -429,22 +429,22 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
  246              		.file 12 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h"
  247              		.file 13 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h"
  248              		.file 14 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/open_loop.h"
-ARM GAS  /tmp/ccVs4uIN.s 			page 9
+ARM GAS  /tmp/cc7321y6.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 open_loop.c
-     /tmp/ccVs4uIN.s:18     .text.OL_Init:0000000000000000 $t
-     /tmp/ccVs4uIN.s:26     .text.OL_Init:0000000000000000 OL_Init
-     /tmp/ccVs4uIN.s:49     .text.OL_VqdConditioning:0000000000000000 $t
-     /tmp/ccVs4uIN.s:56     .text.OL_VqdConditioning:0000000000000000 OL_VqdConditioning
-     /tmp/ccVs4uIN.s:96     .text.OL_UpdateVoltage:0000000000000000 $t
-     /tmp/ccVs4uIN.s:103    .text.OL_UpdateVoltage:0000000000000000 OL_UpdateVoltage
-     /tmp/ccVs4uIN.s:120    .text.OL_GetVoltage:0000000000000000 $t
-     /tmp/ccVs4uIN.s:127    .text.OL_GetVoltage:0000000000000000 OL_GetVoltage
-     /tmp/ccVs4uIN.s:147    .text.OL_Calc:0000000000000000 $t
-     /tmp/ccVs4uIN.s:154    .text.OL_Calc:0000000000000000 OL_Calc
-     /tmp/ccVs4uIN.s:211    .text.OL_VF:0000000000000000 $t
-     /tmp/ccVs4uIN.s:218    .text.OL_VF:0000000000000000 OL_VF
+     /tmp/cc7321y6.s:18     .text.OL_Init:0000000000000000 $t
+     /tmp/cc7321y6.s:26     .text.OL_Init:0000000000000000 OL_Init
+     /tmp/cc7321y6.s:49     .text.OL_VqdConditioning:0000000000000000 $t
+     /tmp/cc7321y6.s:56     .text.OL_VqdConditioning:0000000000000000 OL_VqdConditioning
+     /tmp/cc7321y6.s:96     .text.OL_UpdateVoltage:0000000000000000 $t
+     /tmp/cc7321y6.s:103    .text.OL_UpdateVoltage:0000000000000000 OL_UpdateVoltage
+     /tmp/cc7321y6.s:120    .text.OL_GetVoltage:0000000000000000 $t
+     /tmp/cc7321y6.s:127    .text.OL_GetVoltage:0000000000000000 OL_GetVoltage
+     /tmp/cc7321y6.s:147    .text.OL_Calc:0000000000000000 $t
+     /tmp/cc7321y6.s:154    .text.OL_Calc:0000000000000000 OL_Calc
+     /tmp/cc7321y6.s:211    .text.OL_VF:0000000000000000 $t
+     /tmp/cc7321y6.s:218    .text.OL_VF:0000000000000000 OL_VF
 
 NO UNDEFINED SYMBOLS

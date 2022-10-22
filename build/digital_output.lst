@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccZME2J8.s 			page 1
+ARM GAS  /tmp/ccUy2LFv.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
   27:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @{
   28:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   */
   29:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** 
-ARM GAS  /tmp/ccZME2J8.s 			page 2
+ARM GAS  /tmp/ccUy2LFv.s 			page 2
 
 
   30:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** /** @defgroup DigitalOutput Digital Output
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
   69:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     else
   70:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     {
   71:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       LL_GPIO_SetOutputPin(pHandle->hDOutputPort, pHandle->hDOutputPin);
-ARM GAS  /tmp/ccZME2J8.s 			page 3
+ARM GAS  /tmp/ccUy2LFv.s 			page 3
 
 
   45              		.loc 1 71 7 is_stmt 1 view .LVU6
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
   47:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
   48:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Private types -------------------------------------------------------------*/
   49:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Private variables ---------------------------------------------------------*/
-ARM GAS  /tmp/ccZME2J8.s 			page 4
+ARM GAS  /tmp/ccUy2LFv.s 			page 4
 
 
   50:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Private constants ---------------------------------------------------------*/
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  104:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
  105:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #endif /* USE_FULL_LL_DRIVER */
  106:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
-ARM GAS  /tmp/ccZME2J8.s 			page 5
+ARM GAS  /tmp/ccUy2LFv.s 			page 5
 
 
  107:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Exported constants --------------------------------------------------------*/
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  161:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_SPEED Output Speed
  162:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
  163:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
-ARM GAS  /tmp/ccZME2J8.s 			page 6
+ARM GAS  /tmp/ccUy2LFv.s 			page 6
 
 
  164:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_SPEED_FREQ_LOW             (0x00000000U) /*!< Select I/O low output speed    */
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  218:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_EM_WRITE_READ Common Write and read registers Macros
  219:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
  220:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
-ARM GAS  /tmp/ccZME2J8.s 			page 7
+ARM GAS  /tmp/ccUy2LFv.s 			page 7
 
 
  221:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  275:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
  276:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
  277:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
-ARM GAS  /tmp/ccZME2J8.s 			page 8
+ARM GAS  /tmp/ccUy2LFv.s 			page 8
 
 
  278:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Mode This parameter can be one of the following values:
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  332:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
  333:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
  334:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
-ARM GAS  /tmp/ccZME2J8.s 			page 9
+ARM GAS  /tmp/ccUy2LFv.s 			page 9
 
 
  335:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  389:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
  390:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   return (uint32_t)(READ_BIT(GPIOx->OTYPER, Pin) >> POSITION_VAL(Pin));
  391:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
-ARM GAS  /tmp/ccZME2J8.s 			page 10
+ARM GAS  /tmp/ccUy2LFv.s 			page 10
 
 
  392:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  446:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
  447:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
  448:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
-ARM GAS  /tmp/ccZME2J8.s 			page 11
+ARM GAS  /tmp/ccUy2LFv.s 			page 11
 
 
  449:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  503:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
  504:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll PUPDR        PUPDy         LL_GPIO_GetPinPull
  505:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
-ARM GAS  /tmp/ccZME2J8.s 			page 12
+ARM GAS  /tmp/ccUy2LFv.s 			page 12
 
 
  506:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  560:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_10
  561:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_11
  562:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_12
-ARM GAS  /tmp/ccZME2J8.s 			page 13
+ARM GAS  /tmp/ccUy2LFv.s 			page 13
 
 
  563:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_13
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  617:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
  618:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
  619:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
-ARM GAS  /tmp/ccZME2J8.s 			page 14
+ARM GAS  /tmp/ccUy2LFv.s 			page 14
 
 
  620:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  674:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_8
  675:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_9
  676:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_10
-ARM GAS  /tmp/ccZME2J8.s 			page 15
+ARM GAS  /tmp/ccUy2LFv.s 			page 15
 
 
  677:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_11
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  731:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return 1 if all pins passed as parameter, of a dedicated port, are locked. else Return 
  732:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll LCKR         LCKy          LL_GPIO_IsPinLocked
  733:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
-ARM GAS  /tmp/ccZME2J8.s 			page 16
+ARM GAS  /tmp/ccUy2LFv.s 			page 16
 
 
  734:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  788:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
  789:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
  790:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return if input data level for several pins of dedicated port is high or low.
-ARM GAS  /tmp/ccZME2J8.s 			page 17
+ARM GAS  /tmp/ccUy2LFv.s 			page 17
 
 
  791:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll IDR          IDy           LL_GPIO_IsInputPinSet
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  845:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
  846:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
  847:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
-ARM GAS  /tmp/ccZME2J8.s 			page 18
+ARM GAS  /tmp/ccUy2LFv.s 			page 18
 
 
  848:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
   58              	.L4:
   59              		.loc 2 896 3 is_stmt 0 view .LVU10
   60              	.LBE11:
-ARM GAS  /tmp/ccZME2J8.s 			page 19
+ARM GAS  /tmp/ccUy2LFv.s 			page 19
 
 
   61              	.LBE10:
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  920:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
  921:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval None
  922:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
-ARM GAS  /tmp/ccZME2J8.s 			page 20
+ARM GAS  /tmp/ccUy2LFv.s 			page 20
 
 
  923:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_ResetOutputPin(GPIO_TypeDef *GPIOx, uint32_t PinMask)
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  121              		.loc 2 926 1 is_stmt 0 view .LVU33
  122 0030 EEE7     		b	.L4
  123              	.LBE17:
-ARM GAS  /tmp/ccZME2J8.s 			page 21
+ARM GAS  /tmp/ccUy2LFv.s 			page 21
 
 
  124              	.LBE16:
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  157              		.file 5 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h"
  158              		.file 6 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h"
  159              		.file 7 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
-ARM GAS  /tmp/ccZME2J8.s 			page 22
+ARM GAS  /tmp/ccUy2LFv.s 			page 22
 
 
  160              		.file 8 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h"
@@ -1268,14 +1268,14 @@ ARM GAS  /tmp/ccZME2J8.s 			page 1
  164              		.file 12 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h"
  165              		.file 13 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
  166              		.file 14 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/digital_output.h"
-ARM GAS  /tmp/ccZME2J8.s 			page 23
+ARM GAS  /tmp/ccUy2LFv.s 			page 23
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 digital_output.c
-     /tmp/ccZME2J8.s:18     .text.DOUT_SetOutputState:0000000000000000 $t
-     /tmp/ccZME2J8.s:26     .text.DOUT_SetOutputState:0000000000000000 DOUT_SetOutputState
-     /tmp/ccZME2J8.s:129    .text.DOUT_GetOutputState:0000000000000000 $t
-     /tmp/ccZME2J8.s:136    .text.DOUT_GetOutputState:0000000000000000 DOUT_GetOutputState
+     /tmp/ccUy2LFv.s:18     .text.DOUT_SetOutputState:0000000000000000 $t
+     /tmp/ccUy2LFv.s:26     .text.DOUT_SetOutputState:0000000000000000 DOUT_SetOutputState
+     /tmp/ccUy2LFv.s:129    .text.DOUT_GetOutputState:0000000000000000 $t
+     /tmp/ccUy2LFv.s:136    .text.DOUT_GetOutputState:0000000000000000 DOUT_GetOutputState
 
 NO UNDEFINED SYMBOLS

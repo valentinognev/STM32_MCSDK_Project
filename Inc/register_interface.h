@@ -74,6 +74,7 @@
 #define  MC_REG_SC_COMPLETED           ((20 << ELT_IDENTIFIER_POS) | TYPE_DATA_8BIT )
 #define  MC_REG_POSITION_CTRL_STATE    ((21 << ELT_IDENTIFIER_POS) | TYPE_DATA_8BIT )
 #define  MC_REG_POSITION_ALIGN_STATE   ((22 << ELT_IDENTIFIER_POS) | TYPE_DATA_8BIT )
+#define  MC_REG_DBG_START_WRITE        ((23 << ELT_IDENTIFIER_POS) | TYPE_DATA_8BIT )
 
 /* TYPE_DATA_16BIT registers definition */
 #define  MC_REG_SPEED_KP               ((2U   << ELT_IDENTIFIER_POS) | TYPE_DATA_16BIT )
@@ -96,6 +97,7 @@
 #define  MC_REG_FLUXWK_BUS             ((21U << ELT_IDENTIFIER_POS) | TYPE_DATA_16BIT )
 #define  MC_REG_BUS_VOLTAGE            ((22U << ELT_IDENTIFIER_POS) | TYPE_DATA_16BIT )
 #define  MC_REG_HEATS_TEMP             ((23U << ELT_IDENTIFIER_POS) | TYPE_DATA_16BIT )
+#define  MC_REG_MOTOR_POWER            ((24U << ELT_IDENTIFIER_POS) | TYPE_DATA_16BIT )
 #define  MC_REG_DAC_OUT1               ((25U << ELT_IDENTIFIER_POS) | TYPE_DATA_16BIT )
 #define  MC_REG_DAC_OUT2               ((26U << ELT_IDENTIFIER_POS) | TYPE_DATA_16BIT )
 #define  MC_REG_DAC_OUT3               ((27  << ELT_IDENTIFIER_POS) | TYPE_DATA_16BIT )
@@ -226,6 +228,7 @@
 #define  MC_REG_ASYNC_UARTA           ((20U << ELT_IDENTIFIER_POS) | TYPE_DATA_RAW )
 #define  MC_REG_ASYNC_UARTB           ((21U << ELT_IDENTIFIER_POS) | TYPE_DATA_RAW )
 #define  MC_REG_ASYNC_STLNK           ((22U << ELT_IDENTIFIER_POS) | TYPE_DATA_RAW )
+#define  MC_REG_SPEED_SIN             ((23U << ELT_IDENTIFIER_POS) | TYPE_DATA_RAW)
 
 uint8_t RI_SetRegCommandParser (MCP_Handle_t * pHandle, uint16_t txSyncFreeSpace);
 uint8_t RI_GetRegCommandParser (MCP_Handle_t * pHandle, uint16_t txSyncFreeSpace);

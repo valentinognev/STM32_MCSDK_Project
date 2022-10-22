@@ -26,7 +26,7 @@
 #include "mc_config.h"
 
 /* USER CODE BEGIN Additional include */
-
+#include "debug_scope.h"
 /* USER CODE END Additional include */
 
 #define FREQ_RATIO 1                /* Dummy value for single drive */
@@ -387,6 +387,17 @@ PID_Handle_t *pPIDIq[NBR_OF_MOTORS] = {&PIDIqHandle_M1};
 PID_Handle_t *pPIDId[NBR_OF_MOTORS] = {&PIDIdHandle_M1};
 PQD_MotorPowMeas_Handle_t *pMPM[NBR_OF_MOTORS] = {&PQD_MotorPowMeasM1};
 /* USER CODE BEGIN Additional configuration */
+DebugScope_Handle_t debugScopeM1 =
+    {
+        .sz = DEBUGSCOPESIZE,
+        .curCh = 1,
+        .i1 = 0,
+        .i2 = 0,
+        .i3 = 0,
+        .i4 = 0,
+        .i5 = 0,
+        .startWriteFlag = false
+    };
 /* USER CODE END Additional configuration */
 
 /******************* (C) COPYRIGHT 2022 STMicroelectronics *****END OF FILE****/

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccDmXnvl.s 			page 1
+ARM GAS  /tmp/ccGF0wtY.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
   27:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****   */
   28:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c **** 
   29:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c **** /** @defgroup RampExtMngr Ramp Manager
-ARM GAS  /tmp/ccDmXnvl.s 			page 2
+ARM GAS  /tmp/ccGF0wtY.s 			page 2
 
 
   30:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****   * @brief Ramp Extended Manager component of the Motor Control SDK
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
   62:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c **** #endif
   63:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c **** #ifdef NULL_RMP_EXT_MNG
   64:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****   }
-ARM GAS  /tmp/ccDmXnvl.s 			page 3
+ARM GAS  /tmp/ccGF0wtY.s 			page 3
 
 
   65:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c **** #endif
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
   77 0000 8368     		ldr	r3, [r0, #8]
   78              	.LVL2:
   96:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c **** 
-ARM GAS  /tmp/ccDmXnvl.s 			page 4
+ARM GAS  /tmp/ccGF0wtY.s 			page 4
 
 
   97:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****     /* Update the variable and terminates the ramp if needed. */
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
  126:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c **** #endif
  127:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****   return (ret_val);
  104              		.loc 1 127 3 is_stmt 1 view .LVU30
-ARM GAS  /tmp/ccDmXnvl.s 			page 5
+ARM GAS  /tmp/ccGF0wtY.s 			page 5
 
 
  128:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c **** }
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
  137:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****   *         change in the value.
  138:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****   * @retval bool It returns true is command is valid, false otherwise
  139:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****   */
-ARM GAS  /tmp/ccDmXnvl.s 			page 6
+ARM GAS  /tmp/ccGF0wtY.s 			page 6
 
 
  140:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c **** __weak bool REMNG_ExecRamp(RampExtMngr_Handle_t *pHandle, int32_t TargetFinal, uint32_t Durationms)
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
  194:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****         else
  195:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****         {
  196:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****           wScalingFactorMin = wScalingFactor3;
-ARM GAS  /tmp/ccDmXnvl.s 			page 7
+ARM GAS  /tmp/ccGF0wtY.s 			page 7
 
 
  197:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****         }
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
  157 0008 7047     		bx	lr
  158              		.cfi_endproc
  159              	.LFE1438:
-ARM GAS  /tmp/ccDmXnvl.s 			page 8
+ARM GAS  /tmp/ccGF0wtY.s 			page 8
 
 
  161              		.section	.text.REMNG_RampCompleted,"ax",%progbits
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
  189              	.L8:
  263:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****     {
  264:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****       retVal = true;
-ARM GAS  /tmp/ccDmXnvl.s 			page 9
+ARM GAS  /tmp/ccGF0wtY.s 			page 9
 
 
  190              		.loc 1 264 14 view .LVU53
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
  218 0000 0023     		movs	r3, #0
  219 0002 C360     		str	r3, [r0, #12]
  293:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****     pHandle->IncDecAmount = 0;
-ARM GAS  /tmp/ccDmXnvl.s 			page 10
+ARM GAS  /tmp/ccGF0wtY.s 			page 10
 
 
  220              		.loc 1 293 5 is_stmt 1 view .LVU60
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
  317:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****   else
  318:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****   {
  319:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****     TargetAbs = (uint32_t)Target;
-ARM GAS  /tmp/ccDmXnvl.s 			page 11
+ARM GAS  /tmp/ccGF0wtY.s 			page 11
 
 
  320:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****   }
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
  288              		.loc 1 315 5 is_stmt 1 view .LVU84
  289              	.LVL23:
  315:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****   }
-ARM GAS  /tmp/ccDmXnvl.s 			page 12
+ARM GAS  /tmp/ccGF0wtY.s 			page 12
 
 
  290              		.loc 1 315 5 is_stmt 0 view .LVU85
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
  337              		.loc 1 153 5 view .LVU94
  160:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c **** #endif
  338              		.loc 1 160 5 view .LVU95
-ARM GAS  /tmp/ccDmXnvl.s 			page 13
+ARM GAS  /tmp/ccGF0wtY.s 			page 13
 
 
  160:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c **** #endif
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
  375 0028 BDE8F087 		pop	{r4, r5, r6, r7, r8, r9, r10, pc}
  376              	.LVL32:
  377              	.L18:
-ARM GAS  /tmp/ccDmXnvl.s 			page 14
+ARM GAS  /tmp/ccGF0wtY.s 			page 14
 
 
  223:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c **** 
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
  416 004e 00D2     		bcs	.L21
  181:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****         }
  417              		.loc 1 181 29 view .LVU130
-ARM GAS  /tmp/ccDmXnvl.s 			page 15
+ARM GAS  /tmp/ccGF0wtY.s 			page 15
 
 
  418 0050 5046     		mov	r0, r10
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
  215:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c ****       aux1 /= ((int32_t)pHandle->RampRemainingStep);
  454              		.loc 1 215 12 is_stmt 0 view .LVU149
  455 006e 00FB06F3 		mul	r3, r0, r6
-ARM GAS  /tmp/ccDmXnvl.s 			page 16
+ARM GAS  /tmp/ccGF0wtY.s 			page 16
 
 
  456              	.LVL46:
@@ -948,25 +948,25 @@ ARM GAS  /tmp/ccDmXnvl.s 			page 1
  493              		.file 9 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h"
  494              		.file 10 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h"
  495              		.file 11 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ramp_ext_mngr.h"
-ARM GAS  /tmp/ccDmXnvl.s 			page 17
+ARM GAS  /tmp/ccGF0wtY.s 			page 17
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 ramp_ext_mngr.c
-     /tmp/ccDmXnvl.s:18     .text.REMNG_Init:0000000000000000 $t
-     /tmp/ccDmXnvl.s:26     .text.REMNG_Init:0000000000000000 REMNG_Init
-     /tmp/ccDmXnvl.s:58     .text.REMNG_Calc:0000000000000000 $t
-     /tmp/ccDmXnvl.s:65     .text.REMNG_Calc:0000000000000000 REMNG_Calc
-     /tmp/ccDmXnvl.s:134    .text.REMNG_GetValue:0000000000000000 $t
-     /tmp/ccDmXnvl.s:141    .text.REMNG_GetValue:0000000000000000 REMNG_GetValue
-     /tmp/ccDmXnvl.s:162    .text.REMNG_RampCompleted:0000000000000000 $t
-     /tmp/ccDmXnvl.s:169    .text.REMNG_RampCompleted:0000000000000000 REMNG_RampCompleted
-     /tmp/ccDmXnvl.s:201    .text.REMNG_StopRamp:0000000000000000 $t
-     /tmp/ccDmXnvl.s:208    .text.REMNG_StopRamp:0000000000000000 REMNG_StopRamp
-     /tmp/ccDmXnvl.s:229    .text.getScalingFactor:0000000000000000 $t
-     /tmp/ccDmXnvl.s:236    .text.getScalingFactor:0000000000000000 getScalingFactor
-     /tmp/ccDmXnvl.s:306    .text.REMNG_ExecRamp:0000000000000000 $t
-     /tmp/ccDmXnvl.s:313    .text.REMNG_ExecRamp:0000000000000000 REMNG_ExecRamp
-     /tmp/ccDmXnvl.s:479    .text.REMNG_ExecRamp:0000000000000084 $d
+     /tmp/ccGF0wtY.s:18     .text.REMNG_Init:0000000000000000 $t
+     /tmp/ccGF0wtY.s:26     .text.REMNG_Init:0000000000000000 REMNG_Init
+     /tmp/ccGF0wtY.s:58     .text.REMNG_Calc:0000000000000000 $t
+     /tmp/ccGF0wtY.s:65     .text.REMNG_Calc:0000000000000000 REMNG_Calc
+     /tmp/ccGF0wtY.s:134    .text.REMNG_GetValue:0000000000000000 $t
+     /tmp/ccGF0wtY.s:141    .text.REMNG_GetValue:0000000000000000 REMNG_GetValue
+     /tmp/ccGF0wtY.s:162    .text.REMNG_RampCompleted:0000000000000000 $t
+     /tmp/ccGF0wtY.s:169    .text.REMNG_RampCompleted:0000000000000000 REMNG_RampCompleted
+     /tmp/ccGF0wtY.s:201    .text.REMNG_StopRamp:0000000000000000 $t
+     /tmp/ccGF0wtY.s:208    .text.REMNG_StopRamp:0000000000000000 REMNG_StopRamp
+     /tmp/ccGF0wtY.s:229    .text.getScalingFactor:0000000000000000 $t
+     /tmp/ccGF0wtY.s:236    .text.getScalingFactor:0000000000000000 getScalingFactor
+     /tmp/ccGF0wtY.s:306    .text.REMNG_ExecRamp:0000000000000000 $t
+     /tmp/ccGF0wtY.s:313    .text.REMNG_ExecRamp:0000000000000000 REMNG_ExecRamp
+     /tmp/ccGF0wtY.s:479    .text.REMNG_ExecRamp:0000000000000084 $d
 
 NO UNDEFINED SYMBOLS

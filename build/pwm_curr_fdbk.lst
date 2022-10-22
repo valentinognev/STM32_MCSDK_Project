@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccwRyL58.s 			page 1
+ARM GAS  /tmp/ccXGH47T.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
   27:Src/pwm_curr_fdbk.c **** #include "pwm_curr_fdbk.h"
   28:Src/pwm_curr_fdbk.c **** #include "mc_math.h"
   29:Src/pwm_curr_fdbk.c **** #include "mc_type.h"
-ARM GAS  /tmp/ccwRyL58.s 			page 2
+ARM GAS  /tmp/ccXGH47T.s 			page 2
 
 
   30:Src/pwm_curr_fdbk.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
   79:Src/pwm_curr_fdbk.c ****     /* Nothing to do */
   80:Src/pwm_curr_fdbk.c ****   }
   81:Src/pwm_curr_fdbk.c ****   else
-ARM GAS  /tmp/ccwRyL58.s 			page 3
+ARM GAS  /tmp/ccXGH47T.s 			page 3
 
 
   82:Src/pwm_curr_fdbk.c ****   {
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
   70              		@ frame_needed = 0, uses_anonymous_args = 0
  103:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
   71              		.loc 1 103 3 view .LVU13
-ARM GAS  /tmp/ccwRyL58.s 			page 4
+ARM GAS  /tmp/ccXGH47T.s 			page 4
 
 
   72              		.loc 1 103 6 is_stmt 0 view .LVU14
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  109              		.cfi_startproc
  110              		@ args = 0, pretend = 0, frame = 0
  111              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccwRyL58.s 			page 5
+ARM GAS  /tmp/ccXGH47T.s 			page 5
 
 
  122:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  140:Src/pwm_curr_fdbk.c ****   * @brief Returns the phase current of the motor as read by the ADC (in s16A unit)
  141:Src/pwm_curr_fdbk.c ****   *
  142:Src/pwm_curr_fdbk.c ****   * The function actually returns the current values of phase A & B. Phase C current
-ARM GAS  /tmp/ccwRyL58.s 			page 6
+ARM GAS  /tmp/ccXGH47T.s 			page 6
 
 
  143:Src/pwm_curr_fdbk.c ****   * can be deduced thanks to the formula:
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  179              	.LFB1441:
  169:Src/pwm_curr_fdbk.c **** 
  170:Src/pwm_curr_fdbk.c **** #if defined (CCMRAM)
-ARM GAS  /tmp/ccwRyL58.s 			page 7
+ARM GAS  /tmp/ccXGH47T.s 			page 7
 
 
  171:Src/pwm_curr_fdbk.c **** #if defined (__ICCARM__)
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  209:Src/pwm_curr_fdbk.c ****   }
  210:Src/pwm_curr_fdbk.c ****   else
  211:Src/pwm_curr_fdbk.c ****   {
-ARM GAS  /tmp/ccwRyL58.s 			page 8
+ARM GAS  /tmp/ccXGH47T.s 			page 8
 
 
  212:Src/pwm_curr_fdbk.c **** #endif
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  234              		.loc 1 227 8 view .LVU62
  235 002c 01EBD172 		add	r2, r1, r1, lsr #31
  236 0030 5210     		asrs	r2, r2, #1
-ARM GAS  /tmp/ccwRyL58.s 			page 9
+ARM GAS  /tmp/ccXGH47T.s 			page 9
 
 
  237              	.LVL13:
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  247              		.loc 1 271 25 is_stmt 0 view .LVU68
  248 0040 0124     		movs	r4, #1
  249              	.LVL14:
-ARM GAS  /tmp/ccwRyL58.s 			page 10
+ARM GAS  /tmp/ccXGH47T.s 			page 10
 
 
  250              		.loc 1 271 25 view .LVU69
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  281:Src/pwm_curr_fdbk.c ****         if ( wX <= 0 )
  282:Src/pwm_curr_fdbk.c ****         {
  283:Src/pwm_curr_fdbk.c ****           pHandle->Sector = SECTOR_6;
-ARM GAS  /tmp/ccwRyL58.s 			page 11
+ARM GAS  /tmp/ccXGH47T.s 			page 11
 
 
  284:Src/pwm_curr_fdbk.c ****           wTimePhA = (((int32_t )pHandle->PWMperiod) / 4) + ((wY - wX) / (int32_t)262144);
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  308:Src/pwm_curr_fdbk.c **** 
  309:Src/pwm_curr_fdbk.c ****     if (1U == pHandle->DTTest)
  325              		.loc 1 309 5 is_stmt 1 discriminator 4 view .LVU100
-ARM GAS  /tmp/ccwRyL58.s 			page 12
+ARM GAS  /tmp/ccXGH47T.s 			page 12
 
 
  326              		.loc 1 309 22 is_stmt 0 discriminator 4 view .LVU101
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  345              	.LVL25:
  346              	.L54:
  347              		.cfi_restore_state
-ARM GAS  /tmp/ccwRyL58.s 			page 13
+ARM GAS  /tmp/ccXGH47T.s 			page 13
 
 
  232:Src/pwm_curr_fdbk.c ****       {
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  385 00ce 2246     		mov	r2, r4
  386 00d0 002C     		cmp	r4, #0
  387 00d2 62DB     		blt	.L63
-ARM GAS  /tmp/ccwRyL58.s 			page 14
+ARM GAS  /tmp/ccXGH47T.s 			page 14
 
 
  388              	.L29:
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  425 00f6 0A46     		mov	r2, r1
  426 00f8 0029     		cmp	r1, #0
  427 00fa 12DB     		blt	.L65
-ARM GAS  /tmp/ccwRyL58.s 			page 15
+ARM GAS  /tmp/ccXGH47T.s 			page 15
 
 
  428              	.L20:
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  468 012c 05F57F31 		add	r1, r5, #261120
  469 0130 01F2FF31 		addw	r1, r1, #1023
  470 0134 E7E7     		b	.L21
-ARM GAS  /tmp/ccwRyL58.s 			page 16
+ARM GAS  /tmp/ccXGH47T.s 			page 16
 
 
  471              	.LVL42:
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  251:Src/pwm_curr_fdbk.c ****           pHandle->midDuty = (uint16_t)wTimePhB;
  510              		.loc 1 251 28 is_stmt 0 view .LVU171
  511 015a A0F84610 		strh	r1, [r0, #70]	@ movhi
-ARM GAS  /tmp/ccwRyL58.s 			page 17
+ARM GAS  /tmp/ccXGH47T.s 			page 17
 
 
  252:Src/pwm_curr_fdbk.c ****           pHandle->highDuty = (uint16_t)wTimePhA;
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  555              	.LVL55:
  260:Src/pwm_curr_fdbk.c **** 
  556              		.loc 1 260 37 view .LVU183
-ARM GAS  /tmp/ccwRyL58.s 			page 18
+ARM GAS  /tmp/ccXGH47T.s 			page 18
 
 
  557 019e 02F2FF12 		addw	r2, r2, #511
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  598              		.loc 1 296 37 is_stmt 0 view .LVU196
  599 01d6 0A46     		mov	r2, r1
  600              	.LVL61:
-ARM GAS  /tmp/ccwRyL58.s 			page 19
+ARM GAS  /tmp/ccXGH47T.s 			page 19
 
 
  296:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhB - (wX / 131072);
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  638              		.loc 1 284 54 is_stmt 0 view .LVU213
  639 01fe 9B08     		lsrs	r3, r3, #2
  284:Src/pwm_curr_fdbk.c ****           wTimePhC = wTimePhA - (wY / 131072);
-ARM GAS  /tmp/ccwRyL58.s 			page 20
+ARM GAS  /tmp/ccXGH47T.s 			page 20
 
 
  640              		.loc 1 284 72 view .LVU214
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  679              		.loc 1 284 72 view .LVU229
  680 022a 02F57F32 		add	r2, r2, #261120
  681 022e 02F2FF32 		addw	r2, r2, #1023
-ARM GAS  /tmp/ccwRyL58.s 			page 21
+ARM GAS  /tmp/ccXGH47T.s 			page 21
 
 
  682 0232 E7E7     		b	.L35
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  726 026a 0022     		movs	r2, #0
  727              	.LVL81:
  306:Src/pwm_curr_fdbk.c ****     pHandle->CntPhC = (uint16_t)(MAX(wTimePhC, 0));
-ARM GAS  /tmp/ccwRyL58.s 			page 22
+ARM GAS  /tmp/ccXGH47T.s 			page 22
 
 
  728              		.loc 1 306 23 view .LVU240
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  330:Src/pwm_curr_fdbk.c ****       {
  766              		.loc 1 330 10 view .LVU257
  767 0298 002B     		cmp	r3, #0
-ARM GAS  /tmp/ccwRyL58.s 			page 23
+ARM GAS  /tmp/ccXGH47T.s 			page 23
 
 
  768 029a 10DD     		ble	.L49
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  812              	.LVL83:
  813              	.LFB1442:
  345:Src/pwm_curr_fdbk.c **** 
-ARM GAS  /tmp/ccwRyL58.s 			page 24
+ARM GAS  /tmp/ccXGH47T.s 			page 24
 
 
  346:Src/pwm_curr_fdbk.c **** /**
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  371:Src/pwm_curr_fdbk.c **** //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
  372:Src/pwm_curr_fdbk.c **** __weak void PWMC_SwitchOnPWM(PWMC_Handle_t *pHandle)
  373:Src/pwm_curr_fdbk.c **** {
-ARM GAS  /tmp/ccwRyL58.s 			page 25
+ARM GAS  /tmp/ccXGH47T.s 			page 25
 
 
  845              		.loc 1 373 1 is_stmt 1 view -0
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  399:Src/pwm_curr_fdbk.c ****   */
  400:Src/pwm_curr_fdbk.c **** __weak bool PWMC_CurrentReadingCalibr(PWMC_Handle_t *pHandle, CRCAction_t action)
  401:Src/pwm_curr_fdbk.c **** {
-ARM GAS  /tmp/ccwRyL58.s 			page 26
+ARM GAS  /tmp/ccXGH47T.s 			page 26
 
 
  876              		.loc 1 401 1 is_stmt 1 view -0
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  432:Src/pwm_curr_fdbk.c ****     }
  433:Src/pwm_curr_fdbk.c ****     else
  434:Src/pwm_curr_fdbk.c ****     {
-ARM GAS  /tmp/ccwRyL58.s 			page 27
+ARM GAS  /tmp/ccXGH47T.s 			page 27
 
 
  435:Src/pwm_curr_fdbk.c ****       /* Nothing to do */
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  933 002a 2BB9     		cbnz	r3, .L86
  424:Src/pwm_curr_fdbk.c ****           retVal = true;
  934              		.loc 1 424 11 is_stmt 1 view .LVU306
-ARM GAS  /tmp/ccwRyL58.s 			page 28
+ARM GAS  /tmp/ccXGH47T.s 			page 28
 
 
  424:Src/pwm_curr_fdbk.c ****           retVal = true;
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  453:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
  454:Src/pwm_curr_fdbk.c ****   if (MC_NULL == out_buf)
  455:Src/pwm_curr_fdbk.c ****   {
-ARM GAS  /tmp/ccwRyL58.s 			page 29
+ARM GAS  /tmp/ccXGH47T.s 			page 29
 
 
  456:Src/pwm_curr_fdbk.c ****     x = 0;
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  496:Src/pwm_curr_fdbk.c ****   }
  497:Src/pwm_curr_fdbk.c ****   else
  498:Src/pwm_curr_fdbk.c ****   {
-ARM GAS  /tmp/ccwRyL58.s 			page 30
+ARM GAS  /tmp/ccXGH47T.s 			page 30
 
 
  499:Src/pwm_curr_fdbk.c **** #endif
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1023              	.LBI8:
  450:Src/pwm_curr_fdbk.c **** {
  1024              		.loc 1 450 23 view .LVU336
-ARM GAS  /tmp/ccwRyL58.s 			page 31
+ARM GAS  /tmp/ccXGH47T.s 			page 31
 
 
  1025              	.LBB9:
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1060              		.loc 1 514 5 is_stmt 1 view .LVU354
  1061              		.loc 1 514 11 is_stmt 0 view .LVU355
  1062 0046 5B42     		rsbs	r3, r3, #0
-ARM GAS  /tmp/ccwRyL58.s 			page 32
+ARM GAS  /tmp/ccXGH47T.s 			page 32
 
 
  1063              	.LVL107:
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1103              	PWMC_TurnOnLowSides:
  1104              	.LVL110:
  1105              	.LFB1447:
-ARM GAS  /tmp/ccwRyL58.s 			page 33
+ARM GAS  /tmp/ccXGH47T.s 			page 33
 
 
  531:Src/pwm_curr_fdbk.c **** 
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1136              	.LFB1448:
  557:Src/pwm_curr_fdbk.c **** 
  558:Src/pwm_curr_fdbk.c **** /** @brief Returns #MC_BREAK_IN if an over current condition was detected on the power stage
-ARM GAS  /tmp/ccwRyL58.s 			page 34
+ARM GAS  /tmp/ccXGH47T.s 			page 34
 
 
  559:Src/pwm_curr_fdbk.c ****   *         controlled by the PWMC component pointed by  @p pHandle, since the last call to this fu
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1169              		.cfi_startproc
  1170              		@ args = 0, pretend = 0, frame = 0
  1171              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccwRyL58.s 			page 35
+ARM GAS  /tmp/ccXGH47T.s 			page 35
 
 
  1172              		.loc 1 582 1 is_stmt 0 view .LVU380
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1203              		@ link register save eliminated.
  608:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
  609:Src/pwm_curr_fdbk.c ****   return ((MC_NULL == pHandle) ? false : pHandle->TurnOnLowSidesAction);
-ARM GAS  /tmp/ccwRyL58.s 			page 36
+ARM GAS  /tmp/ccXGH47T.s 			page 36
 
 
  610:Src/pwm_curr_fdbk.c **** #else
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1240              		.weak	PWMC_DPWM_ModeDisable
  1241              		.syntax unified
  1242              		.thumb
-ARM GAS  /tmp/ccwRyL58.s 			page 37
+ARM GAS  /tmp/ccXGH47T.s 			page 37
 
 
  1243              		.thumb_func
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  652:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
  653:Src/pwm_curr_fdbk.c ****   return ((MC_NULL == pHandle) ? false : pHandle->DPWM_Mode);
  654:Src/pwm_curr_fdbk.c **** #else
-ARM GAS  /tmp/ccwRyL58.s 			page 38
+ARM GAS  /tmp/ccXGH47T.s 			page 38
 
 
  655:Src/pwm_curr_fdbk.c ****   return (pHandle->DPWM_Mode);
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1314              		.loc 1 675 1 view .LVU406
  1315 0006 08BD     		pop	{r3, pc}
  1316              		.cfi_endproc
-ARM GAS  /tmp/ccwRyL58.s 			page 39
+ARM GAS  /tmp/ccXGH47T.s 			page 39
 
 
  1317              	.LFE1454:
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1356              		.fpu fpv4-sp-d16
  1358              	PWMC_RLDetectionModeSetDuty:
  1359              	.LVL126:
-ARM GAS  /tmp/ccwRyL58.s 			page 40
+ARM GAS  /tmp/ccXGH47T.s 			page 40
 
 
  1360              	.LFB1456:
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1386              		.thumb_func
  1387              		.fpu fpv4-sp-d16
  1389              	PWMC_SetAlignFlag:
-ARM GAS  /tmp/ccwRyL58.s 			page 41
+ARM GAS  /tmp/ccXGH47T.s 			page 41
 
 
  1390              	.LVL128:
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  753:Src/pwm_curr_fdbk.c **** {
  1416              		.loc 1 753 1 is_stmt 1 view -0
  1417              		.cfi_startproc
-ARM GAS  /tmp/ccwRyL58.s 			page 42
+ARM GAS  /tmp/ccXGH47T.s 			page 42
 
 
  1418              		@ args = 0, pretend = 0, frame = 0
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  783:Src/pwm_curr_fdbk.c ****   {
  784:Src/pwm_curr_fdbk.c **** #endif
  785:Src/pwm_curr_fdbk.c ****     pHandle->pFctSwitchOffPwm = pCallBack;
-ARM GAS  /tmp/ccwRyL58.s 			page 43
+ARM GAS  /tmp/ccXGH47T.s 			page 43
 
 
  1445              		.loc 1 785 5 view .LVU428
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1474              		.cfi_endproc
  1475              	.LFE1460:
  1477              		.section	.text.PWMC_RegisterReadingCalibrationCallBack,"ax",%progbits
-ARM GAS  /tmp/ccwRyL58.s 			page 44
+ARM GAS  /tmp/ccXGH47T.s 			page 44
 
 
  1478              		.align	1
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  836:Src/pwm_curr_fdbk.c **** 
  837:Src/pwm_curr_fdbk.c **** /**
  838:Src/pwm_curr_fdbk.c ****  * @brief Sets the Callback that the PWMC component shall invoke to turn low sides on.
-ARM GAS  /tmp/ccwRyL58.s 			page 45
+ARM GAS  /tmp/ccXGH47T.s 			page 45
 
 
  839:Src/pwm_curr_fdbk.c ****  * @param pCallBack pointer on the callback
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1540              		@ link register save eliminated.
  867:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
  868:Src/pwm_curr_fdbk.c ****   if (MC_NULL == pHandle)
-ARM GAS  /tmp/ccwRyL58.s 			page 46
+ARM GAS  /tmp/ccXGH47T.s 			page 46
 
 
  869:Src/pwm_curr_fdbk.c ****   {
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  898:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
  899:Src/pwm_curr_fdbk.c ****   }
  900:Src/pwm_curr_fdbk.c **** #endif
-ARM GAS  /tmp/ccwRyL58.s 			page 47
+ARM GAS  /tmp/ccXGH47T.s 			page 47
 
 
  901:Src/pwm_curr_fdbk.c **** }
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1602              		.thumb_func
  1603              		.fpu fpv4-sp-d16
  1605              	PWMC_RegisterRLDetectionModeEnableCallBack:
-ARM GAS  /tmp/ccwRyL58.s 			page 48
+ARM GAS  /tmp/ccXGH47T.s 			page 48
 
 
  1606              	.LVL137:
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1633              		.cfi_startproc
  1634              		@ args = 0, pretend = 0, frame = 0
  1635              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccwRyL58.s 			page 49
+ARM GAS  /tmp/ccXGH47T.s 			page 49
 
 
  1636              		@ link register save eliminated.
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1661              		.loc 1 983 5 view .LVU464
  1662              		.loc 1 983 41 is_stmt 0 view .LVU465
  1663 0000 8862     		str	r0, [r1, #40]
-ARM GAS  /tmp/ccwRyL58.s 			page 50
+ARM GAS  /tmp/ccXGH47T.s 			page 50
 
 
  984:Src/pwm_curr_fdbk.c **** #ifdef NULL_PTR_PWR_CUR_FDB
@@ -2963,76 +2963,76 @@ ARM GAS  /tmp/ccwRyL58.s 			page 1
  1680              		.file 11 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
  1681              		.file 12 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h"
  1682              		.file 13 "Inc/mc_math.h"
-ARM GAS  /tmp/ccwRyL58.s 			page 51
+ARM GAS  /tmp/ccXGH47T.s 			page 51
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 pwm_curr_fdbk.c
-     /tmp/ccwRyL58.s:18     .text.PWMC_Clear:0000000000000000 $t
-     /tmp/ccwRyL58.s:26     .text.PWMC_Clear:0000000000000000 PWMC_Clear
-     /tmp/ccwRyL58.s:57     .text.PWMC_SetOffsetCalib:0000000000000000 $t
-     /tmp/ccwRyL58.s:64     .text.PWMC_SetOffsetCalib:0000000000000000 PWMC_SetOffsetCalib
-     /tmp/ccwRyL58.s:98     .text.PWMC_GetOffsetCalib:0000000000000000 $t
-     /tmp/ccwRyL58.s:105    .text.PWMC_GetOffsetCalib:0000000000000000 PWMC_GetOffsetCalib
-     /tmp/ccwRyL58.s:139    .text.PWMC_GetPhaseCurrents:0000000000000000 $t
-     /tmp/ccwRyL58.s:146    .text.PWMC_GetPhaseCurrents:0000000000000000 PWMC_GetPhaseCurrents
-     /tmp/ccwRyL58.s:170    .text.PWMC_SetPhaseVoltage:0000000000000000 $t
-     /tmp/ccwRyL58.s:177    .text.PWMC_SetPhaseVoltage:0000000000000000 PWMC_SetPhaseVoltage
-     /tmp/ccwRyL58.s:804    .text.PWMC_SwitchOffPWM:0000000000000000 $t
-     /tmp/ccwRyL58.s:811    .text.PWMC_SwitchOffPWM:0000000000000000 PWMC_SwitchOffPWM
-     /tmp/ccwRyL58.s:835    .text.PWMC_SwitchOnPWM:0000000000000000 $t
-     /tmp/ccwRyL58.s:842    .text.PWMC_SwitchOnPWM:0000000000000000 PWMC_SwitchOnPWM
-     /tmp/ccwRyL58.s:866    .text.PWMC_CurrentReadingCalibr:0000000000000000 $t
-     /tmp/ccwRyL58.s:873    .text.PWMC_CurrentReadingCalibr:0000000000000000 PWMC_CurrentReadingCalibr
-     /tmp/ccwRyL58.s:962    .text.PWMC_CalcPhaseCurrentsEst:0000000000000000 $t
-     /tmp/ccwRyL58.s:969    .text.PWMC_CalcPhaseCurrentsEst:0000000000000000 PWMC_CalcPhaseCurrentsEst
-     /tmp/ccwRyL58.s:1096   .text.PWMC_TurnOnLowSides:0000000000000000 $t
-     /tmp/ccwRyL58.s:1103   .text.PWMC_TurnOnLowSides:0000000000000000 PWMC_TurnOnLowSides
-     /tmp/ccwRyL58.s:1127   .text.PWMC_CheckOverCurrent:0000000000000000 $t
-     /tmp/ccwRyL58.s:1134   .text.PWMC_CheckOverCurrent:0000000000000000 PWMC_CheckOverCurrent
-     /tmp/ccwRyL58.s:1158   .text.PWMC_OCPSetReferenceVoltage:0000000000000000 $t
-     /tmp/ccwRyL58.s:1165   .text.PWMC_OCPSetReferenceVoltage:0000000000000000 PWMC_OCPSetReferenceVoltage
-     /tmp/ccwRyL58.s:1189   .text.PWMC_GetTurnOnLowSidesAction:0000000000000000 $t
-     /tmp/ccwRyL58.s:1196   .text.PWMC_GetTurnOnLowSidesAction:0000000000000000 PWMC_GetTurnOnLowSidesAction
-     /tmp/ccwRyL58.s:1214   .text.PWMC_DPWM_ModeEnable:0000000000000000 $t
-     /tmp/ccwRyL58.s:1221   .text.PWMC_DPWM_ModeEnable:0000000000000000 PWMC_DPWM_ModeEnable
-     /tmp/ccwRyL58.s:1239   .text.PWMC_DPWM_ModeDisable:0000000000000000 $t
-     /tmp/ccwRyL58.s:1246   .text.PWMC_DPWM_ModeDisable:0000000000000000 PWMC_DPWM_ModeDisable
-     /tmp/ccwRyL58.s:1264   .text.PWMC_GetDPWM_Mode:0000000000000000 $t
-     /tmp/ccwRyL58.s:1271   .text.PWMC_GetDPWM_Mode:0000000000000000 PWMC_GetDPWM_Mode
-     /tmp/ccwRyL58.s:1289   .text.PWMC_RLDetectionModeEnable:0000000000000000 $t
-     /tmp/ccwRyL58.s:1296   .text.PWMC_RLDetectionModeEnable:0000000000000000 PWMC_RLDetectionModeEnable
-     /tmp/ccwRyL58.s:1320   .text.PWMC_RLDetectionModeDisable:0000000000000000 $t
-     /tmp/ccwRyL58.s:1327   .text.PWMC_RLDetectionModeDisable:0000000000000000 PWMC_RLDetectionModeDisable
-     /tmp/ccwRyL58.s:1351   .text.PWMC_RLDetectionModeSetDuty:0000000000000000 $t
-     /tmp/ccwRyL58.s:1358   .text.PWMC_RLDetectionModeSetDuty:0000000000000000 PWMC_RLDetectionModeSetDuty
-     /tmp/ccwRyL58.s:1382   .text.PWMC_SetAlignFlag:0000000000000000 $t
-     /tmp/ccwRyL58.s:1389   .text.PWMC_SetAlignFlag:0000000000000000 PWMC_SetAlignFlag
-     /tmp/ccwRyL58.s:1406   .text.PWMC_RegisterGetPhaseCurrentsCallBack:0000000000000000 $t
-     /tmp/ccwRyL58.s:1413   .text.PWMC_RegisterGetPhaseCurrentsCallBack:0000000000000000 PWMC_RegisterGetPhaseCurrentsCallBack
-     /tmp/ccwRyL58.s:1430   .text.PWMC_RegisterSwitchOffPwmCallBack:0000000000000000 $t
-     /tmp/ccwRyL58.s:1437   .text.PWMC_RegisterSwitchOffPwmCallBack:0000000000000000 PWMC_RegisterSwitchOffPwmCallBack
-     /tmp/ccwRyL58.s:1454   .text.PWMC_RegisterSwitchonPwmCallBack:0000000000000000 $t
-     /tmp/ccwRyL58.s:1461   .text.PWMC_RegisterSwitchonPwmCallBack:0000000000000000 PWMC_RegisterSwitchonPwmCallBack
-     /tmp/ccwRyL58.s:1478   .text.PWMC_RegisterReadingCalibrationCallBack:0000000000000000 $t
-     /tmp/ccwRyL58.s:1485   .text.PWMC_RegisterReadingCalibrationCallBack:0000000000000000 PWMC_RegisterReadingCalibrationCallBack
-     /tmp/ccwRyL58.s:1502   .text.PWMC_RegisterTurnOnLowSidesCallBack:0000000000000000 $t
-     /tmp/ccwRyL58.s:1509   .text.PWMC_RegisterTurnOnLowSidesCallBack:0000000000000000 PWMC_RegisterTurnOnLowSidesCallBack
-     /tmp/ccwRyL58.s:1526   .text.PWMC_RegisterSampPointSectXCallBack:0000000000000000 $t
-     /tmp/ccwRyL58.s:1533   .text.PWMC_RegisterSampPointSectXCallBack:0000000000000000 PWMC_RegisterSampPointSectXCallBack
-     /tmp/ccwRyL58.s:1550   .text.PWMC_RegisterIsOverCurrentOccurredCallBack:0000000000000000 $t
-     /tmp/ccwRyL58.s:1557   .text.PWMC_RegisterIsOverCurrentOccurredCallBack:0000000000000000 PWMC_RegisterIsOverCurrentOccurredCallBack
-     /tmp/ccwRyL58.s:1574   .text.PWMC_RegisterOCPSetRefVoltageCallBack:0000000000000000 $t
-ARM GAS  /tmp/ccwRyL58.s 			page 52
+     /tmp/ccXGH47T.s:18     .text.PWMC_Clear:0000000000000000 $t
+     /tmp/ccXGH47T.s:26     .text.PWMC_Clear:0000000000000000 PWMC_Clear
+     /tmp/ccXGH47T.s:57     .text.PWMC_SetOffsetCalib:0000000000000000 $t
+     /tmp/ccXGH47T.s:64     .text.PWMC_SetOffsetCalib:0000000000000000 PWMC_SetOffsetCalib
+     /tmp/ccXGH47T.s:98     .text.PWMC_GetOffsetCalib:0000000000000000 $t
+     /tmp/ccXGH47T.s:105    .text.PWMC_GetOffsetCalib:0000000000000000 PWMC_GetOffsetCalib
+     /tmp/ccXGH47T.s:139    .text.PWMC_GetPhaseCurrents:0000000000000000 $t
+     /tmp/ccXGH47T.s:146    .text.PWMC_GetPhaseCurrents:0000000000000000 PWMC_GetPhaseCurrents
+     /tmp/ccXGH47T.s:170    .text.PWMC_SetPhaseVoltage:0000000000000000 $t
+     /tmp/ccXGH47T.s:177    .text.PWMC_SetPhaseVoltage:0000000000000000 PWMC_SetPhaseVoltage
+     /tmp/ccXGH47T.s:804    .text.PWMC_SwitchOffPWM:0000000000000000 $t
+     /tmp/ccXGH47T.s:811    .text.PWMC_SwitchOffPWM:0000000000000000 PWMC_SwitchOffPWM
+     /tmp/ccXGH47T.s:835    .text.PWMC_SwitchOnPWM:0000000000000000 $t
+     /tmp/ccXGH47T.s:842    .text.PWMC_SwitchOnPWM:0000000000000000 PWMC_SwitchOnPWM
+     /tmp/ccXGH47T.s:866    .text.PWMC_CurrentReadingCalibr:0000000000000000 $t
+     /tmp/ccXGH47T.s:873    .text.PWMC_CurrentReadingCalibr:0000000000000000 PWMC_CurrentReadingCalibr
+     /tmp/ccXGH47T.s:962    .text.PWMC_CalcPhaseCurrentsEst:0000000000000000 $t
+     /tmp/ccXGH47T.s:969    .text.PWMC_CalcPhaseCurrentsEst:0000000000000000 PWMC_CalcPhaseCurrentsEst
+     /tmp/ccXGH47T.s:1096   .text.PWMC_TurnOnLowSides:0000000000000000 $t
+     /tmp/ccXGH47T.s:1103   .text.PWMC_TurnOnLowSides:0000000000000000 PWMC_TurnOnLowSides
+     /tmp/ccXGH47T.s:1127   .text.PWMC_CheckOverCurrent:0000000000000000 $t
+     /tmp/ccXGH47T.s:1134   .text.PWMC_CheckOverCurrent:0000000000000000 PWMC_CheckOverCurrent
+     /tmp/ccXGH47T.s:1158   .text.PWMC_OCPSetReferenceVoltage:0000000000000000 $t
+     /tmp/ccXGH47T.s:1165   .text.PWMC_OCPSetReferenceVoltage:0000000000000000 PWMC_OCPSetReferenceVoltage
+     /tmp/ccXGH47T.s:1189   .text.PWMC_GetTurnOnLowSidesAction:0000000000000000 $t
+     /tmp/ccXGH47T.s:1196   .text.PWMC_GetTurnOnLowSidesAction:0000000000000000 PWMC_GetTurnOnLowSidesAction
+     /tmp/ccXGH47T.s:1214   .text.PWMC_DPWM_ModeEnable:0000000000000000 $t
+     /tmp/ccXGH47T.s:1221   .text.PWMC_DPWM_ModeEnable:0000000000000000 PWMC_DPWM_ModeEnable
+     /tmp/ccXGH47T.s:1239   .text.PWMC_DPWM_ModeDisable:0000000000000000 $t
+     /tmp/ccXGH47T.s:1246   .text.PWMC_DPWM_ModeDisable:0000000000000000 PWMC_DPWM_ModeDisable
+     /tmp/ccXGH47T.s:1264   .text.PWMC_GetDPWM_Mode:0000000000000000 $t
+     /tmp/ccXGH47T.s:1271   .text.PWMC_GetDPWM_Mode:0000000000000000 PWMC_GetDPWM_Mode
+     /tmp/ccXGH47T.s:1289   .text.PWMC_RLDetectionModeEnable:0000000000000000 $t
+     /tmp/ccXGH47T.s:1296   .text.PWMC_RLDetectionModeEnable:0000000000000000 PWMC_RLDetectionModeEnable
+     /tmp/ccXGH47T.s:1320   .text.PWMC_RLDetectionModeDisable:0000000000000000 $t
+     /tmp/ccXGH47T.s:1327   .text.PWMC_RLDetectionModeDisable:0000000000000000 PWMC_RLDetectionModeDisable
+     /tmp/ccXGH47T.s:1351   .text.PWMC_RLDetectionModeSetDuty:0000000000000000 $t
+     /tmp/ccXGH47T.s:1358   .text.PWMC_RLDetectionModeSetDuty:0000000000000000 PWMC_RLDetectionModeSetDuty
+     /tmp/ccXGH47T.s:1382   .text.PWMC_SetAlignFlag:0000000000000000 $t
+     /tmp/ccXGH47T.s:1389   .text.PWMC_SetAlignFlag:0000000000000000 PWMC_SetAlignFlag
+     /tmp/ccXGH47T.s:1406   .text.PWMC_RegisterGetPhaseCurrentsCallBack:0000000000000000 $t
+     /tmp/ccXGH47T.s:1413   .text.PWMC_RegisterGetPhaseCurrentsCallBack:0000000000000000 PWMC_RegisterGetPhaseCurrentsCallBack
+     /tmp/ccXGH47T.s:1430   .text.PWMC_RegisterSwitchOffPwmCallBack:0000000000000000 $t
+     /tmp/ccXGH47T.s:1437   .text.PWMC_RegisterSwitchOffPwmCallBack:0000000000000000 PWMC_RegisterSwitchOffPwmCallBack
+     /tmp/ccXGH47T.s:1454   .text.PWMC_RegisterSwitchonPwmCallBack:0000000000000000 $t
+     /tmp/ccXGH47T.s:1461   .text.PWMC_RegisterSwitchonPwmCallBack:0000000000000000 PWMC_RegisterSwitchonPwmCallBack
+     /tmp/ccXGH47T.s:1478   .text.PWMC_RegisterReadingCalibrationCallBack:0000000000000000 $t
+     /tmp/ccXGH47T.s:1485   .text.PWMC_RegisterReadingCalibrationCallBack:0000000000000000 PWMC_RegisterReadingCalibrationCallBack
+     /tmp/ccXGH47T.s:1502   .text.PWMC_RegisterTurnOnLowSidesCallBack:0000000000000000 $t
+     /tmp/ccXGH47T.s:1509   .text.PWMC_RegisterTurnOnLowSidesCallBack:0000000000000000 PWMC_RegisterTurnOnLowSidesCallBack
+     /tmp/ccXGH47T.s:1526   .text.PWMC_RegisterSampPointSectXCallBack:0000000000000000 $t
+     /tmp/ccXGH47T.s:1533   .text.PWMC_RegisterSampPointSectXCallBack:0000000000000000 PWMC_RegisterSampPointSectXCallBack
+     /tmp/ccXGH47T.s:1550   .text.PWMC_RegisterIsOverCurrentOccurredCallBack:0000000000000000 $t
+     /tmp/ccXGH47T.s:1557   .text.PWMC_RegisterIsOverCurrentOccurredCallBack:0000000000000000 PWMC_RegisterIsOverCurrentOccurredCallBack
+     /tmp/ccXGH47T.s:1574   .text.PWMC_RegisterOCPSetRefVoltageCallBack:0000000000000000 $t
+ARM GAS  /tmp/ccXGH47T.s 			page 52
 
 
-     /tmp/ccwRyL58.s:1581   .text.PWMC_RegisterOCPSetRefVoltageCallBack:0000000000000000 PWMC_RegisterOCPSetRefVoltageCallBack
-     /tmp/ccwRyL58.s:1598   .text.PWMC_RegisterRLDetectionModeEnableCallBack:0000000000000000 $t
-     /tmp/ccwRyL58.s:1605   .text.PWMC_RegisterRLDetectionModeEnableCallBack:0000000000000000 PWMC_RegisterRLDetectionModeEnableCallBack
-     /tmp/ccwRyL58.s:1622   .text.PWMC_RegisterRLDetectionModeDisableCallBack:0000000000000000 $t
-     /tmp/ccwRyL58.s:1629   .text.PWMC_RegisterRLDetectionModeDisableCallBack:0000000000000000 PWMC_RegisterRLDetectionModeDisableCallBack
-     /tmp/ccwRyL58.s:1646   .text.PWMC_RegisterRLDetectionModeSetDutyCallBack:0000000000000000 $t
-     /tmp/ccwRyL58.s:1653   .text.PWMC_RegisterRLDetectionModeSetDutyCallBack:0000000000000000 PWMC_RegisterRLDetectionModeSetDutyCallBack
+     /tmp/ccXGH47T.s:1581   .text.PWMC_RegisterOCPSetRefVoltageCallBack:0000000000000000 PWMC_RegisterOCPSetRefVoltageCallBack
+     /tmp/ccXGH47T.s:1598   .text.PWMC_RegisterRLDetectionModeEnableCallBack:0000000000000000 $t
+     /tmp/ccXGH47T.s:1605   .text.PWMC_RegisterRLDetectionModeEnableCallBack:0000000000000000 PWMC_RegisterRLDetectionModeEnableCallBack
+     /tmp/ccXGH47T.s:1622   .text.PWMC_RegisterRLDetectionModeDisableCallBack:0000000000000000 $t
+     /tmp/ccXGH47T.s:1629   .text.PWMC_RegisterRLDetectionModeDisableCallBack:0000000000000000 PWMC_RegisterRLDetectionModeDisableCallBack
+     /tmp/ccXGH47T.s:1646   .text.PWMC_RegisterRLDetectionModeSetDutyCallBack:0000000000000000 $t
+     /tmp/ccXGH47T.s:1653   .text.PWMC_RegisterRLDetectionModeSetDutyCallBack:0000000000000000 PWMC_RegisterRLDetectionModeSetDutyCallBack
 
 UNDEFINED SYMBOLS
 MCM_Rev_Park

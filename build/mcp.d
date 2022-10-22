@@ -71,7 +71,8 @@ build/mcp.o: MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c \
  Inc/parameters_conversion_g4xx.h Inc/pmsm_motor_parameters.h \
  Inc/drive_parameters.h Inc/power_stage_parameters.h \
  MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcptl.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcpa.h
+ MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcpa.h \
+ Inc/debug_scope.h
 
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
 
@@ -238,3 +239,5 @@ Inc/power_stage_parameters.h:
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcptl.h:
 
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcpa.h:
+
+Inc/debug_scope.h:

@@ -72,7 +72,7 @@ build/main.o: Src/main.c Inc/main.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_exti.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cortex.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_utils.h \
- Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_pwr.h
+ Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_pwr.h Inc/debug_scope.h
 
 Inc/main.h:
 
@@ -241,3 +241,5 @@ Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cortex.h:
 Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_utils.h:
 
 Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_pwr.h:
+
+Inc/debug_scope.h:

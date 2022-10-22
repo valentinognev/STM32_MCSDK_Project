@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccwngzUX.s 			page 1
+ARM GAS  /tmp/ccec1Kvs.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
   27:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****   * @{
   28:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****   */
   29:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c **** 
-ARM GAS  /tmp/ccwngzUX.s 			page 2
+ARM GAS  /tmp/ccec1Kvs.s 			page 2
 
 
   30:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c **** /** @addtogroup SpeednPosFdbk
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
   36              		.loc 1 77 39 is_stmt 0 view .LVU2
   37 0000 0023     		movs	r3, #0
   38 0002 0370     		strb	r3, [r0]
-ARM GAS  /tmp/ccwngzUX.s 			page 3
+ARM GAS  /tmp/ccec1Kvs.s 			page 3
 
 
   78:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****     pHandle->_Super.hElAngle = 0;
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
   93:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****     pHandle->bTransitionLocked = false;
   78              		.loc 1 93 5 is_stmt 1 view .LVU29
   79              		.loc 1 93 32 is_stmt 0 view .LVU30
-ARM GAS  /tmp/ccwngzUX.s 			page 4
+ARM GAS  /tmp/ccec1Kvs.s 			page 4
 
 
   80 0024 80F83230 		strb	r3, [r0, #50]
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  120              		.syntax unified
  121              		.thumb
  122              		.thumb_func
-ARM GAS  /tmp/ccwngzUX.s 			page 5
+ARM GAS  /tmp/ccec1Kvs.s 			page 5
 
 
  123              		.fpu fpv4-sp-d16
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  139:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****       hRetAngle = *(int16_t *)pInputVars_str;
  146              		.loc 1 139 7 is_stmt 1 view .LVU48
  147              		.loc 1 139 17 is_stmt 0 view .LVU49
-ARM GAS  /tmp/ccwngzUX.s 			page 6
+ARM GAS  /tmp/ccec1Kvs.s 			page 6
 
 
  148 0008 B1F90000 		ldrsh	r0, [r1]
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  192:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****             {
  193:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****               hRetAngle = pHandle->hElAngleAccu;
  194:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****             }
-ARM GAS  /tmp/ccwngzUX.s 			page 7
+ARM GAS  /tmp/ccec1Kvs.s 			page 7
 
 
  195:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****             else
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  149:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c **** #endif
  178              		.loc 1 149 65 view .LVU61
  179 0024 94FBF2F2 		sdiv	r2, r4, r2
-ARM GAS  /tmp/ccwngzUX.s 			page 8
+ARM GAS  /tmp/ccec1Kvs.s 			page 8
 
 
  149:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c **** #endif
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  218              		.cfi_def_cfa_offset 0
  219 004c 7047     		bx	lr
  220              	.LVL10:
-ARM GAS  /tmp/ccwngzUX.s 			page 9
+ARM GAS  /tmp/ccec1Kvs.s 			page 9
 
 
  221              	.L7:
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  258              		.loc 1 182 22 view .LVU95
  259 0070 92B2     		uxth	r2, r2
  260              	.LVL16:
-ARM GAS  /tmp/ccwngzUX.s 			page 10
+ARM GAS  /tmp/ccec1Kvs.s 			page 10
 
 
  184:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****           {
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  298 0090 93F83240 		ldrb	r4, [r3, #50]	@ zero_extendqisi2
  191:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****             {
  299              		.loc 1 191 16 view .LVU113
-ARM GAS  /tmp/ccwngzUX.s 			page 11
+ARM GAS  /tmp/ccec1Kvs.s 			page 11
 
 
  300 0094 002C     		cmp	r4, #0
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  332 0000 10B5     		push	{r4, lr}
  333              		.cfi_def_cfa_offset 8
  334              		.cfi_offset 4, -8
-ARM GAS  /tmp/ccwngzUX.s 			page 12
+ARM GAS  /tmp/ccec1Kvs.s 			page 12
 
 
  335              		.cfi_offset 14, -4
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  366              		.loc 1 255 60 view .LVU136
  367 0022 DC69     		ldr	r4, [r3, #28]
  368              		.loc 1 255 103 view .LVU137
-ARM GAS  /tmp/ccwngzUX.s 			page 13
+ARM GAS  /tmp/ccec1Kvs.s 			page 13
 
 
  369 0024 5878     		ldrb	r0, [r3, #1]	@ zero_extendqisi2
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  400              	.L19:
  277:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****     }
  278:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****     else
-ARM GAS  /tmp/ccwngzUX.s 			page 14
+ARM GAS  /tmp/ccec1Kvs.s 			page 14
 
 
  279:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****     {
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  264:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****       pHandle->_Super.hElSpeedDpp *= ((int16_t)pHandle->_Super.bElToMecRatio);
  433              		.loc 1 264 70 view .LVU170
  434 0062 00EB8000 		add	r0, r0, r0, lsl #2
-ARM GAS  /tmp/ccwngzUX.s 			page 15
+ARM GAS  /tmp/ccec1Kvs.s 			page 15
 
 
  435 0066 4000     		lsls	r0, r0, #1
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  295:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c **** __weak void VSS_SetMecAngle(VirtualSpeedSensor_Handle_t *pHandle, int16_t hMecAngle)
  296:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c **** {
  473              		.loc 1 296 1 is_stmt 1 view -0
-ARM GAS  /tmp/ccwngzUX.s 			page 16
+ARM GAS  /tmp/ccec1Kvs.s 			page 16
 
 
  474              		.cfi_startproc
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  320:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****             by #SPEED_UNIT.
  321:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****   * @param  hDurationms Duration expressed in ms. It can be 0 to apply
  322:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****             instantaneous the final speed.
-ARM GAS  /tmp/ccwngzUX.s 			page 17
+ARM GAS  /tmp/ccec1Kvs.s 			page 17
 
 
  323:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****   * @retval none
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  533              		.loc 1 350 75 view .LVU206
  534 0012 428B     		ldrh	r2, [r0, #26]
  535              	.LVL32:
-ARM GAS  /tmp/ccwngzUX.s 			page 18
+ARM GAS  /tmp/ccec1Kvs.s 			page 18
 
 
  536              		.loc 1 350 48 view .LVU207
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  577              	.LVL35:
  361:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****         hNbrStep++;
  578              		.loc 1 361 9 is_stmt 1 view .LVU223
-ARM GAS  /tmp/ccwngzUX.s 			page 19
+ARM GAS  /tmp/ccec1Kvs.s 			page 19
 
 
  579              		.loc 1 361 17 is_stmt 0 view .LVU224
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  619 006a 1204     		lsls	r2, r2, #16
  373:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****                          * ((int32_t)65536)) / ((int32_t )hNbrStep);
  620              		.loc 1 373 25 view .LVU244
-ARM GAS  /tmp/ccwngzUX.s 			page 20
+ARM GAS  /tmp/ccec1Kvs.s 			page 20
 
 
  621 006c 92FBF3F3 		sdiv	r3, r2, r3
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  663              		.thumb
  664              		.thumb_func
  665              		.fpu fpv4-sp-d16
-ARM GAS  /tmp/ccwngzUX.s 			page 21
+ARM GAS  /tmp/ccec1Kvs.s 			page 21
 
 
  667              	VSS_RampCompleted:
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  415:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****   }
  416:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c **** #endif
  417:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****   return (retVal);
-ARM GAS  /tmp/ccwngzUX.s 			page 22
+ARM GAS  /tmp/ccec1Kvs.s 			page 22
 
 
  692              		.loc 1 417 3 view .LVU265
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  434:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c **** 
  435:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c **** /**
  436:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****   * @brief  Set the command to Start the transition phase from VirtualSpeedSensor
-ARM GAS  /tmp/ccwngzUX.s 			page 23
+ARM GAS  /tmp/ccec1Kvs.s 			page 23
 
 
  437:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****             to other SpeedSensor.
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  465:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****         bAux = false;
  760              		.loc 1 465 9 is_stmt 1 view .LVU284
  761              	.LVL52:
-ARM GAS  /tmp/ccwngzUX.s 			page 24
+ARM GAS  /tmp/ccec1Kvs.s 			page 24
 
 
  762              		.loc 1 465 14 is_stmt 0 view .LVU285
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  800              		@ link register save eliminated.
  481:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****   bool retVal = false;
  801              		.loc 1 481 3 view .LVU293
-ARM GAS  /tmp/ccwngzUX.s 			page 25
+ARM GAS  /tmp/ccec1Kvs.s 			page 25
 
 
  482:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c **** #ifdef NULL_PTR_VIR_SPD_SEN
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  506:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****     }
  507:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c **** #ifdef NULL_PTR_VIR_SPD_SEN
  508:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****   }
-ARM GAS  /tmp/ccwngzUX.s 			page 26
+ARM GAS  /tmp/ccec1Kvs.s 			page 26
 
 
  509:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c **** #endif
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  872              	.LFE1445:
  874              		.section	.text.VSS_SetCopyObserver,"ax",%progbits
  875              		.align	1
-ARM GAS  /tmp/ccwngzUX.s 			page 27
+ARM GAS  /tmp/ccec1Kvs.s 			page 27
 
 
  876              		.weak	VSS_SetCopyObserver
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  544:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****   * @brief  It  set istantaneous information on rotor electrical angle.
  545:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****   * @param  pHandle: handler of the current instance of the VirtualSpeedSensor component
  546:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****   * @param  hElAngle istantaneous measure of rotor electrical angle (s16degrees)
-ARM GAS  /tmp/ccwngzUX.s 			page 28
+ARM GAS  /tmp/ccec1Kvs.s 			page 28
 
 
  547:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c ****   * @retval none
@@ -1667,38 +1667,38 @@ ARM GAS  /tmp/ccwngzUX.s 			page 1
  936              		.file 10 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h"
  937              		.file 11 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h"
  938              		.file 12 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h"
-ARM GAS  /tmp/ccwngzUX.s 			page 29
+ARM GAS  /tmp/ccec1Kvs.s 			page 29
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 virtual_speed_sensor.c
-     /tmp/ccwngzUX.s:18     .text.VSS_Clear:0000000000000000 $t
-     /tmp/ccwngzUX.s:26     .text.VSS_Clear:0000000000000000 VSS_Clear
-     /tmp/ccwngzUX.s:90     .text.VSS_Init:0000000000000000 $t
-     /tmp/ccwngzUX.s:97     .text.VSS_Init:0000000000000000 VSS_Init
-     /tmp/ccwngzUX.s:118    .text.VSS_CalcElAngle:0000000000000000 $t
-     /tmp/ccwngzUX.s:125    .text.VSS_CalcElAngle:0000000000000000 VSS_CalcElAngle
-     /tmp/ccwngzUX.s:317    .text.VSS_CalcAvrgMecSpeedUnit:0000000000000000 $t
-     /tmp/ccwngzUX.s:324    .text.VSS_CalcAvrgMecSpeedUnit:0000000000000000 VSS_CalcAvrgMecSpeedUnit
-     /tmp/ccwngzUX.s:463    .text.VSS_SetMecAngle:0000000000000000 $t
-     /tmp/ccwngzUX.s:470    .text.VSS_SetMecAngle:0000000000000000 VSS_SetMecAngle
-     /tmp/ccwngzUX.s:497    .text.VSS_SetMecAcceleration:0000000000000000 $t
-     /tmp/ccwngzUX.s:504    .text.VSS_SetMecAcceleration:0000000000000000 VSS_SetMecAcceleration
-     /tmp/ccwngzUX.s:655    .text.VSS_SetMecAcceleration:0000000000000084 $d
-     /tmp/ccwngzUX.s:660    .text.VSS_RampCompleted:0000000000000000 $t
-     /tmp/ccwngzUX.s:667    .text.VSS_RampCompleted:0000000000000000 VSS_RampCompleted
-     /tmp/ccwngzUX.s:699    .text.VSS_GetLastRampFinalSpeed:0000000000000000 $t
-     /tmp/ccwngzUX.s:706    .text.VSS_GetLastRampFinalSpeed:0000000000000000 VSS_GetLastRampFinalSpeed
-     /tmp/ccwngzUX.s:724    .text.VSS_SetStartTransition:0000000000000000 $t
-     /tmp/ccwngzUX.s:731    .text.VSS_SetStartTransition:0000000000000000 VSS_SetStartTransition
-     /tmp/ccwngzUX.s:786    .text.VSS_IsTransitionOngoing:0000000000000000 $t
-     /tmp/ccwngzUX.s:793    .text.VSS_IsTransitionOngoing:0000000000000000 VSS_IsTransitionOngoing
-     /tmp/ccwngzUX.s:850    .text.VSS_TransitionEnded:0000000000000000 $t
-     /tmp/ccwngzUX.s:857    .text.VSS_TransitionEnded:0000000000000000 VSS_TransitionEnded
-     /tmp/ccwngzUX.s:875    .text.VSS_SetCopyObserver:0000000000000000 $t
-     /tmp/ccwngzUX.s:882    .text.VSS_SetCopyObserver:0000000000000000 VSS_SetCopyObserver
-     /tmp/ccwngzUX.s:900    .text.VSS_SetElAngle:0000000000000000 $t
-     /tmp/ccwngzUX.s:907    .text.VSS_SetElAngle:0000000000000000 VSS_SetElAngle
+     /tmp/ccec1Kvs.s:18     .text.VSS_Clear:0000000000000000 $t
+     /tmp/ccec1Kvs.s:26     .text.VSS_Clear:0000000000000000 VSS_Clear
+     /tmp/ccec1Kvs.s:90     .text.VSS_Init:0000000000000000 $t
+     /tmp/ccec1Kvs.s:97     .text.VSS_Init:0000000000000000 VSS_Init
+     /tmp/ccec1Kvs.s:118    .text.VSS_CalcElAngle:0000000000000000 $t
+     /tmp/ccec1Kvs.s:125    .text.VSS_CalcElAngle:0000000000000000 VSS_CalcElAngle
+     /tmp/ccec1Kvs.s:317    .text.VSS_CalcAvrgMecSpeedUnit:0000000000000000 $t
+     /tmp/ccec1Kvs.s:324    .text.VSS_CalcAvrgMecSpeedUnit:0000000000000000 VSS_CalcAvrgMecSpeedUnit
+     /tmp/ccec1Kvs.s:463    .text.VSS_SetMecAngle:0000000000000000 $t
+     /tmp/ccec1Kvs.s:470    .text.VSS_SetMecAngle:0000000000000000 VSS_SetMecAngle
+     /tmp/ccec1Kvs.s:497    .text.VSS_SetMecAcceleration:0000000000000000 $t
+     /tmp/ccec1Kvs.s:504    .text.VSS_SetMecAcceleration:0000000000000000 VSS_SetMecAcceleration
+     /tmp/ccec1Kvs.s:655    .text.VSS_SetMecAcceleration:0000000000000084 $d
+     /tmp/ccec1Kvs.s:660    .text.VSS_RampCompleted:0000000000000000 $t
+     /tmp/ccec1Kvs.s:667    .text.VSS_RampCompleted:0000000000000000 VSS_RampCompleted
+     /tmp/ccec1Kvs.s:699    .text.VSS_GetLastRampFinalSpeed:0000000000000000 $t
+     /tmp/ccec1Kvs.s:706    .text.VSS_GetLastRampFinalSpeed:0000000000000000 VSS_GetLastRampFinalSpeed
+     /tmp/ccec1Kvs.s:724    .text.VSS_SetStartTransition:0000000000000000 $t
+     /tmp/ccec1Kvs.s:731    .text.VSS_SetStartTransition:0000000000000000 VSS_SetStartTransition
+     /tmp/ccec1Kvs.s:786    .text.VSS_IsTransitionOngoing:0000000000000000 $t
+     /tmp/ccec1Kvs.s:793    .text.VSS_IsTransitionOngoing:0000000000000000 VSS_IsTransitionOngoing
+     /tmp/ccec1Kvs.s:850    .text.VSS_TransitionEnded:0000000000000000 $t
+     /tmp/ccec1Kvs.s:857    .text.VSS_TransitionEnded:0000000000000000 VSS_TransitionEnded
+     /tmp/ccec1Kvs.s:875    .text.VSS_SetCopyObserver:0000000000000000 $t
+     /tmp/ccec1Kvs.s:882    .text.VSS_SetCopyObserver:0000000000000000 VSS_SetCopyObserver
+     /tmp/ccec1Kvs.s:900    .text.VSS_SetElAngle:0000000000000000 $t
+     /tmp/ccec1Kvs.s:907    .text.VSS_SetElAngle:0000000000000000 VSS_SetElAngle
 
 UNDEFINED SYMBOLS
 SPD_IsMecSpeedReliable

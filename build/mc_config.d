@@ -73,7 +73,8 @@ build/mc_config.o: Src/mc_config.c Inc/main.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cortex.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_utils.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_pwr.h \
- Inc/parameters_conversion.h Inc/mc_parameters.h Inc/mc_config.h
+ Inc/parameters_conversion.h Inc/mc_parameters.h Inc/mc_config.h \
+ Inc/debug_scope.h
 
 Inc/main.h:
 
@@ -248,3 +249,5 @@ Inc/parameters_conversion.h:
 Inc/mc_parameters.h:
 
 Inc/mc_config.h:
+
+Inc/debug_scope.h:

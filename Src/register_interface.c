@@ -27,6 +27,7 @@
 #include "mcp_config.h"
 #include "mcpa.h"
 #include "mc_configuration_registers.h"
+#include "debug_scope.h"
 
 static RevUpCtrl_Handle_t *RevUpControl[NBR_OF_MOTORS] = { &RevUpControlM1 };
 static STO_CR_Handle_t * stoCRSensor [NBR_OF_MOTORS] = { &STO_CR_M1 };
@@ -37,6 +38,7 @@ static uint8_t RI_SetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16
 static uint8_t RI_GetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t maxSize);
 static uint8_t RI_MovString(const char_t * srcString, char_t * destString, uint16_t *size, int16_t maxSize);
 
+extern DebugScope_Handle_t debugScopeM1;
 __weak uint8_t RI_SetRegCommandParser (MCP_Handle_t * pHandle, uint16_t txSyncFreeSpace)
 {
   uint8_t retVal = MCP_CMD_OK;
@@ -211,6 +213,12 @@ uint8_t RI_SetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t data
 
           case MC_REG_RUC_STAGE_NBR:
           {
+            retVal = MCP_ERROR_RO_REG;
+            break;
+          }
+          case MC_REG_DBG_START_WRITE:
+          {
+            DebugScopeStartWrite(&debugScopeM1);
             retVal = MCP_ERROR_RO_REG;
             break;
           }
@@ -565,6 +573,19 @@ uint8_t RI_SetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t data
               MCI_ExecSpeedRamp(pMCIN, (int16_t)((rpm * SPEED_UNIT) / U_RPM), duration);
               break;
             }
+            case MC_REG_SPEED_SIN:
+            {
+              int32_t meanrpm = *(int32_t *)rawData; // cstat !MISRAC2012-Rule-11.3
+              int16_t amprpm = *(uint16_t *)&rawData[4]; // cstat !MISRAC2012-Rule-11.3
+              int16_t phase = *(uint16_t *)&rawData[6];  // cstat !MISRAC2012-Rule-11.3
+
+              int16_t meanfreq = (int16_t)((meanrpm * SPEED_UNIT) / U_RPM);
+              int16_t ampfreq = (int16_t)((amprpm * SPEED_UNIT) / U_RPM);
+
+              MCI_ExecSpeedSin(pMCIN, meanfreq, ampfreq, phase);
+              break;
+            }
+
             case MC_REG_TORQUE_RAMP:
             {
               uint32_t torque;

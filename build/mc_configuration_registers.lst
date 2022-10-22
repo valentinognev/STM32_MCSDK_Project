@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccvGrooj.s 			page 1
+ARM GAS  /tmp/ccOItKCO.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccvGrooj.s 			page 1
   60      592E322D 
   61              		.section	.rodata.M1_ApplicationConfig_reg,"a"
   62              		.align	2
-ARM GAS  /tmp/ccvGrooj.s 			page 2
+ARM GAS  /tmp/ccOItKCO.s 			page 2
 
 
   65              	M1_ApplicationConfig_reg:
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccvGrooj.s 			page 1
  119              	.Letext0:
  120              		.file 1 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
  121              		.file 2 "Drivers/CMSIS/Include/core_cm4.h"
-ARM GAS  /tmp/ccvGrooj.s 			page 3
+ARM GAS  /tmp/ccOItKCO.s 			page 3
 
 
  122              		.file 3 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h"
@@ -131,32 +131,32 @@ ARM GAS  /tmp/ccvGrooj.s 			page 1
  129              		.file 10 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
  130              		.file 11 "Inc/mc_configuration_registers.h"
  131              		.file 12 "Src/mc_configuration_registers.c"
-ARM GAS  /tmp/ccvGrooj.s 			page 4
+ARM GAS  /tmp/ccOItKCO.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 mc_configuration_registers.c
-     /tmp/ccvGrooj.s:29     .data.ApplicationConfig_reg:0000000000000000 ApplicationConfig_reg
-     /tmp/ccvGrooj.s:41     .data.MotorConfig_reg:0000000000000000 MotorConfig_reg
-     /tmp/ccvGrooj.s:35     .data.FOCConfig_reg:0000000000000000 FOCConfig_reg
-     /tmp/ccvGrooj.s:47     .data.PWR_BOARD_NAME:0000000000000000 PWR_BOARD_NAME
-     /tmp/ccvGrooj.s:89     .rodata.M1_MotorConfig_reg:0000000000000000 M1_MotorConfig_reg
-     /tmp/ccvGrooj.s:110    .rodata.globalConfig_reg:0000000000000000 globalConfig_reg
-     /tmp/ccvGrooj.s:59     .rodata.FIRMWARE_NAME:0000000000000000 FIRMWARE_NAME
-     /tmp/ccvGrooj.s:53     .rodata.CTL_BOARD:0000000000000000 CTL_BOARD
-     /tmp/ccvGrooj.s:26     .data.ApplicationConfig_reg:0000000000000000 $d
-     /tmp/ccvGrooj.s:65     .rodata.M1_ApplicationConfig_reg:0000000000000000 M1_ApplicationConfig_reg
-     /tmp/ccvGrooj.s:32     .data.FOCConfig_reg:0000000000000000 $d
-     /tmp/ccvGrooj.s:76     .rodata.M1_FOCConfig_reg:0000000000000000 M1_FOCConfig_reg
-     /tmp/ccvGrooj.s:38     .data.MotorConfig_reg:0000000000000000 $d
-     /tmp/ccvGrooj.s:44     .data.PWR_BOARD_NAME:0000000000000000 $d
-     /tmp/ccvGrooj.s:104    .rodata.M1_PWR_BOARD:0000000000000000 M1_PWR_BOARD
-     /tmp/ccvGrooj.s:50     .rodata.CTL_BOARD:0000000000000000 $d
-     /tmp/ccvGrooj.s:56     .rodata.FIRMWARE_NAME:0000000000000000 $d
-     /tmp/ccvGrooj.s:62     .rodata.M1_ApplicationConfig_reg:0000000000000000 $d
-     /tmp/ccvGrooj.s:73     .rodata.M1_FOCConfig_reg:0000000000000000 $d
-     /tmp/ccvGrooj.s:86     .rodata.M1_MotorConfig_reg:0000000000000000 $d
-     /tmp/ccvGrooj.s:101    .rodata.M1_PWR_BOARD:0000000000000000 $d
-     /tmp/ccvGrooj.s:107    .rodata.globalConfig_reg:0000000000000000 $d
+     /tmp/ccOItKCO.s:29     .data.ApplicationConfig_reg:0000000000000000 ApplicationConfig_reg
+     /tmp/ccOItKCO.s:41     .data.MotorConfig_reg:0000000000000000 MotorConfig_reg
+     /tmp/ccOItKCO.s:35     .data.FOCConfig_reg:0000000000000000 FOCConfig_reg
+     /tmp/ccOItKCO.s:47     .data.PWR_BOARD_NAME:0000000000000000 PWR_BOARD_NAME
+     /tmp/ccOItKCO.s:89     .rodata.M1_MotorConfig_reg:0000000000000000 M1_MotorConfig_reg
+     /tmp/ccOItKCO.s:110    .rodata.globalConfig_reg:0000000000000000 globalConfig_reg
+     /tmp/ccOItKCO.s:59     .rodata.FIRMWARE_NAME:0000000000000000 FIRMWARE_NAME
+     /tmp/ccOItKCO.s:53     .rodata.CTL_BOARD:0000000000000000 CTL_BOARD
+     /tmp/ccOItKCO.s:26     .data.ApplicationConfig_reg:0000000000000000 $d
+     /tmp/ccOItKCO.s:65     .rodata.M1_ApplicationConfig_reg:0000000000000000 M1_ApplicationConfig_reg
+     /tmp/ccOItKCO.s:32     .data.FOCConfig_reg:0000000000000000 $d
+     /tmp/ccOItKCO.s:76     .rodata.M1_FOCConfig_reg:0000000000000000 M1_FOCConfig_reg
+     /tmp/ccOItKCO.s:38     .data.MotorConfig_reg:0000000000000000 $d
+     /tmp/ccOItKCO.s:44     .data.PWR_BOARD_NAME:0000000000000000 $d
+     /tmp/ccOItKCO.s:104    .rodata.M1_PWR_BOARD:0000000000000000 M1_PWR_BOARD
+     /tmp/ccOItKCO.s:50     .rodata.CTL_BOARD:0000000000000000 $d
+     /tmp/ccOItKCO.s:56     .rodata.FIRMWARE_NAME:0000000000000000 $d
+     /tmp/ccOItKCO.s:62     .rodata.M1_ApplicationConfig_reg:0000000000000000 $d
+     /tmp/ccOItKCO.s:73     .rodata.M1_FOCConfig_reg:0000000000000000 $d
+     /tmp/ccOItKCO.s:86     .rodata.M1_MotorConfig_reg:0000000000000000 $d
+     /tmp/ccOItKCO.s:101    .rodata.M1_PWR_BOARD:0000000000000000 $d
+     /tmp/ccOItKCO.s:107    .rodata.globalConfig_reg:0000000000000000 $d
 
 NO UNDEFINED SYMBOLS

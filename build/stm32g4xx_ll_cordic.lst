@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccaxu5l7.s 			page 1
+ARM GAS  /tmp/cca8WccV.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccaxu5l7.s 			page 1
   27:Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_cordic.c **** #endif /* USE_FULL_ASSERT */
   28:Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_cordic.c **** 
   29:Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_cordic.c **** /** @addtogroup STM32G4xx_LL_Driver
-ARM GAS  /tmp/ccaxu5l7.s 			page 2
+ARM GAS  /tmp/cca8WccV.s 			page 2
 
 
   30:Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_cordic.c ****   * @{
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccaxu5l7.s 			page 1
   72:Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_cordic.c **** 
   73:Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_cordic.c ****     /* Release CORDIC reset */
   74:Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_cordic.c ****     LL_AHB1_GRP1_ReleaseReset(LL_AHB1_GRP1_PERIPH_CORDIC);
-ARM GAS  /tmp/ccaxu5l7.s 			page 3
+ARM GAS  /tmp/cca8WccV.s 			page 3
 
 
   75:Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_cordic.c ****   }
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccaxu5l7.s 			page 1
   34:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** 
   35:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** /* Define to prevent recursive inclusion -------------------------------------*/
   36:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** #ifndef STM32G4xx_LL_BUS_H
-ARM GAS  /tmp/ccaxu5l7.s 			page 4
+ARM GAS  /tmp/cca8WccV.s 			page 4
 
 
   37:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** #define STM32G4xx_LL_BUS_H
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccaxu5l7.s 			page 1
   91:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** #define LL_AHB2_GRP1_PERIPH_GPIOC          RCC_AHB2ENR_GPIOCEN
   92:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** #define LL_AHB2_GRP1_PERIPH_GPIOD          RCC_AHB2ENR_GPIODEN
   93:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** #define LL_AHB2_GRP1_PERIPH_GPIOE          RCC_AHB2ENR_GPIOEEN
-ARM GAS  /tmp/ccaxu5l7.s 			page 5
+ARM GAS  /tmp/cca8WccV.s 			page 5
 
 
   94:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** #define LL_AHB2_GRP1_PERIPH_GPIOF          RCC_AHB2ENR_GPIOFEN
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccaxu5l7.s 			page 1
  148:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_SPI3           RCC_APB1ENR1_SPI3EN
  149:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_USART2         RCC_APB1ENR1_USART2EN
  150:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** #define LL_APB1_GRP1_PERIPH_USART3         RCC_APB1ENR1_USART3EN
-ARM GAS  /tmp/ccaxu5l7.s 			page 6
+ARM GAS  /tmp/cca8WccV.s 			page 6
 
 
  151:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** #if defined(UART4)
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccaxu5l7.s 			page 1
  205:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** #endif /* HRTIM1 */
  206:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** /**
  207:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h ****   * @}
-ARM GAS  /tmp/ccaxu5l7.s 			page 7
+ARM GAS  /tmp/cca8WccV.s 			page 7
 
 
  208:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h ****   */
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccaxu5l7.s 			page 1
  262:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA1
  263:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMA2
  264:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_DMAMUX1
-ARM GAS  /tmp/ccaxu5l7.s 			page 8
+ARM GAS  /tmp/cca8WccV.s 			page 8
 
 
  265:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h ****   *         @arg @ref LL_AHB1_GRP1_PERIPH_CORDIC
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccaxu5l7.s 			page 1
  319:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h ****   */
  320:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** __STATIC_INLINE void LL_AHB1_GRP1_ForceReset(uint32_t Periphs)
   54              		.loc 2 320 22 view .LVU9
-ARM GAS  /tmp/ccaxu5l7.s 			page 9
+ARM GAS  /tmp/cca8WccV.s 			page 9
 
 
   55              	.LBB7:
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccaxu5l7.s 			page 1
   80              	.LBB10:
  348:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h **** }
   81              		.loc 2 348 1 view .LVU16
-ARM GAS  /tmp/ccaxu5l7.s 			page 10
+ARM GAS  /tmp/cca8WccV.s 			page 10
 
 
   82 0020 7047     		bx	lr
@@ -560,13 +560,13 @@ ARM GAS  /tmp/ccaxu5l7.s 			page 1
   99              		.file 8 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
  100              		.file 9 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h"
  101              		.file 10 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
-ARM GAS  /tmp/ccaxu5l7.s 			page 11
+ARM GAS  /tmp/cca8WccV.s 			page 11
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 stm32g4xx_ll_cordic.c
-     /tmp/ccaxu5l7.s:18     .text.LL_CORDIC_DeInit:0000000000000000 $t
-     /tmp/ccaxu5l7.s:26     .text.LL_CORDIC_DeInit:0000000000000000 LL_CORDIC_DeInit
-     /tmp/ccaxu5l7.s:86     .text.LL_CORDIC_DeInit:0000000000000024 $d
+     /tmp/cca8WccV.s:18     .text.LL_CORDIC_DeInit:0000000000000000 $t
+     /tmp/cca8WccV.s:26     .text.LL_CORDIC_DeInit:0000000000000000 LL_CORDIC_DeInit
+     /tmp/cca8WccV.s:86     .text.LL_CORDIC_DeInit:0000000000000024 $d
 
 NO UNDEFINED SYMBOLS

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccl72mIK.s 			page 1
+ARM GAS  /tmp/cc3ovmx2.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
   28:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   *    microprocessor devices manufactured by or for STMicroelectronics.
   29:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   * 5. Redistribution and use of this software other than as permitted under
   30:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   *    this license is void and will automatically terminate your rights under
-ARM GAS  /tmp/ccl72mIK.s 			page 2
+ARM GAS  /tmp/cc3ovmx2.s 			page 2
 
 
   31:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   *    this license.
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
   85:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   * @param  pHandle: handler of the current instance of the STO component
   86:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   * @retval none
   87:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   */
-ARM GAS  /tmp/ccl72mIK.s 			page 3
+ARM GAS  /tmp/cc3ovmx2.s 			page 3
 
 
   88:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** __weak void STO_PLL_Init(STO_PLL_Handle_t *pHandle)
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  142:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   if ((MC_NULL == (void *)pHandle) || ((uint8_t)0 == flag))
  143:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   {
  144:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     /* Nothing to do */
-ARM GAS  /tmp/ccl72mIK.s 			page 4
+ARM GAS  /tmp/cc3ovmx2.s 			page 4
 
 
  145:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   }
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  199:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     {
  200:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****       pHandle->wBemf_alfa_est = -INT16_MAX * ((int32_t)pHandle->hF2);
  201:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     }
-ARM GAS  /tmp/ccl72mIK.s 			page 5
+ARM GAS  /tmp/cc3ovmx2.s 			page 5
 
 
  202:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     else
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  256:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     }
  257:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
  258:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #ifndef FULL_MISRA_C_COMPLIANCY_STO_PLL
-ARM GAS  /tmp/ccl72mIK.s 			page 6
+ARM GAS  /tmp/cc3ovmx2.s 			page 6
 
 
  259:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MISRAC2012-Rule-10.1_R6
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  313:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
  314:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #ifndef FULL_MISRA_C_COMPLIANCY_STO_PLL
  315:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     wAux = (int32_t)hAux_Beta >> pHandle->F3POW2; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MI
-ARM GAS  /tmp/ccl72mIK.s 			page 7
+ARM GAS  /tmp/cc3ovmx2.s 			page 7
 
 
  316:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #else
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  370:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****         wDirection = -1;
  371:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****       }
  372:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     }
-ARM GAS  /tmp/ccl72mIK.s 			page 8
+ARM GAS  /tmp/cc3ovmx2.s 			page 8
 
 
  373:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     else
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  427:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     int32_t wAvrSpeed_dpp = (int32_t)0;
  428:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     int32_t wError;
  429:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     int32_t wAux;
-ARM GAS  /tmp/ccl72mIK.s 			page 9
+ARM GAS  /tmp/cc3ovmx2.s 			page 9
 
 
  430:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     int32_t wAvrSquareSpeed;
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  484:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
  485:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     /*Bemf Consistency Check algorithm*/
  486:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     if (true == pHandle->EnableDualCheck) /*do algorithm if it's enabled*/
-ARM GAS  /tmp/ccl72mIK.s 			page 10
+ARM GAS  /tmp/cc3ovmx2.s 			page 10
 
 
  487:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     {
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  541:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****           bAux = SPD_IsMecSpeedReliable (&pHandle->_Super, pMecSpeedUnit);
  542:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****         }
  543:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****       }
-ARM GAS  /tmp/ccl72mIK.s 			page 11
+ARM GAS  /tmp/cc3ovmx2.s 			page 11
 
 
  544:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****       else
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  598:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     else
  599:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     {
  600:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****       hIndexOldTemp = hIndexNew + hBufferSizeDiff;
-ARM GAS  /tmp/ccl72mIK.s 			page 12
+ARM GAS  /tmp/cc3ovmx2.s 			page 12
 
 
  601:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  655:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     pHandle->_Super.hElSpeedDpp = (int16_t)0;
  656:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     pHandle->ConsistencyCounter = 0u;
  657:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     pHandle->ReliabilityCounter = 0u;
-ARM GAS  /tmp/ccl72mIK.s 			page 13
+ARM GAS  /tmp/cc3ovmx2.s 			page 13
 
 
  658:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     pHandle->IsAlgorithmConverged = false;
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  712:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
  713:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   /* Alfa & Beta BEMF multiplied by Cos & Sin*/
  714:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   wAlfa_Sin_tmp = ((int32_t )hBemf_alfa_est) * ((int32_t )Local_Components.hSin);
-ARM GAS  /tmp/ccl72mIK.s 			page 14
+ARM GAS  /tmp/cc3ovmx2.s 			page 14
 
 
  715:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   wBeta_Cos_tmp = ((int32_t )hBemf_beta_est) * ((int32_t )Local_Components.hCos);
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  746:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   {
  747:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     pHandle->Speed_Buffer[b_i] = (int16_t)0;
   52              		.loc 1 747 5 is_stmt 1 discriminator 3 view .LVU9
-ARM GAS  /tmp/ccl72mIK.s 			page 15
+ARM GAS  /tmp/cc3ovmx2.s 			page 15
 
 
   53              		.loc 1 747 32 is_stmt 0 discriminator 3 view .LVU10
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  140:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #ifdef NULL_PTR_STO_PLL_SPD_POS_FDB
   99              		.loc 1 140 1 is_stmt 1 view -0
  100              		.cfi_startproc
-ARM GAS  /tmp/ccl72mIK.s 			page 16
+ARM GAS  /tmp/cc3ovmx2.s 			page 16
 
 
  101              		@ args = 0, pretend = 0, frame = 0
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  179:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     int32_t wDirection;
  149              		.loc 1 179 5 is_stmt 1 view .LVU32
  180:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     int32_t wIalfa_est_Next;
-ARM GAS  /tmp/ccl72mIK.s 			page 17
+ARM GAS  /tmp/cc3ovmx2.s 			page 17
 
 
  150              		.loc 1 180 5 view .LVU33
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  208:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #else
  182              		.loc 1 208 63 view .LVU56
  183 0028 B4F81E51 		ldrh	r5, [r4, #286]
-ARM GAS  /tmp/ccl72mIK.s 			page 18
+ARM GAS  /tmp/cc3ovmx2.s 			page 18
 
 
  208:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #else
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  234:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     }
  221              		.loc 1 234 7 is_stmt 1 view .LVU74
  234:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     }
-ARM GAS  /tmp/ccl72mIK.s 			page 19
+ARM GAS  /tmp/cc3ovmx2.s 			page 19
 
 
  222              		.loc 1 234 26 is_stmt 0 view .LVU75
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  258 007e 46FA05F5 		asr	r5, r6, r5
  269:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #else
  259              		.loc 1 269 16 view .LVU94
-ARM GAS  /tmp/ccl72mIK.s 			page 20
+ARM GAS  /tmp/cc3ovmx2.s 			page 20
 
 
  260 0082 2EB2     		sxth	r6, r5
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  297              		.loc 1 294 5 is_stmt 1 view .LVU111
  299:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     wIalfa_est_Next = pHandle->Ialfa_est - wAux;
  298              		.loc 1 299 5 view .LVU112
-ARM GAS  /tmp/ccl72mIK.s 			page 21
+ARM GAS  /tmp/cc3ovmx2.s 			page 21
 
 
  299:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     wIalfa_est_Next = pHandle->Ialfa_est - wAux;
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  335              		.loc 1 312 5 is_stmt 1 view .LVU130
  312:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
  336              		.loc 1 312 25 is_stmt 0 view .LVU131
-ARM GAS  /tmp/ccl72mIK.s 			page 22
+ARM GAS  /tmp/cc3ovmx2.s 			page 22
 
 
  337 00cc 01FB0323 		mla	r3, r1, r3, r2
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  338:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     wIbeta_est_Next += wAux;
  374              		.loc 1 338 5 is_stmt 1 view .LVU149
  339:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
-ARM GAS  /tmp/ccl72mIK.s 			page 23
+ARM GAS  /tmp/cc3ovmx2.s 			page 23
 
 
  375              		.loc 1 339 5 view .LVU150
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  361:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     {
  411              		.loc 1 361 5 is_stmt 1 view .LVU169
  361:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     {
-ARM GAS  /tmp/ccl72mIK.s 			page 24
+ARM GAS  /tmp/cc3ovmx2.s 			page 24
 
 
  412              		.loc 1 361 21 is_stmt 0 view .LVU170
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  704:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   int32_t wBeta_Cos_tmp;
  452              		.loc 1 704 3 view .LVU185
  705:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   Trig_Components Local_Components;
-ARM GAS  /tmp/ccl72mIK.s 			page 25
+ARM GAS  /tmp/cc3ovmx2.s 			page 25
 
 
  453              		.loc 1 705 3 view .LVU186
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  488              	.LVL57:
  730:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   return (hOutput);
  489              		.loc 1 730 13 view .LVU206
-ARM GAS  /tmp/ccl72mIK.s 			page 26
+ARM GAS  /tmp/cc3ovmx2.s 			page 26
 
 
  490 0160 04F13400 		add	r0, r4, #52
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  689:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   pHandle->Speed_Buffer[bBuffer_index] = hRotor_Speed;
  528              		.loc 1 689 55 is_stmt 0 view .LVU223
  529 017a 03F13802 		add	r2, r3, #56
-ARM GAS  /tmp/ccl72mIK.s 			page 27
+ARM GAS  /tmp/cc3ovmx2.s 			page 27
 
 
  530 017e 04EB4202 		add	r2, r4, r2, lsl #1
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  566              	.LVL67:
  567              	.L8:
  395:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   }
-ARM GAS  /tmp/ccl72mIK.s 			page 28
+ARM GAS  /tmp/cc3ovmx2.s 			page 28
 
 
  568              		.loc 1 395 5 is_stmt 0 view .LVU242
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  236:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     {
  608              		.loc 1 236 13 view .LVU257
  609 01ca B542     		cmp	r5, r6
-ARM GAS  /tmp/ccl72mIK.s 			page 29
+ARM GAS  /tmp/cc3ovmx2.s 			page 29
 
 
  610 01cc 3FF747AF 		bgt	.L14
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  653              	.LBE15:
  654              	.LBE16:
  655              	.LBE17:
-ARM GAS  /tmp/ccl72mIK.s 			page 30
+ARM GAS  /tmp/cc3ovmx2.s 			page 30
 
 
  175:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   }
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  705              		.cfi_offset 8, -20
  706              		.cfi_offset 9, -16
  707              		.cfi_offset 10, -12
-ARM GAS  /tmp/ccl72mIK.s 			page 31
+ARM GAS  /tmp/cc3ovmx2.s 			page 31
 
 
  708              		.cfi_offset 11, -8
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  741 0014 00EB4404 		add	r4, r0, r4, lsl #1
  742 0018 B4F90440 		ldrsh	r4, [r4, #4]
  442:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     }
-ARM GAS  /tmp/ccl72mIK.s 			page 32
+ARM GAS  /tmp/cc3ovmx2.s 			page 32
 
 
  743              		.loc 1 442 21 discriminator 3 view .LVU297
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  781              		.loc 1 457 7 is_stmt 1 discriminator 3 view .LVU313
  458:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     }
  782              		.loc 1 458 7 discriminator 3 view .LVU314
-ARM GAS  /tmp/ccl72mIK.s 			page 33
+ARM GAS  /tmp/cc3ovmx2.s 			page 33
 
 
  458:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     }
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  820              	.LVL95:
  467:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     
  821              		.loc 1 467 39 view .LVU332
-ARM GAS  /tmp/ccl72mIK.s 			page 34
+ARM GAS  /tmp/cc3ovmx2.s 			page 34
 
 
  822 0064 2F46     		mov	r7, r5
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  861 008c 4278     		ldrb	r2, [r0, #1]	@ zero_extendqisi2
  478:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
  862              		.loc 1 478 10 view .LVU348
-ARM GAS  /tmp/ccl72mIK.s 			page 35
+ARM GAS  /tmp/cc3ovmx2.s 			page 35
 
 
  863 008e 93FBF2F3 		sdiv	r3, r3, r2
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  495:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****         wObsBemf = (int32_t)pHandle->hBemf_beta_est;
  900              		.loc 1 495 9 is_stmt 1 view .LVU366
  496:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****         wObsBemfSq += wObsBemf * wObsBemf;
-ARM GAS  /tmp/ccl72mIK.s 			page 36
+ARM GAS  /tmp/cc3ovmx2.s 			page 36
 
 
  901              		.loc 1 496 9 view .LVU367
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  939 00e2 002B     		cmp	r3, #0
  940 00e4 11DB     		blt	.L53
  941              	.L40:
-ARM GAS  /tmp/ccl72mIK.s 			page 37
+ARM GAS  /tmp/cc3ovmx2.s 			page 37
 
 
  505:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
@@ -2218,7 +2218,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  433:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     int32_t wEstBemfSq = 0;
  984              		.loc 1 433 13 view .LVU396
  985 0114 1646     		mov	r6, r2
-ARM GAS  /tmp/ccl72mIK.s 			page 38
+ARM GAS  /tmp/cc3ovmx2.s 			page 38
 
 
  986              	.LVL122:
@@ -2278,7 +2278,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1022 013c 9342     		cmp	r3, r2
  1023 013e 0CD3     		bcc	.L45
  535:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****           pHandle->_Super.bSpeedErrorNumber = pHandle->_Super.bMaximumSpeedErrorsNumber;
-ARM GAS  /tmp/ccl72mIK.s 			page 39
+ARM GAS  /tmp/cc3ovmx2.s 			page 39
 
 
  1024              		.loc 1 535 11 is_stmt 1 view .LVU415
@@ -2338,7 +2338,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1063              	.LVL132:
  1064              	.L44:
  546:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****         bAux = SPD_IsMecSpeedReliable (&pHandle->_Super, pMecSpeedUnit);
-ARM GAS  /tmp/ccl72mIK.s 			page 40
+ARM GAS  /tmp/cc3ovmx2.s 			page 40
 
 
  1065              		.loc 1 546 9 is_stmt 1 view .LVU431
@@ -2398,7 +2398,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1109              	.LVL136:
  587:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     int16_t hSpeedBufferSizedpp = (int16_t)pHandle->SpeedBufferSizeDpp;
  1110              		.loc 1 587 5 is_stmt 1 view .LVU444
-ARM GAS  /tmp/ccl72mIK.s 			page 41
+ARM GAS  /tmp/cc3ovmx2.s 			page 41
 
 
  588:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     int16_t hSpeedBufferSizeUnit = (int16_t)pHandle->SpeedBufferSizeUnit;
@@ -2458,7 +2458,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1148              	.LVL144:
  1149              	.L57:
  616:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #else
-ARM GAS  /tmp/ccl72mIK.s 			page 42
+ARM GAS  /tmp/cc3ovmx2.s 			page 42
 
 
  1150              		.loc 1 616 3 is_stmt 1 view .LVU462
@@ -2518,7 +2518,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1189              		.loc 1 604 9 is_stmt 1 view .LVU477
  604:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****       }
  1190              		.loc 1 604 35 is_stmt 0 view .LVU478
-ARM GAS  /tmp/ccl72mIK.s 			page 43
+ARM GAS  /tmp/cc3ovmx2.s 			page 43
 
 
  1191 004a 931B     		subs	r3, r2, r6
@@ -2578,7 +2578,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1236              		@ args = 0, pretend = 0, frame = 0
  1237              		@ frame_needed = 0, uses_anonymous_args = 0
  641:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #ifdef NULL_PTR_STO_PLL_SPD_POS_FDB
-ARM GAS  /tmp/ccl72mIK.s 			page 44
+ARM GAS  /tmp/cc3ovmx2.s 			page 44
 
 
  1238              		.loc 1 641 1 is_stmt 0 view .LVU490
@@ -2638,7 +2638,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  659:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     pHandle->Obs_Bemf_Level = (int32_t)0;
  1274              		.loc 1 659 5 is_stmt 1 view .LVU509
  659:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     pHandle->Obs_Bemf_Level = (int32_t)0;
-ARM GAS  /tmp/ccl72mIK.s 			page 45
+ARM GAS  /tmp/cc3ovmx2.s 			page 45
 
 
  1275              		.loc 1 659 31 is_stmt 0 view .LVU510
@@ -2698,7 +2698,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
   89:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #ifdef NULL_PTR_STO_PLL_SPD_POS_FDB
  1317              		.loc 1 89 1 is_stmt 1 view -0
  1318              		.cfi_startproc
-ARM GAS  /tmp/ccl72mIK.s 			page 46
+ARM GAS  /tmp/cc3ovmx2.s 			page 46
 
 
  1319              		@ args = 0, pretend = 0, frame = 0
@@ -2758,7 +2758,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1356              		.loc 1 109 11 view .LVU542
  1357 0022 3BB1     		cbz	r3, .L66
  111:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****       wAux *= ((int32_t)2);
-ARM GAS  /tmp/ccl72mIK.s 			page 47
+ARM GAS  /tmp/cc3ovmx2.s 			page 47
 
 
  1358              		.loc 1 111 7 view .LVU543
@@ -2818,7 +2818,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1396 0044 C1EB2321 		rsb	r1, r1, r3, asr #8
  118:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
  1397              		.loc 1 118 18 view .LVU560
-ARM GAS  /tmp/ccl72mIK.s 			page 48
+ARM GAS  /tmp/cc3ovmx2.s 			page 48
 
 
  1398 0048 6185     		strh	r1, [r4, #42]	@ movhi
@@ -2878,7 +2878,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  766:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** {
  1435              		.loc 1 766 1 is_stmt 1 view -0
  1436              		.cfi_startproc
-ARM GAS  /tmp/ccl72mIK.s 			page 49
+ARM GAS  /tmp/cc3ovmx2.s 			page 49
 
 
  1437              		@ args = 0, pretend = 0, frame = 0
@@ -2938,7 +2938,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  790:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****       pHandle->IsAlgorithmConverged = true;
  1468              		.loc 1 790 7 view .LVU586
  1469              		.loc 1 790 37 is_stmt 0 view .LVU587
-ARM GAS  /tmp/ccl72mIK.s 			page 50
+ARM GAS  /tmp/cc3ovmx2.s 			page 50
 
 
  1470 0014 0122     		movs	r2, #1
@@ -2998,7 +2998,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  838:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****               else
  839:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****               {
  840:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****                 pHandle->ConsistencyCounter = 0U;
-ARM GAS  /tmp/ccl72mIK.s 			page 51
+ARM GAS  /tmp/cc3ovmx2.s 			page 51
 
 
  841:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****               }
@@ -3058,7 +3058,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1500              		.loc 1 799 10 is_stmt 0 view .LVU599
  1501 002e 002D     		cmp	r5, #0
  1502 0030 4DDD     		ble	.L72
-ARM GAS  /tmp/ccl72mIK.s 			page 52
+ARM GAS  /tmp/cc3ovmx2.s 			page 52
 
 
  801:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****         {
@@ -3118,7 +3118,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1540              		.loc 1 814 25 view .LVU616
  1541 005a 42F30F12 		sbfx	r2, r2, #4, #16
  1542              	.LVL186:
-ARM GAS  /tmp/ccl72mIK.s 			page 53
+ARM GAS  /tmp/cc3ovmx2.s 			page 53
 
 
  817:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****         {
@@ -3178,7 +3178,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1579              		.loc 1 833 19 is_stmt 1 view .LVU634
  1580              	.LVL189:
  834:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****                   pHandle->_Super.bSpeedErrorNumber = 0U;
-ARM GAS  /tmp/ccl72mIK.s 			page 54
+ARM GAS  /tmp/cc3ovmx2.s 			page 54
 
 
  1581              		.loc 1 834 19 view .LVU635
@@ -3238,7 +3238,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1622              	.L80:
  840:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****               }
  1623              		.loc 1 840 17 is_stmt 1 view .LVU649
-ARM GAS  /tmp/ccl72mIK.s 			page 55
+ARM GAS  /tmp/cc3ovmx2.s 			page 55
 
 
  840:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****               }
@@ -3298,7 +3298,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1665              		.cfi_restore 5
  1666              		.cfi_restore 4
  1667              		.cfi_def_cfa_offset 0
-ARM GAS  /tmp/ccl72mIK.s 			page 56
+ARM GAS  /tmp/cc3ovmx2.s 			page 56
 
 
  1668              	.LVL204:
@@ -3358,7 +3358,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  884:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #ifdef NULL_PTR_STO_PLL_SPD_POS_FDB
  885:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   }
  886:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #endif
-ARM GAS  /tmp/ccl72mIK.s 			page 57
+ARM GAS  /tmp/cc3ovmx2.s 			page 57
 
 
  887:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   return (vaux);
@@ -3418,7 +3418,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  905:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   }
  906:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   else
  907:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   {
-ARM GAS  /tmp/ccl72mIK.s 			page 58
+ARM GAS  /tmp/cc3ovmx2.s 			page 58
 
 
  908:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #endif
@@ -3478,7 +3478,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1778              		.weak	STO_PLL_GetObserverGains
  1779              		.syntax unified
  1780              		.thumb
-ARM GAS  /tmp/ccl72mIK.s 			page 59
+ARM GAS  /tmp/cc3ovmx2.s 			page 59
 
 
  1781              		.thumb_func
@@ -3538,7 +3538,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1813              		.fpu fpv4-sp-d16
  1815              	STO_PLL_SetObserverGains:
  1816              	.LVL210:
-ARM GAS  /tmp/ccl72mIK.s 			page 60
+ARM GAS  /tmp/cc3ovmx2.s 			page 60
 
 
  1817              	.LFB1450:
@@ -3598,7 +3598,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  979:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   * @param  pHandle: handler of the current instance of the STO component
  980:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   * @param  pPgain pointer to int16_t used to return PLL proportional gain
  981:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   * @param  pIgain pointer to int16_t used to return PLL integral gain
-ARM GAS  /tmp/ccl72mIK.s 			page 61
+ARM GAS  /tmp/cc3ovmx2.s 			page 61
 
 
  982:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   * @retval none
@@ -3658,7 +3658,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1882              		.align	1
  1883              		.weak	STO_SetPLLGains
  1884              		.syntax unified
-ARM GAS  /tmp/ccl72mIK.s 			page 62
+ARM GAS  /tmp/cc3ovmx2.s 			page 62
 
 
  1885              		.thumb
@@ -3718,7 +3718,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
 1024:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** }
  1916              		.loc 1 1024 1 is_stmt 0 view .LVU724
  1917 0016 38BD     		pop	{r3, r4, r5, pc}
-ARM GAS  /tmp/ccl72mIK.s 			page 63
+ARM GAS  /tmp/cc3ovmx2.s 			page 63
 
 
  1918              		.loc 1 1024 1 view .LVU725
@@ -3778,7 +3778,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1951              	STO_OTF_ResetPLL:
  1952              	.LVL220:
  1953              	.LFB1454:
-ARM GAS  /tmp/ccl72mIK.s 			page 64
+ARM GAS  /tmp/cc3ovmx2.s 			page 64
 
 
 1050:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
@@ -3838,7 +3838,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  1988              	.LVL224:
  1989              	.LFB1455:
 1072:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
-ARM GAS  /tmp/ccl72mIK.s 			page 65
+ARM GAS  /tmp/cc3ovmx2.s 			page 65
 
 
 1073:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #if defined (CCMRAM)
@@ -3898,7 +3898,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  2019              	STO_SetPLL:
  2020              	.LVL227:
  2021              	.LFB1456:
-ARM GAS  /tmp/ccl72mIK.s 			page 66
+ARM GAS  /tmp/cc3ovmx2.s 			page 66
 
 
 1100:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
@@ -3958,7 +3958,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
 1121:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #ifdef NULL_PTR_STO_PLL_SPD_POS_FDB
 1122:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   }
 1123:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #endif
-ARM GAS  /tmp/ccl72mIK.s 			page 67
+ARM GAS  /tmp/cc3ovmx2.s 			page 67
 
 
 1124:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** }
@@ -4018,7 +4018,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
 1140:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** /**
 1141:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   * @brief  It exports observed Bemf squared level
 1142:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   * @param  pHandle: handler of the current instance of the STO component
-ARM GAS  /tmp/ccl72mIK.s 			page 68
+ARM GAS  /tmp/cc3ovmx2.s 			page 68
 
 
 1143:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   * @retval int32_t
@@ -4078,7 +4078,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
 1169:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     pHandle->EnableDualCheck = bSel;
  2126              		.loc 1 1169 5 view .LVU759
  2127              		.loc 1 1169 30 is_stmt 0 view .LVU760
-ARM GAS  /tmp/ccl72mIK.s 			page 69
+ARM GAS  /tmp/cc3ovmx2.s 			page 69
 
 
  2128 0000 80F80411 		strb	r1, [r0, #260]
@@ -4138,7 +4138,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  2168              	.LVL238:
  2169              	.LFB1461:
 1188:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** 
-ARM GAS  /tmp/ccl72mIK.s 			page 70
+ARM GAS  /tmp/cc3ovmx2.s 			page 70
 
 
 1189:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** /**
@@ -4198,7 +4198,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
 1214:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   * @brief  It forces the state-observer to declare convergency
 1215:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   * @param  pHandle: handler of the current instance of the STO component
 1216:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   */
-ARM GAS  /tmp/ccl72mIK.s 			page 71
+ARM GAS  /tmp/cc3ovmx2.s 			page 71
 
 
 1217:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** __weak void STO_PLL_ForceConvergency1(STO_Handle_t *pHandle)
@@ -4258,7 +4258,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  2234              		@ link register save eliminated.
 1240:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #ifdef NULL_PTR_STO_PLL_SPD_POS_FDB
 1241:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   if (MC_NULL == pHandle)
-ARM GAS  /tmp/ccl72mIK.s 			page 72
+ARM GAS  /tmp/cc3ovmx2.s 			page 72
 
 
 1242:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   {
@@ -4318,7 +4318,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
 1269:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****   {
 1270:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c **** #endif
 1271:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c ****     pHandle->MinStartUpValidSpeed = hMinStartUpValidSpeed;
-ARM GAS  /tmp/ccl72mIK.s 			page 73
+ARM GAS  /tmp/cc3ovmx2.s 			page 73
 
 
  2264              		.loc 1 1271 5 view .LVU787
@@ -4378,7 +4378,7 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  2297              	.Letext0:
  2298              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
  2299              		.file 3 "Drivers/CMSIS/Include/core_cm4.h"
-ARM GAS  /tmp/ccl72mIK.s 			page 74
+ARM GAS  /tmp/cc3ovmx2.s 			page 74
 
 
  2300              		.file 4 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h"
@@ -4394,67 +4394,67 @@ ARM GAS  /tmp/ccl72mIK.s 			page 1
  2310              		.file 14 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h"
  2311              		.file 15 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_pll_speed_pos_fdbk.h"
  2312              		.file 16 "Inc/mc_math.h"
-ARM GAS  /tmp/ccl72mIK.s 			page 75
+ARM GAS  /tmp/cc3ovmx2.s 			page 75
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 sto_pll_speed_pos_fdbk.c
-     /tmp/ccl72mIK.s:18     .text.STO_InitSpeedBuffer:0000000000000000 $t
-     /tmp/ccl72mIK.s:25     .text.STO_InitSpeedBuffer:0000000000000000 STO_InitSpeedBuffer
-     /tmp/ccl72mIK.s:89     .text.STO_PLL_Return:0000000000000000 $t
-     /tmp/ccl72mIK.s:96     .text.STO_PLL_Return:0000000000000000 STO_PLL_Return
-     /tmp/ccl72mIK.s:111    .text.STO_PLL_CalcElAngle:0000000000000000 $t
-     /tmp/ccl72mIK.s:118    .text.STO_PLL_CalcElAngle:0000000000000000 STO_PLL_CalcElAngle
-     /tmp/ccl72mIK.s:683    .text.STO_PLL_CalcAvrgMecSpeedUnit:0000000000000000 $t
-     /tmp/ccl72mIK.s:690    .text.STO_PLL_CalcAvrgMecSpeedUnit:0000000000000000 STO_PLL_CalcAvrgMecSpeedUnit
-     /tmp/ccl72mIK.s:1079   .text.STO_PLL_CalcAvrgElSpeedDpp:0000000000000000 $t
-     /tmp/ccl72mIK.s:1086   .text.STO_PLL_CalcAvrgElSpeedDpp:0000000000000000 STO_PLL_CalcAvrgElSpeedDpp
-     /tmp/ccl72mIK.s:1224   .text.STO_PLL_Clear:0000000000000000 $t
-     /tmp/ccl72mIK.s:1231   .text.STO_PLL_Clear:0000000000000000 STO_PLL_Clear
-     /tmp/ccl72mIK.s:1307   .text.STO_PLL_Init:0000000000000000 $t
-     /tmp/ccl72mIK.s:1314   .text.STO_PLL_Init:0000000000000000 STO_PLL_Init
-     /tmp/ccl72mIK.s:1419   .text.STO_PLL_Init:0000000000000060 $d
-     /tmp/ccl72mIK.s:1425   .text.STO_PLL_IsObserverConverged:0000000000000000 $t
-     /tmp/ccl72mIK.s:1432   .text.STO_PLL_IsObserverConverged:0000000000000000 STO_PLL_IsObserverConverged
-     /tmp/ccl72mIK.s:1675   .text.STO_PLL_GetEstimatedBemf:0000000000000000 $t
-     /tmp/ccl72mIK.s:1682   .text.STO_PLL_GetEstimatedBemf:0000000000000000 STO_PLL_GetEstimatedBemf
-     /tmp/ccl72mIK.s:1723   .text.STO_PLL_GetEstimatedCurrent:0000000000000000 $t
-     /tmp/ccl72mIK.s:1730   .text.STO_PLL_GetEstimatedCurrent:0000000000000000 STO_PLL_GetEstimatedCurrent
-     /tmp/ccl72mIK.s:1777   .text.STO_PLL_GetObserverGains:0000000000000000 $t
-     /tmp/ccl72mIK.s:1784   .text.STO_PLL_GetObserverGains:0000000000000000 STO_PLL_GetObserverGains
-     /tmp/ccl72mIK.s:1808   .text.STO_PLL_SetObserverGains:0000000000000000 $t
-     /tmp/ccl72mIK.s:1815   .text.STO_PLL_SetObserverGains:0000000000000000 STO_PLL_SetObserverGains
-     /tmp/ccl72mIK.s:1835   .text.STO_GetPLLGains:0000000000000000 $t
-     /tmp/ccl72mIK.s:1842   .text.STO_GetPLLGains:0000000000000000 STO_GetPLLGains
-     /tmp/ccl72mIK.s:1882   .text.STO_SetPLLGains:0000000000000000 $t
-     /tmp/ccl72mIK.s:1889   .text.STO_SetPLLGains:0000000000000000 STO_SetPLLGains
-     /tmp/ccl72mIK.s:1923   .text.STO_PLL_SetMecAngle:0000000000000000 $t
-     /tmp/ccl72mIK.s:1930   .text.STO_PLL_SetMecAngle:0000000000000000 STO_PLL_SetMecAngle
-     /tmp/ccl72mIK.s:1944   .text.STO_OTF_ResetPLL:0000000000000000 $t
-     /tmp/ccl72mIK.s:1951   .text.STO_OTF_ResetPLL:0000000000000000 STO_OTF_ResetPLL
-     /tmp/ccl72mIK.s:1980   .text.STO_ResetPLL:0000000000000000 $t
-     /tmp/ccl72mIK.s:1987   .text.STO_ResetPLL:0000000000000000 STO_ResetPLL
-     /tmp/ccl72mIK.s:2012   .text.STO_SetPLL:0000000000000000 $t
-     /tmp/ccl72mIK.s:2019   .text.STO_SetPLL:0000000000000000 STO_SetPLL
-     /tmp/ccl72mIK.s:2061   .text.STO_PLL_GetEstimatedBemfLevel:0000000000000000 $t
-     /tmp/ccl72mIK.s:2068   .text.STO_PLL_GetEstimatedBemfLevel:0000000000000000 STO_PLL_GetEstimatedBemfLevel
-     /tmp/ccl72mIK.s:2086   .text.STO_PLL_GetObservedBemfLevel:0000000000000000 $t
-     /tmp/ccl72mIK.s:2093   .text.STO_PLL_GetObservedBemfLevel:0000000000000000 STO_PLL_GetObservedBemfLevel
-     /tmp/ccl72mIK.s:2111   .text.STO_PLL_BemfConsistencyCheckSwitch:0000000000000000 $t
-     /tmp/ccl72mIK.s:2118   .text.STO_PLL_BemfConsistencyCheckSwitch:0000000000000000 STO_PLL_BemfConsistencyCheckSwitch
-     /tmp/ccl72mIK.s:2135   .text.STO_PLL_IsBemfConsistent:0000000000000000 $t
-     /tmp/ccl72mIK.s:2142   .text.STO_PLL_IsBemfConsistent:0000000000000000 STO_PLL_IsBemfConsistent
-     /tmp/ccl72mIK.s:2160   .text.STO_PLL_IsVarianceTight:0000000000000000 $t
-     /tmp/ccl72mIK.s:2167   .text.STO_PLL_IsVarianceTight:0000000000000000 STO_PLL_IsVarianceTight
-     /tmp/ccl72mIK.s:2191   .text.STO_PLL_ForceConvergency1:0000000000000000 $t
-     /tmp/ccl72mIK.s:2198   .text.STO_PLL_ForceConvergency1:0000000000000000 STO_PLL_ForceConvergency1
-     /tmp/ccl72mIK.s:2220   .text.STO_PLL_ForceConvergency2:0000000000000000 $t
-     /tmp/ccl72mIK.s:2227   .text.STO_PLL_ForceConvergency2:0000000000000000 STO_PLL_ForceConvergency2
-     /tmp/ccl72mIK.s:2249   .text.STO_SetMinStartUpValidSpeedUnit:0000000000000000 $t
-     /tmp/ccl72mIK.s:2256   .text.STO_SetMinStartUpValidSpeedUnit:0000000000000000 STO_SetMinStartUpValidSpeedUnit
-     /tmp/ccl72mIK.s:2273   .text.STO_SetDirection:0000000000000000 $t
-     /tmp/ccl72mIK.s:2280   .text.STO_SetDirection:0000000000000000 STO_SetDirection
-ARM GAS  /tmp/ccl72mIK.s 			page 76
+     /tmp/cc3ovmx2.s:18     .text.STO_InitSpeedBuffer:0000000000000000 $t
+     /tmp/cc3ovmx2.s:25     .text.STO_InitSpeedBuffer:0000000000000000 STO_InitSpeedBuffer
+     /tmp/cc3ovmx2.s:89     .text.STO_PLL_Return:0000000000000000 $t
+     /tmp/cc3ovmx2.s:96     .text.STO_PLL_Return:0000000000000000 STO_PLL_Return
+     /tmp/cc3ovmx2.s:111    .text.STO_PLL_CalcElAngle:0000000000000000 $t
+     /tmp/cc3ovmx2.s:118    .text.STO_PLL_CalcElAngle:0000000000000000 STO_PLL_CalcElAngle
+     /tmp/cc3ovmx2.s:683    .text.STO_PLL_CalcAvrgMecSpeedUnit:0000000000000000 $t
+     /tmp/cc3ovmx2.s:690    .text.STO_PLL_CalcAvrgMecSpeedUnit:0000000000000000 STO_PLL_CalcAvrgMecSpeedUnit
+     /tmp/cc3ovmx2.s:1079   .text.STO_PLL_CalcAvrgElSpeedDpp:0000000000000000 $t
+     /tmp/cc3ovmx2.s:1086   .text.STO_PLL_CalcAvrgElSpeedDpp:0000000000000000 STO_PLL_CalcAvrgElSpeedDpp
+     /tmp/cc3ovmx2.s:1224   .text.STO_PLL_Clear:0000000000000000 $t
+     /tmp/cc3ovmx2.s:1231   .text.STO_PLL_Clear:0000000000000000 STO_PLL_Clear
+     /tmp/cc3ovmx2.s:1307   .text.STO_PLL_Init:0000000000000000 $t
+     /tmp/cc3ovmx2.s:1314   .text.STO_PLL_Init:0000000000000000 STO_PLL_Init
+     /tmp/cc3ovmx2.s:1419   .text.STO_PLL_Init:0000000000000060 $d
+     /tmp/cc3ovmx2.s:1425   .text.STO_PLL_IsObserverConverged:0000000000000000 $t
+     /tmp/cc3ovmx2.s:1432   .text.STO_PLL_IsObserverConverged:0000000000000000 STO_PLL_IsObserverConverged
+     /tmp/cc3ovmx2.s:1675   .text.STO_PLL_GetEstimatedBemf:0000000000000000 $t
+     /tmp/cc3ovmx2.s:1682   .text.STO_PLL_GetEstimatedBemf:0000000000000000 STO_PLL_GetEstimatedBemf
+     /tmp/cc3ovmx2.s:1723   .text.STO_PLL_GetEstimatedCurrent:0000000000000000 $t
+     /tmp/cc3ovmx2.s:1730   .text.STO_PLL_GetEstimatedCurrent:0000000000000000 STO_PLL_GetEstimatedCurrent
+     /tmp/cc3ovmx2.s:1777   .text.STO_PLL_GetObserverGains:0000000000000000 $t
+     /tmp/cc3ovmx2.s:1784   .text.STO_PLL_GetObserverGains:0000000000000000 STO_PLL_GetObserverGains
+     /tmp/cc3ovmx2.s:1808   .text.STO_PLL_SetObserverGains:0000000000000000 $t
+     /tmp/cc3ovmx2.s:1815   .text.STO_PLL_SetObserverGains:0000000000000000 STO_PLL_SetObserverGains
+     /tmp/cc3ovmx2.s:1835   .text.STO_GetPLLGains:0000000000000000 $t
+     /tmp/cc3ovmx2.s:1842   .text.STO_GetPLLGains:0000000000000000 STO_GetPLLGains
+     /tmp/cc3ovmx2.s:1882   .text.STO_SetPLLGains:0000000000000000 $t
+     /tmp/cc3ovmx2.s:1889   .text.STO_SetPLLGains:0000000000000000 STO_SetPLLGains
+     /tmp/cc3ovmx2.s:1923   .text.STO_PLL_SetMecAngle:0000000000000000 $t
+     /tmp/cc3ovmx2.s:1930   .text.STO_PLL_SetMecAngle:0000000000000000 STO_PLL_SetMecAngle
+     /tmp/cc3ovmx2.s:1944   .text.STO_OTF_ResetPLL:0000000000000000 $t
+     /tmp/cc3ovmx2.s:1951   .text.STO_OTF_ResetPLL:0000000000000000 STO_OTF_ResetPLL
+     /tmp/cc3ovmx2.s:1980   .text.STO_ResetPLL:0000000000000000 $t
+     /tmp/cc3ovmx2.s:1987   .text.STO_ResetPLL:0000000000000000 STO_ResetPLL
+     /tmp/cc3ovmx2.s:2012   .text.STO_SetPLL:0000000000000000 $t
+     /tmp/cc3ovmx2.s:2019   .text.STO_SetPLL:0000000000000000 STO_SetPLL
+     /tmp/cc3ovmx2.s:2061   .text.STO_PLL_GetEstimatedBemfLevel:0000000000000000 $t
+     /tmp/cc3ovmx2.s:2068   .text.STO_PLL_GetEstimatedBemfLevel:0000000000000000 STO_PLL_GetEstimatedBemfLevel
+     /tmp/cc3ovmx2.s:2086   .text.STO_PLL_GetObservedBemfLevel:0000000000000000 $t
+     /tmp/cc3ovmx2.s:2093   .text.STO_PLL_GetObservedBemfLevel:0000000000000000 STO_PLL_GetObservedBemfLevel
+     /tmp/cc3ovmx2.s:2111   .text.STO_PLL_BemfConsistencyCheckSwitch:0000000000000000 $t
+     /tmp/cc3ovmx2.s:2118   .text.STO_PLL_BemfConsistencyCheckSwitch:0000000000000000 STO_PLL_BemfConsistencyCheckSwitch
+     /tmp/cc3ovmx2.s:2135   .text.STO_PLL_IsBemfConsistent:0000000000000000 $t
+     /tmp/cc3ovmx2.s:2142   .text.STO_PLL_IsBemfConsistent:0000000000000000 STO_PLL_IsBemfConsistent
+     /tmp/cc3ovmx2.s:2160   .text.STO_PLL_IsVarianceTight:0000000000000000 $t
+     /tmp/cc3ovmx2.s:2167   .text.STO_PLL_IsVarianceTight:0000000000000000 STO_PLL_IsVarianceTight
+     /tmp/cc3ovmx2.s:2191   .text.STO_PLL_ForceConvergency1:0000000000000000 $t
+     /tmp/cc3ovmx2.s:2198   .text.STO_PLL_ForceConvergency1:0000000000000000 STO_PLL_ForceConvergency1
+     /tmp/cc3ovmx2.s:2220   .text.STO_PLL_ForceConvergency2:0000000000000000 $t
+     /tmp/cc3ovmx2.s:2227   .text.STO_PLL_ForceConvergency2:0000000000000000 STO_PLL_ForceConvergency2
+     /tmp/cc3ovmx2.s:2249   .text.STO_SetMinStartUpValidSpeedUnit:0000000000000000 $t
+     /tmp/cc3ovmx2.s:2256   .text.STO_SetMinStartUpValidSpeedUnit:0000000000000000 STO_SetMinStartUpValidSpeedUnit
+     /tmp/cc3ovmx2.s:2273   .text.STO_SetDirection:0000000000000000 $t
+     /tmp/cc3ovmx2.s:2280   .text.STO_SetDirection:0000000000000000 STO_SetDirection
+ARM GAS  /tmp/cc3ovmx2.s 			page 76
 
 
 

@@ -80,7 +80,8 @@ build/mc_tasks.o: Src/mc_tasks.c Inc/main.h \
  MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcp.h \
  MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcptl.h Inc/aspep.h \
  MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcptl.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcpa.h
+ MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcpa.h \
+ Inc/debug_scope.h
 
 Inc/main.h:
 
@@ -275,3 +276,5 @@ Inc/aspep.h:
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcptl.h:
 
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcpa.h:
+
+Inc/debug_scope.h:

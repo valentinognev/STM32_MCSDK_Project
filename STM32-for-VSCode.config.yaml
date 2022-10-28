@@ -10,7 +10,7 @@ target: STM32_MCSDK_Project
 # Can be C or C++
 language: C
 
-optimization: Og
+optimization: O0
 
 # MCU settings
 targetMCU: stm32g4x
@@ -100,6 +100,8 @@ sourceFiles:
   - Src/motorcontrol.c
   - Src/mc_api.c
   - Src/mc_config.c
+  - Src/debug_scope.c 
+  - Src/stm32g4xx_it.c 
   - Src/mcp_config.c
   - Src/mc_tasks.c
   - Src/pwm_curr_fdbk.c

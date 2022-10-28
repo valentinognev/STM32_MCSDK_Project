@@ -53,7 +53,7 @@ extern "C" {
   */
 #define DEBUG_SCOPE 1
 #define DEBUGSCOPESIZE 1024
-#define DEBUGSCOPENUMOFCH 3
+#define DEBUGSCOPENUMOFCH 4
 
 typedef struct
 {
@@ -80,7 +80,7 @@ typedef struct
   int16_t Ch1[DEBUGSCOPESIZE];
   int16_t Ch2[DEBUGSCOPESIZE];
   int16_t Ch3[DEBUGSCOPESIZE];
-  int16_t Ch4[1];
+  int16_t Ch4[DEBUGSCOPESIZE];
 	int16_t Ch5[1];
   uint8_t startWriteFlag;
 } DebugScope_Handle_t;

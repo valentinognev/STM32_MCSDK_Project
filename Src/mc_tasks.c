@@ -35,7 +35,9 @@
 #include "parameters_conversion.h"
 #include "mcp_config.h"
 
+
 /* USER CODE BEGIN Includes */
+#include "mc_config.h"
 #include "debug_scope.h"
 /* USER CODE END Includes */
 
@@ -74,7 +76,7 @@ static volatile uint16_t hStopPermanencyCounterM1 = ((uint16_t)0);
 static volatile uint8_t bMCBootCompleted = ((uint8_t)0);
 
 /* USER CODE BEGIN Private Variables */
-
+extern EncoderReference_Handle_t EncRefM1;
 /* USER CODE END Private Variables */
 
 /* Private functions ---------------------------------------------------------*/
@@ -320,6 +322,28 @@ __weak void MC_Scheduler(void)
   /* USER CODE END MC_Scheduler 2 */
 }
 
+mechanicalAngleCalculation(MCI_Handle_t *pHandle)
+{
+    //const int16_t hElAngle = pHandle->pFOCVars->hElAngle;
+    const int16_t hElAngle = *(EncRefM1.pRefElAngle);
+    const int16_t phase = EncRefM1.enc_I_angle;
+    static int16_t prevAngle = 0;
+    static int16_t sectionCounter = 0;
+     
+    sectionCounter += (prevAngle > hElAngle)?1:0;
+    if (sectionCounter == POLE_PAIR_NUM)
+      sectionCounter = 0; 
+    prevAngle = hElAngle;
+    int32_t localElAngle =  (hElAngle - INT16_MIN);
+    int32_t angle = (localElAngle+UINT16_MAX*sectionCounter)/POLE_PAIR_NUM;       
+    int32_t totalAngle = (int32_t)angle - phase;
+    if (totalAngle > INT16_MAX)
+      totalAngle -= UINT16_MAX;
+    else if (totalAngle < INT16_MIN)
+      totalAngle += UINT16_MAX;
+
+    EncRefM1.hMechAngle = totalAngle;
+}
 /**
   * @brief Executes medium frequency periodic Motor Control tasks
   *
@@ -541,7 +565,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
 				#endif
 
                 /* USER CODE BEGIN MediumFrequencyTask M1 1 */
-
+                NVIC_EnableIRQ(M1_ENCODER_I_EXTI_IRQn);
                 /* USER CODE END MediumFrequencyTask M1 1 */
                 STC_SetSpeedSensor(pSTC[M1], &STO_PLL_M1._Super); /*Observer has converged*/
                 FOC_InitAdditionalMethods(M1);
@@ -569,6 +593,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
             lastCommand--;
             if (Mci[M1].lastCommand == MCI_CMD_EXECSPEEDSIN)
               Mci[M1].CommandState = MCI_COMMAND_NOT_ALREADY_EXECUTED;
+            mechanicalAngleCalculation(&Mci[M1]);
             /* USER CODE END MediumFrequencyTask M1 2 */
 
             MCI_ExecBufferedCommands(&Mci[M1]);

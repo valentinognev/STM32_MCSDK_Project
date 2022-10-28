@@ -137,8 +137,8 @@ void MCP_ReceivedPacket(MCP_Handle_t *pHandle)
       case GET_DBG_DATA:
       {
         MCI_State_t state = MCI_GetSTMState(pHandle);
-        if (state == IDLE || state == FAULT_NOW)
-          UASPEP_SEND_PACKET(aspepOverUartA.HWIp, debugScopeM1.Ch1, sizeof(debugScopeM1.Ch1) * DEBUGSCOPENUMOFCH);
+//        if (state == IDLE || state == FAULT_NOW || state == 49)
+        UASPEP_SEND_PACKET(aspepOverUartA.HWIp, debugScopeM1.Ch1, sizeof(debugScopeM1.Ch1) * DEBUGSCOPENUMOFCH);
         MCPResponse = MCP_CMD_OK;
         break;
       }

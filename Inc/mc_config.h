@@ -42,7 +42,7 @@
 #include "sto_pll_speed_pos_fdbk.h"
 #include "sto_cordic_speed_pos_fdbk.h"
 /* USER CODE BEGIN Additional include */
-
+#include "mc_tasks.h"
 /* USER CODE END Additional include */
 
 extern RevUpCtrl_Handle_t RevUpControlM1;
@@ -63,6 +63,7 @@ extern STO_CR_Handle_t STO_CR_M1;
 extern RDivider_Handle_t BusVoltageSensor_M1;
 extern CircleLimitation_Handle_t CircleLimitationM1;
 extern RampExtMngr_Handle_t RampExtMngrHFParamsM1;
+extern EncoderReference_Handle_t EncRefM1;
 
 extern MCI_Handle_t Mci[NBR_OF_MOTORS];
 extern SpeednTorqCtrl_Handle_t *pSTC[NBR_OF_MOTORS];

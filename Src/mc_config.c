@@ -397,6 +397,13 @@ DebugScope_Handle_t debugScopeM1 =
         .i5 = 0,
         .startWriteFlag = false
     };
+EncoderReference_Handle_t EncRefM1 = 
+{
+  .enc_I_angle = 0,
+  .enc_I_counter = 0,
+  .hMechAngle = 0,
+  .pRefElAngle = &(STO_PLL_M1._Super.hElAngle)   //&(STO_CR_M1._Super.hElAngle)
+};
 /* USER CODE END Additional configuration */
 
 /******************* (C) COPYRIGHT 2022 STMicroelectronics *****END OF FILE****/

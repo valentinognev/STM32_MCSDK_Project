@@ -426,7 +426,7 @@ __weak bool STC_ExecSin(SpeednTorqCtrl_Handle_t *pHandle, int16_t hMean, int16_t
       Local_Vector_Components = MCM_Trig_Functions((int16_t)totalAngle);
       int32_t SinAngleplusPhase = Local_Vector_Components.hCos;
       pHandle->SpeedRefUnitExt = (int32_t)(hMean + hAmp * SinAngleplusPhase / 65536) * 65536;
-      int32_t desiredspeed = (int32_t)(hMean + hAmp * SinAngleplusPhase / 65536 /2) * 65536;
+      int32_t desiredspeed = (int32_t)(hMean + hAmp * SinAngleplusPhase / 65536 ) * 65536;
       //int32_t sensorSpeed = (int32_t)STO_M1._Super->hElSpeedDpp*MEDIUM_FREQUENCY_TASK_RATE/65536*10;
       if (debugScopeM1.i2 == 100)
          debugScopeM1.i2 = 100;

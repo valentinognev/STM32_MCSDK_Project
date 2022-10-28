@@ -25,7 +25,7 @@
 #include "parameters_conversion.h"
 
 #define FIRMWARE_NAME_STR "ST MC SDK\tVer.5.Y.2-RC1"
-#define MAX_READABLE_CURRENT 3.3/(2*0.003*9.14)
+#define MAX_READABLE_CURRENT 3.3/(2*RSHUNT*AMPLIFICATION_GAIN)
 
 const char_t CTL_BOARD[] = "B-G431B-ESC1";
 static const char_t M1_PWR_BOARD[] = "B-G431B-ESC1";
@@ -43,21 +43,21 @@ const GlobalConfig_reg_t globalConfig_reg =
 
 static const ApplicationConfig_reg_t M1_ApplicationConfig_reg =
 {
-  .maxMechanicalSpeed = 6000,
+  .maxMechanicalSpeed = MOTOR_MAX_SPEED_RPM,
   .maxReadableCurrent = MAX_READABLE_CURRENT,
-  .nominalCurrent = 1088,
-  .nominalVoltage = 12,
+  .nominalCurrent = NOMINAL_CURRENT,
+  .nominalVoltage = NOMINAL_BUS_VOLTAGE_V,
   .driveType = DRIVE_TYPE_M1,
 };
 
 const MotorConfig_reg_t M1_MotorConfig_reg =
 {
-  .polePairs = 14,
-  .ratedFlux = 0.5,
-  .rs = 0.1,
-  .ls = 0.00002*1.000,
-  .ld = 0.00002,
-  .maxCurrent = 1088,
+  .polePairs = POLE_PAIR_NUM,
+  .ratedFlux = MOTOR_VOLTAGE_CONSTANT,
+  .rs = RS,
+  .ls = LS*1.000,
+  .ld = LS,
+  .maxCurrent = NOMINAL_CURRENT,
   .name = "Shinano LA052-080E3NL1"
 };
 

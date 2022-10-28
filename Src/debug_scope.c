@@ -68,4 +68,5 @@ DebugWriteState DebugScopeInsertData(DebugScope_Handle_t *pHandle, const int8_t 
 void DebugScopeStartWrite(DebugScope_Handle_t *pHandle)
 {
 	pHandle->startWriteFlag = true;
+	pHandle->i1 = pHandle->i2 = pHandle->i3 = pHandle->i4 = pHandle->i5 = 0;
 }

@@ -324,7 +324,7 @@ mechanicalAngleCalculation(MCI_Handle_t *pHandle)
 {
     //const int16_t hElAngle = pHandle->pFOCVars->hElAngle;
     const int16_t hElAngle = *(EncRefM1.pRefElAngle);
-    const int16_t phase = 1000;//EncRefM1.enc_I_angle;
+    const int16_t encPhase = EncRefM1.enc_I_angle;
     static int16_t prevAngle = 0;
     static int16_t sectionCounter = 0;
      
@@ -338,7 +338,7 @@ mechanicalAngleCalculation(MCI_Handle_t *pHandle)
     else if (angle < INT16_MIN) angle += UINT16_MAX;
     EncRefM1.hMechAngle = angle;
 
-    int32_t totalAngle = (int32_t)angle - phase;
+    int32_t totalAngle = (int32_t)angle - encPhase;
     if (totalAngle > INT16_MAX)      totalAngle -= UINT16_MAX;
     else if (totalAngle < INT16_MIN) totalAngle += UINT16_MAX;
     EncRefM1.hMechAngleWithPhase = totalAngle;

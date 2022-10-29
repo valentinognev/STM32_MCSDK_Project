@@ -45,8 +45,6 @@
 
 extern EncoderReference_Handle_t EncRefM1;
 extern MCI_Handle_t Mci[NBR_OF_MOTORS];
-extern STO_CR_Handle_t STO_CR_M1;
-extern STO_PLL_Handle_t STO_PLL_M1;
 
 int32_t angArr[NUMOFANGS];
 //int16_t angArrS[NUMOFANGS];
@@ -87,34 +85,33 @@ void EXTI9_5_IRQHandler(void)
   /* USER CODE BEGIN EXTI9_5_IRQn 0 */
  
   /* USER CODE END EXTI9_5_IRQn 0 */
-  // if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_8) != RESET && (EncRefM1.enc_I_counter <= NUMOFANGS))
-  // {
-  //   LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_8);
-  //   /* USER CODE BEGIN LL_EXTI_LINE_8 */
-  //   if (EncRefM1.enc_I_counter < NUMOFANGS)
-  //   {
-  //     //angArr[EncRefM1.enc_I_counter]=STO_CR_M1._Super.hElAngle;
-  //     angArr[EncRefM1.enc_I_counter]=STO_PLL_M1._Super.hElAngle;
-  //     EncRefM1.enc_I_counter++;
-  //   }
-  //   else
-  //   {
-  //     EncRefM1.enc_I_angle = 0;
-  //     int32_t var;
-  //     for (int16_t i=NUMOFANGS/2;i<NUMOFANGS;i++)
-  //       EncRefM1.enc_I_angle += angArr[i];//(EncRefM1.enc_I_angle*EncRefM1.enc_I_counter+Mci[M1].pFOCVars->hElAngle)/(EncRefM1.enc_I_counter+1);
-  //     EncRefM1.enc_I_angle /= (NUMOFANGS-NUMOFANGS/2);
-  //     for (int16_t i=NUMOFANGS/2;i<NUMOFANGS;i++)
-  //       var += (angArr[i]-EncRefM1.enc_I_angle)*(angArr[i]-EncRefM1.enc_I_angle);//(EncRefM1.enc_I_angle*EncRefM1.enc_I_counter+Mci[M1].pFOCVars->hElAngle)/(EncRefM1.enc_I_counter+1);
-  //     var /= (NUMOFANGS-NUMOFANGS/2);
-  //     // float sd = sqrt(var);
-  //     NVIC_DisableIRQ(M1_ENCODER_I_EXTI_IRQn);
-  //     EncRefM1.enc_I_counter++;
-  //   }
-  //   /* USER CODE END LL_EXTI_LINE_8 */
-  // }
-  // else 
-  if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_8))
+  if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_8) != RESET && (EncRefM1.enc_I_counter <= NUMOFANGS))
+  {
+    LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_8);
+    /* USER CODE BEGIN LL_EXTI_LINE_8 */
+    if (EncRefM1.enc_I_counter < NUMOFANGS)
+    {
+      //angArr[EncRefM1.enc_I_counter]=STO_CR_M1._Super.hElAngle;
+      angArr[EncRefM1.enc_I_counter] = EncRefM1.hMechAngle;
+      EncRefM1.enc_I_counter++;
+    }
+    else
+    {
+      EncRefM1.enc_I_angle = 0;
+      int32_t var;
+      for (int16_t i=NUMOFANGS/2;i<NUMOFANGS;i++)
+        EncRefM1.enc_I_angle += angArr[i];//(EncRefM1.enc_I_angle*EncRefM1.enc_I_counter+Mci[M1].pFOCVars->hElAngle)/(EncRefM1.enc_I_counter+1);
+      EncRefM1.enc_I_angle /= (NUMOFANGS-NUMOFANGS/2);
+      for (int16_t i=NUMOFANGS/2;i<NUMOFANGS;i++)
+        var += (angArr[i]-EncRefM1.enc_I_angle)*(angArr[i]-EncRefM1.enc_I_angle);//(EncRefM1.enc_I_angle*EncRefM1.enc_I_counter+Mci[M1].pFOCVars->hElAngle)/(EncRefM1.enc_I_counter+1);
+      var /= (NUMOFANGS-NUMOFANGS/2);
+      // float sd = sqrt(var);
+      //NVIC_DisableIRQ(M1_ENCODER_I_EXTI_IRQn);
+      EncRefM1.enc_I_counter++;
+    }
+    /* USER CODE END LL_EXTI_LINE_8 */
+  }
+  else if (LL_EXTI_IsActiveFlag_0_31(LL_EXTI_LINE_8))
   {
     LL_EXTI_ClearFlag_0_31(LL_EXTI_LINE_8);
     //NVIC_DisableIRQ(M1_ENCODER_I_EXTI_IRQn);

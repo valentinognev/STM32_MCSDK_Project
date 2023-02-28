@@ -53,11 +53,14 @@ typedef struct
   uint32_t samplingTime;
 } RegConv_t;
 
+/**
+ * @brief Conversion states
+ */
 typedef enum
 {
-  RCM_USERCONV_IDLE,
-  RCM_USERCONV_REQUESTED,
-  RCM_USERCONV_EOC
+  RCM_USERCONV_IDLE,        /**< @brief No conversion currently scheduled */
+  RCM_USERCONV_REQUESTED,   /**< @brief A conversion is scheduled for execution */
+  RCM_USERCONV_EOC          /**< @brief A conversion has completed and the value is ready */
 }RCM_UserConvState_t;
 
 typedef void (*RCM_exec_cb_t)(uint8_t handle, uint16_t data, void *UserData);

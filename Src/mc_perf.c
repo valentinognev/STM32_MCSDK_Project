@@ -25,6 +25,9 @@ void  MC_Perf_Measure_Init (MC_Perf_Handle_t *pHandle)
   uint8_t  i;
   Perf_Handle_t  *pHdl;
 
+  /* Set Debug mod for DWT IP Enabling */
+  CoreDebug->DEMCR |= CoreDebug_DEMCR_TRCENA_Msk;
+
   if (DWT->CTRL != 0) {                         // Check if DWT is present
     DWT->CYCCNT  = 0;
     DWT->CTRL   |= DWT_CTRL_CYCCNTENA_Msk;      // Enable Cycle Counter

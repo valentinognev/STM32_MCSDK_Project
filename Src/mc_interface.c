@@ -95,7 +95,7 @@ __weak void MCI_Init(MCI_Handle_t *pHandle, SpeednTorqCtrl_Handle_t *pSTC, pFOCV
   *         of the command calling the MCI_IsCommandAcknowledged method.
   * @param  pHandle Pointer on the component instance to operate on.
   * @param  hFinalSpeed is the value of mechanical rotor speed reference at the
-  *         end of the ramp expressed in tenths of HZ.
+  *         end of the ramp expressed in the unit defined by #SPEED_UNIT.
   * @param  hDurationms the duration of the ramp expressed in milliseconds. It
   *         is possible to set 0 to perform an instantaneous change in the
   *         value.
@@ -741,31 +741,6 @@ __weak MCI_CommandState_t  MCI_IsCommandAcknowledged(MCI_Handle_t *pHandle)
 #endif
   return (retVal);
 }
-/**
-  * @brief  It returns information about the state of the last buffered command.
-  * @param  pHandle Pointer on the component instance to work on.
-  * @retval CommandState_t  It can be one of the following codes:
-  *         - MCI_NOCOMMANDSYET 
-  *         - MCI_CMD_EXECSPEEDRAMP 
-  *         - MCI_CMD_EXECTORQUERAMP 
-  *         - MCI_CMD_SETCURRENTREFERENCES 
-  *         - MCI_CMD_EXECSPEEDSIN
-  */
-__weak MCI_UserCommands_t  MCI_GetLastCommand(MCI_Handle_t *pHandle)
-{
-  MCI_UserCommands_t retVal;
-#ifdef NULL_PTR_MC_INT
-  if (MC_NULL == pHandle)
-  {
-    retVal = MCI_NOCOMMANDSYET;
-  }
-#endif
-    retVal = pHandle->lastCommand;
-#ifdef NULL_PTR_MC_INT
-  }
-#endif
-  return (retVal);
-}
 
 /**
   * @brief  It returns information about the state of the related pSTM object.
@@ -895,10 +870,10 @@ __weak int16_t MCI_GetImposedMotorDirection(MCI_Handle_t *pHandle)
 
 /**
   * @brief  It returns information about the last ramp final speed sent by the
-  *         user expressed in tenths of HZ.
+  *         user expressed in the unit defined by #SPEED_UNIT.
   * @param  pHandle Pointer on the component instance to work on.
-  * @retval int16_t last ramp final speed sent by the user expressed in tenths
-  *         of HZ.
+  * @retval int16_t last ramp final speed sent by the user expressed in
+  *         the unit defined by #SPEED_UNIT.
   */
 __weak int16_t MCI_GetLastRampFinalSpeed(MCI_Handle_t *pHandle)
 {

@@ -66,8 +66,6 @@ void MC_SetCurrentReferenceMotor1_F( qd_f_t IqdRef );
 
 /* Returns the state of the last submited command for Motor 1 */
 MCI_CommandState_t  MC_GetCommandStateMotor1( void);
-/* Returns the last command submited for Motor 1 */
-MCI_UserCommands_t  MC_GetLastCommandMotor1( void );
 
 /* Stops the execution of the current speed ramp for Motor 1 if any */
 bool MC_StopSpeedRampMotor1(void);
@@ -83,13 +81,13 @@ bool MC_HasRampCompletedMotor1(void);
 int16_t MC_GetMecSpeedReferenceMotor1(void);
 
 /* Returns the current mechanical rotor speed reference set for Motor 1, expressed in rpm */
-float MC_GetMecSpeedReferenceMotor1_F(void);
+//float MC_GetMecSpeedReferenceMotor1_F(void);
 
 /* Returns the last computed average mechanical rotor speed for Motor 1, expressed in the unit defined by #SPEED_UNIT */
 int16_t MC_GetMecSpeedAverageMotor1(void);
 
 /* Returns the last computed average mechanical rotor speed for Motor 1, expressed in rpm */
-float MC_GetAverageMecSpeedMotor1_F(void);
+//float MC_GetAverageMecSpeedMotor1_F(void);
 
 /* Returns the last computed average mechanical rotor speed from auxiliary sensor for Motor 1, expressed in the unit defined by #SPEED_UNIT */
 int16_t MC_GetMecAuxiliarySpeedAverageMotor1(void);
@@ -183,6 +181,9 @@ MCI_State_t  MC_GetSTMStateMotor1(void);
 
 /* returns the current power of Motor 1 in float format */
 float MC_GetAveragePowerMotor1_F(void);
+
+/* Call the Profiler command */
+uint8_t MC_ProfilerCommand (uint16_t rxLength, uint8_t *rxBuffer, int16_t txSyncFreeSpace, uint16_t *txLength, uint8_t *txBuffer);
 
 /**
   * @}

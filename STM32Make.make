@@ -52,7 +52,9 @@ Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_rcc_ex.c \
 Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim.c \
 Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_hal_tim_ex.c \
 Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_adc.c \
+Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_comp.c \
 Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_cordic.c \
+Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_dac.c \
 Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_dma.c \
 Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_exti.c \
 Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_gpio.c \
@@ -61,29 +63,30 @@ Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_rcc.c \
 Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_tim.c \
 Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_usart.c \
 Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_utils.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/bus_voltage_sensor.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/circle_limitation.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcpa.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/pid_regulator.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/pqd_motor_power_measurement.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/pwm_common.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/r_divider_bus_voltage_sensor.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/speed_pos_fdbk.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/speed_torq_ctrl.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Src/r3_2_g4xx_pwm_curr_fdbk.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/bus_voltage_sensor.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/circle_limitation.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcpa.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/pid_regulator.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/pqd_motor_power_measurement.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/pwm_common.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/r_divider_bus_voltage_sensor.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/speed_pos_fdbk.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/speed_torq_ctrl.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_cordic_speed_pos_fdbk.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c \
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/G4xx/Src/r3_2_g4xx_pwm_curr_fdbk.c \
 Src/aspep.c \
 Src/debug_scope.c \
 Src/main.c \
 Src/mc_api.c \
+Src/mc_app_hooks.c \
 Src/mc_config.c \
 Src/mc_configuration_registers.c \
 Src/mc_interface.c \
@@ -181,8 +184,8 @@ C_INCLUDES =  \
 -IDrivers/STM32G4xx_HAL_Driver/Inc \
 -IDrivers/STM32G4xx_HAL_Driver/Inc/Legacy \
 -IInc \
--IMCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc \
--IMCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc
+-IMCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc \
+-IMCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc
 
 
 

@@ -23,7 +23,6 @@
 /* Define to prevent recursive inclusion -------------------------------------*/
 #ifndef PARAMETERS_CONVERSION_G4XX_H
 #define PARAMETERS_CONVERSION_G4XX_H
-#include "pmsm_motor_parameters.h"
 #include "drive_parameters.h"
 #include "power_stage_parameters.h"
 #include "mc_math.h"
@@ -34,6 +33,7 @@
 #define ADV_TIM_CLK_MHz  170 /* Actual TIM clk including Timer clock divider*/
 #define ADC_CLK_MHz     42
 #define HALL_TIM_CLK    170000000uL
+#define APB1TIM_FREQ 170000000uL
 
 /*************************  IRQ Handler Mapping  *********************/
 #define TIMx_UP_M1_IRQHandler TIM1_UP_TIM16_IRQHandler
@@ -44,7 +44,6 @@
 #define ADC_SAR_CYCLES 12.5
 
 #define M1_VBUS_SW_FILTER_BW_FACTOR     6u
-
 #define OPAMP1_InvertingInput_PC5         LL_OPAMP_INPUT_INVERT_IO0
 #define OPAMP1_InvertingInput_PA3         LL_OPAMP_INPUT_INVERT_IO1
 #define OPAMP1_InvertingInput_PGA         LL_OPAMP_INPUT_INVERT_CONNECT_NO

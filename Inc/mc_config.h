@@ -47,12 +47,13 @@
 
 extern RevUpCtrl_Handle_t RevUpControlM1;
 
-/* USER CODE END Additional include */
 extern PID_Handle_t PIDSpeedHandle_M1;
 extern PID_Handle_t PIDIqHandle_M1;
 extern PID_Handle_t PIDIdHandle_M1;
 extern NTC_Handle_t TempSensor_M1;
+
 extern PWMC_R3_2_Handle_t PWM_Handle_M1;
+
 extern SpeednTorqCtrl_Handle_t SpeednTorqCtrlM1;
 extern PQD_MotorPowMeas_Handle_t PQD_MotorPowMeasM1;
 extern PQD_MotorPowMeas_Handle_t *pPQD_MotorPowMeasM1;
@@ -71,7 +72,6 @@ extern PID_Handle_t *pPIDId[NBR_OF_MOTORS];
 extern NTC_Handle_t *pTemperatureSensor[NBR_OF_MOTORS];
 extern PQD_MotorPowMeas_Handle_t *pMPM[NBR_OF_MOTORS];
 extern MCI_Handle_t* pMCI[NBR_OF_MOTORS];
-
 /* USER CODE BEGIN Additional extern */
 
 /* USER CODE END Additional extern */

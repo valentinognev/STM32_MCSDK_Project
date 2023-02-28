@@ -54,13 +54,13 @@ typedef enum
 
 typedef enum
 {
-  MCI_NOCOMMANDSYET,        /*!< No command has been set by the user.*/
+  MCI_NOCOMMANDSYET,            /*!< No command has been set by the user.*/
   MCI_CMD_EXECSPEEDRAMP,        /*!< ExecSpeedRamp command coming from the user.*/
   MCI_CMD_EXECTORQUERAMP,       /*!< ExecTorqueRamp command coming from the user.*/
   MCI_CMD_SETCURRENTREFERENCES, /*!< SetCurrentReferences command coming from the user.*/
-  MCI_CMD_EXECSPEEDSIN,        /*!< ExecSpeedSin command coming from the user.*/
-  MCI_CMD_SETOPENLOOPCURRENT, /*!< set open loop current .*/
-  MCI_CMD_SETOPENLOOPVOLTAGE, /*!< set open loop voltage .*/
+  MCI_CMD_EXECSPEEDSIN,         /*!< ExecSpeedSin command coming from the user.*/
+  MCI_CMD_SETOPENLOOPCURRENT,   /*!< set open loop current .*/
+  MCI_CMD_SETOPENLOOPVOLTAGE,   /*!< set open loop voltage .*/
 } MCI_UserCommands_t;
 
 /**
@@ -174,7 +174,6 @@ void MCI_FaultProcessing(  MCI_Handle_t * pHandle, uint16_t hSetErrors, uint16_t
                                   hResetErrors );
 uint32_t MCI_GetFaultState( MCI_Handle_t * pHandle );
 MCI_CommandState_t  MCI_IsCommandAcknowledged( MCI_Handle_t * pHandle );
-MCI_UserCommands_t  MCI_GetLastCommand( MCI_Handle_t * pHandle );
 MCI_State_t MCI_GetSTMState( MCI_Handle_t * pHandle );
 uint16_t MCI_GetOccurredFaults( MCI_Handle_t * pHandle );
 uint16_t MCI_GetCurrentFaults( MCI_Handle_t * pHandle );

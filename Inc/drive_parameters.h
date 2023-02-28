@@ -34,7 +34,7 @@
 #define MAX_APPLICATION_SPEED_RPM       3540 /*!< rpm, mechanical */
 #define MIN_APPLICATION_SPEED_RPM       0 /*!< rpm, mechanical,
                                                            absolute value */
-#define MEAS_ERRORS_BEFORE_FAULTS       3 /*!< Number of speed
+#define M1_SS_MEAS_ERRORS_BEFORE_FAULTS 3 /*!< Number of speed
                                                              measurement errors before
                                                              main sensor goes in fault */
 /****** State Observer + PLL ****/
@@ -58,9 +58,6 @@
 #define PLL_KIDIV     65535
 #define PLL_KIDIV_LOG LOG2((PLL_KIDIV))
 
-#define OBS_MEAS_ERRORS_BEFORE_FAULTS    3  /*!< Number of consecutive errors
-                                                           on variance test before a speed
-                                                           feedback error is reported */
 #define STO_FIFO_DEPTH_DPP               64  /*!< Depth of the FIFO used
                                                             to average mechanical speed
                                                             in dpp format */
@@ -87,9 +84,6 @@
 #define CORD_GAIN1                       -22656
 #define CORD_GAIN2                       26684
 
-#define CORD_MEAS_ERRORS_BEFORE_FAULTS   100  /*!< Number of consecutive errors
-                                                           on variance test before a speed
-                                                           feedback error is reported */
 #define CORD_FIFO_DEPTH_DPP              64  /*!< Depth of the FIFO used
                                                             to average mechanical speed
                                                             in dpp format */

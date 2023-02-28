@@ -44,6 +44,7 @@
 #define PFC_DISABLE      0x58
 #define PFC_FAULT_ACK    0x60
 #define PROFILER_CMD     0x68
+#define GET_DBG_DATA     0x70
 #define SW_RESET         0x78
 #define MCP_USER_CMD     0x100
 

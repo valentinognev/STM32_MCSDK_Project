@@ -7,7 +7,7 @@
   ******************************************************************************
   * @attention
   *
-  * Copyright (c) 2022 STMicroelectronics.
+  * Copyright (c) 2023 STMicroelectronics.
   * All rights reserved.
   *
   * This software is licensed under terms that can be found in the LICENSE file
@@ -31,7 +31,10 @@ extern "C" {
 #include "motorcontrol.h"
 
 #include "stm32g4xx_ll_adc.h"
+#include "stm32g4xx_ll_comp.h"
+#include "stm32g4xx_ll_exti.h"
 #include "stm32g4xx_ll_cordic.h"
+#include "stm32g4xx_ll_dac.h"
 #include "stm32g4xx_ll_dma.h"
 #include "stm32g4xx_ll_opamp.h"
 #include "stm32g4xx_ll_rcc.h"

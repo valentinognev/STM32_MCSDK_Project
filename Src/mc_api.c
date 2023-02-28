@@ -22,6 +22,7 @@
 #include "mc_api.h"
 #include "mc_config.h"
 #include "debug_scope.h"
+#include "mcp.h"
 
 static int64_t startMotorTime = -1;
 /** @addtogroup MCSDK
@@ -310,19 +311,6 @@ __weak MCI_CommandState_t  MC_GetCommandStateMotor1( void)
 {
 	return MCI_IsCommandAcknowledged( pMCI[M1] );
 }
-/**
-  * @brief  Returns the last command submited for Motor 1.
-  * The command can be one of the following values:
-  * - #MCI_NOCOMMANDSYET: no command is currently programmed.
-  * - #MCI_CMD_EXECSPEEDRAMP: 
-  * - #MCI_CMD_EXECTORQUERAMP: 
-  * - #MCI_CMD_SETCURRENTREFERENCES: 
-  * - #MCI_CMD_EXECSPEEDSIN
-  */
-__weak MCI_UserCommands_t  MC_GetLastCommandMotor1( void)
-{
-	return MCI_GetLastCommand( pMCI[M1] );
-}
 
 /**
  * @brief Stops the execution of the on-going speed ramp for Motor 1, if any.
@@ -369,10 +357,10 @@ __weak int16_t MC_GetMecSpeedReferenceMotor1(void)
 /**
  *  @brief Returns the current mechanical rotor speed reference set for Motor 1, expressed in rpm.
  */
-__weak float MC_GetMecSpeedReferenceMotor1_F(void)
-{
-	return MCI_GetMecSpeedRef_F( pMCI[M1] );
-}
+//__weak float MC_GetMecSpeedReferenceMotor1_F(void)
+//{
+//	return MCI_GetMecSpeedRef_F( pMCI[M1] );
+//}
 
 /**
  * @brief Returns the last computed average mechanical rotor speed for Motor 1, expressed in the unit defined by #SPEED_UNIT
@@ -419,10 +407,10 @@ __weak float MC_GetAuxiliaryElAngleMotor1_F(void)
 /**
  * @brief Returns the last computed average mechanical rotor speed for Motor 1, expressed in rpm.
  */
-__weak float MC_GetAverageMecSpeedMotor1_F(void)
-{
-	return MCI_GetAvrgMecSpeed_F( pMCI[M1] );
-}
+//__weak float MC_GetAverageMecSpeedMotor1_F(void)
+//{
+//	return MCI_GetAvrgMecSpeed_F( pMCI[M1] );
+//}
 
 /**
  * @brief Returns the final speed of the last ramp programmed for Motor 1 if this ramp was a speed ramp, 0 otherwise.
@@ -747,4 +735,14 @@ __weak float MC_GetAveragePowerMotor1_F(void)
 {
 	return (PQD_GetAvrgElMotorPowerW(pMPM[M1]));
 }
+
+/**
+ * @brief Not implemented MC_Profiler function.
+ *  */
+__weak uint8_t MC_ProfilerCommand (uint16_t rxLength, uint8_t *rxBuffer, int16_t txSyncFreeSpace, uint16_t *txLength, uint8_t *txBuffer)
+{
+  return MCP_CMD_UNKNOWN;
+}
+
+/************************ (C) COPYRIGHT 2022 STMicroelectronics *****END OF FILE****/
 

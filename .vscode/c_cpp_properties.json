@@ -8,8 +8,8 @@
         "Drivers/STM32G4xx_HAL_Driver/Inc",
         "Drivers/STM32G4xx_HAL_Driver/Inc/Legacy",
         "Inc",
-        "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc",
-        "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc"
+        "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc",
+        "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc"
       ],
       "defines": [
         "ARM_MATH_CM4",

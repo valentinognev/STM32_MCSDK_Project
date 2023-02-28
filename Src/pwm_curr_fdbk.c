@@ -21,6 +21,7 @@
   *                             www.st.com/SLA0044
   *
   ******************************************************************************
+  * @ingroup pwm_curr_fdbk
   */
 
 /* Includes ------------------------------------------------------------------*/
@@ -34,7 +35,7 @@
 
 /** @defgroup pwm_curr_fdbk PWM & Current Feedback
   *
-  * @brief PWM & Current Feedback components of the Motor Control SDK
+  * @brief PWM & Current Feedback components of the Motor Control SDK.
   *
   * These components fulfill two functions in a Motor Control subsystem:
   *
@@ -67,9 +68,9 @@
   */
 
 /**
-  * @brief  It is used to clear the variable in CPWMC.
-  * @param  this related object of class CPWMC
-  * @retval none
+  * @brief  Used to clear variables in CPWMC.
+  *
+  * @param pHandle: Handler of the current instance of the PWM component.
   */
 void PWMC_Clear(PWMC_Handle_t *pHandle)
 {
@@ -92,10 +93,8 @@ void PWMC_Clear(PWMC_Handle_t *pHandle)
 }
 
 /**
-  * @brief  Sets the calibrated offsets. In case of single shunt only phase A is relevant
+  * @brief  Sets the calibrated @p offsets for each of the phases in the @p pHandle handler. In case of single shunt only phase A is relevant.
   *
-  * @param  pHandle: handle on the target instance of the PWMC component
-  * @param  offsets: offsets to set
   */
 //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
 __weak void PWMC_SetOffsetCalib(PWMC_Handle_t *pHandle, PolarizationOffsets_t *offsets)
@@ -111,10 +110,8 @@ __weak void PWMC_SetOffsetCalib(PWMC_Handle_t *pHandle, PolarizationOffsets_t *o
 }
 
 /**
-  * @brief  Gets the calibrated offsets. In case of single shunt only phase A is relevant
+  * @brief  Gets the calibrated @p offsets for each of the phases in the @p pHandle handler. In case of single shunt only phase A is relevant.
   *
-  * @param  pHandle: handle on the target instance of the PWMC component
-  * @param  offsets: offsets to get
   */
 //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
 __weak void PWMC_GetOffsetCalib(PWMC_Handle_t *pHandle, PolarizationOffsets_t *offsets)
@@ -137,18 +134,18 @@ __attribute__( ( section ( ".ccmram" ) ) )
 #endif
 #endif
 /**
-  * @brief Returns the phase current of the motor as read by the ADC (in s16A unit)
+  * @brief Returns the phase current of the motor as read by the ADC (in s16A unit).
   *
-  * The function actually returns the current values of phase A & B. Phase C current
+  * Returns the current values of phases A & B. Phase C current
   * can be deduced thanks to the formula:
   *
   * @f[
-  * I_{C} = -I_{A} - I_{C}
+  * I_{C} = -I_{A} - I_{B}
   * @f]
   *
-  * @param  pHandle handle on the target PWMC component
-  * @param  pStator_Currents Pointer to the structure that will receive motor current
-  *         of phase A and B in ElectricalValue format.
+  * @param  pHandle: Handler of the current instance of the PWM component.
+  * @param  Iab: Pointer to the structure that will receive motor current
+  *         of phases A & B in ElectricalValue format.
   */
 //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
 __weak void PWMC_GetPhaseCurrents(PWMC_Handle_t *pHandle, ab_t *Iab)
@@ -174,29 +171,24 @@ __weak void PWMC_GetPhaseCurrents(PWMC_Handle_t *pHandle, ab_t *Iab)
 __attribute__( ( section ( ".ccmram" ) ) )
 #endif
 #endif
-/**
- * @brief Sets the PWM duty cycles
- *
- *
- */
 
 /**
   * @brief  Converts input voltages @f$ V_{\alpha} @f$ and @f$ V_{\beta} @f$ into PWM duty cycles
   *         and feed them to the inverter.
-  * @param  pHandle handler on the target PWMC component.
-  * @param  Valfa_beta Voltage Components expressed in the @f$(\alpha, \beta)@f$ reference frame
   *
-  * This function computes the the time during wIch the transistors of each phase are to be switched on in
-  * a PWM cycle in order to achieve the reference phase voltage set by @p Valfa_beta. Then, the function
+  * This function computes the time during which the transistors of each phase are to be switched on in
+  * a PWM cycle in order to achieve the reference phase voltage set by @p Valfa_beta. The function then
   * programs the resulting duty cycles in the related timer channels. It also sets the phase current
   * sampling point for the next PWM cycle accordingly.
   *
-  * This function is used in the FOC frequency loop and needs to complete before the next PWM cycle starts
-  * so that the duty cycles it computes can be taken into account. Failing to do so (for instance because
-  * the PWM Frequency is too high) results in the functions returning #MC_DURATION wIch entails a
+  * This function is used in the FOC frequency loop and needs to complete itself before the next PWM cycle starts
+  * in order for the duty cycles it computes to be taken into account. Failing to do so (for instance because
+  * the PWM Frequency is too high) results in the function returning #MC_DURATION which entails a
   * Motor Control Fault that stops the motor.
   *
-  * @retval Returns #MC_NO_ERROR if no error occurred or #MC_DURATION if the duty cycles were
+  * @param  pHandle: Handler of the current instance of the PWM component.
+  * @param  Valfa_beta: Voltage Components expressed in the @f$(\alpha, \beta)@f$ reference frame.
+  * @retval #MC_NO_ERROR if no error occurred or #MC_DURATION if the duty cycles were
   *         set too late for being taken into account in the next PWM cycle.
   */
 __weak uint16_t PWMC_SetPhaseVoltage(PWMC_Handle_t *pHandle, alphabeta_t Valfa_beta)
@@ -345,7 +337,8 @@ __weak uint16_t PWMC_SetPhaseVoltage(PWMC_Handle_t *pHandle, alphabeta_t Valfa_b
 
 /**
   * @brief  Switches PWM generation off, inactivating the outputs.
-  * @param  pHandle Handle on the target instance of the PWMC component
+  *
+  * @param  pHandle: Handler of the current instance of the PWM component.
   */
 //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
 __weak void PWMC_SwitchOffPWM(PWMC_Handle_t *pHandle)
@@ -365,8 +358,9 @@ __weak void PWMC_SwitchOffPWM(PWMC_Handle_t *pHandle)
 }
 
 /**
-  * @brief  Switches PWM generation on
-  * @param  pHandle Handle on the target instance of the PWMC component
+  * @brief  Enables PWM generation on the proper Timer peripheral.
+  *
+  * @param  pHandle: Handler of the current instance of the PWM component.
   */
 //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
 __weak void PWMC_SwitchOnPWM(PWMC_Handle_t *pHandle)
@@ -391,10 +385,10 @@ __weak void PWMC_SwitchOnPWM(PWMC_Handle_t *pHandle)
   *
   * This function should be called before each motor start-up.
   *
-  * @param  pHandle Handle on the target instance of the PWMC component
-  * @param  action Can be #CRC_START to initialize the offset calibration or
+  * @param  pHandle: Handler of the current instance of the PWM component.
+  * @param  action: Can be #CRC_START to initialize the offset calibration or
   *         #CRC_EXEC to execute the offset calibration.
-  * @retval true if the current calibration has been completed, false if it is
+  * @retval true if the current calibration has been completed, **false** if it is
   *         still ongoing.
   */
 __weak bool PWMC_CurrentReadingCalibr(PWMC_Handle_t *pHandle, CRCAction_t action)
@@ -447,6 +441,17 @@ __weak bool PWMC_CurrentReadingCalibr(PWMC_Handle_t *pHandle, CRCAction_t action
 __attribute__( ( section ( ".ccmram" ) ) )
 #endif
 #endif
+/**
+  * @brief  Sets a low pass filter.
+  *
+  * This function is called for setting low pass filter on Iq and Id, before getting
+  * transformed in Ia and Ib by the Reverse Park function.
+  *
+  * @param in: Value needing to be passed through the filter (Iq and Id).
+  * @param out_buf: LPF buffer.
+  * @param t: Low pass filter constant.
+  * @retval New value after the low pass filter.
+  */
 static inline int32_t PWMC_LowPassFilter(int32_t in, int32_t *out_buf, int32_t t)
 {
   int32_t x;
@@ -481,11 +486,12 @@ __attribute__( ( section ( ".ccmram" ) ) )
 #endif
 #endif
 /**
-  * @brief  It converts input currents components Iqd into estimated
-  *         currents Ia, Ib and Ic
-  * @param  Iqd: Iq and Id currents
-  * @param  hElAngledpp: electrical angle
-  * @retval none
+  * @brief  Converts input currents components Iqd into estimated
+  *         currents Ia, Ib and Ic.
+  *
+  * @param  pHandle: Handler of the current instance of the PWM component.
+  * @param  Iqd: Structure that will receive Iq and Id currents.
+  * @param  hElAngledpp: Electrical angle.
   */
 void PWMC_CalcPhaseCurrentsEst(PWMC_Handle_t *pHandle, qd_t Iqd, int16_t hElAngledpp)
 {
@@ -536,10 +542,13 @@ void PWMC_CalcPhaseCurrentsEst(PWMC_Handle_t *pHandle, qd_t Iqd, int16_t hElAngl
   * section. It has to be called on each motor start-up when using high
   * voltage drivers.
   *
-  * @param  pHandle: handle on the target instance of the PWMC component
+  * @param  pHandle: Handler of the current instance of the PWM component.
+  * @param  ticks: Timer ticks value to be applied.
+  *                Min value: 0 (low sides ON)
+  *                Max value: PWM_PERIOD_CYCLES/2 (low sides OFF)
   */
 //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
-__weak void PWMC_TurnOnLowSides(PWMC_Handle_t *pHandle)
+__weak void PWMC_TurnOnLowSides(PWMC_Handle_t *pHandle, uint32_t ticks)
 {
 #ifdef NULL_PTR_PWR_CUR_FDB
   if (MC_NULL == pHandle)
@@ -549,15 +558,17 @@ __weak void PWMC_TurnOnLowSides(PWMC_Handle_t *pHandle)
   else
   {
 #endif
-    pHandle->pFctTurnOnLowSides(pHandle);
+    pHandle->pFctTurnOnLowSides(pHandle, ticks);
 #ifdef NULL_PTR_PWR_CUR_FDB
   }
 #endif
 }
 
-/** @brief Returns #MC_BREAK_IN if an over current condition was detected on the power stage
-  *         controlled by the PWMC component pointed by  @p pHandle, since the last call to this function;
-  *         returns #MC_NO_FAULTS otherwise.
+/** @brief  Checks if an overcurrent has occured since the last call to this function.
+  *
+  *	@param  pHandle: Handler of the current instance of the PWM component.
+  * @retval #MC_BREAK_IN if an overcurrent has occurred since last call,
+  *         and #MC_NO_FAULTS otherwise.
   */
 __weak uint16_t PWMC_CheckOverCurrent(PWMC_Handle_t *pHandle) //cstat !MISRAC2012-Rule-8.13
 {
@@ -569,13 +580,12 @@ __weak uint16_t PWMC_CheckOverCurrent(PWMC_Handle_t *pHandle) //cstat !MISRAC201
 }
 
 /**
-  * @brief  Sets the over current threshold to be used
+  * @brief  Sets the over current threshold through the DAC reference voltage.
   *
-  * The value to be set is relative to the VDD_DAC DAC reference voltage with
-  * 0 standing for 0 V and 65536 standing for VDD_DAC.
-  *
-  * @param  pHandle handle on the target instance of the PWMC component
-  * @param  hDACVref Value of DAC reference expressed as 16bit unsigned integer
+  * @param  pHandle:  Handler of the current instance of the PWM component.
+  * @param  hDACVref: Value of DAC reference voltage to be applied expressed as a 16bit unsigned integer.
+  *					  Min value: 0 (0 V)
+  *                	  Max value: 65536 (VDD_DAC)
   */
 //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
 __weak void PWMC_OCPSetReferenceVoltage(PWMC_Handle_t *pHandle, uint16_t hDACVref)
@@ -595,14 +605,12 @@ __weak void PWMC_OCPSetReferenceVoltage(PWMC_Handle_t *pHandle, uint16_t hDACVre
 }
 
 /**
-  * @brief  It is used to retrieve the satus of TurnOnLowSides action.
-  * @param  pHandle: handler of the current instance of the PWMC component
-  * @retval bool It returns the state of TurnOnLowSides action:
-  *         true if TurnOnLowSides action is active, false otherwise.
+  * @brief  Retrieves the satus of TurnOnLowSides action.
+  *
+  * @param  pHandle: Handler of the current instance of the PWMC component.
+  * @retval bool State of TurnOnLowSides action:
+  *         **true** if TurnOnLowSides action is active, **false** otherwise.
   */
-/** @brief Returns the status of the "TurnOnLowSide" action on the power stage
- *         controlled by the @p pHandle PWMC component: true if it
- *         is active, false otherwise*/
 __weak bool PWMC_GetTurnOnLowSidesAction(const PWMC_Handle_t *pHandle)
 {
 #ifdef NULL_PTR_PWR_CUR_FDB
@@ -612,7 +620,9 @@ __weak bool PWMC_GetTurnOnLowSidesAction(const PWMC_Handle_t *pHandle)
 #endif
 }
 
-/** @brief Enables Discontinious PWM mode by the @p pHandle PWMC component. */
+/** @brief Enables Discontinuous PWM mode using the @p pHandle PWMC component.
+  *
+  */
 __weak void PWMC_DPWM_ModeEnable( PWMC_Handle_t * pHandle )
 {
 #ifdef NULL_PTR_PWR_CUR_FDB
@@ -629,7 +639,9 @@ __weak void PWMC_DPWM_ModeEnable( PWMC_Handle_t * pHandle )
 #endif
 }
 
-/** @brief Disables Discontinious PWM mode by the @p pHandle PWMC component. */
+/** @brief Disables Discontinuous PWM mode using the @p pHandle PWMC component.
+  *
+  */
 __weak void PWMC_DPWM_ModeDisable( PWMC_Handle_t * pHandle )
 {
 #ifdef NULL_PTR_PWR_CUR_FDB
@@ -646,7 +658,10 @@ __weak void PWMC_DPWM_ModeDisable( PWMC_Handle_t * pHandle )
 #endif
 }
 
-/** @brief Returns the status of the DPWM Mode: true if enable, false otherwise*/
+/** @brief  Returns the status of the Discontinuous PWM Mode stored in the @p pHandle PWMC component.
+  *
+  * @retval true if DPWM Mode is enabled, **false** otherwise.
+  */
 __weak bool PWMC_GetDPWM_Mode( PWMC_Handle_t * pHandle )
 {
 #ifdef NULL_PTR_PWR_CUR_FDB
@@ -656,7 +671,9 @@ __weak bool PWMC_GetDPWM_Mode( PWMC_Handle_t * pHandle )
 #endif
 }
 
-/** @brief Enables the RL detection mode on the power stage controlled by the @p pHandle PWMC component. */
+/** @brief  Enables the RL detection mode by calling the function in @p pHandle PWMC component.
+  *
+  */
 //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
 __weak void PWMC_RLDetectionModeEnable(PWMC_Handle_t *pHandle)
 {
@@ -674,7 +691,9 @@ __weak void PWMC_RLDetectionModeEnable(PWMC_Handle_t *pHandle)
 #endif
 }
 
-/** @brief Disables the RL detection mode on the power stage controlled by the @p pHandle PWMC component. */
+/** @brief  Disables the RL detection mode by calling the function in @p pHandle PWMC component.
+  *
+  */
 //cstat !MISRAC2012-Rule-8.13 !RED-func-no-effect
 __weak void PWMC_RLDetectionModeDisable(PWMC_Handle_t *pHandle)
 {
@@ -694,13 +713,11 @@ __weak void PWMC_RLDetectionModeDisable(PWMC_Handle_t *pHandle)
 
 /**
   * @brief  Sets the PWM duty cycle to apply in the RL Detection mode.
-  * @param  pHandle: handle on the target instance of the PWMC component
-  * @param  hDuty Duty cycle to apply
   *
-  * @todo TODO: Describe the unit of the hDuty variable.
-  *
-  * @retval If the Duty Cycle could be applied on time for the next PWM period,
-  *         #MC_NO_ERROR is returned. Otherwise, #MC_DURATION is returned.
+  * @param  pHandle: Handler of the current instance of the PWMC component.
+  * @param  hDuty: Duty cycle to apply, written in uint16_t.
+  * @retval #MC_NO_ERROR if the Duty Cycle could be applied on time for the next PWM period.
+  * 		Returns #MC_DURATION otherwise.
   */
 __weak uint16_t PWMC_RLDetectionModeSetDuty(PWMC_Handle_t *pHandle, uint16_t hDuty) //cstat !MISRAC2012-Rule-8.13
 {
@@ -722,11 +739,13 @@ __weak uint16_t PWMC_RLDetectionModeSetDuty(PWMC_Handle_t *pHandle, uint16_t hDu
 }
 
 /**
-* @brief  It is used to set the align motor flag.
-* @param  this related object of class CPWMC
-* @param  flag to be applied in uint8_t, 1: motor is in align stage, 2: motor is not in align stage
-* @retval none
-*/
+  * @brief  Sets the aligned motor flag.
+  *
+  * @param  pHandle: Handler of the current instance of the PWMC component.
+  * @param  flag: Value to be applied as an 8 bit unsigned integer.
+  *				  1: motor is in aligned stage.
+  *               2: motor is not in aligned stage.
+  */
 void PWMC_SetAlignFlag(PWMC_Handle_t *pHandle, uint8_t flag)
 {
 #ifdef NULL_PTR_PWR_CUR_FDB
@@ -745,9 +764,9 @@ void PWMC_SetAlignFlag(PWMC_Handle_t *pHandle, uint8_t flag)
 
 /**
  * @brief Sets the Callback that the PWMC component shall invoke to get phases current.
- * @param pCallBack pointer on the callback
- * @param pHandle pointer on the handle structure of the PWMC instance
  *
+ * @param pCallBack: Pointer on the callback to get the phase current.
+ * @param pHandle: Handler of the current instance of the PWMC component.
  */
 __weak void PWMC_RegisterGetPhaseCurrentsCallBack(PWMC_GetPhaseCurr_Cb_t pCallBack, PWMC_Handle_t *pHandle)
 {
@@ -768,9 +787,9 @@ __weak void PWMC_RegisterGetPhaseCurrentsCallBack(PWMC_GetPhaseCurr_Cb_t pCallBa
 /**
  * @brief Sets the Callback that the PWMC component shall invoke to switch PWM
  *        generation off.
- * @param pCallBack pointer on the callback
- * @param pHandle pointer on the handle structure of the PWMC instance
  *
+ * @param pCallBack: Pointer on the generic callback.
+ * @param pHandle: Handler of the current instance of the PWMC component.
  */
 __weak void PWMC_RegisterSwitchOffPwmCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_Handle_t *pHandle)
 {
@@ -791,9 +810,9 @@ __weak void PWMC_RegisterSwitchOffPwmCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_
 /**
  * @brief Sets the Callback that the PWMC component shall invoke to switch PWM
  *        generation on.
- * @param pCallBack pointer on the callback
- * @param pHandle pointer on the handle structure of the PWMC instance
  *
+ * @param pCallBack: Pointer on the generic callback.
+ * @param pHandle: Handler of the current instance of the PWMC component.
  */
 __weak void PWMC_RegisterSwitchonPwmCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_Handle_t *pHandle)
 {
@@ -814,9 +833,9 @@ __weak void PWMC_RegisterSwitchonPwmCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_H
 /**
  * @brief Sets the Callback that the PWMC component shall invoke to execute a calibration
  *        of the current sensing system.
- * @param pCallBack pointer on the callback
- * @param pHandle pointer on the handle structure of the PWMC instance
  *
+ * @param pCallBack: Pointer on the generic callback.
+ * @param pHandle: Handler of the current instance of the PWMC component.
  */
 __weak void PWMC_RegisterReadingCalibrationCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_Handle_t *pHandle)
 {
@@ -836,11 +855,11 @@ __weak void PWMC_RegisterReadingCalibrationCallBack(PWMC_Generic_Cb_t pCallBack,
 
 /**
  * @brief Sets the Callback that the PWMC component shall invoke to turn low sides on.
- * @param pCallBack pointer on the callback
- * @param pHandle pointer on the handle structure of the PWMC instance
  *
+ * @param pCallBack: Pointer on the callback which turns low sides on.
+ * @param pHandle: Handler of the current instance of the PWMC component.
  */
-__weak void PWMC_RegisterTurnOnLowSidesCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_Handle_t *pHandle)
+__weak void PWMC_RegisterTurnOnLowSidesCallBack(PWMC_TurnOnLowSides_Cb_t pCallBack, PWMC_Handle_t *pHandle)
 {
 #ifdef NULL_PTR_PWR_CUR_FDB
   if (MC_NULL == pHandle)
@@ -857,10 +876,10 @@ __weak void PWMC_RegisterTurnOnLowSidesCallBack(PWMC_Generic_Cb_t pCallBack, PWM
 }
 
 /**
- * @brief Sets the Callback that the PWMC component shall invoke to compute ADC sampling point
- * @param pCallBack pointer on the callback
- * @param pHandle pointer on the handle structure of the PWMC instance
+ * @brief Sets the Callback that the PWMC component shall invoke to compute ADC sampling point.
  *
+ * @param pCallBack: Pointer on the callback which sets the sampling point depending on the sector.
+ * @param pHandle: Handler of the current instance of the PWMC component.
  */
 __weak void PWMC_RegisterSampPointSectXCallBack(PWMC_SetSampPointSectX_Cb_t pCallBack, PWMC_Handle_t *pHandle)
 {
@@ -879,10 +898,10 @@ __weak void PWMC_RegisterSampPointSectXCallBack(PWMC_SetSampPointSectX_Cb_t pCal
 }
 
 /**
- * @brief Sets the Callback that the PWMC component shall invoke to the overcurrent status
- * @param pCallBack pointer on the callback
- * @param pHandle pointer on the handle structure of the PWMC instance
+ * @brief Sets the Callback that the PWMC component shall invoke to check the overcurrent status.
  *
+ * @param pCallBack: Pointer on the callback which checks the overcurrent state.
+ * @param pHandle: Handler of the current instance of the PWMC component.
  */
 __weak void PWMC_RegisterIsOverCurrentOccurredCallBack(PWMC_OverCurr_Cb_t pCallBack, PWMC_Handle_t *pHandle)
 {
@@ -902,9 +921,10 @@ __weak void PWMC_RegisterIsOverCurrentOccurredCallBack(PWMC_OverCurr_Cb_t pCallB
 
 /**
  * @brief Sets the Callback that the PWMC component shall invoke to set the reference
- *        voltage for the over current protection
- * @param pHandle pointer on the handle structure of the PWMC instance
+ *        voltage for the overcurrent protection.
  *
+ * @param pCallBack: Pointer on the callback which sets the reference voltage.
+ * @param pHandle: Handler of the current instance of the PWMC component.
  */
 __weak void PWMC_RegisterOCPSetRefVoltageCallBack(PWMC_SetOcpRefVolt_Cb_t pCallBack, PWMC_Handle_t *pHandle)
 {
@@ -923,9 +943,10 @@ __weak void PWMC_RegisterOCPSetRefVoltageCallBack(PWMC_SetOcpRefVolt_Cb_t pCallB
 }
 
 /**
- * @brief Sets the Callback that the PWMC component shall invoke to enable the R/L detection mode
- * @param pHandle pointer on the handle structure of the PWMC instance
+ * @brief Sets the Callback that the PWMC component shall invoke to enable the R/L detection mode.
  *
+ * @param pCallBack: Pointer on the generic callback.
+ * @param pHandle: Handler of the current instance of the PWMC component.
  */
 __weak void PWMC_RegisterRLDetectionModeEnableCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_Handle_t *pHandle)
 {
@@ -944,9 +965,10 @@ __weak void PWMC_RegisterRLDetectionModeEnableCallBack(PWMC_Generic_Cb_t pCallBa
 }
 
 /**
- * @brief Sets the Callback wIch PWMC shall invoke to disable the R/L detection mode
- * @param pHandle pointer on the handle structure of the PWMC instance
+ * @brief Sets the Callback that the PWMC component shall invoke to disable the R/L detection mode.
  *
+ * @param pCallBack: Pointer on the generic callback.
+ * @param pHandle: Handler of the current instance of the PWMC component.
  */
 __weak void PWMC_RegisterRLDetectionModeDisableCallBack(PWMC_Generic_Cb_t pCallBack, PWMC_Handle_t *pHandle)
 {
@@ -966,9 +988,10 @@ __weak void PWMC_RegisterRLDetectionModeDisableCallBack(PWMC_Generic_Cb_t pCallB
 
 /**
  * @brief Sets the Callback that the PWMC component shall invoke to set the duty cycle
- *        for the R/L detection mode
- * @param pHandle pointer on the handle structure of the PWMC instance
+ *        for the R/L detection mode.
  *
+ * @param pCallBack: Pointer on the callback which sets the duty cycle.
+ * @param pHandle: Handler of the current instance of the PWMC component.
  */
 __weak void PWMC_RegisterRLDetectionModeSetDutyCallBack(PWMC_RLDetectSetDuty_Cb_t pCallBack, PWMC_Handle_t *pHandle)
 {

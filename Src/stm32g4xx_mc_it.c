@@ -158,11 +158,11 @@ void TIMx_BRK_M1_IRQHandler(void)
 /**
   * @brief This function handles DMA_RX_A channel DMACH_RX_A global interrupt.
   */
-void MCP_RX_IRQHandler_A(void)
+void DMA1_Channel1_IRQHandler(void)
 {
-  /* USER CODE BEGIN MCP_RX_IRQHandler_A 0 */
+  /* USER CODE BEGIN DMA1_Channel1_IRQHandler 0 */
 
-  /* USER CODE BEGIN MCP_RX_IRQHandler_A 0 */
+  /* USER CODE BEGIN DMA1_Channel1_IRQHandler 0 */
 
   /* Buffer is ready by the HW layer to be processed */
   if (0U == LL_DMA_IsActiveFlag_TC(DMA_RX_A, DMACH_RX_A))
@@ -174,9 +174,9 @@ void MCP_RX_IRQHandler_A(void)
     LL_DMA_ClearFlag_TC (DMA_RX_A, DMACH_RX_A);
     ASPEP_HWDataReceivedIT (&aspepOverUartA);
   }
-  /* USER CODE BEGIN MCP_RX_IRQHandler_A 1 */
+  /* USER CODE BEGIN DMA1_Channel1_IRQHandler 1 */
 
-  /* USER CODE BEGIN MCP_RX_IRQHandler_A 1 */
+  /* USER CODE BEGIN DMA1_Channel1_IRQHandler 1 */
 
 }
 
@@ -186,11 +186,11 @@ void MCP_RX_IRQHandler_A(void)
   * @param  None
   * @retval None
   */
-void USARTA_IRQHandler(void)
+void USART2_IRQHandler(void)
 {
-  /* USER CODE BEGIN USARTA_IRQn 0 */
+  /* USER CODE BEGIN USART2_IRQHandler 0 */
 
-  /* USER CODE END USARTA_IRQn 0 */
+  /* USER CODE END USART2_IRQHandler 0 */
 
   if ( 0U == LL_USART_IsActiveFlag_TC (USARTA) )
   {
@@ -250,9 +250,9 @@ void USARTA_IRQHandler(void)
     ASPEP_HWDMAReset (&aspepOverUartA);
   }
 
-  /* USER CODE BEGIN USARTA_IRQn 1 */
+  /* USER CODE BEGIN USART2_IRQHandler 1 */
 
-  /* USER CODE END USARTA_IRQn 1 */
+  /* USER CODE END USART2_IRQHandler 1 */
 }
 
 /**

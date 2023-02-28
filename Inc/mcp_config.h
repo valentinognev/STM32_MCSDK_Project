@@ -28,12 +28,11 @@
 #include "mcpa.h"
 
 #define USARTA USART2
-#define DMA_RX_A DMA2
-#define DMA_TX_A DMA2
-#define DMACH_RX_A LL_DMA_CHANNEL_2
-#define DMACH_TX_A LL_DMA_CHANNEL_3
-#define USARTA_IRQHandler USART2_IRQHandler
-#define MCP_RX_IRQHandler_A DMA2_Channel2_IRQHandler
+#define DMA_RX_A DMA1
+#define DMA_TX_A DMA1
+#define DMACH_RX_A LL_DMA_CHANNEL_1
+#define DMACH_TX_A LL_DMA_CHANNEL_2
+
 #define MCP_USER_CALLBACK_MAX 2
 
 #define MCP_TX_SYNC_PAYLOAD_MAX 128

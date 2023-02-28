@@ -74,6 +74,8 @@
 #define NULL_PTR_REG_CON_MNG
 #define NULL_PTR_STL_MNG
 #define NULL_PTR_USA_ASP_DRV
+#define NULL_PTR_POT
+#define NULL_PTR_SPD_POT
 #endif
 
 #ifndef USE_FULL_LL_DRIVER
@@ -131,6 +133,13 @@ __STATIC_INLINE uint32_t LL_DMA_IsActiveFlag_HT(DMA_TypeDef *DMAx, uint32_t Chan
 {
  return ((NULL == DMAx) ? 0U : ((READ_BIT(DMAx->ISR, (DMA_ISR_HTIF1 << ((Channel-LL_DMA_CHANNEL_1)<<2) )) == (DMA_ISR_HTIF1 << ((Channel-LL_DMA_CHANNEL_1)<<2))) ? 1UL : 0UL));
 }
+
+#define PIN_CONNECT (uint32_t)(0)
+#define DIRECT_CONNECT (uint32_t)(OPAMP_CSR_OPAMPINTEN)
+#define OPAMP_UNCHANGED (uint32_t)(0xFFFFFFFFUL)
+#define VPOPAMP3 18
+
+//#define ADC_INJ_TRIG_TIMER LL_ADC_INJ_TRIG_EXT_TIM1_TRGO
 
 /**
  * @name Predefined Speed Units

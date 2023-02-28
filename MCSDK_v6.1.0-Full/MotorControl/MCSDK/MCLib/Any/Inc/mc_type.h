@@ -314,6 +314,19 @@ typedef enum
   ES_GPIO   = 0x2U             /**< @brief Enabling signals are managed by GPIOs (L6230 mode).*/
 } LowSideOutputsFunction_t;
 
+/**
+ * @brief  Structure for encoder reference angle calculation
+ */
+
+typedef struct
+{
+  int32_t enc_I_angle;  // Mechanical angle at the moment of encoder interrupt
+  int8_t enc_I_counter; // Counter for averaging hElAngle value
+  const int16_t *pRefElAngle;
+  int16_t hMechAngle;
+  int16_t hMechAngleWithPhase;
+} EncoderReference_Handle_t;
+
 /** @name UserInterface related exported definitions */
 /** @{ */
 #define OPT_NONE    0x00 /**< @brief No UI option selected. */

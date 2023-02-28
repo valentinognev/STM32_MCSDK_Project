@@ -62,14 +62,14 @@
   * a conversion is ready to be read, scheduled, or free to be scheduled. This is performed through
   * the RCM_GetUserConvState() API.
   *
-  * If the state is RCM_USERCONV_IDLE, a conversion is ready to be scheduled.
-  * if a conversion is already scheduled, the returned value is RCM_USERCONV_REQUESTED.
-  * if a conversion is ready to be read, the returned value is RCM_USERCONV_EOC.
-  * In RCM_USERCONV_EOC state, a call to RCM_GetUserConv will consume the value, and set the state machine back
-  * to RCM_USERCONV_IDLE state. It implies that a second call without new conversion performed,
+  * If the state is #RCM_USERCONV_IDLE, a conversion is ready to be scheduled.
+  * if a conversion is already scheduled, the returned value is #RCM_USERCONV_REQUESTED.
+  * if a conversion is ready to be read, the returned value is #RCM_USERCONV_EOC.
+  * In #RCM_USERCONV_EOC state, a call to RCM_GetUserConv will consume the value, and set the state machine back
+  * to #RCM_USERCONV_IDLE state. It implies that a second call without new conversion performed,
   * will send back 0xffff which is an error value meaning that the data is not available.
   * If a conversion request is executed, but the previous conversion has not been completed, nor consumed,
-  * the request is discarded and the RCM_RequestUserConv return false.
+  * the request is discarded and the RCM_RequestUserConv() return false.
   *
   * If a callback is registered, the data read is sent back to the callback parameters, and therefor consumed.
   * @{
@@ -272,6 +272,7 @@ uint8_t RCM_RegisterRegConv(RegConv_t *regConv)
         {
           LL_ADC_Enable(regConv->regADC);
         }
+
       }
       else
       {

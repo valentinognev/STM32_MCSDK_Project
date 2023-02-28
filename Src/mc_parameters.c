@@ -25,7 +25,6 @@
 #include "main.h" //cstat !MISRAC2012-Rule-21.1
 //cstat +MISRAC2012-Rule-21.1
 #include "parameters_conversion.h"
-#include "mc_parameters.h"
 
 #include "r3_2_g4xx_pwm_curr_fdbk.h"
 
@@ -38,7 +37,7 @@
 
 /**
   * @brief  Internal OPAMP parameters Motor 1 - three shunt - G4xx - Shared Resources
-  * temporary hard coded to ESC G4 board
+  *
   */
 R3_3_OPAMPParams_t R3_3_OPAMPParamsM1 =
 {
@@ -46,34 +45,35 @@ R3_3_OPAMPParams_t R3_3_OPAMPParamsM1 =
    .OPAMPx_2 = OPAMP2,
    .OPAMPx_3 = OPAMP3,
     // OPAMPMatrix is used to specify if the ADC source comes from internal channel of which OPAMP.
-  .OPAMPSelect_1 = { OPAMP3
-                   , NULL
-                   , NULL
-                   , NULL
-                   , NULL
-                   , OPAMP3
-                   },
-  .OPAMPSelect_2 = { NULL
-                   , OPAMP3
-                   , OPAMP3
-                   , NULL
-                   , NULL
-                   , NULL
-                   },
- // Define for each config the VPSEL and the Internal output enable bit
-  .OPAMPConfig1 = {  0x0
-                    ,0x0
-                    ,0x0
-                    ,0x0
-                    ,0x0
-                    ,0x0
+
+  .OPAMPSelect_1 = { OPAMP2
+                   ,OPAMP1
+                   ,OPAMP1
+                   ,OPAMP1
+                   ,OPAMP1
+                   ,OPAMP2
+                 },
+  .OPAMPSelect_2 = { OPAMP3
+                   ,OPAMP3
+                   ,OPAMP3
+                   ,OPAMP2
+                   ,OPAMP2
+                   ,OPAMP3
                   },
-  .OPAMPConfig2 = {   0x0
-                    , OPAMP_CSR_OPAMPINTEN
-                    , OPAMP_CSR_OPAMPINTEN
-                    , 0x0
-                    , 0x0
-                    , 0x0
+
+  .OPAMPConfig1 = { OPAMP_UNCHANGED
+                   ,OPAMP_UNCHANGED
+                   ,OPAMP_UNCHANGED
+                   ,OPAMP_UNCHANGED
+                   ,OPAMP_UNCHANGED
+                   ,OPAMP_UNCHANGED
+                 },
+  .OPAMPConfig2 = { PIN_CONNECT
+                   ,DIRECT_CONNECT
+                   ,DIRECT_CONNECT
+                   ,OPAMP_UNCHANGED
+                   ,OPAMP_UNCHANGED
+                   ,PIN_CONNECT
                   },
 };
 /**
@@ -86,38 +86,40 @@ R3_2_Params_t R3_2_ParamsM1 =
   .IsHigherFreqTim = FREQ_RELATION,
 
 /* Current reading A/D Conversions initialization -----------------------------*/
-  .ADCx_1           = ADC1,
-  .ADCx_2           = ADC2,
- /* ESC-G4 Kit config */
-   .ADCConfig1 = {( uint32_t )( MC_ADC_CHANNEL_12<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
-                 ,( uint32_t )( MC_ADC_CHANNEL_3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
-                 ,( uint32_t )( MC_ADC_CHANNEL_3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
-                 ,( uint32_t )( MC_ADC_CHANNEL_3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
-                 ,( uint32_t )( MC_ADC_CHANNEL_3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
-                 ,( uint32_t )( MC_ADC_CHANNEL_12<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+  .ADCx_1 = ADC1,
+  .ADCx_2 = ADC2,
+  /* Motor Control Kit config */
+   .ADCConfig1 = { ( uint32_t )( 3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+                 , ( uint32_t )( 3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+                 , ( uint32_t )( 3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+                 , ( uint32_t )( 3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+                 , ( uint32_t )( 3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+                 , ( uint32_t )( 3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
                  },
-   .ADCConfig2 = {( uint32_t )( MC_ADC_CHANNEL_3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
-                 ,( uint32_t )( 18 << ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)// Phase C ADC2 on channel 18 (OPAMP3)
-                 ,( uint32_t )( 18 << ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
-                 ,( uint32_t )( MC_ADC_CHANNEL_3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
-                 ,( uint32_t )( MC_ADC_CHANNEL_3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
-                 ,( uint32_t )( MC_ADC_CHANNEL_3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+   .ADCConfig2 = { ( uint32_t )( 12<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+                 , ( uint32_t )( VPOPAMP3<< ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+                 , ( uint32_t )( VPOPAMP3<< ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+                 , ( uint32_t )( 3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+                 , ( uint32_t )( 3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+                 , ( uint32_t )( 12<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
                  },
-  .ADCDataReg1 = { &ADC2->JDR1 // Phase B,
-                 , &ADC1->JDR1 // Phase A,
-                 , &ADC1->JDR1 // Phase A,
-                 , &ADC1->JDR1 // Phase A,
-                 , &ADC1->JDR1 // Phase A,
-                 , &ADC2->JDR1 // Phase B,
+
+   .ADCDataReg1 = { ADC2
+                 , ADC1
+                 , ADC1
+                 , ADC1
+                 , ADC1
+                 , ADC2
                  },
-  .ADCDataReg2 = { &ADC1->JDR1 // Phase C
-                 , &ADC2->JDR1 // Phase C
-                 , &ADC2->JDR1 // Phase C
-                 , &ADC2->JDR1 // Phase B
-                 , &ADC2->JDR1 // Phase B
-                 , &ADC1->JDR1 // Phase C
-                 },
+  .ADCDataReg2 =  { ADC1
+                 , ADC2
+                 , ADC2
+                 , ADC2
+                 , ADC2
+                 , ADC1
+                  },
  //cstat +MISRAC2012-Rule-12.1 +MISRAC2012-Rule-10.1_R6
+
   /* PWM generation parameters --------------------------------------------------*/
   .RepetitionCounter = REP_COUNTER,
   .Tafter            = TW_AFTER,
@@ -137,23 +139,23 @@ R3_2_Params_t R3_2_ParamsM1 =
  .pwm_en_w_pin       = (uint16_t) 0,
 
 /* Emergency input (BKIN2) signal initialization -----------------------------*/
-  .BKIN2Mode     = EXT_MODE,
+  .BKIN2Mode     = INT_MODE,
 
 /* Internal OPAMP common settings --------------------------------------------*/
   .OPAMPParams     = &R3_3_OPAMPParamsM1,
 /* Internal COMP settings ----------------------------------------------------*/
-  .CompOCPASelection     = MC_NULL,
-  .CompOCPAInvInput_MODE = NONE,
-  .CompOCPBSelection     = MC_NULL,
-  .CompOCPBInvInput_MODE = NONE,
-  .CompOCPCSelection     = MC_NULL,
-  .CompOCPCInvInput_MODE = NONE,
-  .DAC_OCP_ASelection    = MC_NULL,
-  .DAC_OCP_BSelection    = MC_NULL,
-  .DAC_OCP_CSelection    = MC_NULL,
-  .DAC_Channel_OCPA      = (uint32_t) 0,
-  .DAC_Channel_OCPB      = (uint32_t) 0,
-  .DAC_Channel_OCPC      = (uint32_t) 0,
+  .CompOCPASelection     = COMP1,
+  .CompOCPAInvInput_MODE = INT_MODE,
+  .CompOCPBSelection     = COMP2,
+  .CompOCPBInvInput_MODE = INT_MODE,
+  .CompOCPCSelection     = COMP4,
+  .CompOCPCInvInput_MODE = INT_MODE,
+  .DAC_OCP_ASelection    = DAC3,
+  .DAC_OCP_BSelection    = DAC3,
+  .DAC_OCP_CSelection    = DAC3,
+  .DAC_Channel_OCPA      = LL_DAC_CHANNEL_1,
+  .DAC_Channel_OCPB      = LL_DAC_CHANNEL_2,
+  .DAC_Channel_OCPC      = LL_DAC_CHANNEL_2,
 
   .CompOVPSelection      = MC_NULL,
   .CompOVPInvInput_MODE  = NONE,
@@ -161,7 +163,7 @@ R3_2_Params_t R3_2_ParamsM1 =
   .DAC_Channel_OVP       = (uint32_t) 0,
 
 /* DAC settings --------------------------------------------------------------*/
-  .DAC_OCP_Threshold =  23830,
+  .DAC_OCP_Threshold =  4083,
   .DAC_OVP_Threshold =  23830,
 
 };
@@ -171,3 +173,4 @@ R3_2_Params_t R3_2_ParamsM1 =
 /* USER CODE END Additional parameters */
 
 /******************* (C) COPYRIGHT 2022 STMicroelectronics *****END OF FILE****/
+

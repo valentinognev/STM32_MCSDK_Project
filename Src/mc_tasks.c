@@ -34,6 +34,7 @@
 #include "mc_tasks.h"
 #include "parameters_conversion.h"
 #include "mcp_config.h"
+#include "mc_app_hooks.h"
 
 /* USER CODE BEGIN Includes */
 #include "debug_scope.h"
@@ -46,14 +47,14 @@
    braking action on over voltage */
 /* #define  MC.SMOOTH_BRAKING_ACTION_ON_OVERVOLTAGE */
 
-  #define CHARGE_BOOT_CAP_MS  ((uint16_t)10)
-  #define CHARGE_BOOT_CAP_MS2 ((uint16_t)10)
-  #define STOPPERMANENCY_MS   ((uint16_t)400)
-  #define STOPPERMANENCY_MS2  ((uint16_t)400)
-  #define CHARGE_BOOT_CAP_TICKS  (uint16_t)((SYS_TICK_FREQUENCY * CHARGE_BOOT_CAP_MS) / ((uint16_t)1000))
-  #define CHARGE_BOOT_CAP_TICKS2 (uint16_t)((SYS_TICK_FREQUENCY * CHARGE_BOOT_CAP_MS2)/ ((uint16_t)1000))
-  #define STOPPERMANENCY_TICKS   (uint16_t)((SYS_TICK_FREQUENCY * STOPPERMANENCY_MS)  / ((uint16_t)1000))
-  #define STOPPERMANENCY_TICKS2  (uint16_t)((SYS_TICK_FREQUENCY * STOPPERMANENCY_MS2) / ((uint16_t)1000))
+#define STOPPERMANENCY_MS   ((uint16_t)400)
+#define STOPPERMANENCY_MS2  ((uint16_t)400)
+#define CHARGE_BOOT_CAP_TICKS  (uint16_t)((SYS_TICK_FREQUENCY * 10) / ((uint16_t)1000))
+#define CHARGE_BOOT_CAP_TICKS2 (uint16_t)((SYS_TICK_FREQUENCY * 10)/ ((uint16_t)1000))
+#define M1_CHARGE_BOOT_CAP_DUTY_CYCLES  (uint32_t)(0.000*(PWM_PERIOD_CYCLES/2))
+#define M2_CHARGE_BOOT_CAP_DUTY_CYCLES (uint32_t)(0*(PWM_PERIOD_CYCLES2/2))
+#define STOPPERMANENCY_TICKS   (uint16_t)((SYS_TICK_FREQUENCY * STOPPERMANENCY_MS)  / ((uint16_t)1000))
+#define STOPPERMANENCY_TICKS2  (uint16_t)((SYS_TICK_FREQUENCY * STOPPERMANENCY_MS2) / ((uint16_t)1000))
 
 /* USER CODE END Private define */
 #define VBUS_TEMP_ERR_MASK (MC_OVER_VOLT| MC_UNDER_VOLT| MC_OVER_TEMP)
@@ -62,7 +63,6 @@
 static FOCVars_t FOCVars[NBR_OF_MOTORS];
 
 static PWMC_Handle_t *pwmcHandle[NBR_OF_MOTORS];
-static CircleLimitation_Handle_t *pCLM[NBR_OF_MOTORS];
 //cstat !MISRAC2012-Rule-8.9_a
 static RampExtMngr_Handle_t *pREMNG[NBR_OF_MOTORS];   /*!< Ramp manager used to modify the Iq ref
                                                     during the start-up switch over.*/
@@ -116,7 +116,6 @@ __weak void MCboot( MCI_Handle_t* pMCIList[NBR_OF_MOTORS] )
   {
 
     bMCBootCompleted = (uint8_t )0;
-    pCLM[M1] = &CircleLimitationM1;
 
     /**********************************************************/
     /*    PWM and current sensing component initialization    */
@@ -197,6 +196,9 @@ __weak void MCboot( MCI_Handle_t* pMCIList[NBR_OF_MOTORS] )
     STC_GetMecSpeedRefUnitDefault(pSTC[M1]),0); /*First command to STC*/
     pMCIList[M1] = &Mci[M1];
 
+    /* Applicative hook in MCBoot() */
+    MC_APP_BootHook();
+
     /* USER CODE BEGIN MCboot 2 */
 
     /* USER CODE END MCboot 2 */
@@ -272,6 +274,9 @@ __weak void MC_Scheduler(void)
     else
     {
       TSK_MediumFrequencyTaskM1();
+
+      /* Applicative hook at end of Medium Frequency for Motor 1 */
+      MC_APP_PostMediumFrequencyHook_M1();
 
       MCP_Over_UartA.rxBuffer = MCP_Over_UartA.pTransportLayer->fRXPacketProcess(MCP_Over_UartA.pTransportLayer,
                                                                                 &MCP_Over_UartA.rxLength);
@@ -387,7 +392,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
              /* calibration already done. Enables only TIM channels */
              pwmcHandle[M1]->OffCalibrWaitTimeCounter = 1u;
              PWMC_CurrentReadingCalibr(pwmcHandle[M1], CRC_EXEC);
-             R3_2_TurnOnLowSides(pwmcHandle[M1]);
+             R3_2_TurnOnLowSides(pwmcHandle[M1],M1_CHARGE_BOOT_CAP_DUTY_CYCLES);
              TSK_SetChargeBootCapDelayM1(CHARGE_BOOT_CAP_TICKS);
              Mci[M1].State = CHARGE_BOOT_CAP;
 
@@ -420,7 +425,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
                 }
                 else
                 {
-                  R3_2_TurnOnLowSides(pwmcHandle[M1]);
+                  R3_2_TurnOnLowSides(pwmcHandle[M1],M1_CHARGE_BOOT_CAP_DUTY_CYCLES);
                   TSK_SetChargeBootCapDelayM1(CHARGE_BOOT_CAP_TICKS);
                   Mci[M1].State = CHARGE_BOOT_CAP;
 
@@ -622,7 +627,6 @@ __weak void TSK_MediumFrequencyTaskM1(void)
             /* USER CODE END MediumFrequencyTask M1 5 */
             Mci[M1].DirectCommand = MCI_NO_COMMAND;
             Mci[M1].State = IDLE;
-
           }
           else
           {
@@ -637,7 +641,6 @@ __weak void TSK_MediumFrequencyTaskM1(void)
           {
             Mci[M1].DirectCommand = MCI_NO_COMMAND;
             Mci[M1].State = IDLE;
-
           }
           else
           {
@@ -650,6 +653,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
         {
           Mci[M1].State = FAULT_OVER;
         }
+        break;
 
         default:
           break;
@@ -940,7 +944,7 @@ inline uint16_t FOC_CurrControllerM1(void)
   Iqd = MCM_Park(Ialphabeta, hElAngle);
   Vqd.q = PI_Controller(pPIDIq[M1], (int32_t)(FOCVars[M1].Iqdref.q) - Iqd.q);
   Vqd.d = PI_Controller(pPIDId[M1], (int32_t)(FOCVars[M1].Iqdref.d) - Iqd.d);
-  Vqd = Circle_Limitation(pCLM[M1], Vqd);
+  Vqd = Circle_Limitation(&CircleLimitationM1, Vqd);
   hElAngle += SPD_GetInstElSpeedDpp(speedHandle)*REV_PARK_ANGLE_COMPENSATION_FACTOR;
   Valphabeta = MCM_Rev_Park(Vqd, hElAngle);
   hCodeError = PWMC_SetPhaseVoltage(pwmcHandle[M1], Valphabeta);
@@ -998,6 +1002,7 @@ __weak void TSK_SafetyTask_PWMOFF(uint8_t bMotor)
     CodeReturn |= errMask[bMotor] & RVBS_CalcAvVbus(&BusVoltageSensor_M1);
   }
   MCI_FaultProcessing(&Mci[bMotor], CodeReturn, ~CodeReturn); /* process faults */
+
   if (MCI_GetFaultState(&Mci[bMotor]) != (uint32_t)MC_NO_FAULTS)
   {
     PWMC_SwitchOffPWM(pwmcHandle[bMotor]);
@@ -1080,17 +1085,17 @@ __weak void UI_HandleStartStopButton_cb (void)
 __weak void mc_lock_pins (void)
 {
 LL_GPIO_LockPin(M1_OPAMP3_INT_GAIN_GPIO_Port, M1_OPAMP3_INT_GAIN_Pin);
-LL_GPIO_LockPin(M1_CURR_SHUNT_W_GPIO_Port, M1_CURR_SHUNT_W_Pin);
 LL_GPIO_LockPin(M1_OPAMP3_OUT_GPIO_Port, M1_OPAMP3_OUT_Pin);
 LL_GPIO_LockPin(M1_ENCODER_I_GPIO_Port, M1_ENCODER_I_Pin);
 LL_GPIO_LockPin(M1_TEMPERATURE_GPIO_Port, M1_TEMPERATURE_Pin);
 LL_GPIO_LockPin(M1_BUS_VOLTAGE_GPIO_Port, M1_BUS_VOLTAGE_Pin);
+LL_GPIO_LockPin(M1_CURR_SHUNT_W_GPIO_Port, M1_CURR_SHUNT_W_Pin);
+LL_GPIO_LockPin(M1_CURR_SHUNT_V_GPIO_Port, M1_CURR_SHUNT_V_Pin);
 LL_GPIO_LockPin(M1_CURR_SHUNT_U_GPIO_Port, M1_CURR_SHUNT_U_Pin);
 LL_GPIO_LockPin(M1_OPAMP1_INT_GAIN_GPIO_Port, M1_OPAMP1_INT_GAIN_Pin);
 LL_GPIO_LockPin(M1_OPAMP1_OUT_GPIO_Port, M1_OPAMP1_OUT_Pin);
 LL_GPIO_LockPin(M1_OPAMP2_OUT_GPIO_Port, M1_OPAMP2_OUT_Pin);
 LL_GPIO_LockPin(M1_OPAMP2_INT_GAIN_GPIO_Port, M1_OPAMP2_INT_GAIN_Pin);
-LL_GPIO_LockPin(M1_CURR_SHUNT_V_GPIO_Port, M1_CURR_SHUNT_V_Pin);
 LL_GPIO_LockPin(M1_ENCODER_A_GPIO_Port, M1_ENCODER_A_Pin);
 LL_GPIO_LockPin(M1_ENCODER_B_GPIO_Port, M1_ENCODER_B_Pin);
 LL_GPIO_LockPin(M1_PWM_UH_GPIO_Port, M1_PWM_UH_Pin);

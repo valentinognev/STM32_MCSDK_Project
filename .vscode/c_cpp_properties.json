@@ -3,10 +3,6 @@
     {
       "name": "STM32",
       "includePath": [
-        "../Drivers/CMSIS/DSP/Include/",
-        "../MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc",
-        "../MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc",
-        "Drivers/CMSIS/DSP/Include/",
         "Drivers/CMSIS/Device/ST/STM32G4xx/Include",
         "Drivers/CMSIS/Include",
         "Drivers/STM32G4xx_HAL_Driver/Inc",

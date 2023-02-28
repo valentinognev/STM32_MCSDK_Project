@@ -176,8 +176,6 @@ AS_INCLUDES = \
 
 # C includes
 C_INCLUDES =  \
--I../MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc \
--I../MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc \
 -IDrivers/CMSIS/Device/ST/STM32G4xx/Include \
 -IDrivers/CMSIS/Include \
 -IDrivers/STM32G4xx_HAL_Driver/Inc \

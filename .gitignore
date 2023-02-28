@@ -10,3 +10,6 @@ build/STM32_MCSDK.hex
 build/STM32_MCSDK.map
 *.zip
 *.ftl
+*.o
+*.d
+*.lst

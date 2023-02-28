@@ -33,11 +33,11 @@
                                                          by HW if low side signals
                                                          are not used */
 /*********** Bus voltage sensing section ****************/
-#define VBUS_PARTITIONING_FACTOR      0.0962566844919786 /*!< It expresses how
+#define VBUS_PARTITIONING_FACTOR      0.09625565501973242 /*!< It expresses how
                                                        much the Vbus is attenuated
                                                        before being converted into
                                                        digital value */
-#define NOMINAL_BUS_VOLTAGE_V         12
+#define NOMINAL_BUS_VOLTAGE_V         15
 /******** Current reading parameters section ******/
 /*** Topology ***/
 #define THREE_SHUNT_INDEPENDENT_RESOURCES

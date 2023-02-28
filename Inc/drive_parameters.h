@@ -31,7 +31,7 @@
 /******** MAIN AND AUXILIARY SPEED/POSITION SENSOR(S) SETTINGS SECTION ********/
 
 /*** Speed measurement settings ***/
-#define MAX_APPLICATION_SPEED_RPM       4962 /*!< rpm, mechanical */
+#define MAX_APPLICATION_SPEED_RPM       3540 /*!< rpm, mechanical */
 #define MIN_APPLICATION_SPEED_RPM       0 /*!< rpm, mechanical,
                                                            absolute value */
 #define MEAS_ERRORS_BEFORE_FAULTS       3 /*!< Number of speed
@@ -43,16 +43,16 @@
                                                             estimates (percentage) */
 /* State observer scaling factors F1 */
 #define F1                               16384
-#define F2                               4096
+#define F2                               8192
 #define F1_LOG                           LOG2((16384))
-#define F2_LOG                           LOG2((4096))
+#define F2_LOG                           LOG2((8192))
 
 /* State observer constants */
-#define GAIN1                            -23248
-#define GAIN2                            22154
+#define GAIN1                            -22656
+#define GAIN2                            26684
 /*Only in case PLL is used, PLL gains */
-#define PLL_KP_GAIN                      1056
-#define PLL_KI_GAIN                      25
+#define PLL_KP_GAIN                      1412
+#define PLL_KI_GAIN                      63
 #define PLL_KPDIV     16384
 #define PLL_KPDIV_LOG LOG2((PLL_KPDIV))
 #define PLL_KIDIV     65535
@@ -79,13 +79,13 @@
                                                             variance on speed
                                                             estimates (percentage) */
 #define CORD_F1                          16384
-#define CORD_F2                          4096
+#define CORD_F2                          8192
 #define CORD_F1_LOG                      LOG2((16384))
-#define CORD_F2_LOG                      LOG2((4096))
+#define CORD_F2_LOG                      LOG2((8192))
 
 /* State observer constants */
-#define CORD_GAIN1                       -23248
-#define CORD_GAIN2                       22154
+#define CORD_GAIN1                       -22656
+#define CORD_GAIN2                       26684
 
 #define CORD_MEAS_ERRORS_BEFORE_FAULTS   100  /*!< Number of consecutive errors
                                                            on variance test before a speed
@@ -98,7 +98,7 @@
 #define CORD_FIFO_DEPTH_UNIT            64  /*!< Depth of the FIFO used
                                                            to average mechanical speed
                                                            in dpp format */
-#define CORD_MAX_ACCEL_DPPP              49  /*!< Maximum instantaneous
+#define CORD_MAX_ACCEL_DPPP              171  /*!< Maximum instantaneous
                                                               electrical acceleration (dpp
                                                               per control period) */
 #define CORD_BEMF_CONSISTENCY_TOL        64  /* Parameter for B-emf
@@ -114,7 +114,7 @@
 /**************************    DRIVE SETTINGS SECTION   **********************/
 /* PWM generation and current reading */
 
-#define PWM_FREQUENCY   30000
+#define PWM_FREQUENCY   16000
 #define PWM_FREQ_SCALING 1
 
 #define LOW_SIDE_SIGNALS_ENABLING        LS_PWM_TIMER
@@ -126,19 +126,19 @@
 #define REGULATION_EXECUTION_RATE     1    /*!< FOC execution rate in
                                                            number of PWM cycles */
 /* Gains values for torque and flux control loops */
-#define PID_TORQUE_KP_DEFAULT         3807
-#define PID_TORQUE_KI_DEFAULT         3292
+#define PID_TORQUE_KP_DEFAULT         3923
+#define PID_TORQUE_KI_DEFAULT         2452
 #define PID_TORQUE_KD_DEFAULT         100
-#define PID_FLUX_KP_DEFAULT           3807
-#define PID_FLUX_KI_DEFAULT           3292
+#define PID_FLUX_KP_DEFAULT           3923
+#define PID_FLUX_KI_DEFAULT           2452
 #define PID_FLUX_KD_DEFAULT           100
 
 /* Torque/Flux control loop gains dividers*/
 #define TF_KPDIV                      2048
-#define TF_KIDIV                      16384
+#define TF_KIDIV                      8192
 #define TF_KDDIV                      8192
 #define TF_KPDIV_LOG                  LOG2((2048))
-#define TF_KIDIV_LOG                  LOG2((16384))
+#define TF_KIDIV_LOG                  LOG2((8192))
 #define TF_KDDIV_LOG                  LOG2((8192))
 #define TFDIFFERENTIAL_TERM_ENABLING  DISABLE
 
@@ -146,14 +146,14 @@
 #define SPEED_LOOP_FREQUENCY_HZ       ( uint16_t )1000 /*!<Execution rate of speed
                                                       regulation loop (Hz) */
 
-#define PID_SPEED_KP_DEFAULT          2315/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
-#define PID_SPEED_KI_DEFAULT          2315/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
+#define PID_SPEED_KP_DEFAULT          2068/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
+#define PID_SPEED_KI_DEFAULT          1883/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
 #define PID_SPEED_KD_DEFAULT          0/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
 /* Speed PID parameter dividers */
-#define SP_KPDIV                      2048
+#define SP_KPDIV                      32
 #define SP_KIDIV                      16384
 #define SP_KDDIV                      16
-#define SP_KPDIV_LOG                  LOG2((2048))
+#define SP_KPDIV_LOG                  LOG2((32))
 #define SP_KIDIV_LOG                  LOG2((16384))
 #define SP_KDDIV_LOG                  LOG2((16))
 
@@ -162,17 +162,17 @@
 /* USER CODE END PID_SPEED_INTEGRAL_INIT_DIV */
 
 #define SPD_DIFFERENTIAL_TERM_ENABLING DISABLE
-#define IQMAX                          3265
+#define IQMAX                          2721
 
 /* Default settings */
 #define DEFAULT_CONTROL_MODE           MCM_SPEED_MODE
-#define DEFAULT_TARGET_SPEED_RPM       886
+#define DEFAULT_TARGET_SPEED_RPM       1274
 #define DEFAULT_TARGET_SPEED_UNIT      (DEFAULT_TARGET_SPEED_RPM*SPEED_UNIT/U_RPM)
 #define DEFAULT_TORQUE_COMPONENT       0
 #define DEFAULT_FLUX_COMPONENT         0
 
 /**************************    FIRMWARE PROTECTIONS SECTION   *****************/
-#define OV_VOLTAGE_THRESHOLD_V          14 /*!< Over-voltage
+#define OV_VOLTAGE_THRESHOLD_V          18 /*!< Over-voltage
                                                          threshold */
 #define UD_VOLTAGE_THRESHOLD_V          8 /*!< Under-voltage
                                                           threshold */
@@ -203,29 +203,29 @@
 /* Phase 1 */
 #define PHASE1_DURATION                1000 /*milliseconds */
 #define PHASE1_FINAL_SPEED_UNIT         (0*SPEED_UNIT/U_RPM)
-#define PHASE1_FINAL_CURRENT           3265
+#define PHASE1_FINAL_CURRENT           2721
 /* Phase 2 */
-#define PHASE2_DURATION                1968 /*milliseconds */
-#define PHASE2_FINAL_SPEED_UNIT         (984*SPEED_UNIT/U_RPM)
-#define PHASE2_FINAL_CURRENT           3265
+#define PHASE2_DURATION                2832 /*milliseconds */
+#define PHASE2_FINAL_SPEED_UNIT         (1416*SPEED_UNIT/U_RPM)
+#define PHASE2_FINAL_CURRENT           2721
 /* Phase 3 */
 #define PHASE3_DURATION                0 /*milliseconds */
-#define PHASE3_FINAL_SPEED_UNIT         (984*SPEED_UNIT/U_RPM)
-#define PHASE3_FINAL_CURRENT           3265
+#define PHASE3_FINAL_SPEED_UNIT         (1416*SPEED_UNIT/U_RPM)
+#define PHASE3_FINAL_CURRENT           2721
 /* Phase 4 */
 #define PHASE4_DURATION                0 /*milliseconds */
-#define PHASE4_FINAL_SPEED_UNIT         (984*SPEED_UNIT/U_RPM)
-#define PHASE4_FINAL_CURRENT           3265
+#define PHASE4_FINAL_SPEED_UNIT         (1416*SPEED_UNIT/U_RPM)
+#define PHASE4_FINAL_CURRENT           2721
 /* Phase 5 */
 #define PHASE5_DURATION                0 /* milliseconds */
-#define PHASE5_FINAL_SPEED_UNIT         (984*SPEED_UNIT/U_RPM)
-#define PHASE5_FINAL_CURRENT           3265
+#define PHASE5_FINAL_SPEED_UNIT         (1416*SPEED_UNIT/U_RPM)
+#define PHASE5_FINAL_CURRENT           2721
 
 #define ENABLE_SL_ALGO_FROM_PHASE      2
 /* Sensor-less rev-up sequence */
 #define STARTING_ANGLE_DEG             0  /*!< degrees [0...359] */
 /* Observer start-up output conditions  */
-#define OBS_MINIMUM_SPEED_RPM          886
+#define OBS_MINIMUM_SPEED_RPM          1274
 
 #define NB_CONSECUTIVE_TESTS           2 /* corresponding to
                                                          former NB_CONSECUTIVE_TESTS/

@@ -1,0 +1,12 @@
+build/debug_scope.d
+build/debug_scope.lst
+build/debug_scope.o
+build/feed_forward_ctrl.d
+build/feed_forward_ctrl.lst
+build/feed_forward_ctrl.o
+build/STM32_MCSDK.bin
+build/STM32_MCSDK.elf
+build/STM32_MCSDK.hex
+build/STM32_MCSDK.map
+*.zip
+*.ftl

@@ -117,14 +117,14 @@ typedef struct
 #define MCP_OVER_UARTA   (1U<< 1U)
 #define MCP_OVER_UARTB   0U
 
-#define configurationFlag1_M1 (FEED_FORWARD_FLAG|VBUS_SENSING_FLAG|TEMP_SENSING_FLAG)
+#define configurationFlag1_M1 (VBUS_SENSING_FLAG|TEMP_SENSING_FLAG)
 #define configurationFlag2_M1 (0U)
 
 #define MAX_OF_MOTORS 2U
 #define NBR_OF_MOTORS  1
 #define DRIVE_TYPE_M1  0
-#define PRIM_SENSOR_M1  ECORDIC
-#define AUX_SENSOR_M1  EPLL
+#define PRIM_SENSOR_M1  EPLL
+#define AUX_SENSOR_M1  ECORDIC
 #define TOPOLOGY_M1 0
 #define FOC_RATE_M1 1
 #define PWM_FREQ_M1 20000

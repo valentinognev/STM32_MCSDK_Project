@@ -1,0 +1,80 @@
+<motor label="MT4008-12Pair-12V" description="" byuser="true">
+  <Mp>
+    <user_data>
+      <ctrl_board name="B-G431B-ESC1"/>
+      <pwr_board name="B-G431B-ESC1 3Sh"/>
+      <motors>
+        <pole_pairs>12</pole_pairs>
+        <max_speed>5000</max_speed>
+        <max_current>6</max_current>
+        <v_bus>12</v_bus>
+        <ld_lq_ratio>1</ld_lq_ratio>
+        <sm_pmsm>true</sm_pmsm>
+        <i_pmsm>false</i_pmsm>
+      </motors>
+    </user_data>
+    <profile_data>
+      <motors>
+        <binaryFile name="C:\Program Files (x86)\STMicroelectronics\MC_SDK_6.0.0\Utilities\PC_Software\STMotorProfiler\resources\assets\fws\B-G431B-ESC1#B-G431B-ESC1 3Sh#(5.4.5)#(3E256425).hex"/>
+        <electrical>
+          <max_current>6</max_current>
+          <v_bus>11.984771728515625</v_bus>
+          <ls>0.00003083333285758272</ls>
+          <rs>0.10000000149011612</rs>
+          <ke>1.1855363845825195</ke>
+        </electrical>
+        <mechanical>
+          <friction>2.546235293721111e-7</friction>
+          <inertia>2.0369885778137586e-9</inertia>
+          <max_speed>4962</max_speed>
+          <max_speed_startup>984</max_speed_startup>
+          <acceleration>500</acceleration>
+        </mechanical>
+      </motors>
+      <operation_condition>
+        <pwm_frequency>30000</pwm_frequency>
+        <foc_rate>1</foc_rate>
+        <cutoff_frequency>6000</cutoff_frequency>
+      </operation_condition>
+    </profile_data>
+  </Mp>
+  <system type="motor 1">
+    <motor version="1.0">
+      <name>Motor</name>
+      <uid>M</uid>
+      <type>M</type>
+      <handler_name>M</handler_name>
+      <board_name>MT4008-12Pair-12V</board_name>
+      <vars>
+        <var version="1.0" type="MC_List" name="I/SM-PMSM" value="1">
+          <items>
+            <item tag="1" text="Internal PMSM"/>
+            <item tag="0" text="Surface Mounted PMSM"/>
+          </items>
+        </var>
+        <var version="1.0" type="MC_Int" name="Pole Pairs" value="12"/>
+        <var version="1.0" type="MC_Int" name="Max Rated Speed" value="4962"/>
+        <var version="1.0" type="MC_Double" name="Nominal Current" value="6"/>
+        <var version="1.0" type="MC_Double" name="Nominal DC Voltage" value="11.984771728515625"/>
+        <var version="1.0" type="MC_Double" name="Rs" value="0.10000000149011612"/>
+        <var version="1.0" type="MC_Double" name="Ld" value="0.030833332857582718"/>
+        <var version="1.0" type="MC_Double" name="Lq" value="0.030833332857582718"/>
+        <var version="1.0" type="MC_Double" name="Ls" value="0.030833332857582718"/>
+        <var version="1.0" type="MC_Double" name="ld_lq_ratio" value="1"/>
+        <var version="1.0" type="MC_Double" name="B-EmfConstant" value="1.1855363845825195"/>
+        <var version="1.0" type="MC_Double" name="inertia" value="0.0020369885778137586"/>
+        <var version="1.0" type="MC_Double" name="friction" value="0.2546235293721111"/>
+        <var version="1.0" type="MC_Bool" name="Hall sensors" value="false"/>
+        <var version="1.0" type="MC_List" name="Sensors displacement" value="1">
+          <items>
+            <item tag="60" text="60"/>
+            <item tag="120" text="120"/>
+          </items>
+        </var>
+        <var version="1.0" type="MC_Int" name="Placement electrical angle" value="300"/>
+        <var version="1.0" type="MC_Bool" name="Quadrature encoder" value="false"/>
+        <var version="1.0" type="MC_Int" name="Pulses per mechanical revolution" value="400"/>
+      </vars>
+    </motor>
+  </system>
+</motor>

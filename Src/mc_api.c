@@ -21,7 +21,9 @@
 #include "mc_interface.h"
 #include "mc_api.h"
 #include "mc_config.h"
+#include "debug_scope.h"
 
+static int64_t startMotorTime = -1;
 /** @addtogroup MCSDK
   * @{
   */
@@ -41,6 +43,10 @@
   *  The current Motor Control API can cope with up to 2 motors.
   * @{
   */
+int64_t getStartMotorTick()
+{
+  return startMotorTime;
+}
 
 /**
   * @brief  Initiates the start-up procedure for Motor 1
@@ -67,6 +73,7 @@
   */
 __weak bool MC_StartMotor1(void)
 {
+  startMotorTime = getTickMSCounter();
 	return MCI_StartMotor( pMCI[M1] );
 }
 
@@ -126,6 +133,10 @@ __weak void MC_ProgramSpeedRampMotor1( int16_t hFinalSpeed, uint16_t hDurationms
 	MCI_ExecSpeedRamp( pMCI[M1], hFinalSpeed, hDurationms );
 }
 
+__weak void MC_ProgramSpeedSinMotor1( const int16_t hFinalSpeedMean, const uint16_t hFinalSpeedAmp, const int16_t hPhase )
+{
+	MCI_ExecSpeedSin( pMCI[M1], hFinalSpeedMean, hFinalSpeedAmp, hPhase );
+}
 /**
   * @brief Programs a speed ramp for Motor 1 for later or immediate execution.
   *
@@ -299,6 +310,19 @@ __weak MCI_CommandState_t  MC_GetCommandStateMotor1( void)
 {
 	return MCI_IsCommandAcknowledged( pMCI[M1] );
 }
+/**
+  * @brief  Returns the last command submited for Motor 1.
+  * The command can be one of the following values:
+  * - #MCI_NOCOMMANDSYET: no command is currently programmed.
+  * - #MCI_CMD_EXECSPEEDRAMP: 
+  * - #MCI_CMD_EXECTORQUERAMP: 
+  * - #MCI_CMD_SETCURRENTREFERENCES: 
+  * - #MCI_CMD_EXECSPEEDSIN
+  */
+__weak MCI_UserCommands_t  MC_GetLastCommandMotor1( void)
+{
+	return MCI_GetLastCommand( pMCI[M1] );
+}
 
 /**
  * @brief Stops the execution of the on-going speed ramp for Motor 1, if any.
@@ -365,7 +389,7 @@ __weak int16_t MC_GetMecSpeedAverageMotor1(void)
  */
 __weak int16_t MC_GetMecAuxiliarySpeedAverageMotor1(void)
 {
-	return SPD_GetAvrgMecSpeedUnit(&STO_PLL_M1._Super);
+	return SPD_GetAvrgMecSpeedUnit(&STO_CR_M1._Super);
 }
 
 /**
@@ -373,7 +397,7 @@ __weak int16_t MC_GetMecAuxiliarySpeedAverageMotor1(void)
  */
 __weak float MC_GetMecAuxiliarySpeedAverageMotor1_F(void)
 {
-  return( (float) ( SPD_GetAvrgMecSpeedUnit(&STO_PLL_M1._Super) * U_RPM) / SPEED_UNIT);
+  return( (float) ( SPD_GetAvrgMecSpeedUnit(&STO_CR_M1._Super) * U_RPM) / SPEED_UNIT);
 }
 
 /**
@@ -381,7 +405,7 @@ __weak float MC_GetMecAuxiliarySpeedAverageMotor1_F(void)
  */
 __weak int16_t MC_GetAuxiliaryElAngledppMotor1(void)
 {
-	return (SPD_GetElAngle(&STO_PLL_M1._Super));
+	return (SPD_GetElAngle(&STO_CR_M1._Super));
 }
 
 /**
@@ -389,7 +413,7 @@ __weak int16_t MC_GetAuxiliaryElAngledppMotor1(void)
  */
 __weak float MC_GetAuxiliaryElAngleMotor1_F(void)
 {
-  return ((float)( (SPD_GetElAngle(&STO_PLL_M1._Super)) / S16ToRAD) );
+  return ((float)( (SPD_GetElAngle(&STO_CR_M1._Super)) / S16ToRAD) );
 }
 
 /**

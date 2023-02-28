@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>B-G431B-ESC1_CordicPLLFF</name>
+	<name>B-G431B-ESC1_CordicPLLnoFF</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -31,9 +31,9 @@
 	</natures>
 	<linkedResources>
 		<link>
-			<name>B-G431B-ESC1_CordicPLLFF.ioc</name>
+			<name>B-G431B-ESC1_CordicPLLnoFF.ioc</name>
 			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/B-G431B-ESC1_CordicPLLFF.ioc</locationURI>
+			<locationURI>PARENT-1-PROJECT_LOC/B-G431B-ESC1_CordicPLLnoFF.ioc</locationURI>
 		</link>
 		<link>
 			<name>Application/User/aspep.c</name>
@@ -274,11 +274,6 @@
 			<name>Middlewares/MotorControl/digital_output.c</name>
 			<type>1</type>
 			<locationURI>PARENT-1-PROJECT_LOC/MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c</locationURI>
-		</link>
-		<link>
-			<name>Middlewares/MotorControl/feed_forward_ctrl.c</name>
-			<type>1</type>
-			<locationURI>PARENT-1-PROJECT_LOC/MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/feed_forward_ctrl.c</locationURI>
 		</link>
 		<link>
 			<name>Middlewares/MotorControl/mcp.c</name>

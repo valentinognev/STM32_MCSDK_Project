@@ -26,7 +26,7 @@
 #include "mc_config.h"
 
 /* USER CODE BEGIN Additional include */
-
+#include "debug_scope.h"
 /* USER CODE END Additional include */
 
 #define FREQ_RATIO 1                /* Dummy value for single drive */
@@ -101,18 +101,6 @@ PID_Handle_t PIDIdHandle_M1 =
   .hDefKdGain           = 0x0000U,
   .hKdDivisor           = 0x0000U,
   .hKdDivisorPOW2       = 0x0000U,
-};
-
-/**
-  * @brief  FeedForwardCtrl parameters Motor 1
-  */
-FF_Handle_t FF_M1 =
-{
-  .hVqdLowPassFilterBW    = M1_VQD_SW_FILTER_BW_FACTOR,
-  .wDefConstant_1D        = (int32_t)CONSTANT1_D,
-  .wDefConstant_1Q        = (int32_t)CONSTANT1_Q,
-  .wDefConstant_2         = (int32_t)CONSTANT2_QD,
-  .hVqdLowPassFilterBWLOG = M1_VQD_SW_FILTER_BW_FACTOR_LOG
 };
 
 /**
@@ -280,6 +268,15 @@ STO_PLL_Handle_t STO_PLL_M1 =
  .hForcedDirection                   =  0x0000U
 };
 
+STO_Handle_t STO_M1 =
+{
+  ._Super                        = (SpeednPosFdbk_Handle_t*)&STO_PLL_M1, //cstat !MISRAC2012-Rule-11.3
+  .pFctForceConvergency1         = &STO_PLL_ForceConvergency1,
+  .pFctForceConvergency2         = &STO_PLL_ForceConvergency2,
+  .pFctStoOtfResetPLL            = &STO_OTF_ResetPLL,
+  .pFctSTO_SpeedReliabilityCheck = &STO_PLL_IsVarianceTight
+};
+
 /**
   * @brief  SpeedNPosition sensor parameters Motor 1 - State Observer + CORDIC
   */
@@ -317,16 +314,6 @@ STO_CR_Handle_t STO_CR_M1 =
   .F1LOG                              =	CORD_F1_LOG,
   .F2LOG                              =	CORD_F2_LOG,
   .SpeedBufferSizedppLOG              =	CORD_FIFO_DEPTH_DPP_LOG
-};
-
-STO_Handle_t STO_M1 =
-{
-  ._Super                        = (SpeednPosFdbk_Handle_t*)&STO_CR_M1, //cstat !MISRAC2012-Rule-11.3
-  .pFctForceConvergency1         = &STO_CR_ForceConvergency1,
-  .pFctForceConvergency2         = &STO_CR_ForceConvergency2,
-  .pFctStoOtfResetPLL            = MC_NULL,
-  .pFctSTO_SpeedReliabilityCheck = &STO_CR_IsSpeedReliable
-
 };
 
 /**
@@ -398,8 +385,27 @@ NTC_Handle_t *pTemperatureSensor[NBR_OF_MOTORS] = {&TempSensor_M1};
 PID_Handle_t *pPIDIq[NBR_OF_MOTORS] = {&PIDIqHandle_M1};
 PID_Handle_t *pPIDId[NBR_OF_MOTORS] = {&PIDIdHandle_M1};
 PQD_MotorPowMeas_Handle_t *pMPM[NBR_OF_MOTORS] = {&PQD_MotorPowMeasM1};
-FF_Handle_t *pFF[NBR_OF_MOTORS] = {&FF_M1};
 /* USER CODE BEGIN Additional configuration */
+DebugScope_Handle_t debugScopeM1 =
+    {
+        .sz = DEBUGSCOPESIZE,
+        .curCh = 1,
+        .i1 = 0,
+        .i2 = 0,
+        .i3 = 0,
+        .i4 = 0,
+        .i5 = 0,
+        .startWriteFlag = false
+    };
+    
+EncoderReference_Handle_t EncRefM1 = 
+{
+  .enc_I_angle = 0,
+  .enc_I_counter = 0,
+  .hMechAngle = 0,
+  .hMechAngleWithPhase = 0,
+  .pRefElAngle = &(STO_PLL_M1._Super.hElAngle)   //&(STO_CR_M1._Super.hElAngle)
+};
 /* USER CODE END Additional configuration */
 
 /******************* (C) COPYRIGHT 2022 STMicroelectronics *****END OF FILE****/

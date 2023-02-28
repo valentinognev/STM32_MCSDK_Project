@@ -1,0 +1,1281 @@
+ARM GAS  /tmp/ccZME2J8.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"digital_output.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.DOUT_SetOutputState,"ax",%progbits
+  18              		.align	1
+  19              		.weak	DOUT_SetOutputState
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	DOUT_SetOutputState:
+  27              	.LVL0:
+  28              	.LFB1435:
+  29              		.file 1 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c"
+   1:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** /**
+   2:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   ******************************************************************************
+   3:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @file    digital_output.c
+   4:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @author  Motor Control SDK Team, ST Microelectronics
+   5:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @brief   This file provides firmware functions that implement the Digital
+   6:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   *          Output component of the Motor Control SDK:
+   7:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   *
+   8:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   ******************************************************************************
+   9:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @attention
+  10:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   *
+  11:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
+  12:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * All rights reserved.</center></h2>
+  13:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   *
+  14:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * This software component is licensed by ST under Ultimate Liberty license
+  15:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
+  16:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * the License. You may obtain a copy of the License at:
+  17:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   *                             www.st.com/SLA0044
+  18:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   *
+  19:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   ******************************************************************************
+  20:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   */
+  21:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** 
+  22:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** /* Includes ------------------------------------------------------------------*/
+  23:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** #include "digital_output.h"
+  24:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** #include "mc_type.h"
+  25:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** 
+  26:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** /** @addtogroup MCSDK
+  27:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @{
+  28:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   */
+  29:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** 
+ARM GAS  /tmp/ccZME2J8.s 			page 2
+
+
+  30:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** /** @defgroup DigitalOutput Digital Output
+  31:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @brief digital output component of the Motor Control SDK
+  32:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   *
+  33:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @{
+  34:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   */
+  35:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** 
+  36:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** 
+  37:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** /**
+  38:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @brief Accordingly with selected polarity, it sets to active or inactive the
+  39:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   *        digital output
+  40:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @param pHandle handler address of the digital output component.
+  41:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @param OutputState_t New requested state
+  42:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @retval none
+  43:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   */
+  44:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** __weak void DOUT_SetOutputState(DOUT_handle_t *pHandle, DOutputState_t State)
+  45:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** {
+  30              		.loc 1 45 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		@ link register save eliminated.
+  46:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** #ifdef NULL_PTR_CHECK_DIG_OUT
+  47:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   if (MC_NULL == pHandle)
+  48:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   {
+  49:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     /* Nothing to do */
+  50:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   }
+  51:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   else
+  52:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   {
+  53:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** #endif
+  54:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     if (ACTIVE == State)
+  35              		.loc 1 54 5 view .LVU1
+  36              		.loc 1 54 8 is_stmt 0 view .LVU2
+  37 0000 0129     		cmp	r1, #1
+  38 0002 07D0     		beq	.L6
+  55:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     {
+  56:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       if (pHandle->bDOutputPolarity == DOutputActiveHigh)
+  57:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       {
+  58:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****         LL_GPIO_SetOutputPin(pHandle->hDOutputPort, pHandle->hDOutputPin);
+  59:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       }
+  60:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       else
+  61:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       {
+  62:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****         LL_GPIO_ResetOutputPin(pHandle->hDOutputPort, pHandle->hDOutputPin);
+  63:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       }
+  64:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     }
+  65:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     else if (pHandle->bDOutputPolarity == DOutputActiveHigh)
+  39              		.loc 1 65 10 is_stmt 1 view .LVU3
+  40              		.loc 1 65 21 is_stmt 0 view .LVU4
+  41 0004 837A     		ldrb	r3, [r0, #10]	@ zero_extendqisi2
+  42              		.loc 1 65 13 view .LVU5
+  43 0006 012B     		cmp	r3, #1
+  44 0008 0FD0     		beq	.L7
+  66:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     {
+  67:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       LL_GPIO_ResetOutputPin(pHandle->hDOutputPort, pHandle->hDOutputPin);
+  68:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     }
+  69:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     else
+  70:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     {
+  71:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       LL_GPIO_SetOutputPin(pHandle->hDOutputPort, pHandle->hDOutputPin);
+ARM GAS  /tmp/ccZME2J8.s 			page 3
+
+
+  45              		.loc 1 71 7 is_stmt 1 view .LVU6
+  46 000a 4368     		ldr	r3, [r0, #4]
+  47              		.loc 1 71 58 is_stmt 0 view .LVU7
+  48 000c 0289     		ldrh	r2, [r0, #8]
+  49              	.LVL1:
+  50              	.LBB10:
+  51              	.LBI10:
+  52              		.file 2 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h"
+   1:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+   2:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   ******************************************************************************
+   3:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @file    stm32g4xx_ll_gpio.h
+   4:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @author  MCD Application Team
+   5:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief   Header file of GPIO LL module.
+   6:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   ******************************************************************************
+   7:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @attention
+   8:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *
+   9:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * Copyright (c) 2019 STMicroelectronics.
+  10:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * All rights reserved.
+  11:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *
+  12:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * This software is licensed under terms that can be found in the LICENSE file
+  13:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * in the root directory of this software component.
+  14:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * If no LICENSE file comes with this software, it is provided AS-IS.
+  15:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *
+  16:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   ******************************************************************************
+  17:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+  18:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  19:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Define to prevent recursive inclusion -------------------------------------*/
+  20:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #ifndef STM32G4xx_LL_GPIO_H
+  21:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define STM32G4xx_LL_GPIO_H
+  22:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  23:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #ifdef __cplusplus
+  24:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** extern "C" {
+  25:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #endif
+  26:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  27:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Includes ------------------------------------------------------------------*/
+  28:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #include "stm32g4xx.h"
+  29:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  30:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @addtogroup STM32G4xx_LL_Driver
+  31:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+  32:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+  33:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  34:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #if defined (GPIOA) || defined (GPIOB) || defined (GPIOC) || defined (GPIOD) || defined (GPIOE) || 
+  35:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  36:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL GPIO
+  37:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+  38:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+  39:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** MISRA C:2012 deviation rule has been granted for following rules:
+  40:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * Rule-18.1_d - Medium: Array pointer `GPIOx' is accessed with index [..,..]
+  41:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * which may be out of array bounds [..,UNKNOWN] in following APIs:
+  42:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * LL_GPIO_GetAFPin_0_7
+  43:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * LL_GPIO_SetAFPin_0_7
+  44:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * LL_GPIO_SetAFPin_8_15
+  45:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * LL_GPIO_GetAFPin_8_15
+  46:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+  47:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  48:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Private types -------------------------------------------------------------*/
+  49:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Private variables ---------------------------------------------------------*/
+ARM GAS  /tmp/ccZME2J8.s 			page 4
+
+
+  50:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Private constants ---------------------------------------------------------*/
+  51:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Private macros ------------------------------------------------------------*/
+  52:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #if defined(USE_FULL_LL_DRIVER)
+  53:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_Private_Macros GPIO Private Macros
+  54:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+  55:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+  56:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  57:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+  58:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @}
+  59:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+  60:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #endif /*USE_FULL_LL_DRIVER*/
+  61:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  62:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Exported types ------------------------------------------------------------*/
+  63:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #if defined(USE_FULL_LL_DRIVER)
+  64:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_ES_INIT GPIO Exported Init structures
+  65:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+  66:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+  67:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  68:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+  69:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief LL GPIO Init Structure definition
+  70:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+  71:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** typedef struct
+  72:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+  73:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   uint32_t Pin;          /*!< Specifies the GPIO pins to be configured.
+  74:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                               This parameter can be any value of @ref GPIO_LL_EC_PIN */
+  75:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  76:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   uint32_t Mode;         /*!< Specifies the operating mode for the selected pins.
+  77:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                               This parameter can be a value of @ref GPIO_LL_EC_MODE.
+  78:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  79:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                               GPIO HW configuration can be modified afterwards using unitary functi
+  80:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  81:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   uint32_t Speed;        /*!< Specifies the speed for the selected pins.
+  82:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                               This parameter can be a value of @ref GPIO_LL_EC_SPEED.
+  83:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  84:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                               GPIO HW configuration can be modified afterwards using unitary functi
+  85:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  86:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   uint32_t OutputType;   /*!< Specifies the operating output type for the selected pins.
+  87:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                               This parameter can be a value of @ref GPIO_LL_EC_OUTPUT.
+  88:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  89:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                               GPIO HW configuration can be modified afterwards using unitary functi
+  90:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  91:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   uint32_t Pull;         /*!< Specifies the operating Pull-up/Pull down for the selected pins.
+  92:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                               This parameter can be a value of @ref GPIO_LL_EC_PULL.
+  93:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  94:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                               GPIO HW configuration can be modified afterwards using unitary functi
+  95:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  96:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   uint32_t Alternate;    /*!< Specifies the Peripheral to be connected to the selected pins.
+  97:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                               This parameter can be a value of @ref GPIO_LL_EC_AF.
+  98:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+  99:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                               GPIO HW configuration can be modified afterwards using unitary functi
+ 100:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** } LL_GPIO_InitTypeDef;
+ 101:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 102:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 103:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @}
+ 104:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 105:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #endif /* USE_FULL_LL_DRIVER */
+ 106:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ARM GAS  /tmp/ccZME2J8.s 			page 5
+
+
+ 107:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Exported constants --------------------------------------------------------*/
+ 108:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_Exported_Constants GPIO Exported Constants
+ 109:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+ 110:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 111:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 112:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_PIN PIN
+ 113:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+ 114:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 115:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_0                      GPIO_BSRR_BS0 /*!< Select pin 0 */
+ 116:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_1                      GPIO_BSRR_BS1 /*!< Select pin 1 */
+ 117:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_2                      GPIO_BSRR_BS2 /*!< Select pin 2 */
+ 118:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_3                      GPIO_BSRR_BS3 /*!< Select pin 3 */
+ 119:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_4                      GPIO_BSRR_BS4 /*!< Select pin 4 */
+ 120:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_5                      GPIO_BSRR_BS5 /*!< Select pin 5 */
+ 121:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_6                      GPIO_BSRR_BS6 /*!< Select pin 6 */
+ 122:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_7                      GPIO_BSRR_BS7 /*!< Select pin 7 */
+ 123:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_8                      GPIO_BSRR_BS8 /*!< Select pin 8 */
+ 124:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_9                      GPIO_BSRR_BS9 /*!< Select pin 9 */
+ 125:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_10                     GPIO_BSRR_BS10 /*!< Select pin 10 */
+ 126:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_11                     GPIO_BSRR_BS11 /*!< Select pin 11 */
+ 127:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_12                     GPIO_BSRR_BS12 /*!< Select pin 12 */
+ 128:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_13                     GPIO_BSRR_BS13 /*!< Select pin 13 */
+ 129:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_14                     GPIO_BSRR_BS14 /*!< Select pin 14 */
+ 130:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_15                     GPIO_BSRR_BS15 /*!< Select pin 15 */
+ 131:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PIN_ALL                    (GPIO_BSRR_BS0 | GPIO_BSRR_BS1  | GPIO_BSRR_BS2  | \
+ 132:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                                            GPIO_BSRR_BS3  | GPIO_BSRR_BS4  | GPIO_BSRR_BS5  | \
+ 133:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                                            GPIO_BSRR_BS6  | GPIO_BSRR_BS7  | GPIO_BSRR_BS8  | \
+ 134:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                                            GPIO_BSRR_BS9  | GPIO_BSRR_BS10 | GPIO_BSRR_BS11 | \
+ 135:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                                            GPIO_BSRR_BS12 | GPIO_BSRR_BS13 | GPIO_BSRR_BS14 | \
+ 136:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                                            GPIO_BSRR_BS15) /*!< Select all pins */
+ 137:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 138:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @}
+ 139:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 140:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 141:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_MODE Mode
+ 142:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+ 143:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 144:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_MODE_INPUT                 (0x00000000U) /*!< Select input mode */
+ 145:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_MODE_OUTPUT                GPIO_MODER_MODE0_0  /*!< Select output mode */
+ 146:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_MODE_ALTERNATE             GPIO_MODER_MODE0_1  /*!< Select alternate function mode 
+ 147:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_MODE_ANALOG                GPIO_MODER_MODE0    /*!< Select analog mode */
+ 148:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 149:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @}
+ 150:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 151:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 152:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_OUTPUT Output Type
+ 153:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+ 154:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 155:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_OUTPUT_PUSHPULL            (0x00000000U) /*!< Select push-pull as output type */
+ 156:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_OUTPUT_OPENDRAIN           GPIO_OTYPER_OT0 /*!< Select open-drain as output type */
+ 157:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 158:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @}
+ 159:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 160:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 161:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_SPEED Output Speed
+ 162:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+ 163:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ARM GAS  /tmp/ccZME2J8.s 			page 6
+
+
+ 164:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_SPEED_FREQ_LOW             (0x00000000U) /*!< Select I/O low output speed    */
+ 165:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_SPEED_FREQ_MEDIUM          GPIO_OSPEEDR_OSPEED0_0 /*!< Select I/O medium output spe
+ 166:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_SPEED_FREQ_HIGH            GPIO_OSPEEDR_OSPEED0_1 /*!< Select I/O fast output speed
+ 167:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_SPEED_FREQ_VERY_HIGH       GPIO_OSPEEDR_OSPEED0   /*!< Select I/O high output speed
+ 168:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 169:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @}
+ 170:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 171:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_SPEED_LOW                  LL_GPIO_SPEED_FREQ_LOW
+ 172:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_SPEED_MEDIUM               LL_GPIO_SPEED_FREQ_MEDIUM
+ 173:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_SPEED_FAST                 LL_GPIO_SPEED_FREQ_HIGH
+ 174:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_SPEED_HIGH                 LL_GPIO_SPEED_FREQ_VERY_HIGH
+ 175:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 176:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_PULL Pull Up Pull Down
+ 177:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+ 178:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 179:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PULL_NO                    (0x00000000U) /*!< Select I/O no pull */
+ 180:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PULL_UP                    GPIO_PUPDR_PUPD0_0 /*!< Select I/O pull up */
+ 181:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_PULL_DOWN                  GPIO_PUPDR_PUPD0_1 /*!< Select I/O pull down */
+ 182:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 183:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @}
+ 184:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 185:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 186:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_EC_AF Alternate Function
+ 187:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+ 188:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 189:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_0                       (0x0000000U) /*!< Select alternate function 0 */
+ 190:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_1                       (0x0000001U) /*!< Select alternate function 1 */
+ 191:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_2                       (0x0000002U) /*!< Select alternate function 2 */
+ 192:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_3                       (0x0000003U) /*!< Select alternate function 3 */
+ 193:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_4                       (0x0000004U) /*!< Select alternate function 4 */
+ 194:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_5                       (0x0000005U) /*!< Select alternate function 5 */
+ 195:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_6                       (0x0000006U) /*!< Select alternate function 6 */
+ 196:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_7                       (0x0000007U) /*!< Select alternate function 7 */
+ 197:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_8                       (0x0000008U) /*!< Select alternate function 8 */
+ 198:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_9                       (0x0000009U) /*!< Select alternate function 9 */
+ 199:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_10                      (0x000000AU) /*!< Select alternate function 10 */
+ 200:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_11                      (0x000000BU) /*!< Select alternate function 11 */
+ 201:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_12                      (0x000000CU) /*!< Select alternate function 12 */
+ 202:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_13                      (0x000000DU) /*!< Select alternate function 13 */
+ 203:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_14                      (0x000000EU) /*!< Select alternate function 14 */
+ 204:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_AF_15                      (0x000000FU) /*!< Select alternate function 15 */
+ 205:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 206:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @}
+ 207:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 208:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 209:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 210:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @}
+ 211:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 212:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 213:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Exported macro ------------------------------------------------------------*/
+ 214:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_Exported_Macros GPIO Exported Macros
+ 215:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+ 216:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 217:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 218:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_EM_WRITE_READ Common Write and read registers Macros
+ 219:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+ 220:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ARM GAS  /tmp/ccZME2J8.s 			page 7
+
+
+ 221:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 222:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 223:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Write a value in GPIO register
+ 224:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  __INSTANCE__ GPIO Instance
+ 225:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  __REG__ Register to be written
+ 226:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  __VALUE__ Value to be written in the register
+ 227:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval None
+ 228:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 229:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_WriteReg(__INSTANCE__, __REG__, __VALUE__) WRITE_REG(__INSTANCE__->__REG__, (__VALU
+ 230:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 231:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 232:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Read a value in GPIO register
+ 233:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  __INSTANCE__ GPIO Instance
+ 234:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  __REG__ Register to be read
+ 235:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval Register value
+ 236:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 237:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** #define LL_GPIO_ReadReg(__INSTANCE__, __REG__) READ_REG(__INSTANCE__->__REG__)
+ 238:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 239:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @}
+ 240:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 241:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 242:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 243:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @}
+ 244:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 245:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 246:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /* Exported functions --------------------------------------------------------*/
+ 247:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_Exported_Functions GPIO Exported Functions
+ 248:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+ 249:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 250:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 251:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_EF_Port_Configuration Port Configuration
+ 252:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+ 253:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 254:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 255:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 256:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Configure gpio mode for a dedicated pin on dedicated port.
+ 257:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   I/O mode can be Input mode, General purpose output, Alternate function mode or Analog.
+ 258:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 259:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll MODER        MODEy         LL_GPIO_SetPinMode
+ 260:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 261:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 262:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 263:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 264:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 265:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 266:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 267:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 268:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 269:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 270:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 271:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 272:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 273:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 274:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 275:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 276:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 277:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ARM GAS  /tmp/ccZME2J8.s 			page 8
+
+
+ 278:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Mode This parameter can be one of the following values:
+ 279:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_INPUT
+ 280:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_OUTPUT
+ 281:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_ALTERNATE
+ 282:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_ANALOG
+ 283:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval None
+ 284:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 285:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetPinMode(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Mode)
+ 286:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 287:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   MODIFY_REG(GPIOx->MODER, (GPIO_MODER_MODE0 << (POSITION_VAL(Pin) * 2U)), (Mode << (POSITION_VAL(P
+ 288:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 289:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 290:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 291:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return gpio mode for a dedicated pin on dedicated port.
+ 292:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   I/O mode can be Input mode, General purpose output, Alternate function mode or Analog.
+ 293:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 294:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll MODER        MODEy         LL_GPIO_GetPinMode
+ 295:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 296:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 297:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 298:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 299:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 300:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 301:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 302:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 303:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 304:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 305:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 306:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 307:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 308:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 309:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 310:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 311:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 312:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 313:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
+ 314:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_INPUT
+ 315:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_OUTPUT
+ 316:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_ALTERNATE
+ 317:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_MODE_ANALOG
+ 318:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 319:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_GetPinMode(GPIO_TypeDef *GPIOx, uint32_t Pin)
+ 320:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 321:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   return (uint32_t)(READ_BIT(GPIOx->MODER,
+ 322:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                              (GPIO_MODER_MODE0 << (POSITION_VAL(Pin) * 2U))) >> (POSITION_VAL(Pin) 
+ 323:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 324:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 325:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 326:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Configure gpio output type for several pins on dedicated port.
+ 327:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Output type as to be set when gpio pin is in output or
+ 328:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         alternate modes. Possible type are Push-pull or Open-drain.
+ 329:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll OTYPER       OTy           LL_GPIO_SetPinOutputType
+ 330:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 331:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
+ 332:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 333:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 334:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ARM GAS  /tmp/ccZME2J8.s 			page 9
+
+
+ 335:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 336:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 337:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 338:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 339:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 340:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 341:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 342:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 343:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 344:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 345:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 346:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 347:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 348:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 349:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  OutputType This parameter can be one of the following values:
+ 350:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_PUSHPULL
+ 351:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_OPENDRAIN
+ 352:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval None
+ 353:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 354:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetPinOutputType(GPIO_TypeDef *GPIOx, uint32_t PinMask, uint32_t Outpu
+ 355:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 356:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   MODIFY_REG(GPIOx->OTYPER, PinMask, (PinMask * OutputType));
+ 357:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 358:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 359:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 360:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return gpio output type for several pins on dedicated port.
+ 361:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Output type as to be set when gpio pin is in output or
+ 362:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         alternate modes. Possible type are Push-pull or Open-drain.
+ 363:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 364:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll OTYPER       OTy           LL_GPIO_GetPinOutputType
+ 365:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 366:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 367:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 368:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 369:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 370:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 371:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 372:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 373:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 374:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 375:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 376:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 377:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 378:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 379:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 380:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 381:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 382:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 383:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 384:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
+ 385:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_PUSHPULL
+ 386:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_OUTPUT_OPENDRAIN
+ 387:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 388:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_GetPinOutputType(GPIO_TypeDef *GPIOx, uint32_t Pin)
+ 389:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 390:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   return (uint32_t)(READ_BIT(GPIOx->OTYPER, Pin) >> POSITION_VAL(Pin));
+ 391:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ARM GAS  /tmp/ccZME2J8.s 			page 10
+
+
+ 392:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 393:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 394:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Configure gpio speed for a dedicated pin on dedicated port.
+ 395:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   I/O speed can be Low, Medium, Fast or High speed.
+ 396:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 397:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Refer to datasheet for frequency specifications and the power
+ 398:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         supply and load conditions for each speed.
+ 399:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll OSPEEDR      OSPEEDy       LL_GPIO_SetPinSpeed
+ 400:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 401:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 402:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 403:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 404:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 405:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 406:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 407:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 408:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 409:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 410:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 411:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 412:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 413:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 414:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 415:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 416:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 417:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 418:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Speed This parameter can be one of the following values:
+ 419:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_LOW
+ 420:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_MEDIUM
+ 421:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_HIGH
+ 422:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_VERY_HIGH
+ 423:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval None
+ 424:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 425:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetPinSpeed(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t  Speed)
+ 426:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 427:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   MODIFY_REG(GPIOx->OSPEEDR, (GPIO_OSPEEDR_OSPEED0 << (POSITION_VAL(Pin) * 2U)),
+ 428:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****              (Speed << (POSITION_VAL(Pin) * 2U)));
+ 429:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 430:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 431:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 432:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return gpio speed for a dedicated pin on dedicated port.
+ 433:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   I/O speed can be Low, Medium, Fast or High speed.
+ 434:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 435:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Refer to datasheet for frequency specifications and the power
+ 436:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         supply and load conditions for each speed.
+ 437:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll OSPEEDR      OSPEEDy       LL_GPIO_GetPinSpeed
+ 438:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 439:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 440:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 441:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 442:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 443:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 444:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 445:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 446:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 447:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 448:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ARM GAS  /tmp/ccZME2J8.s 			page 11
+
+
+ 449:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 450:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 451:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 452:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 453:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 454:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 455:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 456:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
+ 457:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_LOW
+ 458:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_MEDIUM
+ 459:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_HIGH
+ 460:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_SPEED_FREQ_VERY_HIGH
+ 461:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 462:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_GetPinSpeed(GPIO_TypeDef *GPIOx, uint32_t Pin)
+ 463:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 464:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   return (uint32_t)(READ_BIT(GPIOx->OSPEEDR,
+ 465:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                              (GPIO_OSPEEDR_OSPEED0 << (POSITION_VAL(Pin) * 2U))) >> (POSITION_VAL(P
+ 466:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 467:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 468:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 469:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Configure gpio pull-up or pull-down for a dedicated pin on a dedicated port.
+ 470:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 471:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll PUPDR        PUPDy         LL_GPIO_SetPinPull
+ 472:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 473:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 474:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 475:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 476:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 477:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 478:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 479:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 480:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 481:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 482:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 483:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 484:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 485:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 486:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 487:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 488:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 489:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 490:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pull This parameter can be one of the following values:
+ 491:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_NO
+ 492:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_UP
+ 493:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_DOWN
+ 494:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval None
+ 495:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 496:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetPinPull(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Pull)
+ 497:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 498:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   MODIFY_REG(GPIOx->PUPDR, (GPIO_PUPDR_PUPD0 << (POSITION_VAL(Pin) * 2U)), (Pull << (POSITION_VAL(P
+ 499:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 500:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 501:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 502:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return gpio pull-up or pull-down for a dedicated pin on a dedicated port
+ 503:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 504:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll PUPDR        PUPDy         LL_GPIO_GetPinPull
+ 505:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ARM GAS  /tmp/ccZME2J8.s 			page 12
+
+
+ 506:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 507:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 508:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 509:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 510:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 511:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 512:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 513:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 514:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 515:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 516:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 517:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 518:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 519:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 520:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 521:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 522:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 523:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
+ 524:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_NO
+ 525:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_UP
+ 526:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PULL_DOWN
+ 527:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 528:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_GetPinPull(GPIO_TypeDef *GPIOx, uint32_t Pin)
+ 529:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 530:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   return (uint32_t)(READ_BIT(GPIOx->PUPDR,
+ 531:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                              (GPIO_PUPDR_PUPD0 << (POSITION_VAL(Pin) * 2U))) >> (POSITION_VAL(Pin) 
+ 532:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 533:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 534:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 535:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Configure gpio alternate function of a dedicated pin from 0 to 7 for a dedicated port.
+ 536:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Possible values are from AF0 to AF15 depending on target.
+ 537:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 538:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll AFRL         AFSELy        LL_GPIO_SetAFPin_0_7
+ 539:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 540:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 541:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 542:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 543:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 544:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 545:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 546:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 547:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 548:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 549:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Alternate This parameter can be one of the following values:
+ 550:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_0
+ 551:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_1
+ 552:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_2
+ 553:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_3
+ 554:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_4
+ 555:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_5
+ 556:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_6
+ 557:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_7
+ 558:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_8
+ 559:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_9
+ 560:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_10
+ 561:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_11
+ 562:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_12
+ARM GAS  /tmp/ccZME2J8.s 			page 13
+
+
+ 563:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_13
+ 564:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_14
+ 565:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_15
+ 566:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval None
+ 567:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 568:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetAFPin_0_7(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Alternate)
+ 569:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 570:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   MODIFY_REG(GPIOx->AFR[0], (GPIO_AFRL_AFSEL0 << (POSITION_VAL(Pin) * 4U)),
+ 571:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****              (Alternate << (POSITION_VAL(Pin) * 4U)));
+ 572:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 573:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 574:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 575:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return gpio alternate function of a dedicated pin from 0 to 7 for a dedicated port.
+ 576:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll AFRL         AFSELy        LL_GPIO_GetAFPin_0_7
+ 577:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 578:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 579:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 580:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 581:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 582:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 583:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 584:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 585:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 586:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 587:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
+ 588:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_0
+ 589:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_1
+ 590:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_2
+ 591:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_3
+ 592:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_4
+ 593:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_5
+ 594:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_6
+ 595:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_7
+ 596:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_8
+ 597:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_9
+ 598:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_10
+ 599:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_11
+ 600:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_12
+ 601:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_13
+ 602:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_14
+ 603:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_15
+ 604:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 605:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_GetAFPin_0_7(GPIO_TypeDef *GPIOx, uint32_t Pin)
+ 606:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 607:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   return (uint32_t)(READ_BIT(GPIOx->AFR[0],
+ 608:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                              (GPIO_AFRL_AFSEL0 << (POSITION_VAL(Pin) * 4U))) >> (POSITION_VAL(Pin) 
+ 609:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 610:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 611:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 612:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Configure gpio alternate function of a dedicated pin from 8 to 15 for a dedicated port.
+ 613:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Possible values are from AF0 to AF15 depending on target.
+ 614:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Warning: only one pin can be passed as parameter.
+ 615:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll AFRH         AFSELy        LL_GPIO_SetAFPin_8_15
+ 616:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 617:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 618:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 619:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ARM GAS  /tmp/ccZME2J8.s 			page 14
+
+
+ 620:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 621:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 622:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 623:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 624:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 625:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 626:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Alternate This parameter can be one of the following values:
+ 627:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_0
+ 628:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_1
+ 629:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_2
+ 630:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_3
+ 631:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_4
+ 632:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_5
+ 633:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_6
+ 634:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_7
+ 635:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_8
+ 636:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_9
+ 637:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_10
+ 638:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_11
+ 639:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_12
+ 640:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_13
+ 641:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_14
+ 642:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_15
+ 643:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval None
+ 644:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 645:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetAFPin_8_15(GPIO_TypeDef *GPIOx, uint32_t Pin, uint32_t Alternate)
+ 646:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 647:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   MODIFY_REG(GPIOx->AFR[1], (GPIO_AFRH_AFSEL8 << (POSITION_VAL(Pin >> 8U) * 4U)),
+ 648:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****              (Alternate << (POSITION_VAL(Pin >> 8U) * 4U)));
+ 649:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 650:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 651:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 652:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return gpio alternate function of a dedicated pin from 8 to 15 for a dedicated port.
+ 653:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Possible values are from AF0 to AF15 depending on target.
+ 654:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll AFRH         AFSELy        LL_GPIO_GetAFPin_8_15
+ 655:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 656:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  Pin This parameter can be one of the following values:
+ 657:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 658:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 659:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 660:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 661:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 662:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 663:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 664:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 665:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval Returned value can be one of the following values:
+ 666:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_0
+ 667:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_1
+ 668:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_2
+ 669:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_3
+ 670:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_4
+ 671:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_5
+ 672:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_6
+ 673:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_7
+ 674:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_8
+ 675:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_9
+ 676:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_10
+ARM GAS  /tmp/ccZME2J8.s 			page 15
+
+
+ 677:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_11
+ 678:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_12
+ 679:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_13
+ 680:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_14
+ 681:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_AF_15
+ 682:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 683:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_GetAFPin_8_15(GPIO_TypeDef *GPIOx, uint32_t Pin)
+ 684:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 685:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   return (uint32_t)(READ_BIT(GPIOx->AFR[1],
+ 686:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****                              (GPIO_AFRH_AFSEL8 << (POSITION_VAL(Pin >> 8U) * 4U))) >> (POSITION_VAL
+ 687:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 688:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 689:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 690:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 691:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Lock configuration of several pins for a dedicated port.
+ 692:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   When the lock sequence has been applied on a port bit, the
+ 693:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         value of this port bit can no longer be modified until the
+ 694:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         next reset.
+ 695:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @note   Each lock bit freezes a specific configuration register
+ 696:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         (control and alternate function registers).
+ 697:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll LCKR         LCKK          LL_GPIO_LockPin
+ 698:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 699:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
+ 700:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 701:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 702:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 703:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 704:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 705:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 706:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 707:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 708:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 709:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 710:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 711:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 712:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 713:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 714:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 715:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 716:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 717:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval None
+ 718:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 719:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_LockPin(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+ 720:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 721:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   __IO uint32_t temp;
+ 722:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   WRITE_REG(GPIOx->LCKR, GPIO_LCKR_LCKK | PinMask);
+ 723:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   WRITE_REG(GPIOx->LCKR, PinMask);
+ 724:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   WRITE_REG(GPIOx->LCKR, GPIO_LCKR_LCKK | PinMask);
+ 725:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   /* Read LCKR register. This read is mandatory to complete key lock sequence */
+ 726:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   temp = READ_REG(GPIOx->LCKR);
+ 727:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   (void) temp;
+ 728:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 729:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 730:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 731:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return 1 if all pins passed as parameter, of a dedicated port, are locked. else Return 
+ 732:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll LCKR         LCKy          LL_GPIO_IsPinLocked
+ 733:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ARM GAS  /tmp/ccZME2J8.s 			page 16
+
+
+ 734:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
+ 735:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 736:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 737:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 738:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 739:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 740:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 741:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 742:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 743:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 744:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 745:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 746:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 747:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 748:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 749:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 750:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 751:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 752:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval State of bit (1 or 0).
+ 753:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 754:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_IsPinLocked(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+ 755:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 756:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   return ((READ_BIT(GPIOx->LCKR, PinMask) == (PinMask)) ? 1UL : 0UL);
+ 757:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 758:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 759:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 760:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return 1 if one of the pin of a dedicated port is locked. else return 0.
+ 761:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll LCKR         LCKK          LL_GPIO_IsAnyPinLocked
+ 762:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 763:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval State of bit (1 or 0).
+ 764:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 765:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_IsAnyPinLocked(GPIO_TypeDef *GPIOx)
+ 766:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 767:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   return ((READ_BIT(GPIOx->LCKR, GPIO_LCKR_LCKK) == (GPIO_LCKR_LCKK)) ? 1UL : 0UL);
+ 768:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 769:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 770:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 771:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @}
+ 772:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 773:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 774:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /** @defgroup GPIO_LL_EF_Data_Access Data Access
+ 775:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @{
+ 776:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 777:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 778:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 779:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return full input data register value for a dedicated port.
+ 780:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll IDR          IDy           LL_GPIO_ReadInputPort
+ 781:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 782:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval Input data register value of port
+ 783:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 784:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_ReadInputPort(GPIO_TypeDef *GPIOx)
+ 785:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 786:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   return (uint32_t)(READ_REG(GPIOx->IDR));
+ 787:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 788:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 789:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 790:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return if input data level for several pins of dedicated port is high or low.
+ARM GAS  /tmp/ccZME2J8.s 			page 17
+
+
+ 791:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll IDR          IDy           LL_GPIO_IsInputPinSet
+ 792:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 793:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
+ 794:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 795:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 796:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 797:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 798:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 799:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 800:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 801:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 802:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 803:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 804:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 805:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 806:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 807:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 808:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 809:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 810:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 811:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval State of bit (1 or 0).
+ 812:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 813:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_IsInputPinSet(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+ 814:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 815:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   return ((READ_BIT(GPIOx->IDR, PinMask) == (PinMask)) ? 1UL : 0UL);
+ 816:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 817:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 818:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 819:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Write output data register for the port.
+ 820:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll ODR          ODy           LL_GPIO_WriteOutputPort
+ 821:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 822:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  PortValue Level value for each pin of the port
+ 823:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval None
+ 824:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 825:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_WriteOutputPort(GPIO_TypeDef *GPIOx, uint32_t PortValue)
+ 826:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 827:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   WRITE_REG(GPIOx->ODR, PortValue);
+ 828:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 829:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 830:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 831:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return full output data register value for a dedicated port.
+ 832:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll ODR          ODy           LL_GPIO_ReadOutputPort
+ 833:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 834:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval Output data register value of port
+ 835:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 836:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_ReadOutputPort(GPIO_TypeDef *GPIOx)
+ 837:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 838:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   return (uint32_t)(READ_REG(GPIOx->ODR));
+ 839:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 840:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 841:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 842:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Return if input data level for several pins of dedicated port is high or low.
+ 843:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll ODR          ODy           LL_GPIO_IsOutputPinSet
+ 844:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 845:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
+ 846:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 847:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ARM GAS  /tmp/ccZME2J8.s 			page 18
+
+
+ 848:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 849:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 850:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 851:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 852:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 853:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 854:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 855:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 856:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 857:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 858:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 859:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 860:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 861:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 862:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 863:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval State of bit (1 or 0).
+ 864:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 865:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE uint32_t LL_GPIO_IsOutputPinSet(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+ 866:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 867:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   return ((READ_BIT(GPIOx->ODR, PinMask) == (PinMask)) ? 1UL : 0UL);
+ 868:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 869:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 870:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 871:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Set several pins to high level on dedicated gpio port.
+ 872:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll BSRR         BSy           LL_GPIO_SetOutputPin
+ 873:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 874:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
+ 875:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 876:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 877:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 878:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 879:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 880:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 881:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 882:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 883:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 884:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 885:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 886:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 887:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 888:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 889:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 890:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 891:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 892:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval None
+ 893:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ 894:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_SetOutputPin(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+  53              		.loc 2 894 22 is_stmt 1 view .LVU8
+  54              	.LBB11:
+ 895:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 896:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   WRITE_REG(GPIOx->BSRR, PinMask);
+  55              		.loc 2 896 3 view .LVU9
+  56 000e 9A61     		str	r2, [r3, #24]
+  57              	.LVL2:
+  58              	.L4:
+  59              		.loc 2 896 3 is_stmt 0 view .LVU10
+  60              	.LBE11:
+ARM GAS  /tmp/ccZME2J8.s 			page 19
+
+
+  61              	.LBE10:
+  72:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     }
+  73:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     pHandle->OutputState = State;
+  62              		.loc 1 73 5 is_stmt 1 view .LVU11
+  63              		.loc 1 73 26 is_stmt 0 view .LVU12
+  64 0010 0170     		strb	r1, [r0]
+  74:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** #ifdef NULL_PTR_CHECK_DIG_OUT
+  75:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   }
+  76:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** #endif
+  77:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** }
+  65              		.loc 1 77 1 view .LVU13
+  66 0012 7047     		bx	lr
+  67              	.L6:
+  56:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       {
+  68              		.loc 1 56 7 is_stmt 1 view .LVU14
+  56:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       {
+  69              		.loc 1 56 18 is_stmt 0 view .LVU15
+  70 0014 837A     		ldrb	r3, [r0, #10]	@ zero_extendqisi2
+  56:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       {
+  71              		.loc 1 56 10 view .LVU16
+  72 0016 012B     		cmp	r3, #1
+  73 0018 03D0     		beq	.L8
+  62:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       }
+  74              		.loc 1 62 9 is_stmt 1 view .LVU17
+  75 001a 4368     		ldr	r3, [r0, #4]
+  62:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       }
+  76              		.loc 1 62 62 is_stmt 0 view .LVU18
+  77 001c 0289     		ldrh	r2, [r0, #8]
+  78              	.LVL3:
+  79              	.LBB12:
+  80              	.LBI12:
+ 897:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 898:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 899:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** /**
+ 900:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @brief  Set several pins to low level on dedicated gpio port.
+ 901:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @rmtoll BRR          BRy           LL_GPIO_ResetOutputPin
+ 902:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  GPIOx GPIO Port
+ 903:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @param  PinMask This parameter can be a combination of the following values:
+ 904:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_0
+ 905:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_1
+ 906:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_2
+ 907:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_3
+ 908:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_4
+ 909:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_5
+ 910:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_6
+ 911:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_7
+ 912:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_8
+ 913:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_9
+ 914:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_10
+ 915:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_11
+ 916:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_12
+ 917:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_13
+ 918:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_14
+ 919:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_15
+ 920:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   *         @arg @ref LL_GPIO_PIN_ALL
+ 921:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   * @retval None
+ 922:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   */
+ARM GAS  /tmp/ccZME2J8.s 			page 20
+
+
+ 923:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** __STATIC_INLINE void LL_GPIO_ResetOutputPin(GPIO_TypeDef *GPIOx, uint32_t PinMask)
+  81              		.loc 2 923 22 is_stmt 1 view .LVU19
+  82              	.LBB13:
+ 924:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 925:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h ****   WRITE_REG(GPIOx->BRR, PinMask);
+  83              		.loc 2 925 3 view .LVU20
+  84 001e 9A62     		str	r2, [r3, #40]
+ 926:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+  85              		.loc 2 926 1 is_stmt 0 view .LVU21
+  86 0020 F6E7     		b	.L4
+  87              	.LVL4:
+  88              	.L8:
+  89              		.loc 2 926 1 view .LVU22
+  90              	.LBE13:
+  91              	.LBE12:
+  58:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       }
+  92              		.loc 1 58 9 is_stmt 1 view .LVU23
+  93 0022 4368     		ldr	r3, [r0, #4]
+  58:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****       }
+  94              		.loc 1 58 60 is_stmt 0 view .LVU24
+  95 0024 0289     		ldrh	r2, [r0, #8]
+  96              	.LVL5:
+  97              	.LBB14:
+  98              	.LBI14:
+ 894:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+  99              		.loc 2 894 22 is_stmt 1 view .LVU25
+ 100              	.LBB15:
+ 896:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 101              		.loc 2 896 3 view .LVU26
+ 102 0026 9A61     		str	r2, [r3, #24]
+ 897:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 103              		.loc 2 897 1 is_stmt 0 view .LVU27
+ 104 0028 F2E7     		b	.L4
+ 105              	.LVL6:
+ 106              	.L7:
+ 897:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** 
+ 107              		.loc 2 897 1 view .LVU28
+ 108              	.LBE15:
+ 109              	.LBE14:
+  67:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     }
+ 110              		.loc 1 67 7 is_stmt 1 view .LVU29
+ 111 002a 4368     		ldr	r3, [r0, #4]
+  67:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     }
+ 112              		.loc 1 67 60 is_stmt 0 view .LVU30
+ 113 002c 0289     		ldrh	r2, [r0, #8]
+ 114              	.LVL7:
+ 115              	.LBB16:
+ 116              	.LBI16:
+ 923:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** {
+ 117              		.loc 2 923 22 is_stmt 1 view .LVU31
+ 118              	.LBB17:
+ 925:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_gpio.h **** }
+ 119              		.loc 2 925 3 view .LVU32
+ 120 002e 9A62     		str	r2, [r3, #40]
+ 121              		.loc 2 926 1 is_stmt 0 view .LVU33
+ 122 0030 EEE7     		b	.L4
+ 123              	.LBE17:
+ARM GAS  /tmp/ccZME2J8.s 			page 21
+
+
+ 124              	.LBE16:
+ 125              		.cfi_endproc
+ 126              	.LFE1435:
+ 128              		.section	.text.DOUT_GetOutputState,"ax",%progbits
+ 129              		.align	1
+ 130              		.weak	DOUT_GetOutputState
+ 131              		.syntax unified
+ 132              		.thumb
+ 133              		.thumb_func
+ 134              		.fpu fpv4-sp-d16
+ 136              	DOUT_GetOutputState:
+ 137              	.LVL8:
+ 138              	.LFB1436:
+  78:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** 
+  79:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** /**
+  80:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @brief It returns the state of the digital output
+  81:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @param pHandle pointer on related component instance
+  82:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   * @retval OutputState_t Digital output state (ACTIVE or INACTIVE)
+  83:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   */
+  84:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** __weak DOutputState_t DOUT_GetOutputState(DOUT_handle_t *pHandle)
+  85:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** {
+ 139              		.loc 1 85 1 is_stmt 1 view -0
+ 140              		.cfi_startproc
+ 141              		@ args = 0, pretend = 0, frame = 0
+ 142              		@ frame_needed = 0, uses_anonymous_args = 0
+ 143              		@ link register save eliminated.
+  86:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** #ifdef NULL_PTR_CHECK_DIG_OUT
+  87:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   DOutputState_t temp_outputState;
+  88:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** 
+  89:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   if (MC_NULL == pHandle)
+  90:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   {
+  91:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     temp_outputState = INACTIVE;
+  92:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   }
+  93:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   else
+  94:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   {
+  95:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****     temp_outputState = pHandle->OutputState;
+  96:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   }
+  97:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   return (temp_outputState);
+  98:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** #else
+  99:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c ****   return (pHandle->OutputState);
+ 144              		.loc 1 99 3 view .LVU35
+ 100:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** #endif
+ 101:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c **** }
+ 145              		.loc 1 101 1 is_stmt 0 view .LVU36
+ 146 0000 0078     		ldrb	r0, [r0]	@ zero_extendqisi2
+ 147              	.LVL9:
+ 148              		.loc 1 101 1 view .LVU37
+ 149 0002 7047     		bx	lr
+ 150              		.cfi_endproc
+ 151              	.LFE1436:
+ 153              		.text
+ 154              	.Letext0:
+ 155              		.file 3 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 156              		.file 4 "Drivers/CMSIS/Include/core_cm4.h"
+ 157              		.file 5 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h"
+ 158              		.file 6 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h"
+ 159              		.file 7 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
+ARM GAS  /tmp/ccZME2J8.s 			page 22
+
+
+ 160              		.file 8 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h"
+ 161              		.file 9 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
+ 162              		.file 10 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h"
+ 163              		.file 11 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h"
+ 164              		.file 12 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h"
+ 165              		.file 13 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
+ 166              		.file 14 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/digital_output.h"
+ARM GAS  /tmp/ccZME2J8.s 			page 23
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 digital_output.c
+     /tmp/ccZME2J8.s:18     .text.DOUT_SetOutputState:0000000000000000 $t
+     /tmp/ccZME2J8.s:26     .text.DOUT_SetOutputState:0000000000000000 DOUT_SetOutputState
+     /tmp/ccZME2J8.s:129    .text.DOUT_GetOutputState:0000000000000000 $t
+     /tmp/ccZME2J8.s:136    .text.DOUT_GetOutputState:0000000000000000 DOUT_GetOutputState
+
+NO UNDEFINED SYMBOLS

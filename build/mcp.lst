@@ -1,0 +1,855 @@
+ARM GAS  /tmp/ccIrqQRp.s 			page 1
+
+
+   1              		.cpu cortex-m4
+   2              		.eabi_attribute 27, 1
+   3              		.eabi_attribute 28, 1
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 1
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.file	"mcp.c"
+  14              		.text
+  15              	.Ltext0:
+  16              		.cfi_sections	.debug_frame
+  17              		.section	.text.MCP_ReceivedPacket,"ax",%progbits
+  18              		.align	1
+  19              		.global	MCP_ReceivedPacket
+  20              		.arch armv7e-m
+  21              		.syntax unified
+  22              		.thumb
+  23              		.thumb_func
+  24              		.fpu fpv4-sp-d16
+  26              	MCP_ReceivedPacket:
+  27              	.LVL0:
+  28              	.LFB1437:
+  29              		.file 1 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c"
+   1:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** /**
+   2:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   ******************************************************************************
+   3:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   * @file    mcp.c
+   4:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   * @author  Motor Control SDK Team, ST Microelectronics
+   5:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   * @brief   This file provides firmware functions that implement the MCP protocol
+   6:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   *
+   7:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   *
+   8:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   ******************************************************************************
+   9:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   * @attention
+  10:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   *
+  11:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
+  12:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   * All rights reserved.</center></h2>
+  13:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   *
+  14:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   * This software component is licensed by ST under Ultimate Liberty license
+  15:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
+  16:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   * the License. You may obtain a copy of the License at:
+  17:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   *                             www.st.com/SLA0044
+  18:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   *
+  19:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   ******************************************************************************
+  20:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   */
+  21:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+  22:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** #include "mc_type.h"
+  23:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** #include "mcp.h"
+  24:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** #include "register_interface.h"
+  25:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** #include "mc_config.h"
+  26:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** #include "mcp_config.h"
+  27:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+  28:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** void MCP_ReceivedPacket(MCP_Handle_t *pHandle)
+  29:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** {
+ARM GAS  /tmp/ccIrqQRp.s 			page 2
+
+
+  30              		.loc 1 29 1 view -0
+  31              		.cfi_startproc
+  32              		@ args = 0, pretend = 0, frame = 0
+  33              		@ frame_needed = 0, uses_anonymous_args = 0
+  34              		.loc 1 29 1 is_stmt 0 view .LVU1
+  35 0000 F0B5     		push	{r4, r5, r6, r7, lr}
+  36              		.cfi_def_cfa_offset 20
+  37              		.cfi_offset 4, -20
+  38              		.cfi_offset 5, -16
+  39              		.cfi_offset 6, -12
+  40              		.cfi_offset 7, -8
+  41              		.cfi_offset 14, -4
+  42 0002 83B0     		sub	sp, sp, #12
+  43              		.cfi_def_cfa_offset 32
+  44 0004 0446     		mov	r4, r0
+  30:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   uint16_t *packetHeader;
+  45              		.loc 1 30 3 is_stmt 1 view .LVU2
+  31:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   uint16_t command;
+  46              		.loc 1 31 3 view .LVU3
+  32:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   uint8_t motorID;
+  47              		.loc 1 32 3 view .LVU4
+  33:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   uint8_t MCPResponse;
+  48              		.loc 1 33 3 view .LVU5
+  34:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   uint8_t userCommand=0;
+  49              		.loc 1 34 3 view .LVU6
+  50              	.LVL1:
+  35:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   int16_t txSyncFreeSpace;
+  51              		.loc 1 35 3 view .LVU7
+  36:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** #ifdef NULL_PTR_CHECK_MCP
+  37:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   if ((MC_NULL == pHandle) || (0U == pHandle->rxLength))
+  38:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   {
+  39:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     /* Nothing to do, txBuffer and txLength have not been modified */
+  40:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   }
+  41:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   else /* Length is 0, this is a request to send back the last packet */
+  42:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   {
+  43:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** #endif
+  44:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     packetHeader = (uint16_t *)pHandle->rxBuffer; //cstat !MISRAC2012-Rule-11.3
+  52              		.loc 1 44 5 view .LVU8
+  53              		.loc 1 44 18 is_stmt 0 view .LVU9
+  54 0006 4768     		ldr	r7, [r0, #4]
+  55              	.LVL2:
+  45:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     command = (uint16_t)(*packetHeader & CMD_MASK);
+  56              		.loc 1 45 5 is_stmt 1 view .LVU10
+  57              		.loc 1 45 26 is_stmt 0 view .LVU11
+  58 0008 3888     		ldrh	r0, [r7]
+  59              	.LVL3:
+  60              		.loc 1 45 13 view .LVU12
+  61 000a 20F00703 		bic	r3, r0, #7
+  62 000e 9BB2     		uxth	r3, r3
+  63              	.LVL4:
+  46:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     if ((command & MCP_USER_CMD_MASK) == MCP_USER_CMD)
+  64              		.loc 1 46 5 is_stmt 1 view .LVU13
+  65 0010 00F47F42 		and	r2, r0, #65280
+  66              		.loc 1 46 8 is_stmt 0 view .LVU14
+  67 0014 B2F5807F 		cmp	r2, #256
+  68 0018 39D0     		beq	.L29
+  34:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   int16_t txSyncFreeSpace;
+ARM GAS  /tmp/ccIrqQRp.s 			page 3
+
+
+  69              		.loc 1 34 11 view .LVU15
+  70 001a 0026     		movs	r6, #0
+  71              	.LVL5:
+  72              	.L2:
+  47:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     {
+  48:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       userCommand = (command >> 3) & 0x1f;
+  49:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       command = MCP_USER_CMD;    	
+  50:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     }
+  51:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+  52:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     motorID = (uint8_t)((*packetHeader - 1U) & MOTOR_MASK);
+  73              		.loc 1 52 5 is_stmt 1 view .LVU16
+  74              		.loc 1 52 40 is_stmt 0 view .LVU17
+  75 001c 0138     		subs	r0, r0, #1
+  76              		.loc 1 52 13 view .LVU18
+  77 001e 00F00700 		and	r0, r0, #7
+  78              	.LVL6:
+  53:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+  54:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     
+  55:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     MCI_Handle_t *pMCI = &Mci[motorID];
+  79              		.loc 1 55 5 is_stmt 1 view .LVU19
+  80              		.loc 1 55 19 is_stmt 0 view .LVU20
+  81 0022 5A4D     		ldr	r5, .L34
+  82 0024 05EB4015 		add	r5, r5, r0, lsl #5
+  83              	.LVL7:
+  56:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     /* Removing MCP Header from RxBuffer*/
+  57:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     pHandle->rxLength = pHandle->rxLength-MCP_HEADER_SIZE;
+  84              		.loc 1 57 5 is_stmt 1 view .LVU21
+  85              		.loc 1 57 32 is_stmt 0 view .LVU22
+  86 0028 A089     		ldrh	r0, [r4, #12]
+  87              	.LVL8:
+  88              		.loc 1 57 42 view .LVU23
+  89 002a 0238     		subs	r0, r0, #2
+  90 002c 80B2     		uxth	r0, r0
+  91              		.loc 1 57 23 view .LVU24
+  92 002e A081     		strh	r0, [r4, #12]	@ movhi
+  93              	.LVL9:
+  58:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     pHandle->rxBuffer = pHandle->rxBuffer+MCP_HEADER_SIZE;
+  94              		.loc 1 58 5 is_stmt 1 view .LVU25
+  95              		.loc 1 58 42 is_stmt 0 view .LVU26
+  96 0030 0237     		adds	r7, r7, #2
+  97              	.LVL10:
+  98              		.loc 1 58 23 view .LVU27
+  99 0032 6760     		str	r7, [r4, #4]
+ 100              	.LVL11:
+  59:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     /* Commands requiering payload response must be aware of space available for the payload*/
+  60:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     txSyncFreeSpace = pHandle->pTransportLayer->txSyncMaxPayload-1; /* Last byte is reserved for MC
+ 101              		.loc 1 60 5 is_stmt 1 view .LVU28
+ 102              		.loc 1 60 30 is_stmt 0 view .LVU29
+ 103 0034 2268     		ldr	r2, [r4]
+ 104              		.loc 1 60 47 view .LVU30
+ 105 0036 9289     		ldrh	r2, [r2, #12]
+ 106              		.loc 1 60 65 view .LVU31
+ 107 0038 013A     		subs	r2, r2, #1
+ 108 003a 91B2     		uxth	r1, r2
+ 109              		.loc 1 60 21 view .LVU32
+ 110 003c 12B2     		sxth	r2, r2
+ 111              	.LVL12:
+ARM GAS  /tmp/ccIrqQRp.s 			page 4
+
+
+  61:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     /* Initialization of the tx length, command which send back data has to increment the txLength
+  62:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****      * (case of Read register) */
+  63:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     pHandle->txLength = 0;
+ 112              		.loc 1 63 5 is_stmt 1 view .LVU33
+ 113              		.loc 1 63 23 is_stmt 0 view .LVU34
+ 114 003e 4FF0000C 		mov	ip, #0
+ 115 0042 A4F80EC0 		strh	ip, [r4, #14]	@ movhi
+  64:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+  65:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     switch (command)
+ 116              		.loc 1 65 5 is_stmt 1 view .LVU35
+ 117 0046 382B     		cmp	r3, #56
+ 118 0048 25D8     		bhi	.L30
+ 119 004a 382B     		cmp	r3, #56
+ 120 004c 00F29980 		bhi	.L23
+ 121 0050 DFE803F0 		tbb	[pc, r3]
+ 122              	.LVL13:
+ 123              	.L10:
+ 124 0054 45       		.byte	(.L17-.L10)/2
+ 125 0055 97       		.byte	(.L23-.L10)/2
+ 126 0056 97       		.byte	(.L23-.L10)/2
+ 127 0057 97       		.byte	(.L23-.L10)/2
+ 128 0058 97       		.byte	(.L23-.L10)/2
+ 129 0059 97       		.byte	(.L23-.L10)/2
+ 130 005a 97       		.byte	(.L23-.L10)/2
+ 131 005b 97       		.byte	(.L23-.L10)/2
+ 132 005c 4C       		.byte	(.L16-.L10)/2
+ 133 005d 97       		.byte	(.L23-.L10)/2
+ 134 005e 97       		.byte	(.L23-.L10)/2
+ 135 005f 97       		.byte	(.L23-.L10)/2
+ 136 0060 97       		.byte	(.L23-.L10)/2
+ 137 0061 97       		.byte	(.L23-.L10)/2
+ 138 0062 97       		.byte	(.L23-.L10)/2
+ 139 0063 97       		.byte	(.L23-.L10)/2
+ 140 0064 50       		.byte	(.L15-.L10)/2
+ 141 0065 97       		.byte	(.L23-.L10)/2
+ 142 0066 97       		.byte	(.L23-.L10)/2
+ 143 0067 97       		.byte	(.L23-.L10)/2
+ 144 0068 97       		.byte	(.L23-.L10)/2
+ 145 0069 97       		.byte	(.L23-.L10)/2
+ 146 006a 97       		.byte	(.L23-.L10)/2
+ 147 006b 97       		.byte	(.L23-.L10)/2
+ 148 006c 54       		.byte	(.L14-.L10)/2
+ 149 006d 97       		.byte	(.L23-.L10)/2
+ 150 006e 97       		.byte	(.L23-.L10)/2
+ 151 006f 97       		.byte	(.L23-.L10)/2
+ 152 0070 97       		.byte	(.L23-.L10)/2
+ 153 0071 97       		.byte	(.L23-.L10)/2
+ 154 0072 97       		.byte	(.L23-.L10)/2
+ 155 0073 97       		.byte	(.L23-.L10)/2
+ 156 0074 5B       		.byte	(.L13-.L10)/2
+ 157 0075 97       		.byte	(.L23-.L10)/2
+ 158 0076 97       		.byte	(.L23-.L10)/2
+ 159 0077 97       		.byte	(.L23-.L10)/2
+ 160 0078 97       		.byte	(.L23-.L10)/2
+ 161 0079 97       		.byte	(.L23-.L10)/2
+ 162 007a 97       		.byte	(.L23-.L10)/2
+ 163 007b 97       		.byte	(.L23-.L10)/2
+ARM GAS  /tmp/ccIrqQRp.s 			page 5
+
+
+ 164 007c 60       		.byte	(.L12-.L10)/2
+ 165 007d 97       		.byte	(.L23-.L10)/2
+ 166 007e 97       		.byte	(.L23-.L10)/2
+ 167 007f 97       		.byte	(.L23-.L10)/2
+ 168 0080 97       		.byte	(.L23-.L10)/2
+ 169 0081 97       		.byte	(.L23-.L10)/2
+ 170 0082 97       		.byte	(.L23-.L10)/2
+ 171 0083 97       		.byte	(.L23-.L10)/2
+ 172 0084 6C       		.byte	(.L11-.L10)/2
+ 173 0085 97       		.byte	(.L23-.L10)/2
+ 174 0086 97       		.byte	(.L23-.L10)/2
+ 175 0087 97       		.byte	(.L23-.L10)/2
+ 176 0088 97       		.byte	(.L23-.L10)/2
+ 177 0089 97       		.byte	(.L23-.L10)/2
+ 178 008a 97       		.byte	(.L23-.L10)/2
+ 179 008b 97       		.byte	(.L23-.L10)/2
+ 180 008c 7C       		.byte	(.L9-.L10)/2
+ 181 008d 00       		.p2align 1
+ 182              	.L29:
+  48:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       command = MCP_USER_CMD;    	
+ 183              		.loc 1 48 7 view .LVU36
+  48:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       command = MCP_USER_CMD;    	
+ 184              		.loc 1 48 19 is_stmt 0 view .LVU37
+ 185 008e C3F3C406 		ubfx	r6, r3, #3, #5
+ 186              	.LVL14:
+  49:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     }
+ 187              		.loc 1 49 7 is_stmt 1 view .LVU38
+  49:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     }
+ 188              		.loc 1 49 15 is_stmt 0 view .LVU39
+ 189 0092 1346     		mov	r3, r2
+ 190 0094 C2E7     		b	.L2
+ 191              	.LVL15:
+ 192              	.L30:
+ 193              		.loc 1 65 5 view .LVU40
+ 194 0096 602B     		cmp	r3, #96
+ 195 0098 15D8     		bhi	.L18
+ 196 009a 482B     		cmp	r3, #72
+ 197 009c 11D3     		bcc	.L31
+ 198 009e 483B     		subs	r3, r3, #72
+ 199              	.LVL16:
+ 200              		.loc 1 65 5 view .LVU41
+ 201 00a0 182B     		cmp	r3, #24
+ 202 00a2 6CD8     		bhi	.L22
+ 203 00a4 DFE803F0 		tbb	[pc, r3]
+ 204              	.L7:
+ 205 00a8 57       		.byte	(.L8-.L7)/2
+ 206 00a9 6B       		.byte	(.L22-.L7)/2
+ 207 00aa 6B       		.byte	(.L22-.L7)/2
+ 208 00ab 6B       		.byte	(.L22-.L7)/2
+ 209 00ac 6B       		.byte	(.L22-.L7)/2
+ 210 00ad 6B       		.byte	(.L22-.L7)/2
+ 211 00ae 6B       		.byte	(.L22-.L7)/2
+ 212 00af 6B       		.byte	(.L22-.L7)/2
+ 213 00b0 5C       		.byte	(.L6-.L7)/2
+ 214 00b1 6B       		.byte	(.L22-.L7)/2
+ 215 00b2 6B       		.byte	(.L22-.L7)/2
+ 216 00b3 6B       		.byte	(.L22-.L7)/2
+ARM GAS  /tmp/ccIrqQRp.s 			page 6
+
+
+ 217 00b4 6B       		.byte	(.L22-.L7)/2
+ 218 00b5 6B       		.byte	(.L22-.L7)/2
+ 219 00b6 6B       		.byte	(.L22-.L7)/2
+ 220 00b7 6B       		.byte	(.L22-.L7)/2
+ 221 00b8 5C       		.byte	(.L6-.L7)/2
+ 222 00b9 6B       		.byte	(.L22-.L7)/2
+ 223 00ba 6B       		.byte	(.L22-.L7)/2
+ 224 00bb 6B       		.byte	(.L22-.L7)/2
+ 225 00bc 6B       		.byte	(.L22-.L7)/2
+ 226 00bd 6B       		.byte	(.L22-.L7)/2
+ 227 00be 6B       		.byte	(.L22-.L7)/2
+ 228 00bf 6B       		.byte	(.L22-.L7)/2
+ 229 00c0 5C       		.byte	(.L6-.L7)/2
+ 230              	.LVL17:
+ 231 00c1 00       		.p2align 1
+ 232              	.L31:
+ 233              		.loc 1 65 5 view .LVU42
+ 234 00c2 0220     		movs	r0, #2
+ 235 00c4 03E0     		b	.L5
+ 236              	.L18:
+ 237 00c6 B3F5807F 		cmp	r3, #256
+ 238 00ca 49D0     		beq	.L6
+ 239 00cc 0220     		movs	r0, #2
+ 240              	.LVL18:
+ 241              	.L5:
+  66:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     {
+  67:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case GET_MCP_VERSION:
+  68:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         pHandle->txLength = 4;
+  69:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         *pHandle->txBuffer = (uint32_t) MCP_VERSION;
+  70:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_OK;
+  71:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       break;
+  72:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case SET_DATA_ELEMENT:
+  73:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       {
+  74:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = RI_SetRegCommandParser(pHandle, txSyncFreeSpace);
+  75:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+  76:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+  77:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+  78:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case GET_DATA_ELEMENT:
+  79:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       {
+  80:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = RI_GetRegCommandParser(pHandle, txSyncFreeSpace);
+  81:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+  82:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+  83:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+  84:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case START_MOTOR:
+  85:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       {
+  86:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = (MCI_StartMotor(pMCI)) ? MCP_CMD_OK : MCP_CMD_NOK;
+  87:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+  88:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+  89:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+  90:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case STOP_MOTOR: /* Todo: Check the pertinance of return value*/
+  91:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       {
+  92:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         (void)MCI_StopMotor(pMCI);
+  93:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_OK;
+  94:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+  95:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+  96:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+  97:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case STOP_RAMP:
+ARM GAS  /tmp/ccIrqQRp.s 			page 7
+
+
+  98:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       {
+  99:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         if (RUN == MCI_GetSTMState(pMCI))
+ 100:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         {
+ 101:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****           MCI_StopRamp(pMCI);
+ 102:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         }
+ 103:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_OK;
+ 104:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 105:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ 106:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+ 107:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case START_STOP:
+ 108:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       {
+ 109:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         /* Queries the STM and a command start or stop depending on the state. */
+ 110:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         if (IDLE == MCI_GetSTMState(pMCI))
+ 111:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         {
+ 112:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****           MCPResponse = (MCI_StartMotor(pMCI)) ? MCP_CMD_OK : MCP_CMD_NOK;
+ 113:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         }
+ 114:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         else
+ 115:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         {
+ 116:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****           (void)MCI_StopMotor(pMCI);
+ 117:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****           MCPResponse = MCP_CMD_OK;
+ 118:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         }
+ 119:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 120:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ 121:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+ 122:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case FAULT_ACK:
+ 123:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       {
+ 124:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         (void)MCI_FaultAcknowledged(pMCI);
+ 125:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_OK;
+ 126:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 127:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ 128:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+ 129:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case IQDREF_CLEAR:
+ 130:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       {
+ 131:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCI_Clear_Iqdref(pMCI);
+ 132:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_OK;
+ 133:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 134:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ 135:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case PFC_ENABLE:
+ 136:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case PFC_DISABLE:
+ 137:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case PFC_FAULT_ACK:
+ 138:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case MCP_USER_CMD:
+ 139:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  if (userCommand < MCP_USER_CALLBACK_MAX && MCP_UserCallBack[userCommand] != NULL)
+ 140:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  {
+ 141:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	    MCPResponse = MCP_UserCallBack[userCommand](pHandle->rxLength, pHandle->rxBuffer, txSyncFr
+ 142:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  }
+ 143:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  else
+ 144:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  {
+ 145:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****           MCPResponse = MCP_ERROR_CALLBACK_NOT_REGISTRED;
+ 146:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  }
+ 147:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 148:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       default :
+ 149:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       {
+ 150:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_UNKNOWN;
+ 151:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 152:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ 153:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     }
+ 154:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     pHandle->txBuffer[pHandle->txLength] = MCPResponse;
+ARM GAS  /tmp/ccIrqQRp.s 			page 8
+
+
+ 242              		.loc 1 154 5 is_stmt 1 view .LVU43
+ 243              		.loc 1 154 12 is_stmt 0 view .LVU44
+ 244 00ce A268     		ldr	r2, [r4, #8]
+ 245              		.loc 1 154 30 view .LVU45
+ 246 00d0 E389     		ldrh	r3, [r4, #14]
+ 247              		.loc 1 154 42 view .LVU46
+ 248 00d2 D054     		strb	r0, [r2, r3]
+ 155:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     pHandle->txLength++;
+ 249              		.loc 1 155 5 is_stmt 1 view .LVU47
+ 250              		.loc 1 155 12 is_stmt 0 view .LVU48
+ 251 00d4 E389     		ldrh	r3, [r4, #14]
+ 252              		.loc 1 155 22 view .LVU49
+ 253 00d6 0133     		adds	r3, r3, #1
+ 254 00d8 E381     		strh	r3, [r4, #14]	@ movhi
+ 156:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** #ifdef NULL_PTR_CHECK_MCP
+ 157:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   }
+ 158:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** #endif
+ 159:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** }
+ 255              		.loc 1 159 1 view .LVU50
+ 256 00da 03B0     		add	sp, sp, #12
+ 257              		.cfi_remember_state
+ 258              		.cfi_def_cfa_offset 20
+ 259              		@ sp needed
+ 260 00dc F0BD     		pop	{r4, r5, r6, r7, pc}
+ 261              	.LVL19:
+ 262              	.L17:
+ 263              		.cfi_restore_state
+  68:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         *pHandle->txBuffer = (uint32_t) MCP_VERSION;
+ 264              		.loc 1 68 9 is_stmt 1 view .LVU51
+  68:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         *pHandle->txBuffer = (uint32_t) MCP_VERSION;
+ 265              		.loc 1 68 27 is_stmt 0 view .LVU52
+ 266 00de 0423     		movs	r3, #4
+ 267              	.LVL20:
+  68:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         *pHandle->txBuffer = (uint32_t) MCP_VERSION;
+ 268              		.loc 1 68 27 view .LVU53
+ 269 00e0 E381     		strh	r3, [r4, #14]	@ movhi
+  69:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_OK;
+ 270              		.loc 1 69 9 is_stmt 1 view .LVU54
+  69:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_OK;
+ 271              		.loc 1 69 17 is_stmt 0 view .LVU55
+ 272 00e2 A368     		ldr	r3, [r4, #8]
+  69:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_OK;
+ 273              		.loc 1 69 28 view .LVU56
+ 274 00e4 0122     		movs	r2, #1
+ 275 00e6 1A70     		strb	r2, [r3]
+  70:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       break;
+ 276              		.loc 1 70 9 is_stmt 1 view .LVU57
+ 277              	.LVL21:
+  71:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case SET_DATA_ELEMENT:
+ 278              		.loc 1 71 7 view .LVU58
+  70:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       break;
+ 279              		.loc 1 70 21 is_stmt 0 view .LVU59
+ 280 00e8 0020     		movs	r0, #0
+  71:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       case SET_DATA_ELEMENT:
+ 281              		.loc 1 71 7 view .LVU60
+ 282 00ea F0E7     		b	.L5
+ 283              	.LVL22:
+ARM GAS  /tmp/ccIrqQRp.s 			page 9
+
+
+ 284              	.L16:
+  74:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 285              		.loc 1 74 9 is_stmt 1 view .LVU61
+  74:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 286              		.loc 1 74 23 is_stmt 0 view .LVU62
+ 287 00ec 2046     		mov	r0, r4
+ 288 00ee FFF7FEFF 		bl	RI_SetRegCommandParser
+ 289              	.LVL23:
+  75:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ 290              		.loc 1 75 9 is_stmt 1 view .LVU63
+ 291 00f2 ECE7     		b	.L5
+ 292              	.LVL24:
+ 293              	.L15:
+  80:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 294              		.loc 1 80 9 view .LVU64
+  80:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 295              		.loc 1 80 23 is_stmt 0 view .LVU65
+ 296 00f4 2046     		mov	r0, r4
+ 297 00f6 FFF7FEFF 		bl	RI_GetRegCommandParser
+ 298              	.LVL25:
+  81:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ 299              		.loc 1 81 9 is_stmt 1 view .LVU66
+ 300 00fa E8E7     		b	.L5
+ 301              	.LVL26:
+ 302              	.L14:
+  86:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 303              		.loc 1 86 9 view .LVU67
+  86:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 304              		.loc 1 86 24 is_stmt 0 view .LVU68
+ 305 00fc 2846     		mov	r0, r5
+ 306 00fe FFF7FEFF 		bl	MCI_StartMotor
+ 307              	.LVL27:
+  86:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 308              		.loc 1 86 59 view .LVU69
+ 309 0102 80F00100 		eor	r0, r0, #1
+ 310 0106 C0B2     		uxtb	r0, r0
+ 311              	.LVL28:
+  87:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ 312              		.loc 1 87 9 is_stmt 1 view .LVU70
+ 313 0108 E1E7     		b	.L5
+ 314              	.LVL29:
+ 315              	.L13:
+  92:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_OK;
+ 316              		.loc 1 92 9 view .LVU71
+  92:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_OK;
+ 317              		.loc 1 92 15 is_stmt 0 view .LVU72
+ 318 010a 2846     		mov	r0, r5
+ 319 010c FFF7FEFF 		bl	MCI_StopMotor
+ 320              	.LVL30:
+  93:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 321              		.loc 1 93 9 is_stmt 1 view .LVU73
+  94:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ 322              		.loc 1 94 9 view .LVU74
+  93:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 323              		.loc 1 93 21 is_stmt 0 view .LVU75
+ 324 0110 0020     		movs	r0, #0
+  94:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ARM GAS  /tmp/ccIrqQRp.s 			page 10
+
+
+ 325              		.loc 1 94 9 view .LVU76
+ 326 0112 DCE7     		b	.L5
+ 327              	.LVL31:
+ 328              	.L12:
+  99:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         {
+ 329              		.loc 1 99 9 is_stmt 1 view .LVU77
+  99:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         {
+ 330              		.loc 1 99 20 is_stmt 0 view .LVU78
+ 331 0114 2846     		mov	r0, r5
+ 332 0116 FFF7FEFF 		bl	MCI_GetSTMState
+ 333              	.LVL32:
+  99:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         {
+ 334              		.loc 1 99 12 view .LVU79
+ 335 011a 0628     		cmp	r0, #6
+ 336 011c 01D0     		beq	.L32
+ 103:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 337              		.loc 1 103 21 view .LVU80
+ 338 011e 0020     		movs	r0, #0
+ 339 0120 D5E7     		b	.L5
+ 340              	.L32:
+ 101:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         }
+ 341              		.loc 1 101 11 is_stmt 1 view .LVU81
+ 342 0122 2846     		mov	r0, r5
+ 343 0124 FFF7FEFF 		bl	MCI_StopRamp
+ 344              	.LVL33:
+ 103:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 345              		.loc 1 103 21 is_stmt 0 view .LVU82
+ 346 0128 0020     		movs	r0, #0
+ 347 012a D0E7     		b	.L5
+ 348              	.LVL34:
+ 349              	.L11:
+ 110:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         {
+ 350              		.loc 1 110 9 is_stmt 1 view .LVU83
+ 110:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         {
+ 351              		.loc 1 110 21 is_stmt 0 view .LVU84
+ 352 012c 2846     		mov	r0, r5
+ 353 012e FFF7FEFF 		bl	MCI_GetSTMState
+ 354              	.LVL35:
+ 110:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         {
+ 355              		.loc 1 110 12 view .LVU85
+ 356 0132 30B9     		cbnz	r0, .L20
+ 112:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         }
+ 357              		.loc 1 112 11 is_stmt 1 view .LVU86
+ 112:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         }
+ 358              		.loc 1 112 26 is_stmt 0 view .LVU87
+ 359 0134 2846     		mov	r0, r5
+ 360 0136 FFF7FEFF 		bl	MCI_StartMotor
+ 361              	.LVL36:
+ 112:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         }
+ 362              		.loc 1 112 61 view .LVU88
+ 363 013a 80F00100 		eor	r0, r0, #1
+ 364 013e C0B2     		uxtb	r0, r0
+ 365              	.LVL37:
+ 112:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         }
+ 366              		.loc 1 112 61 view .LVU89
+ 367 0140 C5E7     		b	.L5
+ 368              	.LVL38:
+ARM GAS  /tmp/ccIrqQRp.s 			page 11
+
+
+ 369              	.L20:
+ 116:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****           MCPResponse = MCP_CMD_OK;
+ 370              		.loc 1 116 11 is_stmt 1 view .LVU90
+ 116:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****           MCPResponse = MCP_CMD_OK;
+ 371              		.loc 1 116 17 is_stmt 0 view .LVU91
+ 372 0142 2846     		mov	r0, r5
+ 373 0144 FFF7FEFF 		bl	MCI_StopMotor
+ 374              	.LVL39:
+ 117:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         }
+ 375              		.loc 1 117 11 is_stmt 1 view .LVU92
+ 117:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         }
+ 376              		.loc 1 117 23 is_stmt 0 view .LVU93
+ 377 0148 0020     		movs	r0, #0
+ 378 014a C0E7     		b	.L5
+ 379              	.LVL40:
+ 380              	.L9:
+ 124:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_OK;
+ 381              		.loc 1 124 9 is_stmt 1 view .LVU94
+ 124:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_OK;
+ 382              		.loc 1 124 15 is_stmt 0 view .LVU95
+ 383 014c 2846     		mov	r0, r5
+ 384 014e FFF7FEFF 		bl	MCI_FaultAcknowledged
+ 385              	.LVL41:
+ 125:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 386              		.loc 1 125 9 is_stmt 1 view .LVU96
+ 126:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ 387              		.loc 1 126 9 view .LVU97
+ 125:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 388              		.loc 1 125 21 is_stmt 0 view .LVU98
+ 389 0152 0020     		movs	r0, #0
+ 126:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ 390              		.loc 1 126 9 view .LVU99
+ 391 0154 BBE7     		b	.L5
+ 392              	.LVL42:
+ 393              	.L8:
+ 131:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         MCPResponse = MCP_CMD_OK;
+ 394              		.loc 1 131 9 is_stmt 1 view .LVU100
+ 395 0156 2846     		mov	r0, r5
+ 396 0158 FFF7FEFF 		bl	MCI_Clear_Iqdref
+ 397              	.LVL43:
+ 132:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 398              		.loc 1 132 9 view .LVU101
+ 133:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ 399              		.loc 1 133 9 view .LVU102
+ 132:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****         break;
+ 400              		.loc 1 132 21 is_stmt 0 view .LVU103
+ 401 015c 0020     		movs	r0, #0
+ 133:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****       }
+ 402              		.loc 1 133 9 view .LVU104
+ 403 015e B6E7     		b	.L5
+ 404              	.LVL44:
+ 405              	.L6:
+ 139:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  {
+ 406              		.loc 1 139 8 is_stmt 1 view .LVU105
+ 139:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  {
+ 407              		.loc 1 139 11 is_stmt 0 view .LVU106
+ 408 0160 012E     		cmp	r6, #1
+ARM GAS  /tmp/ccIrqQRp.s 			page 12
+
+
+ 409 0162 01D9     		bls	.L33
+ 145:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  }
+ 410              		.loc 1 145 23 view .LVU107
+ 411 0164 0D20     		movs	r0, #13
+ 412 0166 B2E7     		b	.L5
+ 413              	.L33:
+ 139:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  {
+ 414              		.loc 1 139 67 discriminator 1 view .LVU108
+ 415 0168 094B     		ldr	r3, .L34+4
+ 416 016a 53F82650 		ldr	r5, [r3, r6, lsl #2]
+ 417              	.LVL45:
+ 139:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  {
+ 418              		.loc 1 139 48 discriminator 1 view .LVU109
+ 419 016e 55B1     		cbz	r5, .L26
+ 141:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  }
+ 420              		.loc 1 141 10 is_stmt 1 view .LVU110
+ 141:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  }
+ 421              		.loc 1 141 24 is_stmt 0 view .LVU111
+ 422 0170 A368     		ldr	r3, [r4, #8]
+ 423 0172 0093     		str	r3, [sp]
+ 424 0174 04F10E03 		add	r3, r4, #14
+ 425 0178 3946     		mov	r1, r7
+ 426 017a A847     		blx	r5
+ 427              	.LVL46:
+ 141:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  }
+ 428              		.loc 1 141 22 view .LVU112
+ 429 017c A7E7     		b	.L5
+ 430              	.LVL47:
+ 431              	.L22:
+  65:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     {
+ 432              		.loc 1 65 5 view .LVU113
+ 433 017e 0220     		movs	r0, #2
+ 434 0180 A5E7     		b	.L5
+ 435              	.LVL48:
+ 436              	.L23:
+  65:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     {
+ 437              		.loc 1 65 5 view .LVU114
+ 438 0182 0220     		movs	r0, #2
+ 439 0184 A3E7     		b	.L5
+ 440              	.LVL49:
+ 441              	.L26:
+ 145:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****     	  }
+ 442              		.loc 1 145 23 view .LVU115
+ 443 0186 0D20     		movs	r0, #13
+ 444 0188 A1E7     		b	.L5
+ 445              	.L35:
+ 446 018a 00BF     		.align	2
+ 447              	.L34:
+ 448 018c 00000000 		.word	Mci
+ 449 0190 00000000 		.word	MCP_UserCallBack
+ 450              		.cfi_endproc
+ 451              	.LFE1437:
+ 453              		.section	.text.MCP_RegisterCallBack,"ax",%progbits
+ 454              		.align	1
+ 455              		.global	MCP_RegisterCallBack
+ 456              		.syntax unified
+ 457              		.thumb
+ARM GAS  /tmp/ccIrqQRp.s 			page 13
+
+
+ 458              		.thumb_func
+ 459              		.fpu fpv4-sp-d16
+ 461              	MCP_RegisterCallBack:
+ 462              	.LVL50:
+ 463              	.LFB1438:
+ 160:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+ 161:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** uint8_t MCP_RegisterCallBack (uint8_t callBackID, MCP_user_cb_t fctCB)
+ 162:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** {
+ 464              		.loc 1 162 1 is_stmt 1 view -0
+ 465              		.cfi_startproc
+ 466              		@ args = 0, pretend = 0, frame = 0
+ 467              		@ frame_needed = 0, uses_anonymous_args = 0
+ 468              		@ link register save eliminated.
+ 163:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 	uint8_t result;
+ 469              		.loc 1 163 2 view .LVU117
+ 164:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 
+ 165:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   if (callBackID < MCP_USER_CALLBACK_MAX)
+ 470              		.loc 1 165 3 view .LVU118
+ 471              		.loc 1 165 6 is_stmt 0 view .LVU119
+ 472 0000 0128     		cmp	r0, #1
+ 473 0002 01D9     		bls	.L39
+ 166:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   {
+ 167:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 	  MCP_UserCallBack[callBackID] = fctCB;
+ 168:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 	  result = MCP_CMD_OK;
+ 169:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   }
+ 170:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   else
+ 171:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   {
+ 172:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 	  result = MCP_CMD_NOK;
+ 474              		.loc 1 172 11 view .LVU120
+ 475 0004 0120     		movs	r0, #1
+ 476              	.LVL51:
+ 173:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   }
+ 174:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   return result;
+ 477              		.loc 1 174 3 is_stmt 1 view .LVU121
+ 175:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** }
+ 478              		.loc 1 175 1 is_stmt 0 view .LVU122
+ 479 0006 7047     		bx	lr
+ 480              	.LVL52:
+ 481              	.L39:
+ 167:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 	  result = MCP_CMD_OK;
+ 482              		.loc 1 167 4 is_stmt 1 view .LVU123
+ 167:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c **** 	  result = MCP_CMD_OK;
+ 483              		.loc 1 167 33 is_stmt 0 view .LVU124
+ 484 0008 024B     		ldr	r3, .L40
+ 485 000a 43F82010 		str	r1, [r3, r0, lsl #2]
+ 168:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   }
+ 486              		.loc 1 168 4 is_stmt 1 view .LVU125
+ 487              	.LVL53:
+ 168:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   }
+ 488              		.loc 1 168 11 is_stmt 0 view .LVU126
+ 489 000e 0020     		movs	r0, #0
+ 490              	.LVL54:
+ 168:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c ****   }
+ 491              		.loc 1 168 11 view .LVU127
+ 492 0010 7047     		bx	lr
+ 493              	.L41:
+ 494 0012 00BF     		.align	2
+ARM GAS  /tmp/ccIrqQRp.s 			page 14
+
+
+ 495              	.L40:
+ 496 0014 00000000 		.word	MCP_UserCallBack
+ 497              		.cfi_endproc
+ 498              	.LFE1438:
+ 500              		.text
+ 501              	.Letext0:
+ 502              		.file 2 "/usr/lib/gcc/arm-none-eabi/9.2.1/include/stdint.h"
+ 503              		.file 3 "Drivers/CMSIS/Include/core_cm4.h"
+ 504              		.file 4 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h"
+ 505              		.file 5 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h"
+ 506              		.file 6 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
+ 507              		.file 7 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h"
+ 508              		.file 8 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
+ 509              		.file 9 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h"
+ 510              		.file 10 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h"
+ 511              		.file 11 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h"
+ 512              		.file 12 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
+ 513              		.file 13 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcptl.h"
+ 514              		.file 14 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcp.h"
+ 515              		.file 15 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h"
+ 516              		.file 16 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h"
+ 517              		.file 17 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h"
+ 518              		.file 18 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h"
+ 519              		.file 19 "Inc/regular_conversion_manager.h"
+ 520              		.file 20 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ntc_temperature_sensor.h"
+ 521              		.file 21 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h"
+ 522              		.file 22 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h"
+ 523              		.file 23 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/revup_ctrl.h"
+ 524              		.file 24 "Inc/mc_interface.h"
+ 525              		.file 25 "Inc/mc_configuration_registers.h"
+ 526              		.file 26 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/bus_voltage_sensor.h"
+ 527              		.file 27 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/r_divider_bus_voltage_sensor.h"
+ 528              		.file 28 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pqd_motor_power_measurement.h"
+ 529              		.file 29 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc/r3_2_g4xx_pwm_curr_fdbk.h"
+ 530              		.file 30 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ramp_ext_mngr.h"
+ 531              		.file 31 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/circle_limitation.h"
+ 532              		.file 32 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_pll_speed_pos_fdbk.h"
+ 533              		.file 33 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_cordic_speed_pos_fdbk.h"
+ 534              		.file 34 "Inc/mc_config.h"
+ 535              		.file 35 "Inc/aspep.h"
+ 536              		.file 36 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mcpa.h"
+ 537              		.file 37 "Inc/mcp_config.h"
+ 538              		.file 38 "Inc/register_interface.h"
+ARM GAS  /tmp/ccIrqQRp.s 			page 15
+
+
+DEFINED SYMBOLS
+                            *ABS*:0000000000000000 mcp.c
+     /tmp/ccIrqQRp.s:18     .text.MCP_ReceivedPacket:0000000000000000 $t
+     /tmp/ccIrqQRp.s:26     .text.MCP_ReceivedPacket:0000000000000000 MCP_ReceivedPacket
+     /tmp/ccIrqQRp.s:124    .text.MCP_ReceivedPacket:0000000000000054 $d
+     /tmp/ccIrqQRp.s:205    .text.MCP_ReceivedPacket:00000000000000a8 $d
+     /tmp/ccIrqQRp.s:448    .text.MCP_ReceivedPacket:000000000000018c $d
+     /tmp/ccIrqQRp.s:454    .text.MCP_RegisterCallBack:0000000000000000 $t
+     /tmp/ccIrqQRp.s:461    .text.MCP_RegisterCallBack:0000000000000000 MCP_RegisterCallBack
+     /tmp/ccIrqQRp.s:496    .text.MCP_RegisterCallBack:0000000000000014 $d
+     /tmp/ccIrqQRp.s:181    .text.MCP_ReceivedPacket:000000000000008d $d
+     /tmp/ccIrqQRp.s:181    .text.MCP_ReceivedPacket:000000000000008e $t
+     /tmp/ccIrqQRp.s:231    .text.MCP_ReceivedPacket:00000000000000c1 $d
+     /tmp/ccIrqQRp.s:231    .text.MCP_ReceivedPacket:00000000000000c2 $t
+
+UNDEFINED SYMBOLS
+RI_SetRegCommandParser
+RI_GetRegCommandParser
+MCI_StartMotor
+MCI_StopMotor
+MCI_GetSTMState
+MCI_StopRamp
+MCI_FaultAcknowledged
+MCI_Clear_Iqdref
+Mci
+MCP_UserCallBack

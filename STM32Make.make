@@ -13,7 +13,7 @@
 ######################################
 # target
 ######################################
-TARGET = STM32_MCSDK
+TARGET = STM32_MCSDK_Project
 
 
 ######################################
@@ -64,7 +64,6 @@ Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_utils.c \
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/bus_voltage_sensor.c \
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/circle_limitation.c \
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/digital_output.c \
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/feed_forward_ctrl.c \
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c \
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcpa.c \
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ntc_temperature_sensor.c \
@@ -82,6 +81,7 @@ MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/sto_pll_speed_pos_fdbk.c \
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/virtual_speed_sensor.c \
 MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Src/r3_2_g4xx_pwm_curr_fdbk.c \
 Src/aspep.c \
+Src/debug_scope.c \
 Src/main.c \
 Src/mc_api.c \
 Src/mc_config.c \

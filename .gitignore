@@ -8,3 +8,5 @@ build/STM32_MCSDK.bin
 build/STM32_MCSDK.elf
 build/STM32_MCSDK.hex
 build/STM32_MCSDK.map
+*.zip
+*.ftl

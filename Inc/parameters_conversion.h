@@ -151,6 +151,9 @@
 #define M1_TEMP_SW_FILTER_BW_FACTOR      250u
 
 /* USER CODE END temperature */
+/* Flux Weakening - Feed forward */
+#define M1_VQD_SW_FILTER_BW_FACTOR       128u
+#define M1_VQD_SW_FILTER_BW_FACTOR_LOG LOG2(M1_VQD_SW_FILTER_BW_FACTOR)
 
 #define PQD_CONVERSION_FACTOR (float)((( 1.732 * ADC_REFERENCE_VOLTAGE ) /\
              ( RSHUNT * AMPLIFICATION_GAIN ))/65536.0f)

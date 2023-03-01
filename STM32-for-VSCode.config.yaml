@@ -162,6 +162,7 @@ sourceFiles:
   - MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/G4xx/Src/r3_2_g4xx_pwm_curr_fdbk.c
   - MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcp.c
   - MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/mcpa.c
+  - MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/feed_forward_ctrl.c
   - Src/**
   - Core/Src/**
   - Core/Lib/**

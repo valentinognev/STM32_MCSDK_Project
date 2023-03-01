@@ -1,0 +1,20 @@
+var searchData=
+[
+  ['m1_5fencoder_5fppr_0',['M1_ENCODER_PPR',['../pmsm__motor__parameters_8h.html#a4fd231de146638f99b09a63ca3423598',1,'pmsm_motor_parameters.h']]],
+  ['m1_5fovp_5fthreshold_5fhigh_1',['M1_OVP_THRESHOLD_HIGH',['../drive__parameters_8h.html#aeb7efc219152530224f193867587e5c1',1,'drive_parameters.h']]],
+  ['m1_5fovp_5fthreshold_5flow_2',['M1_OVP_THRESHOLD_LOW',['../drive__parameters_8h.html#a7bb04ad84150730d8189c455f0d7f9a3',1,'drive_parameters.h']]],
+  ['m1_5fss_5fmeas_5ferrors_5fbefore_5ffaults_3',['M1_SS_MEAS_ERRORS_BEFORE_FAULTS',['../drive__parameters_8h.html#a7f29e6800b554bb5cc8018dbbbf2990c',1,'drive_parameters.h']]],
+  ['m2_5fencoder_5fppr_4',['M2_ENCODER_PPR',['../pmsm__motor__parameters_8h.html#a4b34e583c99900ac6843d6e8227b611d',1,'pmsm_motor_parameters.h']]],
+  ['m2_5fovp_5fthreshold_5fhigh_5',['M2_OVP_THRESHOLD_HIGH',['../drive__parameters_8h.html#a69c53ac82686d7513b34d5b073087b73',1,'drive_parameters.h']]],
+  ['m2_5fovp_5fthreshold_5flow_6',['M2_OVP_THRESHOLD_LOW',['../drive__parameters_8h.html#a6e1648fe957155a28079cb14bcc06845',1,'drive_parameters.h']]],
+  ['m2_5fss_5fmeas_5ferrors_5fbefore_5ffaults_7',['M2_SS_MEAS_ERRORS_BEFORE_FAULTS',['../drive__parameters_8h.html#a38b60cf6a66d520a99727d4cb074b0b0',1,'drive_parameters.h']]],
+  ['max_5fapplication_5fspeed_5frpm_8',['MAX_APPLICATION_SPEED_RPM',['../drive__parameters_8h.html#a15d839791707a7d1d693520f5a7bd3bf',1,'drive_parameters.h']]],
+  ['max_5fapplication_5fspeed_5frpm2_9',['MAX_APPLICATION_SPEED_RPM2',['../drive__parameters_8h.html#ae8ad2dc925604dd96ea6af6ec67efc9b',1,'drive_parameters.h']]],
+  ['min_5fapplication_5fspeed_5frpm_10',['MIN_APPLICATION_SPEED_RPM',['../drive__parameters_8h.html#a1be74206a9d18194737f187a46b82666',1,'drive_parameters.h']]],
+  ['min_5fapplication_5fspeed_5frpm2_11',['MIN_APPLICATION_SPEED_RPM2',['../drive__parameters_8h.html#a35f73941f14f65bc043731c547704662',1,'drive_parameters.h']]],
+  ['min_5fdemag_5ftime_12',['MIN_DEMAG_TIME',['../drive__parameters_8h.html#aa9cee108532e7a58f88c3db75aa6e8e7',1,'drive_parameters.h']]],
+  ['motor_5fmax_5fspeed_5frpm_13',['MOTOR_MAX_SPEED_RPM',['../pmsm__motor__parameters_8h.html#aefe3e35332a80aa220a03708ff59ac52',1,'pmsm_motor_parameters.h']]],
+  ['motor_5fmax_5fspeed_5frpm2_14',['MOTOR_MAX_SPEED_RPM2',['../pmsm__motor__parameters_8h.html#a675fa389657dfcdf100dbdf022dbbe3b',1,'pmsm_motor_parameters.h']]],
+  ['motor_5fvoltage_5fconstant_15',['MOTOR_VOLTAGE_CONSTANT',['../pmsm__motor__parameters_8h.html#a028a05858ab4d75f611454bc13e66797',1,'pmsm_motor_parameters.h']]],
+  ['motor_5fvoltage_5fconstant2_16',['MOTOR_VOLTAGE_CONSTANT2',['../pmsm__motor__parameters_8h.html#a310fe313c8ceba3f598ed88d2b563143',1,'pmsm_motor_parameters.h']]]
+];

@@ -197,8 +197,9 @@ __weak void MCboot( MCI_Handle_t* pMCIList[NBR_OF_MOTORS] )
     FOCVars[M1].Iqdref = STC_GetDefaultIqdref(pSTC[M1]);
     FOCVars[M1].UserIdref = STC_GetDefaultIqdref(pSTC[M1]).d;
     MCI_Init(&Mci[M1], pSTC[M1], &FOCVars[M1],pwmcHandle[M1] );
-    MCI_ExecSpeedRamp(&Mci[M1],
-    STC_GetMecSpeedRefUnitDefault(pSTC[M1]),0); /*First command to STC*/
+    // MCI_ExecSpeedRamp(&Mci[M1],
+    // STC_GetMecSpeedRefUnitDefault(pSTC[M1]),0); /*First command to STC*/
+    MCI_ExecTorqueRamp(&Mci[M1], STC_GetDefaultIqdref(pSTC[M1]).q, 0);
     pMCIList[M1] = &Mci[M1];
 
     /* Applicative hook in MCBoot() */
@@ -599,11 +600,11 @@ __weak void TSK_MediumFrequencyTaskM1(void)
           {
             /* USER CODE BEGIN MediumFrequencyTask M1 2 */
             int8_t lastCommand = Mci[M1].lastCommand ;
-            lastCommand++;
-            lastCommand--;
-            if (Mci[M1].lastCommand == MCI_CMD_EXECSPEEDSIN)
-              Mci[M1].CommandState = MCI_COMMAND_NOT_ALREADY_EXECUTED;
-            mechanicalAngleCalculation(&Mci[M1]);
+            // lastCommand++;
+            // lastCommand--;
+            // if (Mci[M1].lastCommand == MCI_CMD_EXECSPEEDSIN)
+            //   Mci[M1].CommandState = MCI_COMMAND_NOT_ALREADY_EXECUTED;
+            // mechanicalAngleCalculation(&Mci[M1]);
             /* USER CODE END MediumFrequencyTask M1 2 */
 
             MCI_ExecBufferedCommands(&Mci[M1]);

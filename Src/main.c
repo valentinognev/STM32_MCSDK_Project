@@ -127,6 +127,8 @@ int main(void)
   LL_TIM_EnableCounter(TIM4);
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+
+  
   int32_t counter;
   while (1)
   {

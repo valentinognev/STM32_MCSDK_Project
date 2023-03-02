@@ -156,13 +156,13 @@
 /* USER CODE END PID_SPEED_INTEGRAL_INIT_DIV */
 
 #define SPD_DIFFERENTIAL_TERM_ENABLING DISABLE
-#define IQMAX                          2721
+#define IQMAX                          3721
 
 /* Default settings */
-#define DEFAULT_CONTROL_MODE           MCM_SPEED_MODE
+#define DEFAULT_CONTROL_MODE           MCM_TORQUE_MODE
 #define DEFAULT_TARGET_SPEED_RPM       1274
 #define DEFAULT_TARGET_SPEED_UNIT      (DEFAULT_TARGET_SPEED_RPM*SPEED_UNIT/U_RPM)
-#define DEFAULT_TORQUE_COMPONENT       0
+#define DEFAULT_TORQUE_COMPONENT       100
 #define DEFAULT_FLUX_COMPONENT         0
 
 /**************************    FIRMWARE PROTECTIONS SECTION   *****************/
@@ -203,7 +203,7 @@
 #define PHASE2_FINAL_SPEED_UNIT         (1416*SPEED_UNIT/U_RPM)
 #define PHASE2_FINAL_CURRENT           2721
 /* Phase 3 */
-#define PHASE3_DURATION                0 /*milliseconds */
+#define PHASE3_DURATION                5000 /*milliseconds */
 #define PHASE3_FINAL_SPEED_UNIT         (1416*SPEED_UNIT/U_RPM)
 #define PHASE3_FINAL_CURRENT           2721
 /* Phase 4 */

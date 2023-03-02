@@ -96,12 +96,12 @@ R3_2_Params_t R3_2_ParamsM1 =
                  , ( uint32_t )( 3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
                  , ( uint32_t )( 3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
                  },
-   .ADCConfig2 = { ( uint32_t )( 12<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
-                 , ( uint32_t )( VPOPAMP3<< ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
-                 , ( uint32_t )( VPOPAMP3<< ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+   .ADCConfig2 = { ( uint32_t )( VPOPAMP3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+                 , ( uint32_t )( 12<< ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+                 , ( uint32_t )( 12<< ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
                  , ( uint32_t )( 3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
                  , ( uint32_t )( 3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
-                 , ( uint32_t )( 12<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
+                 , ( uint32_t )( VPOPAMP3<<ADC_JSQR_JSQ1_Pos ) | (LL_ADC_INJ_TRIG_EXT_TIM1_TRGO & ~ADC_INJ_TRIG_EXT_EDGE_DEFAULT)
                  },
 
    .ADCDataReg1 = { ADC2

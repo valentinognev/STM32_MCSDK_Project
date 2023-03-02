@@ -412,19 +412,48 @@ __weak bool STC_ExecSin(SpeednTorqCtrl_Handle_t *pHandle, int16_t hMean, int16_t
   {
 #endif
 #ifdef CHECK_BOUNDARY
-    if ((int32_t)(hMean + hAmp) > (int32_t)pHandle->MaxAppPositiveMecSpeedUnit)
+    if (MCM_SPEED_MODE == pHandle->Mode)
     {
-      allowedRange = false;
-    }
-    else if (-(hMean + hAmp) < pHandle->MinAppNegativeMecSpeedUnit)
-    {
-      allowedRange = false;
-    }
-    else if ((int32_t)(hMean - hAmp) < (int32_t)pHandle->MinAppPositiveMecSpeedUnit)
-    {
-      if (-(hMean - hAmp) > pHandle->MaxAppNegativeMecSpeedUnit)
+      if ((int32_t)(hMean + hAmp) > (int32_t)pHandle->MaxAppPositiveMecSpeedUnit)
       {
         allowedRange = false;
+      }
+      else if (-(hMean + hAmp) < pHandle->MinAppNegativeMecSpeedUnit)
+      {
+        allowedRange = false;
+      }
+      else if ((int32_t)(hMean - hAmp) < (int32_t)pHandle->MinAppPositiveMecSpeedUnit)
+      {
+        if (-(hMean - hAmp) > pHandle->MaxAppNegativeMecSpeedUnit)
+        {
+          allowedRange = false;
+        }
+      }
+      else
+      {
+        /* Nothing to do */
+      }
+    }
+    else if (MCM_TORQUE_MODE == pHandle->Mode)
+    {
+      if ((int32_t)(hMean + hAmp) > (int32_t)pHandle->MaxPositiveTorque)
+      {
+        allowedRange = false;
+      }
+      else if (-(hMean + hAmp) < pHandle->MinNegativeTorque)
+      {
+        allowedRange = false;
+      }
+      else if ((int32_t)(hMean - hAmp) < (int32_t)pHandle->MinNegativeTorque)
+      {
+        if (-(hMean - hAmp) > pHandle->MaxPositiveTorque)
+        {
+          allowedRange = false;
+        }
+      }
+      else
+      {
+        /* Nothing to do */
       }
     }
     else
@@ -444,14 +473,20 @@ __weak bool STC_ExecSin(SpeednTorqCtrl_Handle_t *pHandle, int16_t hMean, int16_t
         angle += UINT16_MAX;
       Local_Vector_Components = MCM_Trig_Functions((int16_t)angle);
       int32_t SinAngleplusPhase = Local_Vector_Components.hCos;
-      pHandle->SpeedRefUnitExt = (int32_t)(hMean + hAmp * SinAngleplusPhase / 65536) * 65536;
-      int32_t desiredspeed = (int32_t)(hMean + hAmp * SinAngleplusPhase / 65536) * 65536;
+
+      if (MCM_SPEED_MODE == pHandle->Mode)
+      {
+        pHandle->SpeedRefUnitExt = (int32_t)(hMean + hAmp * SinAngleplusPhase / 65536) * 65536;
+        DebugScopeInsertData(&debugScopeM1, 2, pHandle->SpeedRefUnitExt / 65536);
+      }
+      else
+      {
+        pHandle->TorqueRef = (int32_t)(hMean + hAmp * SinAngleplusPhase / 65536) * 65536;
+        DebugScopeInsertData(&debugScopeM1, 2, pHandle->TorqueRef / 65536);
+      }
       // int32_t sensorSpeed = (int32_t)STO_M1._Super->hElSpeedDpp*MEDIUM_FREQUENCY_TASK_RATE/65536*10;
-      if (debugScopeM1.i2 == 100)
-        debugScopeM1.i2 = 100;
       int16_t encoder = LL_TIM_GetCounter(TIM4);
       DebugScopeInsertData(&debugScopeM1, 1, angle);
-      DebugScopeInsertData(&debugScopeM1, 2, desiredspeed / 65536);
       DebugScopeInsertData(&debugScopeM1, 3, *(EncRefM1.pRefElAngle));
       DebugScopeInsertData(&debugScopeM1, 4, encoder);
 

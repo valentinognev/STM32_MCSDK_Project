@@ -592,12 +592,20 @@ uint8_t RI_SetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t data
             }
             case MC_REG_SPEED_SIN:
             {
-              int32_t meanrpm = *(int32_t *)rawData; // cstat !MISRAC2012-Rule-11.3
+              int32_t meanrpm = *(int32_t *)rawData;     // cstat !MISRAC2012-Rule-11.3
               int16_t amprpm = *(uint16_t *)&rawData[4]; // cstat !MISRAC2012-Rule-11.3
               int16_t phase = *(uint16_t *)&rawData[6];  // cstat !MISRAC2012-Rule-11.3
               int16_t meanfreq = (int16_t)((meanrpm * SPEED_UNIT) / U_RPM);
               int16_t ampfreq = (int16_t)((amprpm * SPEED_UNIT) / U_RPM);
               MCI_ExecSpeedSin(pMCIN, meanfreq, ampfreq, phase);
+              break;
+            }
+            case MC_REG_TORQUE_SIN:
+            {
+              int32_t meanTorque = *(int32_t *)rawData;     // cstat !MISRAC2012-Rule-11.3
+              int16_t ampTorque = *(uint16_t *)&rawData[4]; // cstat !MISRAC2012-Rule-11.3
+              int16_t phase = *(uint16_t *)&rawData[6];  // cstat !MISRAC2012-Rule-11.3
+              MCI_ExecTorqueSin(pMCIN, meanTorque, ampTorque, phase);
               break;
             }
             case MC_REG_TORQUE_RAMP:

@@ -59,6 +59,7 @@ typedef enum
   MCI_CMD_EXECTORQUERAMP,       /*!< ExecTorqueRamp command coming from the user.*/
   MCI_CMD_SETCURRENTREFERENCES, /*!< SetCurrentReferences command coming from the user.*/
   MCI_CMD_EXECSPEEDSIN,         /*!< ExecSpeedSin command coming from the user.*/
+  MCI_CMD_EXECTORQUESIN,         /*!< ExecSpeedSin command coming from the user.*/
   MCI_CMD_SETOPENLOOPCURRENT,   /*!< set open loop current .*/
   MCI_CMD_SETOPENLOOPVOLTAGE,   /*!< set open loop voltage .*/
 } MCI_UserCommands_t;
@@ -132,12 +133,13 @@ typedef struct
   PWMC_Handle_t *pPWM;    /*!< Pointer to PWM handle structure.*/
   MCI_UserCommands_t lastCommand; /*!< Last command coming from the user.*/
   int16_t hFinalSpeed;        /*!< Final speed of last ExecSpeedRamp command.*/
-  int16_t hSpeedPhase;
-  int16_t hSpeedAmp;
-  int16_t hFinalTorque;       /*!< Final torque of last ExecTorqueRamp
-                                   command.*/
-  qd_t Iqdref;     /*!< Current component of last
-                                   SetCurrentReferences command.*/
+  int16_t hSpeedPhase;        /*!< Phase angle Final speed of last ExecSpeedRamp command.*/
+  int16_t hSpeedAmp;          /*!< Amplitude Final speed of last ExecSpeedRamp command.*/
+  int16_t hFinalTorque;       /*!< Final torque of last ExecTorqueRamp command.*/
+  int16_t hTorquePhase;       /*!< Phase angle Final torque of last ExecTorqueRamp command.*/
+  int16_t hTorqueAmp;        /*!< Amplitude Final torque of last ExecTorqueRamp command.*/
+  qd_t Iqdref;                /*!< Current component of last
+                          SetCurrentReferences command.*/
   uint16_t hDurationms;       /*!< Duration in ms of last ExecSpeedRamp or
                                    ExecTorqueRamp command.*/
  MCI_DirectCommands_t DirectCommand;
@@ -154,6 +156,7 @@ void MCI_Init( MCI_Handle_t * pHandle, SpeednTorqCtrl_Handle_t * pSTC, pFOCVars_
 void MCI_ExecBufferedCommands( MCI_Handle_t * pHandle );
 void MCI_ExecSpeedRamp( MCI_Handle_t * pHandle,  int16_t hFinalSpeed, uint16_t hDurationms );
 void MCI_ExecSpeedSin( MCI_Handle_t * pHandle,  const int16_t hFinalSpeedMean, const uint16_t hFinalSpeedAmp, const int16_t hPhase );
+void MCI_ExecTorqueSin(MCI_Handle_t *pHandle, const int16_t hFinalTorqueMean, const uint16_t hFinalTorqueAmp, const int16_t hPhase);
 void MCI_ExecSpeedRamp_F( MCI_Handle_t * pHandle, const float FinalSpeed, uint16_t hDurationms );
 
 void MCI_ExecTorqueRamp( MCI_Handle_t * pHandle,  int16_t hFinalTorque, uint16_t hDurationms );

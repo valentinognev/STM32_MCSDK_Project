@@ -142,6 +142,27 @@ __weak void MCI_ExecSpeedSin( MCI_Handle_t * pHandle,  const int16_t hFinalSpeed
 #endif
 }
 
+__weak void MCI_ExecTorqueSin(MCI_Handle_t *pHandle, const int16_t hFinalTorqueMean, const uint16_t hFinalTorqueAmp, const int16_t hPhase)
+{
+#ifdef NULL_PTR_MC_INT
+  if (MC_NULL == pHandle)
+  {
+    /* Nothing to do */
+  }
+  else
+  {
+#endif
+    pHandle->lastCommand = MCI_CMD_EXECTORQUESIN;
+    pHandle->hFinalSpeed = hFinalTorqueMean;
+    pHandle->hSpeedAmp = hFinalTorqueAmp;
+    pHandle->hSpeedPhase = hPhase;
+    pHandle->CommandState = MCI_COMMAND_NOT_ALREADY_EXECUTED;
+    pHandle->LastModalitySetByUser = MCM_TORQUE_MODE;
+#ifdef NULL_PTR_MC_INT
+  }
+#endif
+}
+
 /**
   * @brief  This is a buffered command to set a motor speed ramp. This commands
   *         don't become active as soon as it is called but it will be executed
@@ -673,6 +694,14 @@ __weak void MCI_ExecBufferedCommands(MCI_Handle_t *pHandle)
           pHandle->pFOCVars->bDriveInput = INTERNAL;
           STC_SetControlMode(pHandle->pSTC, MCM_TORQUE_MODE);
           commandHasBeenExecuted = STC_ExecRamp(pHandle->pSTC, pHandle->hFinalTorque, pHandle->hDurationms);
+          break;
+        }
+
+        case MCI_CMD_EXECTORQUESIN:
+        {
+          pHandle->pFOCVars->bDriveInput = INTERNAL;
+          STC_SetControlMode(pHandle->pSTC, MCM_TORQUE_MODE);
+          commandHasBeenExecuted = STC_ExecSin(pHandle->pSTC, pHandle->hFinalTorque, pHandle->hTorqueAmp, pHandle->hTorquePhase);
           break;
         }
 

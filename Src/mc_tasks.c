@@ -599,15 +599,15 @@ __weak void TSK_MediumFrequencyTaskM1(void)
           else
           {
             /* USER CODE BEGIN MediumFrequencyTask M1 2 */
-            int8_t lastCommand = Mci[M1].lastCommand ;
-            // lastCommand++;
-            // lastCommand--;
-            // if (Mci[M1].lastCommand == MCI_CMD_EXECSPEEDSIN)
-            //   Mci[M1].CommandState = MCI_COMMAND_NOT_ALREADY_EXECUTED;
-            // mechanicalAngleCalculation(&Mci[M1]);
+              int8_t lastCommand = Mci[M1].lastCommand ;
+              lastCommand++;
+              lastCommand--;
+              if (Mci[M1].lastCommand == MCI_CMD_EXECSPEEDSIN || Mci[M1].lastCommand ==MCI_CMD_EXECTORQUESIN)
+                Mci[M1].CommandState = MCI_COMMAND_NOT_ALREADY_EXECUTED;
+              mechanicalAngleCalculation(&Mci[M1]);
             /* USER CODE END MediumFrequencyTask M1 2 */
 
-            MCI_ExecBufferedCommands(&Mci[M1]);
+              MCI_ExecBufferedCommands(&Mci[M1]);
 
               FOC_CalcCurrRef(M1);
 

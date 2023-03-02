@@ -76,7 +76,11 @@ __weak void MCI_Init(MCI_Handle_t *pHandle, SpeednTorqCtrl_Handle_t *pSTC, pFOCV
     /* Buffer related initialization */
     pHandle->lastCommand = MCI_NOCOMMANDSYET;
     pHandle->hFinalSpeed = 0;
+    pHandle->hSpeedAmp = 0;
+    pHandle->hSpeedPhase = 0;
     pHandle->hFinalTorque = 0;
+    pHandle->hTorqueAmp = 0;
+    pHandle->hTorquePhase = 0;
     pHandle->hDurationms = 0;
     pHandle->CommandState = MCI_BUFFER_EMPTY;
     pHandle->DirectCommand = MCI_NO_COMMAND;
@@ -153,9 +157,9 @@ __weak void MCI_ExecTorqueSin(MCI_Handle_t *pHandle, const int16_t hFinalTorqueM
   {
 #endif
     pHandle->lastCommand = MCI_CMD_EXECTORQUESIN;
-    pHandle->hFinalSpeed = hFinalTorqueMean;
-    pHandle->hSpeedAmp = hFinalTorqueAmp;
-    pHandle->hSpeedPhase = hPhase;
+    pHandle->hFinalTorque = hFinalTorqueMean;
+    pHandle->hTorqueAmp = hFinalTorqueAmp;
+    pHandle->hTorquePhase = hPhase;
     pHandle->CommandState = MCI_COMMAND_NOT_ALREADY_EXECUTED;
     pHandle->LastModalitySetByUser = MCM_TORQUE_MODE;
 #ifdef NULL_PTR_MC_INT

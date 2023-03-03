@@ -147,11 +147,6 @@ __weak void MCboot( MCI_Handle_t* pMCIList[NBR_OF_MOTORS] )
     /******************************************************/
     STC_Init(pSTC[M1],&PIDSpeedHandle_M1, &STO_PLL_M1._Super);
 
-    /******************************************************/
-    /*   Auxiliary speed sensor component initialization  */
-    /******************************************************/
-    STO_CR_Init (&STO_CR_M1);
-
     /****************************************************/
     /*   Virtual speed sensor component initialization  */
     /****************************************************/
@@ -370,7 +365,6 @@ __weak void TSK_MediumFrequencyTaskM1(void)
   /* USER CODE END MediumFrequencyTask M1 0 */
 
   int16_t wAux = 0;
-  (void)STO_CR_CalcAvrgMecSpeedUnit(&STO_CR_M1, &wAux);
   bool IsSpeedReliable = STO_PLL_CalcAvrgMecSpeedUnit(&STO_PLL_M1, &wAux);
   PQD_CalcElMotorPower(pMPM[M1]);
 
@@ -459,7 +453,6 @@ __weak void TSK_MediumFrequencyTaskM1(void)
               FOCVars[M1].bDriveInput = EXTERNAL;
               STC_SetSpeedSensor( pSTC[M1], &VirtualSpeedSensorM1._Super );
               STO_PLL_Clear(&STO_PLL_M1);
-              STO_CR_Clear(&STO_CR_M1);
               FOC_Clear( M1 );
 
               {
@@ -877,8 +870,6 @@ __weak uint8_t TSK_HighFrequencyTask(void)
   uint8_t bMotorNbr = 0;
 
   Observer_Inputs_t STO_Inputs; /*  only if sensorless main*/
-  Observer_Inputs_t STO_aux_Inputs; /*  only if sensorless aux*/
-  STO_aux_Inputs.Valfa_beta = FOCVars[M1].Valphabeta;  /* only if sensorless*/
 
   STO_Inputs.Valfa_beta = FOCVars[M1].Valphabeta;  /* only if sensorless*/
   if (SWITCH_OVER == Mci[M1].State)
@@ -916,10 +907,6 @@ __weak uint8_t TSK_HighFrequencyTask(void)
       int16_t hObsAngle = SPD_GetElAngle(&STO_PLL_M1._Super);
       (void)VSS_CalcElAngle(&VirtualSpeedSensorM1, &hObsAngle);
     }
-    STO_aux_Inputs.Ialfa_beta = FOCVars[M1].Ialphabeta; /*  only if sensorless*/
-    STO_aux_Inputs.Vbus = VBS_GetAvBusVoltage_d(&(BusVoltageSensor_M1._Super)); /*  only for sensorless*/
-    (void)STO_CR_CalcElAngle (&STO_CR_M1, &STO_aux_Inputs);
-	STO_CR_CalcAvrgElSpeedDpp (&STO_CR_M1);
     /* USER CODE BEGIN HighFrequencyTask SINGLEDRIVE_3 */
 
     /* USER CODE END HighFrequencyTask SINGLEDRIVE_3 */

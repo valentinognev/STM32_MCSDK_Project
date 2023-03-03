@@ -77,7 +77,7 @@ void Error_Handler(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/
-#define ENC_PULSE_NBR 1999
+#define ENC_PULSE_NBR 500
 #define M1_ENC_IC_FILTER 12
 #define M1_PWM_UL_Pin LL_GPIO_PIN_13
 #define M1_PWM_UL_GPIO_Port GPIOC

@@ -121,41 +121,6 @@ void EXTI9_5_IRQHandler(void)
   /* USER CODE END EXTI9_5_IRQn 1 */
 }
 
-/**
-  * @brief  This function handles TIMx global interrupt request for M1 Speed Sensor.
-  * @param  None
-  * @retval None
-  */
-void TIM4_IRQHandler(void)
-{
-  /* USER CODE BEGIN SPD_TIM_M1_IRQn 0 */
-
-  /* USER CODE END SPD_TIM_M1_IRQn 0 */
-
- /* Encoder Timer UPDATE IT is dynamicaly enabled/disabled, checking enable state is required */
-  if (LL_TIM_IsEnabledIT_UPDATE (TIM4) != 0U)
-  {
-    if (LL_TIM_IsActiveFlag_UPDATE (TIM4) != 0U)
-    {
-      LL_TIM_ClearFlag_UPDATE(TIM4);
-//      (void)ENC_IRQHandler(&ENCODER_M1);
-      /* USER CODE BEGIN M1 ENCODER_Update */
-
-      /* USER CODE END M1 ENCODER_Update   */
-    }
-    else
-    {
-      /* No other IT to manage for encoder config */
-    }
-  }
-  else
-  {
-    /* No other IT to manage for encoder config */
-  }
-  /* USER CODE BEGIN SPD_TIM_M1_IRQn 1 */
-
-  /* USER CODE END SPD_TIM_M1_IRQn 1 */
-}
 /* USER CODE BEGIN 1 */
 
 /* USER CODE END 1 */

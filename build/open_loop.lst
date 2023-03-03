@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccVs4uIN.s 			page 1
+ARM GAS  /tmp/ccKL4nML.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -28,86 +28,89 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
   26              	OL_Init:
   27              	.LVL0:
   28              	.LFB1435:
-  29              		.file 1 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c"
-   1:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
-   2:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   ******************************************************************************
-   3:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @file    open_loop.c
-   4:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @author  Motor Control SDK Team, ST Microelectronics
-   5:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief   This file provides firmware functions that implement the features
-   6:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *          of the Open Loop component.
-   7:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *
-   8:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   ******************************************************************************
-   9:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @attention
-  10:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *
-  11:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
-  12:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * All rights reserved.</center></h2>
-  13:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *
-  14:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * This software component is licensed by ST under Ultimate Liberty license
-  15:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
-  16:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * the License. You may obtain a copy of the License at:
-  17:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *                             www.st.com/SLA0044
-  18:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *
-  19:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   ******************************************************************************
-  20:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
-  21:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
-  22:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /* Includes ------------------------------------------------------------------*/
-  23:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #include "open_loop.h"
-  24:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
-  25:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /** @addtogroup MCSDK
-  26:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @{
-  27:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
-  28:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
-  29:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /** @defgroup OpenLoop Open Loop Control
-ARM GAS  /tmp/ccVs4uIN.s 			page 2
+  29              		.file 1 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c"
+   1:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
+   2:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   ******************************************************************************
+   3:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @file    open_loop.c
+   4:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @author  Motor Control SDK Team, ST Microelectronics
+   5:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief   This file provides firmware functions that implement the features
+   6:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *          of the Open Loop component.
+   7:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *
+   8:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   ******************************************************************************
+   9:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @attention
+  10:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *
+  11:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * <h2><center>&copy; Copyright (c) 2022 STMicroelectronics.
+  12:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * All rights reserved.</center></h2>
+  13:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *
+  14:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * This software component is licensed by ST under Ultimate Liberty license
+  15:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * SLA0044, the "License"; You may not use this file except in compliance with
+  16:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * the License. You may obtain a copy of the License at:
+  17:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *                             www.st.com/SLA0044
+  18:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *
+  19:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   ******************************************************************************
+  20:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @ingroup OpenLoop
+  21:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
+  22:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   
+  23:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /* Includes ------------------------------------------------------------------*/
+  24:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #include "open_loop.h"
+  25:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
+  26:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /** @addtogroup MCSDK
+  27:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @{
+  28:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
+  29:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
+ARM GAS  /tmp/ccKL4nML.s 			page 2
 
 
-  30:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief Open Loop component of the Motor Control SDK
-  31:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *
-  32:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * Used to run the motor in open loop mode.
-  33:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *
-  34:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @todo Document the Bus Open Loop "module".
-  35:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *
-  36:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @{
-  37:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
-  38:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
-  39:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /* Private defines -----------------------------------------------------------*/
-  40:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
-  41:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
-  42:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief  Initialize OpenLoop variables.
-  43:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pHandle: Pointer on Handle structure of OpenLoop feature.
-  44:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pVSS: Pointer on virtual speed sensor structure.
-  45:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *  @retval none
-  46:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
-  47:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** __weak void OL_Init(OpenLoop_Handle_t *pHandle, VirtualSpeedSensor_Handle_t *pVSS)
-  48:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** {
-  30              		.loc 1 48 1 view -0
+  30:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /** @defgroup OpenLoop Open Loop Control
+  31:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief Open Loop component of the Motor Control SDK
+  32:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *
+  33:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * Open Loop component allows to run the motor in open loop voltage mode. In that mode, the phase 
+  34:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * forced independently from the measured currents. To do so, the routine OL_VqdConditioning() ove
+  35:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * voltage command Vdq in the FOC current controller task. The voltage level to apply can be set d
+  36:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * user, with OL_UpdateVoltage(), or computed by OL_Calc() if the V/F mode is selected. In that mo
+  37:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * level depends on the speed, the slope and the offset selected by the user. 
+  38:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *
+  39:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @{
+  40:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
+  41:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
+  42:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /* Private defines -----------------------------------------------------------*/
+  43:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
+  44:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
+  45:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief  Initializes OpenLoop variables.it should be called 
+  46:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *         once during Motor Control initialization.
+  47:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pHandle: Pointer on Handle structure of OpenLoop feature.
+  48:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pVSS: Pointer on virtual speed sensor structure.
+  49:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
+  50:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** __weak void OL_Init(OpenLoop_Handle_t *pHandle, VirtualSpeedSensor_Handle_t *pVSS)
+  51:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** {
+  30              		.loc 1 51 1 view -0
   31              		.cfi_startproc
   32              		@ args = 0, pretend = 0, frame = 0
   33              		@ frame_needed = 0, uses_anonymous_args = 0
   34              		@ link register save eliminated.
-  49:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
-  50:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   if (MC_NULL == pHandle)
-  51:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
-  52:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     /* Nothing to do */
-  53:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
-  54:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   else
-  55:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
-  56:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
-  57:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     pHandle->hVoltage = pHandle->hDefaultVoltage;
-  35              		.loc 1 57 5 view .LVU1
-  36              		.loc 1 57 32 is_stmt 0 view .LVU2
+  52:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
+  53:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   if (MC_NULL == pHandle)
+  54:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
+  55:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     /* Nothing to do */
+  56:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
+  57:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   else
+  58:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
+  59:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
+  60:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     pHandle->hVoltage = pHandle->hDefaultVoltage;
+  35              		.loc 1 60 5 view .LVU1
+  36              		.loc 1 60 32 is_stmt 0 view .LVU2
   37 0000 B0F90030 		ldrsh	r3, [r0]
-  38              		.loc 1 57 23 view .LVU3
+  38              		.loc 1 60 23 view .LVU3
   39 0004 0381     		strh	r3, [r0, #8]	@ movhi
-  58:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     pHandle->pVSS = pVSS;
-  40              		.loc 1 58 5 is_stmt 1 view .LVU4
-  41              		.loc 1 58 19 is_stmt 0 view .LVU5
+  61:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     pHandle->pVSS = pVSS;
+  40              		.loc 1 61 5 is_stmt 1 view .LVU4
+  41              		.loc 1 61 19 is_stmt 0 view .LVU5
   42 0006 C160     		str	r1, [r0, #12]
-  59:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
-  60:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
-  61:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
-  62:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** }
-  43              		.loc 1 62 1 view .LVU6
+  62:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
+  63:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
+  64:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
+  65:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** }
+  43              		.loc 1 65 1 view .LVU6
   44 0008 7047     		bx	lr
   45              		.cfi_endproc
   46              	.LFE1435:
@@ -115,72 +118,73 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
   49              		.align	1
   50              		.weak	OL_VqdConditioning
   51              		.syntax unified
+ARM GAS  /tmp/ccKL4nML.s 			page 3
+
+
   52              		.thumb
   53              		.thumb_func
   54              		.fpu fpv4-sp-d16
-ARM GAS  /tmp/ccVs4uIN.s 			page 3
-
-
   56              	OL_VqdConditioning:
   57              	.LVL1:
   58              	.LFB1436:
-  63:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
-  64:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
-  65:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief  Set Vqd according to open loop phase voltage.
-  66:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pHandle: Pointer on Handle structure of OpenLoop feature.
-  67:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *  @retval qd_t Vqd conditioned values.
-  68:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
-  69:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** __weak qd_t OL_VqdConditioning(const OpenLoop_Handle_t *pHandle)
-  70:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** {
-  59              		.loc 1 70 1 is_stmt 1 view -0
+  66:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
+  67:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
+  68:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief  Sets Vqd according to open loop phase voltage. It should be 
+  69:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *         called during current controller task.
+  70:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pHandle: Pointer on Handle structure of OpenLoop feature.
+  71:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @retval qd_t Vqd conditioned values.
+  72:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
+  73:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** __weak qd_t OL_VqdConditioning(const OpenLoop_Handle_t *pHandle)
+  74:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** {
+  59              		.loc 1 74 1 is_stmt 1 view -0
   60              		.cfi_startproc
   61              		@ args = 0, pretend = 0, frame = 8
   62              		@ frame_needed = 0, uses_anonymous_args = 0
   63              		@ link register save eliminated.
-  64              		.loc 1 70 1 is_stmt 0 view .LVU8
+  64              		.loc 1 74 1 is_stmt 0 view .LVU8
   65 0000 82B0     		sub	sp, sp, #8
   66              		.cfi_def_cfa_offset 8
-  71:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   qd_t Vqd;
-  67              		.loc 1 71 3 is_stmt 1 view .LVU9
-  72:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   Vqd.d = 0;
-  68              		.loc 1 72 3 view .LVU10
-  69              		.loc 1 72 9 is_stmt 0 view .LVU11
+  75:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   qd_t Vqd;
+  67              		.loc 1 75 3 is_stmt 1 view .LVU9
+  76:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   Vqd.d = 0;
+  68              		.loc 1 76 3 view .LVU10
+  69              		.loc 1 76 9 is_stmt 0 view .LVU11
   70 0002 0023     		movs	r3, #0
   71 0004 ADF80230 		strh	r3, [sp, #2]	@ movhi
-  73:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
-  74:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   Vqd.q = ((MC_NULL == pHandle) ? 0 : pHandle->hVoltage);
-  75:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #else
-  76:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   Vqd.q = (pHandle->hVoltage);
-  72              		.loc 1 76 3 is_stmt 1 view .LVU12
-  73              		.loc 1 76 19 is_stmt 0 view .LVU13
+  77:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
+  78:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   Vqd.q = ((MC_NULL == pHandle) ? 0 : pHandle->hVoltage);
+  79:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #else
+  80:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   Vqd.q = (pHandle->hVoltage);
+  72              		.loc 1 80 3 is_stmt 1 view .LVU12
+  73              		.loc 1 80 19 is_stmt 0 view .LVU13
   74 0008 B0F90820 		ldrsh	r2, [r0, #8]
-  75              		.loc 1 76 9 view .LVU14
+  75              		.loc 1 80 9 view .LVU14
   76 000c ADF80020 		strh	r2, [sp]	@ movhi
-  77:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
-  78:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   return (Vqd);
-  77              		.loc 1 78 3 is_stmt 1 view .LVU15
-  78              		.loc 1 78 10 is_stmt 0 view .LVU16
+  81:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
+  82:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   return (Vqd);
+  77              		.loc 1 82 3 is_stmt 1 view .LVU15
+  78              		.loc 1 82 10 is_stmt 0 view .LVU16
   79 0010 009A     		ldr	r2, [sp]
   80 0012 1846     		mov	r0, r3
   81              	.LVL2:
-  82              		.loc 1 78 10 view .LVU17
+  82              		.loc 1 82 10 view .LVU17
   83 0014 93B2     		uxth	r3, r2
   84 0016 63F30F00 		bfi	r0, r3, #0, #16
   85 001a 120C     		lsrs	r2, r2, #16
   86 001c 62F31F40 		bfi	r0, r2, #16, #16
-  79:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** }
-  87              		.loc 1 79 1 view .LVU18
+  83:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** }
+  87              		.loc 1 83 1 view .LVU18
   88 0020 02B0     		add	sp, sp, #8
   89              		.cfi_def_cfa_offset 0
   90              		@ sp needed
   91 0022 7047     		bx	lr
+ARM GAS  /tmp/ccKL4nML.s 			page 4
+
+
   92              		.cfi_endproc
   93              	.LFE1436:
   95              		.section	.text.OL_UpdateVoltage,"ax",%progbits
   96              		.align	1
-ARM GAS  /tmp/ccVs4uIN.s 			page 4
-
-
   97              		.weak	OL_UpdateVoltage
   98              		.syntax unified
   99              		.thumb
@@ -189,37 +193,36 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
  103              	OL_UpdateVoltage:
  104              	.LVL3:
  105              	.LFB1437:
-  80:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
-  81:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
-  82:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief  Allow to set new open loop phase voltage.
-  83:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pHandle: Pointer on Handle structure of OpenLoop feature.
-  84:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  hNewVoltage: New voltage value to apply.
-  85:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @retval None
-  86:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
-  87:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** __weak void OL_UpdateVoltage(OpenLoop_Handle_t *pHandle, int16_t hNewVoltage)
-  88:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** {
- 106              		.loc 1 88 1 is_stmt 1 view -0
+  84:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
+  85:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
+  86:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief  Sets new open loop phase voltage.
+  87:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pHandle: Pointer on Handle structure of OpenLoop feature.
+  88:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  hNewVoltage: New voltage value to apply.
+  89:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
+  90:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** __weak void OL_UpdateVoltage(OpenLoop_Handle_t *pHandle, int16_t hNewVoltage)
+  91:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** {
+ 106              		.loc 1 91 1 is_stmt 1 view -0
  107              		.cfi_startproc
  108              		@ args = 0, pretend = 0, frame = 0
  109              		@ frame_needed = 0, uses_anonymous_args = 0
  110              		@ link register save eliminated.
-  89:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
-  90:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   if (MC_NULL == pHandle)
-  91:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
-  92:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     /* Nothing to do */
-  93:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
-  94:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   else
-  95:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
-  96:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
-  97:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     pHandle->hVoltage = hNewVoltage;
- 111              		.loc 1 97 5 view .LVU20
- 112              		.loc 1 97 23 is_stmt 0 view .LVU21
+  92:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
+  93:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   if (MC_NULL == pHandle)
+  94:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
+  95:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     /* Nothing to do */
+  96:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
+  97:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   else
+  98:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
+  99:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
+ 100:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     pHandle->hVoltage = hNewVoltage;
+ 111              		.loc 1 100 5 view .LVU20
+ 112              		.loc 1 100 23 is_stmt 0 view .LVU21
  113 0000 0181     		strh	r1, [r0, #8]	@ movhi
-  98:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
-  99:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
- 100:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
- 101:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** }
- 114              		.loc 1 101 1 view .LVU22
+ 101:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
+ 102:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
+ 103:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
+ 104:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** }
+ 114              		.loc 1 104 1 view .LVU22
  115 0002 7047     		bx	lr
  116              		.cfi_endproc
  117              	.LFE1437:
@@ -233,37 +236,36 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
  127              	OL_GetVoltage:
  128              	.LVL4:
  129              	.LFB1438:
- 102:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
- 103:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
- 104:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief  get open loop phase voltage.
- 105:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pHandle: Pointer on Handle structure of OpenLoop feature.
- 106:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @retval None
-ARM GAS  /tmp/ccVs4uIN.s 			page 5
+ 105:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
+ 106:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
+ARM GAS  /tmp/ccKL4nML.s 			page 5
 
 
- 107:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
- 108:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** __weak int16_t OL_GetVoltage(OpenLoop_Handle_t *pHandle)
- 109:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** {
- 130              		.loc 1 109 1 is_stmt 1 view -0
+ 107:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief  Gets open loop phase voltage.
+ 108:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pHandle: Pointer on Handle structure of OpenLoop feature.
+ 109:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
+ 110:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** __weak int16_t OL_GetVoltage(OpenLoop_Handle_t *pHandle)
+ 111:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** {
+ 130              		.loc 1 111 1 is_stmt 1 view -0
  131              		.cfi_startproc
  132              		@ args = 0, pretend = 0, frame = 0
  133              		@ frame_needed = 0, uses_anonymous_args = 0
  134              		@ link register save eliminated.
- 110:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   int16_t hVoltage;
- 135              		.loc 1 110 3 view .LVU24
- 111:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
- 112:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   hVoltage = ((MC_NULL == pHandle) ? 0 : pHandle->hVoltage);
- 113:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #else
- 114:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   hVoltage = pHandle->hVoltage;
- 136              		.loc 1 114 3 view .LVU25
- 115:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
- 116:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   return (hVoltage);
- 137              		.loc 1 116 3 view .LVU26
- 117:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** }
- 138              		.loc 1 117 1 is_stmt 0 view .LVU27
+ 112:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   int16_t hVoltage;
+ 135              		.loc 1 112 3 view .LVU24
+ 113:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
+ 114:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   hVoltage = ((MC_NULL == pHandle) ? 0 : pHandle->hVoltage);
+ 115:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #else
+ 116:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   hVoltage = pHandle->hVoltage;
+ 136              		.loc 1 116 3 view .LVU25
+ 117:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
+ 118:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   return (hVoltage);
+ 137              		.loc 1 118 3 view .LVU26
+ 119:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** }
+ 138              		.loc 1 119 1 is_stmt 0 view .LVU27
  139 0000 B0F90800 		ldrsh	r0, [r0, #8]
  140              	.LVL5:
- 141              		.loc 1 117 1 view .LVU28
+ 141              		.loc 1 119 1 view .LVU28
  142 0004 7047     		bx	lr
  143              		.cfi_endproc
  144              	.LFE1438:
@@ -277,93 +279,93 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
  154              	OL_Calc:
  155              	.LVL6:
  156              	.LFB1439:
- 118:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
- 119:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
- 120:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief  Compute phase voltage to apply according to average mechanical speed (V/F Mode).
- 121:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pHandle: Pointer on Handle structure of OpenLoop feature.
- 122:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @retval None
- 123:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
- 124:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** __weak void OL_Calc(OpenLoop_Handle_t *pHandle)
- 125:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** {
- 157              		.loc 1 125 1 is_stmt 1 view -0
+ 120:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
+ 121:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
+ 122:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief  Computes phase voltage to apply according to average mechanical speed (V/F Mode).
+ 123:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   *         It should be called during background task.
+ 124:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pHandle: Pointer on Handle structure of OpenLoop feature.
+ 125:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
+ 126:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** __weak void OL_Calc(OpenLoop_Handle_t *pHandle)
+ 127:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** {
+ 157              		.loc 1 127 1 is_stmt 1 view -0
  158              		.cfi_startproc
  159              		@ args = 0, pretend = 0, frame = 0
  160              		@ frame_needed = 0, uses_anonymous_args = 0
  161              		@ link register save eliminated.
- 126:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
- 127:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   if (MC_NULL == pHandle)
- 128:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
- 129:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     /* Nothing to do */
- 130:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
- 131:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   else
- 132:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
- 133:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
-ARM GAS  /tmp/ccVs4uIN.s 			page 6
+ 128:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
+ 129:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   if (MC_NULL == pHandle)
+ 130:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
+ 131:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     /* Nothing to do */
+ 132:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
+ 133:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   else
+ARM GAS  /tmp/ccKL4nML.s 			page 6
 
 
- 134:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     if (true ==  pHandle->VFMode)
- 162              		.loc 1 134 5 view .LVU30
- 163              		.loc 1 134 25 is_stmt 0 view .LVU31
+ 134:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
+ 135:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
+ 136:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     if (true ==  pHandle->VFMode)
+ 162              		.loc 1 136 5 view .LVU30
+ 163              		.loc 1 136 25 is_stmt 0 view .LVU31
  164 0000 8378     		ldrb	r3, [r0, #2]	@ zero_extendqisi2
- 165              		.loc 1 134 8 view .LVU32
+ 165              		.loc 1 136 8 view .LVU32
  166 0002 ABB1     		cbz	r3, .L6
- 135:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     {
- 136:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       /* V/F mode true means enabled */
- 137:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       if (pHandle->pVSS->_Super.hAvrMecSpeedUnit >= 0)
- 167              		.loc 1 137 7 is_stmt 1 view .LVU33
- 168              		.loc 1 137 18 is_stmt 0 view .LVU34
+ 137:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     {
+ 138:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       /* V/F mode true means enabled */
+ 139:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       if (pHandle->pVSS->_Super.hAvrMecSpeedUnit >= 0)
+ 167              		.loc 1 139 7 is_stmt 1 view .LVU33
+ 168              		.loc 1 139 18 is_stmt 0 view .LVU34
  169 0004 C368     		ldr	r3, [r0, #12]
- 170              		.loc 1 137 32 view .LVU35
+ 170              		.loc 1 139 32 view .LVU35
  171 0006 B3F90C30 		ldrsh	r3, [r3, #12]
- 172              		.loc 1 137 10 view .LVU36
+ 172              		.loc 1 139 10 view .LVU36
  173 000a 002B     		cmp	r3, #0
  174 000c 08DB     		blt	.L8
- 138:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       {
- 139:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****         pHandle->hVoltage = pHandle->hVFOffset + (pHandle->hVFSlope * pHandle->pVSS->_Super.hAvrMec
- 175              		.loc 1 139 9 is_stmt 1 view .LVU37
- 176              		.loc 1 139 36 is_stmt 0 view .LVU38
+ 140:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       {
+ 141:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****         pHandle->hVoltage = pHandle->hVFOffset + (pHandle->hVFSlope * pHandle->pVSS->_Super.hAvrMec
+ 175              		.loc 1 141 9 is_stmt 1 view .LVU37
+ 176              		.loc 1 141 36 is_stmt 0 view .LVU38
  177 000e 8188     		ldrh	r1, [r0, #4]
- 178              		.loc 1 139 58 view .LVU39
+ 178              		.loc 1 141 58 view .LVU39
  179 0010 C288     		ldrh	r2, [r0, #6]
- 180              		.loc 1 139 92 view .LVU40
+ 180              		.loc 1 141 92 view .LVU40
  181 0012 9BB2     		uxth	r3, r3
- 182              		.loc 1 139 69 view .LVU41
+ 182              		.loc 1 141 69 view .LVU41
  183 0014 12FB03F3 		smulbb	r3, r2, r3
- 184              		.loc 1 139 48 view .LVU42
+ 184              		.loc 1 141 48 view .LVU42
  185 0018 11FA83F3 		uxtah	r3, r1, r3
- 186              		.loc 1 139 27 view .LVU43
+ 186              		.loc 1 141 27 view .LVU43
  187 001c 0381     		strh	r3, [r0, #8]	@ movhi
  188 001e 7047     		bx	lr
  189              	.L8:
- 140:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       }
- 141:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       else
- 142:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       {
- 143:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****         pHandle->hVoltage = pHandle->hVFOffset - (pHandle->hVFSlope * pHandle->pVSS->_Super.hAvrMec
- 190              		.loc 1 143 9 is_stmt 1 view .LVU44
- 191              		.loc 1 143 36 is_stmt 0 view .LVU45
+ 142:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       }
+ 143:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       else
+ 144:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       {
+ 145:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****         pHandle->hVoltage = pHandle->hVFOffset - (pHandle->hVFSlope * pHandle->pVSS->_Super.hAvrMec
+ 190              		.loc 1 145 9 is_stmt 1 view .LVU44
+ 191              		.loc 1 145 36 is_stmt 0 view .LVU45
  192 0020 8188     		ldrh	r1, [r0, #4]
- 193              		.loc 1 143 58 view .LVU46
+ 193              		.loc 1 145 58 view .LVU46
  194 0022 C288     		ldrh	r2, [r0, #6]
- 195              		.loc 1 143 92 view .LVU47
+ 195              		.loc 1 145 92 view .LVU47
  196 0024 9BB2     		uxth	r3, r3
- 197              		.loc 1 143 69 view .LVU48
+ 197              		.loc 1 145 69 view .LVU48
  198 0026 12FB03F3 		smulbb	r3, r2, r3
  199 002a 9BB2     		uxth	r3, r3
- 200              		.loc 1 143 48 view .LVU49
+ 200              		.loc 1 145 48 view .LVU49
  201 002c CB1A     		subs	r3, r1, r3
- 202              		.loc 1 143 27 view .LVU50
+ 202              		.loc 1 145 27 view .LVU50
  203 002e 0381     		strh	r3, [r0, #8]	@ movhi
  204              	.L6:
- 144:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       }
- 145:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     }
- 146:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
- 147:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
-ARM GAS  /tmp/ccVs4uIN.s 			page 7
+ 146:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****       }
+ 147:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     }
+ARM GAS  /tmp/ccKL4nML.s 			page 7
 
 
- 148:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
- 149:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** }
- 205              		.loc 1 149 1 view .LVU51
+ 148:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
+ 149:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
+ 150:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
+ 151:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** }
+ 205              		.loc 1 151 1 view .LVU51
  206 0030 7047     		bx	lr
  207              		.cfi_endproc
  208              	.LFE1439:
@@ -377,37 +379,36 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
  218              	OL_VF:
  219              	.LVL7:
  220              	.LFB1440:
- 150:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
- 151:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
- 152:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief  Allow activation of the Voltage versus Frequency mode (V/F mode).
- 153:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pHandle: Pointer on Handle structure of OpenLoop feature.
- 154:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  VFEnabling: Flag to enable the V/F mode.
- 155:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @retval None
- 156:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
- 157:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** __weak void OL_VF(OpenLoop_Handle_t *pHandle, bool VFEnabling)
- 158:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** {
- 221              		.loc 1 158 1 is_stmt 1 view -0
+ 152:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** 
+ 153:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** /**
+ 154:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @brief  Activates of the Voltage versus Frequency mode (V/F mode).
+ 155:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  pHandle: Pointer on Handle structure of OpenLoop feature.
+ 156:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   * @param  VFEnabling: Flag to enable the V/F mode.
+ 157:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   */
+ 158:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** __weak void OL_VF(OpenLoop_Handle_t *pHandle, bool VFEnabling)
+ 159:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** {
+ 221              		.loc 1 159 1 is_stmt 1 view -0
  222              		.cfi_startproc
  223              		@ args = 0, pretend = 0, frame = 0
  224              		@ frame_needed = 0, uses_anonymous_args = 0
  225              		@ link register save eliminated.
- 159:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
- 160:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   if (MC_NULL == pHandle)
- 161:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
- 162:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     /* Nothing to do */
- 163:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
- 164:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   else
- 165:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
- 166:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
- 167:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     pHandle->VFMode = VFEnabling;
- 226              		.loc 1 167 5 view .LVU53
- 227              		.loc 1 167 21 is_stmt 0 view .LVU54
+ 160:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
+ 161:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   if (MC_NULL == pHandle)
+ 162:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
+ 163:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     /* Nothing to do */
+ 164:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
+ 165:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   else
+ 166:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   {
+ 167:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
+ 168:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****     pHandle->VFMode = VFEnabling;
+ 226              		.loc 1 168 5 view .LVU53
+ 227              		.loc 1 168 21 is_stmt 0 view .LVU54
  228 0000 8170     		strb	r1, [r0, #2]
- 168:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
- 169:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
- 170:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
- 171:MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** }
- 229              		.loc 1 171 1 view .LVU55
+ 169:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #ifdef NULL_PTR_CHECK_OPEN_LOOP
+ 170:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c ****   }
+ 171:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** #endif
+ 172:MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/open_loop.c **** }
+ 229              		.loc 1 172 1 view .LVU55
  230 0002 7047     		bx	lr
  231              		.cfi_endproc
  232              	.LFE1440:
@@ -417,34 +418,34 @@ ARM GAS  /tmp/ccVs4uIN.s 			page 1
  237              		.file 3 "Drivers/CMSIS/Include/core_cm4.h"
  238              		.file 4 "Drivers/CMSIS/Device/ST/STM32G4xx/Include/system_stm32g4xx.h"
  239              		.file 5 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_def.h"
+ARM GAS  /tmp/ccKL4nML.s 			page 8
+
+
  240              		.file 6 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_flash.h"
-ARM GAS  /tmp/ccVs4uIN.s 			page 8
-
-
  241              		.file 7 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal.h"
  242              		.file 8 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h"
  243              		.file 9 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h"
  244              		.file 10 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h"
- 245              		.file 11 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
- 246              		.file 12 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h"
- 247              		.file 13 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h"
- 248              		.file 14 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/open_loop.h"
-ARM GAS  /tmp/ccVs4uIN.s 			page 9
+ 245              		.file 11 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
+ 246              		.file 12 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h"
+ 247              		.file 13 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h"
+ 248              		.file 14 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/open_loop.h"
+ARM GAS  /tmp/ccKL4nML.s 			page 9
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 open_loop.c
-     /tmp/ccVs4uIN.s:18     .text.OL_Init:0000000000000000 $t
-     /tmp/ccVs4uIN.s:26     .text.OL_Init:0000000000000000 OL_Init
-     /tmp/ccVs4uIN.s:49     .text.OL_VqdConditioning:0000000000000000 $t
-     /tmp/ccVs4uIN.s:56     .text.OL_VqdConditioning:0000000000000000 OL_VqdConditioning
-     /tmp/ccVs4uIN.s:96     .text.OL_UpdateVoltage:0000000000000000 $t
-     /tmp/ccVs4uIN.s:103    .text.OL_UpdateVoltage:0000000000000000 OL_UpdateVoltage
-     /tmp/ccVs4uIN.s:120    .text.OL_GetVoltage:0000000000000000 $t
-     /tmp/ccVs4uIN.s:127    .text.OL_GetVoltage:0000000000000000 OL_GetVoltage
-     /tmp/ccVs4uIN.s:147    .text.OL_Calc:0000000000000000 $t
-     /tmp/ccVs4uIN.s:154    .text.OL_Calc:0000000000000000 OL_Calc
-     /tmp/ccVs4uIN.s:211    .text.OL_VF:0000000000000000 $t
-     /tmp/ccVs4uIN.s:218    .text.OL_VF:0000000000000000 OL_VF
+     /tmp/ccKL4nML.s:18     .text.OL_Init:0000000000000000 $t
+     /tmp/ccKL4nML.s:26     .text.OL_Init:0000000000000000 OL_Init
+     /tmp/ccKL4nML.s:49     .text.OL_VqdConditioning:0000000000000000 $t
+     /tmp/ccKL4nML.s:56     .text.OL_VqdConditioning:0000000000000000 OL_VqdConditioning
+     /tmp/ccKL4nML.s:96     .text.OL_UpdateVoltage:0000000000000000 $t
+     /tmp/ccKL4nML.s:103    .text.OL_UpdateVoltage:0000000000000000 OL_UpdateVoltage
+     /tmp/ccKL4nML.s:120    .text.OL_GetVoltage:0000000000000000 $t
+     /tmp/ccKL4nML.s:127    .text.OL_GetVoltage:0000000000000000 OL_GetVoltage
+     /tmp/ccKL4nML.s:147    .text.OL_Calc:0000000000000000 $t
+     /tmp/ccKL4nML.s:154    .text.OL_Calc:0000000000000000 OL_Calc
+     /tmp/ccKL4nML.s:211    .text.OL_VF:0000000000000000 $t
+     /tmp/ccKL4nML.s:218    .text.OL_VF:0000000000000000 OL_VF
 
 NO UNDEFINED SYMBOLS

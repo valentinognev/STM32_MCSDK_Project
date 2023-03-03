@@ -684,7 +684,7 @@ __weak void MCI_ExecBufferedCommands(MCI_Handle_t *pHandle)
           STC_SetControlMode(pHandle->pSTC, MCM_SPEED_MODE);
           commandHasBeenExecuted = STC_ExecRamp(pHandle->pSTC, pHandle->hFinalSpeed, pHandle->hDurationms);
           break;
-        } 
+        }
         case MCI_CMD_EXECSPEEDSIN:
         {
           pHandle->pFOCVars->bDriveInput = INTERNAL;
@@ -872,8 +872,8 @@ __weak int16_t MCI_GetImposedMotorDirection(MCI_Handle_t *pHandle)
 #endif
     switch (pHandle->lastCommand)
     {
-       case MCI_CMD_EXECSPEEDSIN:
-       case MCI_CMD_EXECSPEEDRAMP:
+      case MCI_CMD_EXECSPEEDSIN:
+      case MCI_CMD_EXECSPEEDRAMP:
         if (pHandle->hFinalSpeed < 0)
         {
 

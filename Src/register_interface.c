@@ -32,6 +32,7 @@
 static RevUpCtrl_Handle_t *RevUpControl[NBR_OF_MOTORS] = { &RevUpControlM1 };
 static STO_PLL_Handle_t * stoPLLSensor [NBR_OF_MOTORS] = { &STO_PLL_M1 };
 static PID_Handle_t *pPIDSpeed[NBR_OF_MOTORS] = { &PIDSpeedHandle_M1 };
+static ENCODER_Handle_t *pEncoder[NBR_OF_MOTORS] = {&ENCODER_M1};
 
 static uint8_t RI_SetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t dataAvailable);
 static uint8_t RI_GetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t maxSize);
@@ -329,6 +330,12 @@ uint8_t RI_SetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t data
           case MC_REG_V_D:
           case MC_REG_V_ALPHA:
           case MC_REG_V_BETA:
+          case MC_REG_ENCODER_EL_ANGLE:
+          case MC_REG_ENCODER_SPEED:
+          {
+            retVal = MCP_ERROR_RO_REG;
+            break;
+          }
 
           case MC_REG_STOPLL_C1:
           {
@@ -849,6 +856,19 @@ uint8_t RI_GetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t free
               *regdata16 = MCI_GetValphabeta(pMCIN).beta;
               break;
             }
+
+            case MC_REG_ENCODER_EL_ANGLE:
+            {
+              *regdata16 = SPD_GetElAngle ((SpeednPosFdbk_Handle_t*) pEncoder[motorID]); //cstat !MISRAC2012-Rule-11.3
+              break;
+            }
+
+            case MC_REG_ENCODER_SPEED:
+            {
+              *regdata16 = SPD_GetS16Speed ((SpeednPosFdbk_Handle_t*) pEncoder[motorID]); //cstat !MISRAC2012-Rule-11.3
+              break;
+            }
+
             case MC_REG_STOPLL_EL_ANGLE:
             {
               //cstat !MISRAC2012-Rule-11.3
@@ -1442,6 +1462,18 @@ __weak uint8_t RI_GetPtrReg(uint16_t dataID, void **dataPtr)
           case MC_REG_V_BETA:
           {
             *dataPtr = &(pMCIN->pFOCVars->Valphabeta.beta);
+            break;
+          }
+
+          case MC_REG_ENCODER_SPEED:
+          {
+            *dataPtr = &(pEncoder[vmotorID]->_Super.hAvrMecSpeedUnit);
+            break;
+          }
+
+          case MC_REG_ENCODER_EL_ANGLE:
+          {
+            *dataPtr = &(pEncoder[vmotorID]->_Super.hElAngle);
             break;
           }
 

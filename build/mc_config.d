@@ -25,8 +25,8 @@ build/mc_config.o: Src/mc_config.c Inc/main.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_tim_ex.h \
  Inc/motorcontrol.h Inc/mc_config.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
  Inc/mc_stm_types.h Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_rcc.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_system.h \
@@ -40,40 +40,43 @@ build/mc_config.o: Src/mc_config.c Inc/main.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_comp.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_opamp.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ntc_temperature_sensor.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ntc_temperature_sensor.h \
  Inc/regular_conversion_manager.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/revup_ctrl.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/fast_div.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/revup_ctrl.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h \
  Inc/mc_interface.h Inc/mc_configuration_registers.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/r_divider_bus_voltage_sensor.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/bus_voltage_sensor.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_bus_voltage_sensor.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pqd_motor_power_measurement.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc/r3_2_g4xx_pwm_curr_fdbk.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ramp_ext_mngr.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/circle_limitation.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_pll_speed_pos_fdbk.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_cordic_speed_pos_fdbk.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/r_divider_bus_voltage_sensor.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/bus_voltage_sensor.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_bus_voltage_sensor.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/feed_forward_ctrl.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pqd_motor_power_measurement.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc/r3_2_g4xx_pwm_curr_fdbk.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/encoder_speed_pos_fdbk.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/enc_align_ctrl.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/encoder_speed_pos_fdbk.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ramp_ext_mngr.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/circle_limitation.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_pll_speed_pos_fdbk.h \
  Inc/parameters_conversion.h Inc/mc_math.h \
- Inc/parameters_conversion_g4xx.h Inc/pmsm_motor_parameters.h \
- Inc/drive_parameters.h Inc/power_stage_parameters.h Inc/mc_api.h \
- Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_crs.h \
+ Inc/parameters_conversion_g4xx.h Inc/drive_parameters.h \
+ Inc/power_stage_parameters.h Inc/pmsm_motor_parameters.h Inc/mc_api.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_exti.h \
+ Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_crs.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cortex.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_utils.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_pwr.h \
- Inc/parameters_conversion.h Inc/mc_parameters.h Inc/mc_config.h
+ Inc/parameters_conversion.h Inc/mc_parameters.h Inc/mc_config.h \
+ Inc/debug_scope.h
 
 Inc/main.h:
 
@@ -135,9 +138,9 @@ Inc/motorcontrol.h:
 
 Inc/mc_config.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
 
 Inc/mc_stm_types.h:
 
@@ -167,57 +170,61 @@ Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_opamp.h:
 
 Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ntc_temperature_sensor.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ntc_temperature_sensor.h:
 
 Inc/regular_conversion_manager.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/revup_ctrl.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/revup_ctrl.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/fast_div.h:
-
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h:
 
 Inc/mc_interface.h:
 
 Inc/mc_configuration_registers.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/r_divider_bus_voltage_sensor.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/r_divider_bus_voltage_sensor.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/bus_voltage_sensor.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/bus_voltage_sensor.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_bus_voltage_sensor.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_bus_voltage_sensor.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pqd_motor_power_measurement.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/feed_forward_ctrl.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc/r3_2_g4xx_pwm_curr_fdbk.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pqd_motor_power_measurement.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ramp_ext_mngr.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc/r3_2_g4xx_pwm_curr_fdbk.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/circle_limitation.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/encoder_speed_pos_fdbk.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/enc_align_ctrl.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_pll_speed_pos_fdbk.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/encoder_speed_pos_fdbk.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_cordic_speed_pos_fdbk.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ramp_ext_mngr.h:
+
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/circle_limitation.h:
+
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h:
+
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_pll_speed_pos_fdbk.h:
 
 Inc/parameters_conversion.h:
 
@@ -225,17 +232,17 @@ Inc/mc_math.h:
 
 Inc/parameters_conversion_g4xx.h:
 
-Inc/pmsm_motor_parameters.h:
-
 Inc/drive_parameters.h:
 
 Inc/power_stage_parameters.h:
 
+Inc/pmsm_motor_parameters.h:
+
 Inc/mc_api.h:
 
-Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_crs.h:
-
 Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_exti.h:
+
+Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_crs.h:
 
 Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cortex.h:
 
@@ -248,3 +255,5 @@ Inc/parameters_conversion.h:
 Inc/mc_parameters.h:
 
 Inc/mc_config.h:
+
+Inc/debug_scope.h:

@@ -1,4 +1,4 @@
-ARM GAS  /tmp/cc1EHuZM.s 			page 1
+ARM GAS  /tmp/cciKPr1b.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/cc1EHuZM.s 			page 1
   28:Src/motorcontrol.c **** /** @addtogroup MCSDK
   29:Src/motorcontrol.c ****   * @{
   30:Src/motorcontrol.c ****   */
-ARM GAS  /tmp/cc1EHuZM.s 			page 2
+ARM GAS  /tmp/cciKPr1b.s 			page 2
 
 
   31:Src/motorcontrol.c **** 
@@ -118,7 +118,7 @@ ARM GAS  /tmp/cc1EHuZM.s 			page 1
   57              	.LVL3:
   57:Src/motorcontrol.c ****   mc_lock_pins();
   58              		.loc 1 57 3 view .LVU6
-ARM GAS  /tmp/cc1EHuZM.s 			page 3
+ARM GAS  /tmp/cciKPr1b.s 			page 3
 
 
   59 0026 FFF7FEFF 		bl	mc_lock_pins
@@ -147,38 +147,40 @@ ARM GAS  /tmp/cc1EHuZM.s 			page 1
   82              		.file 9 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h"
   83              		.file 10 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h"
   84              		.file 11 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h"
-  85              		.file 12 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
-  86              		.file 13 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h"
-  87              		.file 14 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h"
-  88              		.file 15 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h"
-  89              		.file 16 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h"
+  85              		.file 12 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
+  86              		.file 13 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h"
+  87              		.file 14 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h"
+  88              		.file 15 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h"
+  89              		.file 16 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h"
   90              		.file 17 "Inc/regular_conversion_manager.h"
-  91              		.file 18 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ntc_temperature_sensor.h"
-  92              		.file 19 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h"
-  93              		.file 20 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h"
-  94              		.file 21 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/revup_ctrl.h"
+  91              		.file 18 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ntc_temperature_sensor.h"
+  92              		.file 19 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h"
+  93              		.file 20 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h"
+  94              		.file 21 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/revup_ctrl.h"
   95              		.file 22 "Inc/mc_interface.h"
   96              		.file 23 "Inc/mc_configuration_registers.h"
-  97              		.file 24 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/bus_voltage_sensor.h"
-  98              		.file 25 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/r_divider_bus_voltage_sensor.h"
-  99              		.file 26 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pqd_motor_power_measurement.h"
- 100              		.file 27 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc/r3_2_g4xx_pwm_curr_fdbk.h"
- 101              		.file 28 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ramp_ext_mngr.h"
- 102              		.file 29 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/circle_limitation.h"
- 103              		.file 30 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_pll_speed_pos_fdbk.h"
- 104              		.file 31 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_cordic_speed_pos_fdbk.h"
- 105              		.file 32 "Inc/mc_config.h"
- 106              		.file 33 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h"
- 107              		.file 34 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_cortex.h"
- 108              		.file 35 "Inc/mc_tasks.h"
-ARM GAS  /tmp/cc1EHuZM.s 			page 4
+  97              		.file 24 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/bus_voltage_sensor.h"
+  98              		.file 25 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/r_divider_bus_voltage_sensor.h"
+  99              		.file 26 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/feed_forward_ctrl.h"
+ 100              		.file 27 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pqd_motor_power_measurement.h"
+ 101              		.file 28 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/G4xx/Inc/r3_2_g4xx_pwm_curr_fdbk.h"
+ 102              		.file 29 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/encoder_speed_pos_fdbk.h"
+ 103              		.file 30 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/enc_align_ctrl.h"
+ 104              		.file 31 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ramp_ext_mngr.h"
+ 105              		.file 32 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/circle_limitation.h"
+ 106              		.file 33 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_pll_speed_pos_fdbk.h"
+ 107              		.file 34 "Inc/mc_config.h"
+ 108              		.file 35 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_rcc.h"
+ 109              		.file 36 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_hal_cortex.h"
+ 110              		.file 37 "Inc/mc_tasks.h"
+ARM GAS  /tmp/cciKPr1b.s 			page 4
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 motorcontrol.c
-     /tmp/cc1EHuZM.s:18     .text.MX_MotorControl_Init:0000000000000000 $t
-     /tmp/cc1EHuZM.s:26     .text.MX_MotorControl_Init:0000000000000000 MX_MotorControl_Init
-     /tmp/cc1EHuZM.s:66     .text.MX_MotorControl_Init:000000000000002c $d
+     /tmp/cciKPr1b.s:18     .text.MX_MotorControl_Init:0000000000000000 $t
+     /tmp/cciKPr1b.s:26     .text.MX_MotorControl_Init:0000000000000000 MX_MotorControl_Init
+     /tmp/cciKPr1b.s:66     .text.MX_MotorControl_Init:000000000000002c $d
                             *COM*:0000000000000004 pMCI
 
 UNDEFINED SYMBOLS

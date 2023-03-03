@@ -1,8 +1,8 @@
 build/pqd_motor_power_measurement.o: \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/pqd_motor_power_measurement.c \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pqd_motor_power_measurement.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/bus_voltage_sensor.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/pqd_motor_power_measurement.c \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pqd_motor_power_measurement.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/bus_voltage_sensor.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
  Inc/mc_stm_types.h Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h \
  Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h \
@@ -41,13 +41,13 @@ build/pqd_motor_power_measurement.o: \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_comp.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_opamp.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pqd_motor_power_measurement.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pqd_motor_power_measurement.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/bus_voltage_sensor.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/bus_voltage_sensor.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
 
 Inc/mc_stm_types.h:
 
@@ -131,4 +131,4 @@ Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_opamp.h:
 
 Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:

@@ -42,16 +42,16 @@ const GlobalConfig_reg_t globalConfig_reg =
 };
 
 static const ApplicationConfig_reg_t M1_ApplicationConfig_reg =
-    {
+{
         .maxMechanicalSpeed = MOTOR_MAX_SPEED_RPM,
-        .maxReadableCurrent = MAX_READABLE_CURRENT,
+  .maxReadableCurrent = MAX_READABLE_CURRENT,
         .nominalCurrent = NOMINAL_CURRENT,
         .nominalVoltage = NOMINAL_BUS_VOLTAGE_V,
-        .driveType = DRIVE_TYPE_M1,
+  .driveType = DRIVE_TYPE_M1,
 };
 
 const MotorConfig_reg_t M1_MotorConfig_reg =
-    {
+{
         .polePairs = POLE_PAIR_NUM,
         .ratedFlux = MOTOR_VOLTAGE_CONSTANT,
         .rs = RS,

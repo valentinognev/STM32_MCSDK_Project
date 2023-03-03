@@ -1,4 +1,4 @@
-ARM GAS  /tmp/ccTHPLPa.s 			page 1
+ARM GAS  /tmp/cc2UoieA.s 			page 1
 
 
    1              		.cpu cortex-m4
@@ -58,7 +58,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
   28:Src/mc_math.c **** 
   29:Src/mc_math.c **** /** @defgroup MC_Math Motor Control Math functions
   30:Src/mc_math.c ****   * @brief Motor Control Mathematic functions of the Motor Control SDK
-ARM GAS  /tmp/ccTHPLPa.s 			page 2
+ARM GAS  /tmp/cc2UoieA.s 			page 2
 
 
   31:Src/mc_math.c ****   *
@@ -118,7 +118,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
   68:Src/mc_math.c **** 
   69:Src/mc_math.c ****   a_divSQRT3_tmp = divSQRT_3 * ((int32_t)Input.a);
   46              		.loc 1 69 3 is_stmt 1 view .LVU9
-ARM GAS  /tmp/ccTHPLPa.s 			page 3
+ARM GAS  /tmp/cc2UoieA.s 			page 3
 
 
   47              		.loc 1 69 18 is_stmt 0 view .LVU10
@@ -178,7 +178,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
   75              		.loc 1 95 15 is_stmt 0 view .LVU22
   76 002a 12B2     		sxth	r2, r2
   77              	.LVL5:
-ARM GAS  /tmp/ccTHPLPa.s 			page 4
+ARM GAS  /tmp/cc2UoieA.s 			page 4
 
 
   78              		.loc 1 95 15 view .LVU23
@@ -238,7 +238,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
   91:Src/mc_math.c ****   }
  119              		.loc 1 91 15 view .LVU35
  120 0052 EEE7     		b	.L2
-ARM GAS  /tmp/ccTHPLPa.s 			page 5
+ARM GAS  /tmp/cc2UoieA.s 			page 5
 
 
  121              	.LVL13:
@@ -298,7 +298,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  133:Src/mc_math.c ****   int16_t hqd_tmp;
  134:Src/mc_math.c ****   Trig_Components Local_Vector_Components;
  135:Src/mc_math.c **** 
-ARM GAS  /tmp/ccTHPLPa.s 			page 6
+ARM GAS  /tmp/cc2UoieA.s 			page 6
 
 
  136:Src/mc_math.c ****   Local_Vector_Components = MCM_Trig_Functions(Theta);
@@ -358,7 +358,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  190:Src/mc_math.c **** 
  191:Src/mc_math.c ****   /* Check saturation of Id */
  192:Src/mc_math.c ****   if (wqd_tmp > INT16_MAX)
-ARM GAS  /tmp/ccTHPLPa.s 			page 7
+ARM GAS  /tmp/cc2UoieA.s 			page 7
 
 
  193:Src/mc_math.c ****   {
@@ -418,7 +418,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  247:Src/mc_math.c **** #ifndef FULL_MISRA_C_COMPLIANCY_MC_MATH
  248:Src/mc_math.c ****   /* WARNING: the below instruction is not MISRA compliant, user should verify
  249:Src/mc_math.c ****     that Cortex-M3 assembly instruction ASR (arithmetic shift right) is used by
-ARM GAS  /tmp/ccTHPLPa.s 			page 8
+ARM GAS  /tmp/cc2UoieA.s 			page 8
 
 
  250:Src/mc_math.c ****     the compiler to perform the shift (instead of LSR logical shift right) */
@@ -478,7 +478,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  296:Src/mc_math.c ****    * Bit-order — how are bits numbered within bytes and how are bits allocated to
  297:Src/mc_math.c ****    *             bit fields.
  298:Src/mc_math.c ****    * Low. Use of union (u32toi16x2). */
-ARM GAS  /tmp/ccTHPLPa.s 			page 9
+ARM GAS  /tmp/cc2UoieA.s 			page 9
 
 
  299:Src/mc_math.c ****   //cstat -MISRAC2012-Rule-19.2
@@ -538,7 +538,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
   28:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** #include "stm32g4xx.h"
   29:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
   30:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @addtogroup STM32G4xx_LL_Driver
-ARM GAS  /tmp/ccTHPLPa.s 			page 10
+ARM GAS  /tmp/cc2UoieA.s 			page 10
 
 
   31:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
@@ -598,7 +598,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
   85:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @}
   86:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
   87:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
-ARM GAS  /tmp/ccTHPLPa.s 			page 11
+ARM GAS  /tmp/cc2UoieA.s 			page 11
 
 
   88:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EC_PRECISION PRECISION
@@ -658,7 +658,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  142:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
  143:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
  144:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EC_NBREAD NBREAD
-ARM GAS  /tmp/ccTHPLPa.s 			page 12
+ARM GAS  /tmp/cc2UoieA.s 			page 12
 
 
  145:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
@@ -718,7 +718,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  199:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  __INSTANCE__ CORDIC Instance
  200:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  __REG__ Register to be written
  201:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  __VALUE__ Value to be written in the register
-ARM GAS  /tmp/ccTHPLPa.s 			page 13
+ARM GAS  /tmp/cc2UoieA.s 			page 13
 
 
  202:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @retval None
@@ -778,7 +778,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  256:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_MODULUS
  257:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_ARCTANGENT
  258:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_HCOSINE
-ARM GAS  /tmp/ccTHPLPa.s 			page 14
+ARM GAS  /tmp/cc2UoieA.s 			page 14
 
 
  259:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_FUNCTION_HSINE
@@ -838,7 +838,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  313:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Configure function.
  314:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          FUNC          LL_CORDIC_SetFunction
  315:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  CORDICx CORDIC Instance
-ARM GAS  /tmp/ccTHPLPa.s 			page 15
+ARM GAS  /tmp/cc2UoieA.s 			page 15
 
 
  316:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @param  Function parameter can be one of the following values:
@@ -898,7 +898,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  370:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_11CYCLES
  371:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_12CYCLES
  372:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_13CYCLES
-ARM GAS  /tmp/ccTHPLPa.s 			page 16
+ARM GAS  /tmp/cc2UoieA.s 			page 16
 
 
  373:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   *         @arg @ref LL_CORDIC_PRECISION_14CYCLES
@@ -958,7 +958,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  427:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
  428:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
  429:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Return scaling factor.
-ARM GAS  /tmp/ccTHPLPa.s 			page 17
+ARM GAS  /tmp/cc2UoieA.s 			page 17
 
 
  430:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          SCALE         LL_CORDIC_GetScale
@@ -1018,7 +1018,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  484:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
  485:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   MODIFY_REG(CORDICx->CSR, CORDIC_CSR_NRES, NbRead);
  486:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
-ARM GAS  /tmp/ccTHPLPa.s 			page 18
+ARM GAS  /tmp/cc2UoieA.s 			page 18
 
 
  487:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
@@ -1078,7 +1078,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  541:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
  542:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /**
  543:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @brief  Return width of output data.
-ARM GAS  /tmp/ccTHPLPa.s 			page 19
+ARM GAS  /tmp/cc2UoieA.s 			page 19
 
 
  544:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @rmtoll CSR          RESIZE       LL_CORDIC_GetOutSize
@@ -1138,7 +1138,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  598:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   */
  599:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
  600:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** /** @defgroup CORDIC_LL_EF_DMA_Management DMA_Management
-ARM GAS  /tmp/ccTHPLPa.s 			page 20
+ARM GAS  /tmp/cc2UoieA.s 			page 20
 
 
  601:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   * @{
@@ -1198,7 +1198,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  655:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
  656:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   CLEAR_BIT(CORDICx->CSR, CORDIC_CSR_DMAWEN);
  657:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
-ARM GAS  /tmp/ccTHPLPa.s 			page 21
+ARM GAS  /tmp/cc2UoieA.s 			page 21
 
 
  658:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** 
@@ -1258,7 +1258,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  712:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** __STATIC_INLINE uint32_t LL_CORDIC_IsActiveFlag_RRDY(CORDIC_TypeDef *CORDICx)
  713:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** {
  714:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h ****   return ((READ_BIT(CORDICx->CSR, CORDIC_CSR_RRDY) == (CORDIC_CSR_RRDY)) ? 1U : 0U);
-ARM GAS  /tmp/ccTHPLPa.s 			page 22
+ARM GAS  /tmp/cc2UoieA.s 			page 22
 
 
  715:Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h **** }
@@ -1318,7 +1318,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  189              	.LBE22:
  316:Src/mc_math.c ****   return (CosSin.Components); //cstat !UNION-type-punning
  190              		.loc 1 316 3 is_stmt 1 view .LVU53
-ARM GAS  /tmp/ccTHPLPa.s 			page 23
+ARM GAS  /tmp/cc2UoieA.s 			page 23
 
 
  191              		.loc 1 316 17 is_stmt 0 view .LVU54
@@ -1378,7 +1378,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  238              		.loc 1 132 3 view .LVU63
  133:Src/mc_math.c ****   Trig_Components Local_Vector_Components;
  239              		.loc 1 133 3 view .LVU64
-ARM GAS  /tmp/ccTHPLPa.s 			page 24
+ARM GAS  /tmp/cc2UoieA.s 			page 24
 
 
  134:Src/mc_math.c **** 
@@ -1438,7 +1438,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  276 002e 24B2     		sxth	r4, r4
  277              	.LVL26:
  165:Src/mc_math.c ****   }
-ARM GAS  /tmp/ccTHPLPa.s 			page 25
+ARM GAS  /tmp/cc2UoieA.s 			page 25
 
 
  278              		.loc 1 165 13 view .LVU83
@@ -1498,7 +1498,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  202:Src/mc_math.c ****   }
  316              		.loc 1 202 13 is_stmt 0 view .LVU100
  317 0056 1BB2     		sxth	r3, r3
-ARM GAS  /tmp/ccTHPLPa.s 			page 26
+ARM GAS  /tmp/cc2UoieA.s 			page 26
 
 
  318              	.LVL33:
@@ -1558,7 +1558,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  358 007a 9AB2     		uxth	r2, r3
  359              	.LVL42:
  212:Src/mc_math.c **** }
-ARM GAS  /tmp/ccTHPLPa.s 			page 27
+ARM GAS  /tmp/cc2UoieA.s 			page 27
 
 
  360              		.loc 1 212 10 view .LVU115
@@ -1618,7 +1618,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  408              		.cfi_startproc
  409              		@ args = 0, pretend = 0, frame = 24
  410              		@ frame_needed = 0, uses_anonymous_args = 0
-ARM GAS  /tmp/ccTHPLPa.s 			page 28
+ARM GAS  /tmp/cc2UoieA.s 			page 28
 
 
  233:Src/mc_math.c ****   int32_t alpha_tmp1;
@@ -1678,7 +1678,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  447              	.LVL52:
  252:Src/mc_math.c **** #else
  448              		.loc 1 252 18 view .LVU142
-ARM GAS  /tmp/ccTHPLPa.s 			page 29
+ARM GAS  /tmp/cc2UoieA.s 			page 29
 
 
  449 0020 42F3CF32 		sbfx	r2, r2, #15, #16
@@ -1738,7 +1738,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  491              		.fpu fpv4-sp-d16
  493              	MCM_Sqrt:
  494              	.LVL57:
-ARM GAS  /tmp/ccTHPLPa.s 			page 30
+ARM GAS  /tmp/cc2UoieA.s 			page 30
 
 
  495              	.LFB1441:
@@ -1798,7 +1798,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
   14:Drivers/CMSIS/Include/cmsis_gcc.h ****  * You may obtain a copy of the License at
   15:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
   16:Drivers/CMSIS/Include/cmsis_gcc.h ****  * www.apache.org/licenses/LICENSE-2.0
-ARM GAS  /tmp/ccTHPLPa.s 			page 31
+ARM GAS  /tmp/cc2UoieA.s 			page 31
 
 
   17:Drivers/CMSIS/Include/cmsis_gcc.h ****  *
@@ -1858,7 +1858,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
   71:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic push
   72:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wpacked"
   73:Drivers/CMSIS/Include/cmsis_gcc.h ****   #pragma GCC diagnostic ignored "-Wattributes"
-ARM GAS  /tmp/ccTHPLPa.s 			page 32
+ARM GAS  /tmp/cc2UoieA.s 			page 32
 
 
   74:Drivers/CMSIS/Include/cmsis_gcc.h ****   struct __attribute__((packed)) T_UINT32 { uint32_t v; };
@@ -1918,7 +1918,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  128:Drivers/CMSIS/Include/cmsis_gcc.h ****            in the used linker script.
  129:Drivers/CMSIS/Include/cmsis_gcc.h ****   
  130:Drivers/CMSIS/Include/cmsis_gcc.h ****  */
-ARM GAS  /tmp/ccTHPLPa.s 			page 33
+ARM GAS  /tmp/cc2UoieA.s 			page 33
 
 
  131:Drivers/CMSIS/Include/cmsis_gcc.h **** __STATIC_FORCEINLINE __NO_RETURN void __cmsis_start(void)
@@ -1978,7 +1978,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  185:Drivers/CMSIS/Include/cmsis_gcc.h **** /* ###########################  Core Function Access  ########################### */
  186:Drivers/CMSIS/Include/cmsis_gcc.h **** /** \ingroup  CMSIS_Core_FunctionInterface
  187:Drivers/CMSIS/Include/cmsis_gcc.h ****     \defgroup CMSIS_Core_RegAccFunctions CMSIS Core Register Access Functions
-ARM GAS  /tmp/ccTHPLPa.s 			page 34
+ARM GAS  /tmp/cc2UoieA.s 			page 34
 
 
  188:Drivers/CMSIS/Include/cmsis_gcc.h ****   @{
@@ -2038,7 +2038,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  539              	.LBE27:
  344:Src/mc_math.c ****     /* Read sqrt and return */
  345:Src/mc_math.c **** #ifndef FULL_MISRA_C_COMPLIANCY_MC_MATH
-ARM GAS  /tmp/ccTHPLPa.s 			page 35
+ARM GAS  /tmp/cc2UoieA.s 			page 35
 
 
  346:Src/mc_math.c ****     retVal = (LL_CORDIC_ReadData(CORDIC)) >> 15; //cstat !MISRAC2012-Rule-1.3_n !ATH-shift-neg !MIS
@@ -2098,7 +2098,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  578              	.LVL63:
  357:Src/mc_math.c ****   }
  358:Src/mc_math.c **** 
-ARM GAS  /tmp/ccTHPLPa.s 			page 36
+ARM GAS  /tmp/cc2UoieA.s 			page 36
 
 
  359:Src/mc_math.c ****   return (wtemprootnew);
@@ -2158,7 +2158,7 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  620              		.cfi_endproc
  621              	.LFE1442:
  623              		.text
-ARM GAS  /tmp/ccTHPLPa.s 			page 37
+ARM GAS  /tmp/cc2UoieA.s 			page 37
 
 
  624              	.Letext0:
@@ -2172,28 +2172,28 @@ ARM GAS  /tmp/ccTHPLPa.s 			page 1
  632              		.file 11 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_tim.h"
  633              		.file 12 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_usart.h"
  634              		.file 13 "Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_dma.h"
- 635              		.file 14 "MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
+ 635              		.file 14 "MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h"
  636              		.file 15 "Inc/mc_math.h"
-ARM GAS  /tmp/ccTHPLPa.s 			page 38
+ARM GAS  /tmp/cc2UoieA.s 			page 38
 
 
 DEFINED SYMBOLS
                             *ABS*:0000000000000000 mc_math.c
-     /tmp/ccTHPLPa.s:18     .text.MCM_Clarke:0000000000000000 $t
-     /tmp/ccTHPLPa.s:26     .text.MCM_Clarke:0000000000000000 MCM_Clarke
-     /tmp/ccTHPLPa.s:133    .text.MCM_Clarke:0000000000000060 $d
-     /tmp/ccTHPLPa.s:138    .text.MCM_Trig_Functions:0000000000000000 $t
-     /tmp/ccTHPLPa.s:145    .text.MCM_Trig_Functions:0000000000000000 MCM_Trig_Functions
-     /tmp/ccTHPLPa.s:205    .text.MCM_Trig_Functions:0000000000000028 $d
-     /tmp/ccTHPLPa.s:210    .text.MCM_Park:0000000000000000 $t
-     /tmp/ccTHPLPa.s:217    .text.MCM_Park:0000000000000000 MCM_Park
-     /tmp/ccTHPLPa.s:392    .text.MCM_Park:0000000000000098 $d
-     /tmp/ccTHPLPa.s:397    .text.MCM_Rev_Park:0000000000000000 $t
-     /tmp/ccTHPLPa.s:404    .text.MCM_Rev_Park:0000000000000000 MCM_Rev_Park
-     /tmp/ccTHPLPa.s:486    .text.MCM_Sqrt:0000000000000000 $t
-     /tmp/ccTHPLPa.s:493    .text.MCM_Sqrt:0000000000000000 MCM_Sqrt
-     /tmp/ccTHPLPa.s:585    .text.MCM_Sqrt:000000000000001c $d
-     /tmp/ccTHPLPa.s:590    .text.MCM_floatToIntBit:0000000000000000 $t
-     /tmp/ccTHPLPa.s:597    .text.MCM_floatToIntBit:0000000000000000 MCM_floatToIntBit
+     /tmp/cc2UoieA.s:18     .text.MCM_Clarke:0000000000000000 $t
+     /tmp/cc2UoieA.s:26     .text.MCM_Clarke:0000000000000000 MCM_Clarke
+     /tmp/cc2UoieA.s:133    .text.MCM_Clarke:0000000000000060 $d
+     /tmp/cc2UoieA.s:138    .text.MCM_Trig_Functions:0000000000000000 $t
+     /tmp/cc2UoieA.s:145    .text.MCM_Trig_Functions:0000000000000000 MCM_Trig_Functions
+     /tmp/cc2UoieA.s:205    .text.MCM_Trig_Functions:0000000000000028 $d
+     /tmp/cc2UoieA.s:210    .text.MCM_Park:0000000000000000 $t
+     /tmp/cc2UoieA.s:217    .text.MCM_Park:0000000000000000 MCM_Park
+     /tmp/cc2UoieA.s:392    .text.MCM_Park:0000000000000098 $d
+     /tmp/cc2UoieA.s:397    .text.MCM_Rev_Park:0000000000000000 $t
+     /tmp/cc2UoieA.s:404    .text.MCM_Rev_Park:0000000000000000 MCM_Rev_Park
+     /tmp/cc2UoieA.s:486    .text.MCM_Sqrt:0000000000000000 $t
+     /tmp/cc2UoieA.s:493    .text.MCM_Sqrt:0000000000000000 MCM_Sqrt
+     /tmp/cc2UoieA.s:585    .text.MCM_Sqrt:000000000000001c $d
+     /tmp/cc2UoieA.s:590    .text.MCM_floatToIntBit:0000000000000000 $t
+     /tmp/cc2UoieA.s:597    .text.MCM_floatToIntBit:0000000000000000 MCM_floatToIntBit
 
 NO UNDEFINED SYMBOLS

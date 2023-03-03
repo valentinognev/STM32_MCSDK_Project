@@ -1,7 +1,7 @@
 build/ramp_ext_mngr.o: \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ramp_ext_mngr.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/ramp_ext_mngr.c \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ramp_ext_mngr.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
  Inc/mc_stm_types.h Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h \
  Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h \
@@ -41,9 +41,9 @@ build/ramp_ext_mngr.o: \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_opamp.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ramp_ext_mngr.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/ramp_ext_mngr.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
 
 Inc/mc_stm_types.h:
 

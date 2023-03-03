@@ -1,5 +1,5 @@
 build/mc_math.o: Src/mc_math.c Inc/mc_math.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
  Inc/mc_stm_types.h Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h \
  Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h \
@@ -41,7 +41,7 @@ build/mc_math.o: Src/mc_math.c Inc/mc_math.h \
 
 Inc/mc_math.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
 
 Inc/mc_stm_types.h:
 

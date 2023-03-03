@@ -1,7 +1,7 @@
 build/revup_ctrl.o: \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/revup_ctrl.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Src/revup_ctrl.c \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/revup_ctrl.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
  Inc/mc_stm_types.h Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h \
  Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h \
@@ -40,17 +40,16 @@ build/revup_ctrl.o: \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_comp.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_opamp.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/fast_div.h
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/revup_ctrl.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/revup_ctrl.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
 
 Inc/mc_stm_types.h:
 
@@ -134,16 +133,14 @@ Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_opamp.h:
 
 Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_torq_ctrl.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pid_regulator.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/speed_pos_fdbk.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/virtual_speed_sensor.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/sto_speed_pos_fdbk.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h:
-
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/fast_div.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/pwm_curr_fdbk.h:

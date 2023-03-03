@@ -37,6 +37,11 @@
 #define M1_SS_MEAS_ERRORS_BEFORE_FAULTS 3 /*!< Number of speed
                                                              measurement errors before
                                                              main sensor goes in fault */
+/*** Encoder **********************/
+
+#define ENC_AVERAGING_FIFO_DEPTH        16 /*!< depth of the FIFO used to
+                                                              average mechanical speed in
+                                                              0.1Hz resolution */
 /****** State Observer + PLL ****/
 #define VARIANCE_THRESHOLD             0.25 /*!<Maximum accepted
                                                             variance on speed
@@ -164,6 +169,13 @@
 #define OVP_SELECTION2                  COMP_Selection_COMP1
 
 /******************************   START-UP PARAMETERS   **********************/
+/* Encoder alignment */
+#define ALIGNMENT_DURATION              700 /*!< milliseconds */
+#define ALIGNMENT_ANGLE_DEG             90 /*!< degrees [0...359] */
+#define FINAL_I_ALIGNMENT               2177 /*!< s16A */
+// With ALIGNMENT_ANGLE_DEG equal to 90 degrees final alignment
+// phase current = (FINAL_I_ALIGNMENT * 1.65/ Av)/(32767 * Rshunt)
+// being Av the voltage gain between Rshunt and A/D input
 
 /* Phase 1 */
 #define PHASE1_DURATION                1000 /*milliseconds */

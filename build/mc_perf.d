@@ -1,5 +1,5 @@
 build/mc_perf.o: Src/mc_perf.c Inc/parameters_conversion.h Inc/mc_math.h \
- MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
+ MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h \
  Inc/mc_stm_types.h Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_bus.h \
  Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g4xx.h \
  Drivers/CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h \
@@ -38,14 +38,14 @@ build/mc_perf.o: Src/mc_perf.c Inc/parameters_conversion.h Inc/mc_math.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_comp.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_opamp.h \
  Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h \
- Inc/parameters_conversion_g4xx.h Inc/pmsm_motor_parameters.h \
- Inc/drive_parameters.h Inc/power_stage_parameters.h Inc/mc_perf.h
+ Inc/parameters_conversion_g4xx.h Inc/drive_parameters.h \
+ Inc/power_stage_parameters.h Inc/pmsm_motor_parameters.h Inc/mc_perf.h
 
 Inc/parameters_conversion.h:
 
 Inc/mc_math.h:
 
-MCSDK_v6.0.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
+MCSDK_v6.1.0-Full/MotorControl/MCSDK/MCLib/Any/Inc/mc_type.h:
 
 Inc/mc_stm_types.h:
 
@@ -131,10 +131,10 @@ Drivers/STM32G4xx_HAL_Driver/Inc/stm32g4xx_ll_cordic.h:
 
 Inc/parameters_conversion_g4xx.h:
 
-Inc/pmsm_motor_parameters.h:
-
 Inc/drive_parameters.h:
 
 Inc/power_stage_parameters.h:
+
+Inc/pmsm_motor_parameters.h:
 
 Inc/mc_perf.h:

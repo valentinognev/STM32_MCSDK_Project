@@ -36,6 +36,9 @@
 
 #include "r3_2_g4xx_pwm_curr_fdbk.h"
 
+#include "encoder_speed_pos_fdbk.h"
+#include "enc_align_ctrl.h"
+
 #include "ramp_ext_mngr.h"
 #include "circle_limitation.h"
 
@@ -61,6 +64,8 @@ extern PQD_MotorPowMeas_Handle_t *pPQD_MotorPowMeasM1;
 extern VirtualSpeedSensor_Handle_t VirtualSpeedSensorM1;
 extern STO_Handle_t STO_M1;
 extern STO_PLL_Handle_t STO_PLL_M1;
+extern ENCODER_Handle_t ENCODER_M1;
+extern EncAlign_Handle_t EncAlignCtrlM1;
 extern RDivider_Handle_t BusVoltageSensor_M1;
 extern CircleLimitation_Handle_t CircleLimitationM1;
 extern RampExtMngr_Handle_t RampExtMngrHFParamsM1;

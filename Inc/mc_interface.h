@@ -139,7 +139,7 @@ typedef struct
   int16_t hTorquePhase;       /*!< Phase angle Final torque of last ExecTorqueRamp command.*/
   int16_t hTorqueAmp;        /*!< Amplitude Final torque of last ExecTorqueRamp command.*/
   qd_t Iqdref;                /*!< Current component of last
-                          SetCurrentReferences command.*/
+                                   SetCurrentReferences command.*/
   uint16_t hDurationms;       /*!< Duration in ms of last ExecSpeedRamp or
                                    ExecTorqueRamp command.*/
  MCI_DirectCommands_t DirectCommand;

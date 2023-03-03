@@ -98,6 +98,8 @@
 #define DELTA_V_HYSTERESIS           (dV_dT * DELTA_TEMP_HYSTERESIS)
 #define OV_TEMPERATURE_HYSTERESIS_d  (DELTA_V_HYSTERESIS*INT_SUPPLY_VOLTAGE)
 
+#define ALIGNMENT_ANGLE_S16      (int16_t)  (ALIGNMENT_ANGLE_DEG*65536u/360u)
+
 /*************** Timer for PWM generation & currenst sensing parameters  ******/
 #define PWM_PERIOD_CYCLES (uint16_t)((ADV_TIM_CLK_MHz*(uint32_t)1000000u/((uint32_t)(PWM_FREQUENCY)))& ( uint16_t )0xFFFE)
 
@@ -162,7 +164,7 @@
 /* Sensors setting */
 #define MAIN_SCFG UI_SCODE_STO_PLL
 
-#define AUX_SCFG 0x0
+#define AUX_SCFG UI_SCODE_ENC
 
 #define PLLTUNING_ENABLE
 
@@ -184,6 +186,11 @@
 
 #define DOUT_ACTIVE_HIGH   DOutputActiveHigh
 #define DOUT_ACTIVE_LOW    DOutputActiveLow
+
+/**********  AUXILIARY ENCODER TIMER MOTOR 1 *************/
+#define M1_PULSE_NBR ( (4 * (M1_ENCODER_PPR)) - 1 )
+#define M1_ENC_IC_FILTER  12
+#define SPD_TIM_M1_IRQHandler TIM4_IRQHandler
 
 #define LPF_FILT_CONST ((int16_t)(32767 * 0.5))
 /* MMI Table Motor 1 MAX_MODULATION_100_PER_CENT */

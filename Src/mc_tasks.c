@@ -61,6 +61,7 @@
 /* Private variables----------------------------------------------------------*/
 
 static FOCVars_t FOCVars[NBR_OF_MOTORS];
+static EncAlign_Handle_t *pEAC[NBR_OF_MOTORS];
 
 static PWMC_Handle_t *pwmcHandle[NBR_OF_MOTORS];
 //cstat !MISRAC2012-Rule-8.9_a
@@ -146,6 +147,17 @@ __weak void MCboot( MCI_Handle_t* pMCIList[NBR_OF_MOTORS] )
     /*   Speed & torque component initialization          */
     /******************************************************/
     STC_Init(pSTC[M1],&PIDSpeedHandle_M1, &STO_PLL_M1._Super);
+
+    /******************************************************/
+    /*   Auxiliary speed sensor component initialization  */
+    /******************************************************/
+    ENC_Init (&ENCODER_M1);
+
+    /***********************************************************/
+    /*   Auxiliary encoder alignment component initialization  */
+    /***********************************************************/
+    EAC_Init(&EncAlignCtrlM1,pSTC[M1],&VirtualSpeedSensorM1,&ENCODER_M1);
+    pEAC[M1] = &EncAlignCtrlM1;
 
     /****************************************************/
     /*   Virtual speed sensor component initialization  */
@@ -365,6 +377,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
   /* USER CODE END MediumFrequencyTask M1 0 */
 
   int16_t wAux = 0;
+  (void)ENC_CalcAvrgMecSpeedUnit(&ENCODER_M1, &wAux);
   bool IsSpeedReliable = STO_PLL_CalcAvrgMecSpeedUnit(&STO_PLL_M1, &wAux);
   PQD_CalcElMotorPower(pMPM[M1]);
 
@@ -453,10 +466,19 @@ __weak void TSK_MediumFrequencyTaskM1(void)
               FOCVars[M1].bDriveInput = EXTERNAL;
               STC_SetSpeedSensor( pSTC[M1], &VirtualSpeedSensorM1._Super );
               STO_PLL_Clear(&STO_PLL_M1);
+              ENC_Clear(&ENCODER_M1);
               FOC_Clear( M1 );
 
+              if (EAC_IsAligned(&EncAlignCtrlM1) == false )
+              {
+                EAC_StartAlignment(&EncAlignCtrlM1);
+                Mci[M1].State = ALIGNMENT;
+              }
+              else
               {
 
+                VSS_Clear(&VirtualSpeedSensorM1); /* Reset measured speed in IDLE */
+                FOC_Clear(M1);
                 Mci[M1].State = START;
               }
 
@@ -465,6 +487,39 @@ __weak void TSK_MediumFrequencyTaskM1(void)
             else
             {
               /* nothing to be done, FW waits for bootstrap capacitor to charge */
+            }
+          }
+          break;
+        }
+
+        case ALIGNMENT:
+        {
+          if (MCI_STOP == Mci[M1].DirectCommand)
+          {
+            TSK_MF_StopProcessing(&Mci[M1], M1);
+          }
+          else
+          {
+            bool isAligned = EAC_IsAligned(&EncAlignCtrlM1);
+            bool EACDone = EAC_Exec(&EncAlignCtrlM1);
+            if ((isAligned == false)  && (EACDone == false))
+            {
+                qd_t IqdRef;
+                IqdRef.q = 0;
+                IqdRef.d = STC_CalcTorqueReference(pSTC[M1]);
+                FOCVars[M1].Iqdref = IqdRef;
+            }
+            else
+            {
+              R3_2_SwitchOffPWM( pwmcHandle[M1] );
+
+              FOC_Clear(M1);
+              TSK_SetStopPermanencyTimeM1(STOPPERMANENCY_TICKS);
+              Mci[M1].State = WAIT_STOP_MOTOR;
+
+              /* USER CODE BEGIN MediumFrequencyTask M1 EndOfEncAlignment */
+
+              /* USER CODE END MediumFrequencyTask M1 EndOfEncAlignment */
             }
           }
           break;
@@ -600,7 +655,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
               mechanicalAngleCalculation(&Mci[M1]);
             /* USER CODE END MediumFrequencyTask M1 2 */
 
-              MCI_ExecBufferedCommands(&Mci[M1]);
+            MCI_ExecBufferedCommands(&Mci[M1]);
 
               FOC_CalcCurrRef(M1);
 
@@ -651,6 +706,32 @@ __weak void TSK_MediumFrequencyTaskM1(void)
         case FAULT_NOW:
         {
           Mci[M1].State = FAULT_OVER;
+        }
+        break;
+
+        case WAIT_STOP_MOTOR:
+        {
+          if (MCI_STOP == Mci[M1].DirectCommand)
+          {
+            TSK_MF_StopProcessing(&Mci[M1], M1);
+          }
+          else
+          {
+            if (TSK_StopPermanencyTimeHasElapsedM1())
+            {
+              RUC_Clear(&RevUpControlM1, MCI_GetImposedMotorDirection(&Mci[M1]));
+              STO_PLL_Clear( &STO_PLL_M1 );
+              ENC_Clear(&ENCODER_M1);
+              VSS_Clear(&VirtualSpeedSensorM1);
+              R3_2_SwitchOnPWM( pwmcHandle[M1] );
+              Mci[M1].State = START;
+            }
+            else
+            {
+              /* nothing to do */
+            }
+
+          }
         }
         break;
 
@@ -871,6 +952,8 @@ __weak uint8_t TSK_HighFrequencyTask(void)
 
   Observer_Inputs_t STO_Inputs; /*  only if sensorless main*/
 
+  (void)ENC_CalcAngle(&ENCODER_M1);   /* if not sensorless then 2nd parameter is MC_NULL*/
+
   STO_Inputs.Valfa_beta = FOCVars[M1].Valphabeta;  /* only if sensorless*/
   if (SWITCH_OVER == Mci[M1].State)
   {
@@ -1025,6 +1108,11 @@ __weak void TSK_SafetyTask_PWMOFF(uint8_t bMotor)
 
   if (MCI_GetFaultState(&Mci[bMotor]) != (uint32_t)MC_NO_FAULTS)
   {
+    /* reset Encoder state */
+    if (pEAC[bMotor] != MC_NULL)
+    {
+      EAC_SetRestartState(pEAC[bMotor], false);
+    }
     PWMC_SwitchOffPWM(pwmcHandle[bMotor]);
     if (MCPA_UART_A.Mark != 0)
     {

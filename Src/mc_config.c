@@ -133,26 +133,6 @@ SpeednTorqCtrl_Handle_t SpeednTorqCtrlM1 =
   .IdrefDefault =                    (int16_t)DEFAULT_FLUX_COMPONENT,
 };
 
-RevUpCtrl_Handle_t RevUpControlM1 =
-{
-  .hRUCFrequencyHz         = MEDIUM_FREQUENCY_TASK_RATE,
-  .hStartingMecAngle       = (int16_t)((int32_t)(STARTING_ANGLE_DEG)* 65536/360),
-  .bFirstAccelerationStage = (ENABLE_SL_ALGO_FROM_PHASE-1u),
-  .hMinStartUpValidSpeed   = OBS_MINIMUM_SPEED_UNIT,
-  .hMinStartUpFlySpeed     = (int16_t)(OBS_MINIMUM_SPEED_UNIT/2),
-  .OTFStartupEnabled       = false,
-  .OTFPhaseParams         = {(uint16_t)500,
-                                         0,
-                             (int16_t)PHASE5_FINAL_CURRENT,
-                             (void*)MC_NULL},
-  .ParamsData             = {{(uint16_t)PHASE1_DURATION,(int16_t)(PHASE1_FINAL_SPEED_UNIT),PHASE1_FINAL_CURRENT,&RevUpControlM1.ParamsData[1]},
-                             {(uint16_t)PHASE2_DURATION,(int16_t)(PHASE2_FINAL_SPEED_UNIT),PHASE2_FINAL_CURRENT,&RevUpControlM1.ParamsData[2]},
-                             {(uint16_t)PHASE3_DURATION,(int16_t)(PHASE3_FINAL_SPEED_UNIT),PHASE3_FINAL_CURRENT,&RevUpControlM1.ParamsData[3]},
-                             {(uint16_t)PHASE4_DURATION,(int16_t)(PHASE4_FINAL_SPEED_UNIT),PHASE4_FINAL_CURRENT,&RevUpControlM1.ParamsData[4]},
-                             {(uint16_t)PHASE5_DURATION,(int16_t)(PHASE5_FINAL_SPEED_UNIT),PHASE5_FINAL_CURRENT,(void*)MC_NULL},
-                            },
-};
-
 PWMC_R3_2_Handle_t PWM_Handle_M1=
 {
   {
@@ -283,15 +263,6 @@ STO_PLL_Handle_t STO_PLL_M1 =
  .F2LOG                              =	F2_LOG,
  .SpeedBufferSizeDppLOG              =	STO_FIFO_DEPTH_DPP_LOG,
  .hForcedDirection                   =  0x0000U
-};
-
-STO_Handle_t STO_M1 =
-{
-  ._Super                        = (SpeednPosFdbk_Handle_t*)&STO_PLL_M1, //cstat !MISRAC2012-Rule-11.3
-  .pFctForceConvergency1         = &STO_PLL_ForceConvergency1,
-  .pFctForceConvergency2         = &STO_PLL_ForceConvergency2,
-  .pFctStoOtfResetPLL            = &STO_OTF_ResetPLL,
-  .pFctSTO_SpeedReliabilityCheck = &STO_PLL_IsVarianceTight
 };
 
 /**

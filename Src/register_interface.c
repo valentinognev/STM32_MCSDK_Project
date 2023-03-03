@@ -29,7 +29,6 @@
 #include "mc_configuration_registers.h"
 #include "debug_scope.h"
 
-static RevUpCtrl_Handle_t *RevUpControl[NBR_OF_MOTORS] = { &RevUpControlM1 };
 static STO_PLL_Handle_t * stoPLLSensor [NBR_OF_MOTORS] = { &STO_PLL_M1 };
 static PID_Handle_t *pPIDSpeed[NBR_OF_MOTORS] = { &PIDSpeedHandle_M1 };
 static ENCODER_Handle_t *pEncoder[NBR_OF_MOTORS] = {&ENCODER_M1};
@@ -208,12 +207,6 @@ uint8_t RI_SetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t data
               /* Nothing to do */
             }
 
-            break;
-          }
-
-          case MC_REG_RUC_STAGE_NBR:
-          {
-            retVal = MCP_ERROR_RO_REG;
             break;
           }
           case MC_REG_DBG_START_WRITE:
@@ -592,31 +585,6 @@ uint8_t RI_SetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t data
               break;
             }
 
-            case MC_REG_REVUP_DATA:
-            {
-              int32_t rpm;
-              RevUpCtrl_PhaseParams_t revUpPhase;
-              uint8_t i;
-              uint8_t nbrOfPhase = (((uint8_t)rawSize) / 8U);
-
-              if (((0U != ((rawSize) % 8U))) || ((nbrOfPhase > RUC_MAX_PHASE_NUMBER) != 0))
-              {
-                retVal = MCP_ERROR_BAD_RAW_FORMAT;
-              }
-              else
-              {
-                for (i = 0; i <nbrOfPhase; i++)
-                {
-                rpm = *(int32_t *) &rawData[i * 8U]; //cstat !MISRAC2012-Rule-11.3
-                revUpPhase.hFinalMecSpeedUnit = (((int16_t)rpm) * ((int16_t)SPEED_UNIT)) / ((int16_t)U_RPM);
-                revUpPhase.hFinalTorque = *((int16_t *) &rawData[4U + (i * 8U)]); //cstat !MISRAC2012-Rule-11.3
-                revUpPhase.hDurationms  = *((uint16_t *) &rawData[6U +(i * 8U)]); //cstat !MISRAC2012-Rule-11.3
-                (void)RUC_SetPhase( RevUpControl[motorID], i, &revUpPhase);
-                }
-              }
-              break;
-            }
-
             case MC_REG_ASYNC_UARTA:
             {
               retVal =  MCPA_cfgLog (&MCPA_UART_A, rawData);
@@ -689,12 +657,6 @@ uint8_t RI_GetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t free
             case MC_REG_CONTROL_MODE:
             {
               *data = (uint8_t)MCI_GetControlMode(pMCIN);
-              break;
-            }
-
-            case MC_REG_RUC_STAGE_NBR:
-            {
-              *data = (RevUpControl[motorID] != MC_NULL) ? (uint8_t)RUC_GetNumberOfPhases(RevUpControl[motorID]) : 0U;
               break;
             }
 
@@ -1081,7 +1043,7 @@ uint8_t RI_GetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t free
               break;
             }
 
-           case MC_REG_FF_1Q:
+            case MC_REG_FF_1Q:
             {
               *regdata32 = pFF[motorID]->wConstant_1Q;
               break;
@@ -1238,35 +1200,6 @@ uint8_t RI_GetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t free
             *rawSize = 4;
             *torque = MCI_GetLastRampFinalTorque(pMCIN);
             *duration = MCI_GetLastRampFinalDuration(pMCIN) ;
-            break;
-          }
-
-          case MC_REG_REVUP_DATA:
-          {
-            int32_t *rpm;
-            uint16_t *finalTorque;
-            uint16_t *durationms;
-            RevUpCtrl_PhaseParams_t revUpPhase;
-            uint8_t i;
-
-            *rawSize = (uint16_t)RUC_MAX_PHASE_NUMBER*8U;
-            if (((*rawSize) + 2U) > freeSpace)
-            {
-              retVal = MCP_ERROR_NO_TXSYNC_SPACE;
-            }
-            else
-            {
-              for (i = 0; i <RUC_MAX_PHASE_NUMBER; i++)
-              {
-                (void)RUC_GetPhase( RevUpControl[motorID] ,i, &revUpPhase);
-                rpm = (int32_t *) &data[2U + (i*8U)];  //cstat !MISRAC2012-Rule-11.3
-                *rpm = (((int32_t)revUpPhase.hFinalMecSpeedUnit) * U_RPM) / SPEED_UNIT; //cstat !MISRAC2012-Rule-11.3
-                finalTorque = (uint16_t *)&data[6U + (i * 8U)]; //cstat !MISRAC2012-Rule-11.3
-                *finalTorque = (uint16_t)revUpPhase.hFinalTorque; //cstat !MISRAC2012-Rule-11.3
-                durationms  = (uint16_t *)&data[8U + (i * 8U)]; //cstat !MISRAC2012-Rule-11.3
-                *durationms  = revUpPhase.hDurationms;
-              }
-            }
             break;
           }
 

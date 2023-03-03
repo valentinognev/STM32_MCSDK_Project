@@ -124,8 +124,8 @@ typedef struct
 #define MAX_OF_MOTORS 2U
 #define NBR_OF_MOTORS  1
 #define DRIVE_TYPE_M1  0
-#define PRIM_SENSOR_M1  EPLL
-#define AUX_SENSOR_M1  EENCODER
+#define PRIM_SENSOR_M1  EENCODER
+#define AUX_SENSOR_M1  EPLL
 #define TOPOLOGY_M1 0
 #define FOC_RATE_M1 1
 #define PWM_FREQ_M1 16000

@@ -377,7 +377,7 @@ __weak int16_t MC_GetMecSpeedAverageMotor1(void)
  */
 __weak int16_t MC_GetMecAuxiliarySpeedAverageMotor1(void)
 {
-	return SPD_GetAvrgMecSpeedUnit(&ENCODER_M1._Super);
+	return SPD_GetAvrgMecSpeedUnit(&STO_PLL_M1._Super);
 }
 
 /**
@@ -385,7 +385,7 @@ __weak int16_t MC_GetMecAuxiliarySpeedAverageMotor1(void)
  */
 __weak float MC_GetMecAuxiliarySpeedAverageMotor1_F(void)
 {
-  return( (float) ( SPD_GetAvrgMecSpeedUnit(&ENCODER_M1._Super) * U_RPM) / SPEED_UNIT);
+  return( (float) ( SPD_GetAvrgMecSpeedUnit(&STO_PLL_M1._Super) * U_RPM) / SPEED_UNIT);
 }
 
 /**
@@ -393,7 +393,7 @@ __weak float MC_GetMecAuxiliarySpeedAverageMotor1_F(void)
  */
 __weak int16_t MC_GetAuxiliaryElAngledppMotor1(void)
 {
-	return (SPD_GetElAngle(&ENCODER_M1._Super));
+	return (SPD_GetElAngle(&STO_PLL_M1._Super));
 }
 
 /**
@@ -401,7 +401,7 @@ __weak int16_t MC_GetAuxiliaryElAngledppMotor1(void)
  */
 __weak float MC_GetAuxiliaryElAngleMotor1_F(void)
 {
-  return ((float)( (SPD_GetElAngle(&ENCODER_M1._Super)) / S16ToRAD) );
+  return ((float)( (SPD_GetElAngle(&STO_PLL_M1._Super)) / S16ToRAD) );
 }
 
 /**

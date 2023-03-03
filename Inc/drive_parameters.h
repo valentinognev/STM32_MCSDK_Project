@@ -77,7 +77,6 @@
                                                            amplitude-speed consistency */
 
 /* USER CODE BEGIN angle reconstruction M1 */
-#define PARK_ANGLE_COMPENSATION_FACTOR 0
 #define REV_PARK_ANGLE_COMPENSATION_FACTOR 0
 /* USER CODE END angle reconstruction M1 */
 
@@ -177,30 +176,6 @@
 // phase current = (FINAL_I_ALIGNMENT * 1.65/ Av)/(32767 * Rshunt)
 // being Av the voltage gain between Rshunt and A/D input
 
-/* Phase 1 */
-#define PHASE1_DURATION                1000 /*milliseconds */
-#define PHASE1_FINAL_SPEED_UNIT         (0*SPEED_UNIT/U_RPM)
-#define PHASE1_FINAL_CURRENT           2721
-/* Phase 2 */
-#define PHASE2_DURATION                2832 /*milliseconds */
-#define PHASE2_FINAL_SPEED_UNIT         (1416*SPEED_UNIT/U_RPM)
-#define PHASE2_FINAL_CURRENT           2721
-/* Phase 3 */
-#define PHASE3_DURATION                5000 /*milliseconds */
-#define PHASE3_FINAL_SPEED_UNIT         (1416*SPEED_UNIT/U_RPM)
-#define PHASE3_FINAL_CURRENT           2721
-/* Phase 4 */
-#define PHASE4_DURATION                0 /*milliseconds */
-#define PHASE4_FINAL_SPEED_UNIT         (1416*SPEED_UNIT/U_RPM)
-#define PHASE4_FINAL_CURRENT           2721
-/* Phase 5 */
-#define PHASE5_DURATION                0 /* milliseconds */
-#define PHASE5_FINAL_SPEED_UNIT         (1416*SPEED_UNIT/U_RPM)
-#define PHASE5_FINAL_CURRENT           2721
-
-#define ENABLE_SL_ALGO_FROM_PHASE      2
-/* Sensor-less rev-up sequence */
-#define STARTING_ANGLE_DEG             0  /*!< degrees [0...359] */
 /* Observer start-up output conditions  */
 #define OBS_MINIMUM_SPEED_RPM          1274
 

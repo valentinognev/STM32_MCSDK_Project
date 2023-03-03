@@ -42,39 +42,6 @@
 #define ENC_AVERAGING_FIFO_DEPTH        16 /*!< depth of the FIFO used to
                                                               average mechanical speed in
                                                               0.1Hz resolution */
-/****** State Observer + PLL ****/
-#define VARIANCE_THRESHOLD             0.25 /*!<Maximum accepted
-                                                            variance on speed
-                                                            estimates (percentage) */
-/* State observer scaling factors F1 */
-#define F1                               16384
-#define F2                               8192
-#define F1_LOG                           LOG2((16384))
-#define F2_LOG                           LOG2((8192))
-
-/* State observer constants */
-#define GAIN1                            -22656
-#define GAIN2                            26684
-/*Only in case PLL is used, PLL gains */
-#define PLL_KP_GAIN                      1412
-#define PLL_KI_GAIN                      63
-#define PLL_KPDIV     16384
-#define PLL_KPDIV_LOG LOG2((PLL_KPDIV))
-#define PLL_KIDIV     65535
-#define PLL_KIDIV_LOG LOG2((PLL_KIDIV))
-
-#define STO_FIFO_DEPTH_DPP               64  /*!< Depth of the FIFO used
-                                                            to average mechanical speed
-                                                            in dpp format */
-#define STO_FIFO_DEPTH_DPP_LOG           LOG2((64))
-
-#define STO_FIFO_DEPTH_UNIT              64  /*!< Depth of the FIFO used
-                                                            to average mechanical speed
-                                                            in the unit defined by #SPEED_UNIT */
-#define BEMF_CONSISTENCY_TOL             64   /* Parameter for B-emf
-                                                            amplitude-speed consistency */
-#define BEMF_CONSISTENCY_GAIN            64   /* Parameter for B-emf
-                                                           amplitude-speed consistency */
 
 /* USER CODE BEGIN angle reconstruction M1 */
 #define REV_PARK_ANGLE_COMPENSATION_FACTOR 0
@@ -175,24 +142,6 @@
 // With ALIGNMENT_ANGLE_DEG equal to 90 degrees final alignment
 // phase current = (FINAL_I_ALIGNMENT * 1.65/ Av)/(32767 * Rshunt)
 // being Av the voltage gain between Rshunt and A/D input
-
-/* Observer start-up output conditions  */
-#define OBS_MINIMUM_SPEED_RPM          1274
-
-#define NB_CONSECUTIVE_TESTS           2 /* corresponding to
-                                                         former NB_CONSECUTIVE_TESTS/
-                                                         (TF_REGULATION_RATE/
-                                                         MEDIUM_FREQUENCY_TASK_RATE) */
-#define SPEED_BAND_UPPER_LIMIT         17 /*!< It expresses how much
-                                                            estimated speed can exceed
-                                                            forced stator electrical
-                                                            without being considered wrong.
-                                                            In 1/16 of forced speed */
-#define SPEED_BAND_LOWER_LIMIT         15  /*!< It expresses how much
-                                                             estimated speed can be below
-                                                             forced stator electrical
-                                                             without being considered wrong.
-                                                             In 1/16 of forced speed */
 
 #define TRANSITION_DURATION            25  /* Switch over duration, ms */
 

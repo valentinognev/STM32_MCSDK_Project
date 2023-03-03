@@ -59,7 +59,7 @@
 /* USER CODE END Private define */
 #define VBUS_TEMP_ERR_MASK (MC_OVER_VOLT| MC_UNDER_VOLT| MC_OVER_TEMP)
 /* Private variables----------------------------------------------------------*/
-
+extern FF_Handle_t *pFF[NBR_OF_MOTORS];
 static FOCVars_t FOCVars[NBR_OF_MOTORS];
 static EncAlign_Handle_t *pEAC[NBR_OF_MOTORS];
 
@@ -153,11 +153,6 @@ __weak void MCboot( MCI_Handle_t* pMCIList[NBR_OF_MOTORS] )
     /*   Speed & torque component initialization          */
     /******************************************************/
     STC_Init(pSTC[M1],&PIDSpeedHandle_M1, &ENCODER_M1._Super);
-
-    /******************************************************/
-    /*   Auxiliary speed sensor component initialization  */
-    /******************************************************/
-    STO_PLL_Init (&STO_PLL_M1);
 
     /****************************************************/
     /*   Virtual speed sensor component initialization  */
@@ -371,7 +366,6 @@ __weak void TSK_MediumFrequencyTaskM1(void)
   /* USER CODE END MediumFrequencyTask M1 0 */
 
   int16_t wAux = 0;
-  (void)STO_PLL_CalcAvrgMecSpeedUnit(&STO_PLL_M1, &wAux);
   (void)ENC_CalcAvrgMecSpeedUnit(&ENCODER_M1, &wAux);
   PQD_CalcElMotorPower(pMPM[M1]);
 
@@ -457,7 +451,6 @@ __weak void TSK_MediumFrequencyTaskM1(void)
               FOCVars[M1].bDriveInput = EXTERNAL;
               STC_SetSpeedSensor( pSTC[M1], &VirtualSpeedSensorM1._Super );
               ENC_Clear(&ENCODER_M1);
-              STO_PLL_Clear(&STO_PLL_M1);
               FOC_Clear( M1 );
 
               if (EAC_IsAligned(&EncAlignCtrlM1) == false )
@@ -827,9 +820,6 @@ __weak uint8_t TSK_HighFrequencyTask(void)
   uint16_t hFOCreturn;
   uint8_t bMotorNbr = 0;
 
-  Observer_Inputs_t STO_aux_Inputs; /*  only if sensorless aux*/
-  STO_aux_Inputs.Valfa_beta = FOCVars[M1].Valphabeta;  /* only if sensorless*/
-
   (void)ENC_CalcAngle(&ENCODER_M1);   /* if not sensorless then 2nd parameter is MC_NULL*/
 
   /* USER CODE BEGIN HighFrequencyTask SINGLEDRIVE_1 */
@@ -845,10 +835,6 @@ __weak uint8_t TSK_HighFrequencyTask(void)
   }
   else
   {
-    STO_aux_Inputs.Ialfa_beta = FOCVars[M1].Ialphabeta; /*  only if sensorless*/
-    STO_aux_Inputs.Vbus = VBS_GetAvBusVoltage_d(&(BusVoltageSensor_M1._Super)); /*  only for sensorless*/
-    (void)( void )STO_PLL_CalcElAngle (&STO_PLL_M1, &STO_aux_Inputs);
-	  STO_PLL_CalcAvrgElSpeedDpp (&STO_PLL_M1);
     /* USER CODE BEGIN HighFrequencyTask SINGLEDRIVE_3 */
 
     /* USER CODE END HighFrequencyTask SINGLEDRIVE_3 */

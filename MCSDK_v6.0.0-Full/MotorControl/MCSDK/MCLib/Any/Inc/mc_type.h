@@ -208,14 +208,14 @@ typedef enum
 typedef enum
 {
   MCM_OBSERVING_MODE = 0,       /**< not used */
-  MCM_OPEN_LOOP_VOLTAGE_MODE,   /**< Open loop, duty cycle set as reference */
-  MCM_OPEN_LOOP_CURRENT_MODE,   /**< Open loop, q & d currents set as reference */
-  MCM_SPEED_MODE,               /**< Closed loop, Speed mode.*/
-  MCM_TORQUE_MODE,              /**< Closed loop, Torque mode.*/
-  MCM_PROFILING_MODE,           /**< not used */
-  MCM_SHORTED_MODE,             /**< not used */
-  MCM_POSITION_MODE,            /**< Closed loop, sensored position control mode */
-  MCM_MODE_NUM                  /**< Number of modes in enum */
+  MCM_OPEN_LOOP_VOLTAGE_MODE = 1,   /**< Open loop, duty cycle set as reference */
+  MCM_OPEN_LOOP_CURRENT_MODE = 2,   /**< Open loop, q & d currents set as reference */
+  MCM_SPEED_MODE = 3,               /**< Closed loop, Speed mode.*/
+  MCM_TORQUE_MODE = 4,              /**< Closed loop, Torque mode.*/
+  MCM_PROFILING_MODE = 5,           /**< not used */
+  MCM_SHORTED_MODE = 6,             /**< not used */
+  MCM_POSITION_MODE = 7,            /**< Closed loop, sensored position control mode */
+  MCM_MODE_NUM = 8                  /**< Number of modes in enum */
 } MC_ControlMode_t;
 
 

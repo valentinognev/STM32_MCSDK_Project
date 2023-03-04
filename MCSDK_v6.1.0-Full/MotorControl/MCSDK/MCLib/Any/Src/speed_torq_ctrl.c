@@ -465,24 +465,24 @@ __weak bool STC_ExecSin(SpeednTorqCtrl_Handle_t *pHandle, int16_t hMean, int16_t
     {
       /* Interrupts the execution of any previous ramp command */
       Trig_Components Local_Vector_Components;
-      int32_t userPhase = hPhase * 65536 / 360 - 65536 / 2;
+      int32_t userPhase = hPhase * M1_PULSE_NBR / 360;
       int32_t angle = EncRefM1.hMechAngleWithPhase + userPhase;
-      while (angle > INT16_MAX)
-        angle -= UINT16_MAX;
-      while (angle < INT16_MIN)
-        angle += UINT16_MAX;
-      Local_Vector_Components = MCM_Trig_Functions((int16_t)angle);
+      while (angle > M1_PULSE_NBR)
+        angle -= M1_PULSE_NBR; //
+      while (angle < 0)
+        angle += M1_PULSE_NBR;
+      Local_Vector_Components = MCM_Trig_Functions((int16_t)(angle * UINT16_MAX / M1_PULSE_NBR - INT16_MAX));
       int32_t SinAngleplusPhase = Local_Vector_Components.hCos;
 
       if (MCM_SPEED_MODE == pHandle->Mode)
       {
-        pHandle->SpeedRefUnitExt = (int32_t)(hMean + hAmp * SinAngleplusPhase / 65536) * 65536;
-        DebugScopeInsertData(&debugScopeM1, 2, pHandle->SpeedRefUnitExt / 65536);
+        pHandle->SpeedRefUnitExt = (int32_t)(hMean + hAmp * SinAngleplusPhase / UINT16_MAX) * UINT16_MAX;
+        DebugScopeInsertData(&debugScopeM1, 2, pHandle->SpeedRefUnitExt / UINT16_MAX);
       }
       else
       {
-        pHandle->TorqueRef = (int32_t)(hMean + hAmp * SinAngleplusPhase / 65536) * 65536;
-        DebugScopeInsertData(&debugScopeM1, 2, pHandle->TorqueRef / 65536);
+        pHandle->TorqueRef = (int32_t)(hMean + hAmp * SinAngleplusPhase / UINT16_MAX) * UINT16_MAX;
+        DebugScopeInsertData(&debugScopeM1, 2, pHandle->TorqueRef / UINT16_MAX);
       }
       // int32_t sensorSpeed = (int32_t)STO_M1._Super->hElSpeedDpp*MEDIUM_FREQUENCY_TASK_RATE/65536*10;
       int16_t encoder = TIM4->CNT;//LL_TIM_GetCounter(TIM4);

@@ -336,7 +336,7 @@ EncoderReference_Handle_t EncRefM1 =
   .enc_I_counter = 0,
   .hMechAngle = 0,
   .hMechAngleWithPhase = 0,
-  .pRefElAngle = 0//&(STO_PLL_M1._Super.hElAngle)   //&(STO_CR_M1._Super.hElAngle)
+  .pRefElAngle = &(ENCODER_M1._Super.hElAngle)//&(STO_PLL_M1._Super.hElAngle)   //&(STO_CR_M1._Super.hElAngle)
 };
 /* USER CODE END Additional configuration */
 

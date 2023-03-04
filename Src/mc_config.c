@@ -317,6 +317,10 @@ PID_Handle_t *pPIDIq[NBR_OF_MOTORS] = {&PIDIqHandle_M1};
 PID_Handle_t *pPIDId[NBR_OF_MOTORS] = {&PIDIdHandle_M1};
 PQD_MotorPowMeas_Handle_t *pMPM[NBR_OF_MOTORS] = {&PQD_MotorPowMeasM1};
 FF_Handle_t *pFF[NBR_OF_MOTORS] = {&FF_M1};
+ESC_Handle_t ESC_M1 =
+{
+  .pESC_params = &ESC_ParamsM1,
+} ;
 /* USER CODE BEGIN Additional configuration */
 DebugScope_Handle_t debugScopeM1 =
     {

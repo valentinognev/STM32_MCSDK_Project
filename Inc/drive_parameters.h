@@ -31,7 +31,7 @@
 /******** MAIN AND AUXILIARY SPEED/POSITION SENSOR(S) SETTINGS SECTION ********/
 
 /*** Speed measurement settings ***/
-#define MAX_APPLICATION_SPEED_RPM       3540 /*!< rpm, mechanical */
+#define MAX_APPLICATION_SPEED_RPM       10002 /*!< rpm, mechanical */
 #define MIN_APPLICATION_SPEED_RPM       0 /*!< rpm, mechanical,
                                                            absolute value */
 #define M1_SS_MEAS_ERRORS_BEFORE_FAULTS 3 /*!< Number of speed
@@ -62,11 +62,11 @@
 #define REGULATION_EXECUTION_RATE     1    /*!< FOC execution rate in
                                                            number of PWM cycles */
 /* Gains values for torque and flux control loops */
-#define PID_TORQUE_KP_DEFAULT         3923
-#define PID_TORQUE_KI_DEFAULT         2452
+#define PID_TORQUE_KP_DEFAULT         2399
+#define PID_TORQUE_KI_DEFAULT         2999
 #define PID_TORQUE_KD_DEFAULT         100
-#define PID_FLUX_KP_DEFAULT           3923
-#define PID_FLUX_KI_DEFAULT           2452
+#define PID_FLUX_KP_DEFAULT           2399
+#define PID_FLUX_KI_DEFAULT           2999
 #define PID_FLUX_KD_DEFAULT           100
 
 /* Torque/Flux control loop gains dividers*/
@@ -82,14 +82,14 @@
 #define SPEED_LOOP_FREQUENCY_HZ       ( uint16_t )1000 /*!<Execution rate of speed
                                                       regulation loop (Hz) */
 
-#define PID_SPEED_KP_DEFAULT          2068/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
-#define PID_SPEED_KI_DEFAULT          1883/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
+#define PID_SPEED_KP_DEFAULT          2578/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
+#define PID_SPEED_KI_DEFAULT          2/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
 #define PID_SPEED_KD_DEFAULT          0/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/
 /* Speed PID parameter dividers */
-#define SP_KPDIV                      32
+#define SP_KPDIV                      4096
 #define SP_KIDIV                      16384
 #define SP_KDDIV                      16
-#define SP_KPDIV_LOG                  LOG2((32))
+#define SP_KPDIV_LOG                  LOG2((4096))
 #define SP_KIDIV_LOG                  LOG2((16384))
 #define SP_KDDIV_LOG                  LOG2((16))
 
@@ -98,17 +98,17 @@
 /* USER CODE END PID_SPEED_INTEGRAL_INIT_DIV */
 
 #define SPD_DIFFERENTIAL_TERM_ENABLING DISABLE
-#define IQMAX                          3721
+#define IQMAX                          2177
 
 /* Default settings */
 #define DEFAULT_CONTROL_MODE           MCM_TORQUE_MODE
-#define DEFAULT_TARGET_SPEED_RPM       1274
+#define DEFAULT_TARGET_SPEED_RPM       3601
 #define DEFAULT_TARGET_SPEED_UNIT      (DEFAULT_TARGET_SPEED_RPM*SPEED_UNIT/U_RPM)
-#define DEFAULT_TORQUE_COMPONENT       100
-#define DEFAULT_FLUX_COMPONENT         0
+#define DEFAULT_TORQUE_COMPONENT       200
+#define DEFAULT_FLUX_COMPONENT         200
 
 /**************************    FIRMWARE PROTECTIONS SECTION   *****************/
-#define OV_VOLTAGE_THRESHOLD_V          18 /*!< Over-voltage
+#define OV_VOLTAGE_THRESHOLD_V          15 /*!< Over-voltage
                                                          threshold */
 #define UD_VOLTAGE_THRESHOLD_V          8 /*!< Under-voltage
                                                           threshold */
@@ -156,9 +156,9 @@
 
 /*  Feed-forward parameters */
 #define FEED_FORWARD_CURRENT_REG_ENABLING ENABLE
-#define CONSTANT1_Q                    115690
-#define CONSTANT1_D                    115690
-#define CONSTANT2_QD                   8022
+#define CONSTANT1_Q                    57845
+#define CONSTANT1_D                    57845
+#define CONSTANT2_QD                   2936
 
 /*** On the fly start-up ***/
 

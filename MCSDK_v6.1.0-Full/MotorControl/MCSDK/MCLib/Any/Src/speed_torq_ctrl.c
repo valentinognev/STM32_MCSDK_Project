@@ -485,7 +485,7 @@ __weak bool STC_ExecSin(SpeednTorqCtrl_Handle_t *pHandle, int16_t hMean, int16_t
         DebugScopeInsertData(&debugScopeM1, 2, pHandle->TorqueRef / 65536);
       }
       // int32_t sensorSpeed = (int32_t)STO_M1._Super->hElSpeedDpp*MEDIUM_FREQUENCY_TASK_RATE/65536*10;
-      int16_t encoder = LL_TIM_GetCounter(TIM4);
+      int16_t encoder = TIM4->CNT;//LL_TIM_GetCounter(TIM4);
       DebugScopeInsertData(&debugScopeM1, 1, angle);
       DebugScopeInsertData(&debugScopeM1, 3, *(EncRefM1.pRefElAngle));
       DebugScopeInsertData(&debugScopeM1, 4, encoder);

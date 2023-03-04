@@ -464,25 +464,24 @@ __weak bool STC_ExecSin(SpeednTorqCtrl_Handle_t *pHandle, int16_t hMean, int16_t
     if (true == allowedRange)
     {
       /* Interrupts the execution of any previous ramp command */
-      Trig_Components Local_Vector_Components;
-      int32_t userPhase = hPhase * M1_PULSE_NBR / 360;
+      int32_t userPhase = hPhase * 65536 / 360 - 65536 / 2;
       int32_t angle = EncRefM1.hMechAngleWithPhase + userPhase;
-      while (angle > M1_PULSE_NBR)
-        angle -= M1_PULSE_NBR; //
-      while (angle < 0)
-        angle += M1_PULSE_NBR;
-      Local_Vector_Components = MCM_Trig_Functions((int16_t)(angle * UINT16_MAX / M1_PULSE_NBR - INT16_MAX));
+      while (angle > INT16_MAX)
+        angle -= UINT16_MAX;
+      while (angle < INT16_MIN)
+        angle += UINT16_MAX;
+      Trig_Components Local_Vector_Components = MCM_Trig_Functions((int16_t)angle);
       int32_t SinAngleplusPhase = Local_Vector_Components.hCos;
 
       if (MCM_SPEED_MODE == pHandle->Mode)
       {
-        pHandle->SpeedRefUnitExt = (int32_t)(hMean + hAmp * SinAngleplusPhase / UINT16_MAX) * UINT16_MAX;
-        DebugScopeInsertData(&debugScopeM1, 2, pHandle->SpeedRefUnitExt / UINT16_MAX);
+        pHandle->SpeedRefUnitExt = (int32_t)(hMean + hAmp * SinAngleplusPhase / 65536) * 65536;
+        DebugScopeInsertData(&debugScopeM1, 2, pHandle->SpeedRefUnitExt / 65536);
       }
       else
       {
-        pHandle->TorqueRef = (int32_t)(hMean + hAmp * SinAngleplusPhase / UINT16_MAX) * UINT16_MAX;
-        DebugScopeInsertData(&debugScopeM1, 2, pHandle->TorqueRef / UINT16_MAX);
+        pHandle->TorqueRef = (int32_t)(hMean + hAmp * SinAngleplusPhase / 65536) * 65536;
+        DebugScopeInsertData(&debugScopeM1, 2, pHandle->TorqueRef / 65536);
       }
       // int32_t sensorSpeed = (int32_t)STO_M1._Super->hElSpeedDpp*MEDIUM_FREQUENCY_TASK_RATE/65536*10;
       int16_t encoder = TIM4->CNT;//LL_TIM_GetCounter(TIM4);
@@ -498,6 +497,108 @@ __weak bool STC_ExecSin(SpeednTorqCtrl_Handle_t *pHandle, int16_t hMean, int16_t
 #endif
   return (allowedRange);
 }
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// /* Starts the execution of a sin speed. */
+// __weak bool STC_ExecSin(SpeednTorqCtrl_Handle_t *pHandle, int16_t hMean, int16_t hAmp, int32_t hPhase)
+// {
+//   bool allowedRange = true;
+// #ifdef NULL_PTR_SPD_TRQ_CTL
+//   if (MC_NULL == pHandle)
+//   {
+//     allowedRange = false;
+//   }
+//   else
+//   {
+// #endif
+// #ifdef CHECK_BOUNDARY
+//     if (MCM_SPEED_MODE == pHandle->Mode)
+//     {
+//       if ((int32_t)(hMean + hAmp) > (int32_t)pHandle->MaxAppPositiveMecSpeedUnit)
+//       {
+//         allowedRange = false;
+//       }
+//       else if (-(hMean + hAmp) < pHandle->MinAppNegativeMecSpeedUnit)
+//       {
+//         allowedRange = false;
+//       }
+//       else if ((int32_t)(hMean - hAmp) < (int32_t)pHandle->MinAppPositiveMecSpeedUnit)
+//       {
+//         if (-(hMean - hAmp) > pHandle->MaxAppNegativeMecSpeedUnit)
+//         {
+//           allowedRange = false;
+//         }
+//       }
+//       else
+//       {
+//         /* Nothing to do */
+//       }
+//     }
+//     else if (MCM_TORQUE_MODE == pHandle->Mode)
+//     {
+//       if ((int32_t)(hMean + hAmp) > (int32_t)pHandle->MaxPositiveTorque)
+//       {
+//         allowedRange = false;
+//       }
+//       else if (-(hMean + hAmp) < pHandle->MinNegativeTorque)
+//       {
+//         allowedRange = false;
+//       }
+//       else if ((int32_t)(hMean - hAmp) < (int32_t)pHandle->MinNegativeTorque)
+//       {
+//         if (-(hMean - hAmp) > pHandle->MaxPositiveTorque)
+//         {
+//           allowedRange = false;
+//         }
+//       }
+//       else
+//       {
+//         /* Nothing to do */
+//       }
+//     }
+//     else
+//     {
+//       /* Nothing to do */
+//     }
+// #endif
+//     if (true == allowedRange)
+//     {
+//       /* Interrupts the execution of any previous ramp command */
+//       Trig_Components Local_Vector_Components;
+//       int32_t userPhase = hPhase * M1_PULSE_NBR / 360;
+//       int32_t angle = EncRefM1.hMechAngleWithPhase + userPhase;
+//       while (angle > M1_PULSE_NBR)
+//         angle -= M1_PULSE_NBR; //
+//       while (angle < 0)
+//         angle += M1_PULSE_NBR;
+//       Local_Vector_Components = MCM_Trig_Functions((int16_t)(angle * UINT16_MAXz - INT16_MAX));
+//       int32_t SinAngleplusPhase = Local_Vector_Components.hCos;
+
+//       if (MCM_SPEED_MODE == pHandle->Mode)
+//       {
+//         pHandle->SpeedRefUnitExt = (int32_t)(hMean + hAmp * SinAngleplusPhase / UINT16_MAX) * UINT16_MAX;
+//         DebugScopeInsertData(&debugScopeM1, 2, pHandle->SpeedRefUnitExt / UINT16_MAX);
+//       }
+//       else
+//       {
+//         pHandle->TorqueRef = (int32_t)(hMean + hAmp * SinAngleplusPhase / UINT16_MAX) * UINT16_MAX;
+//         DebugScopeInsertData(&debugScopeM1, 2, pHandle->TorqueRef / UINT16_MAX);
+//       }
+//       // int32_t sensorSpeed = (int32_t)STO_M1._Super->hElSpeedDpp*MEDIUM_FREQUENCY_TASK_RATE/65536*10;
+//       int16_t encoder = TIM4->CNT; // LL_TIM_GetCounter(TIM4);
+//       DebugScopeInsertData(&debugScopeM1, 1, angle);
+//       DebugScopeInsertData(&debugScopeM1, 3, *(EncRefM1.pRefElAngle));
+//       DebugScopeInsertData(&debugScopeM1, 4, encoder);
+
+//       pHandle->RampRemainingStep = 0U;
+//       pHandle->IncDecAmount = 0;
+//     }
+// #ifdef NULL_PTR_SPD_TRQ_CTL
+//   }
+// #endif
+//   return (allowedRange);
+// }
+
 /**
   * @brief  Interrupts the execution of any previous ramp command in particular by clearing
   *         the number of steps remaining to complete the ramp

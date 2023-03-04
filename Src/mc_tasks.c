@@ -194,7 +194,16 @@ __weak void MCboot( MCI_Handle_t* pMCIList[NBR_OF_MOTORS] )
     FOCVars[M1].Iqdref = STC_GetDefaultIqdref(pSTC[M1]);
     FOCVars[M1].UserIdref = STC_GetDefaultIqdref(pSTC[M1]).d;
     MCI_Init(&Mci[M1], pSTC[M1], &FOCVars[M1],pwmcHandle[M1] );
-    MCI_ExecTorqueRamp(&Mci[M1], STC_GetDefaultIqdref(pSTC[M1]).q, 0);
+    if (EncAlignCtrlM1.pSTC[M1].Mode == MCM_TORQUE_MODE ||
+        Mci[M1].LastModalitySetByUser == MCM_TORQUE_MODE)
+    {
+      MCI_ExecTorqueRamp(&Mci[M1], STC_GetDefaultIqdref(pSTC[M1]).q, 0);
+    }
+    else
+    {
+      MCI_ExecSpeedRamp(&Mci[M1],
+      STC_GetMecSpeedRefUnitDefault(pSTC[M1]),0); /*First command to STC*/
+    }
     pMCIList[M1] = &Mci[M1];
 
     /* Applicative hook in MCBoot() */
@@ -363,7 +372,7 @@ encoderAngleCalculation(MCI_Handle_t *pHandle)
       totalAngle -= M1_PULSE_NBR;
     else if (totalAngle < 0)
       totalAngle += M1_PULSE_NBR;
-    EncRefM1.hMechAngleWithPhase = totalAngle;
+    EncRefM1.hMechAngleWithPhase = totalAngle * UINT16_MAX / M1_PULSE_NBR - INT16_MAX;
 }
 /**
   * @brief Executes medium frequency periodic Motor Control tasks

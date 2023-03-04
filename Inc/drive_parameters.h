@@ -50,7 +50,7 @@
 /**************************    DRIVE SETTINGS SECTION   **********************/
 /* PWM generation and current reading */
 
-#define PWM_FREQUENCY   16000
+#define PWM_FREQUENCY   30000
 #define PWM_FREQ_SCALING 1
 
 #define LOW_SIDE_SIGNALS_ENABLING        LS_PWM_TIMER
@@ -79,7 +79,7 @@
 #define TFDIFFERENTIAL_TERM_ENABLING  DISABLE
 
 /* Speed control loop */
-#define SPEED_LOOP_FREQUENCY_HZ       ( uint16_t )1000 /*!<Execution rate of speed
+#define SPEED_LOOP_FREQUENCY_HZ       ( uint16_t )2000 /*!<Execution rate of speed
                                                       regulation loop (Hz) */
 
 #define PID_SPEED_KP_DEFAULT          2578/(SPEED_UNIT/10) /* Workbench compute the gain for 01Hz unit*/

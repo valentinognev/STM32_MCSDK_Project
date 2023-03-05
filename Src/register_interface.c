@@ -29,7 +29,9 @@
 #include "mc_configuration_registers.h"
 #include "debug_scope.h"
 
-static STO_PLL_Handle_t * stoPLLSensor [NBR_OF_MOTORS] = { &STO_PLL_M1 };
+static STO_PLL_Handle_t *stoPLLSensor[NBR_OF_MOTORS] = {&STO_PLL_M1};
+extern FF_Handle_t *pFF[NBR_OF_MOTORS];
+
 static PID_Handle_t *pPIDSpeed[NBR_OF_MOTORS] = { &PIDSpeedHandle_M1 };
 static ENCODER_Handle_t *pEncoder[NBR_OF_MOTORS] = {&ENCODER_M1};
 

@@ -59,7 +59,7 @@
 /* USER CODE END Private define */
 #define VBUS_TEMP_ERR_MASK (MC_OVER_VOLT| MC_UNDER_VOLT| MC_OVER_TEMP)
 /* Private variables----------------------------------------------------------*/
-
+extern FF_Handle_t *pFF[NBR_OF_MOTORS];
 static FOCVars_t FOCVars[NBR_OF_MOTORS];
 static EncAlign_Handle_t *pEAC[NBR_OF_MOTORS];
 
@@ -199,8 +199,16 @@ __weak void MCboot( MCI_Handle_t* pMCIList[NBR_OF_MOTORS] )
     FOCVars[M1].Iqdref = STC_GetDefaultIqdref(pSTC[M1]);
     FOCVars[M1].UserIdref = STC_GetDefaultIqdref(pSTC[M1]).d;
     MCI_Init(&Mci[M1], pSTC[M1], &FOCVars[M1],pwmcHandle[M1] );
-    MCI_ExecSpeedRamp(&Mci[M1],
-    STC_GetMecSpeedRefUnitDefault(pSTC[M1]),0); /*First command to STC*/
+    if (EncAlignCtrlM1.pSTC[M1].Mode == MCM_TORQUE_MODE ||
+        Mci[M1].LastModalitySetByUser == MCM_TORQUE_MODE)
+    {
+      MCI_ExecTorqueRamp(&Mci[M1], STC_GetDefaultIqdref(pSTC[M1]).q, 0);
+    }
+    else
+    {
+      MCI_ExecSpeedRamp(&Mci[M1],
+      STC_GetMecSpeedRefUnitDefault(pSTC[M1]),0); /*First command to STC*/
+    }
     pMCIList[M1] = &Mci[M1];
 
     /* Applicative hook in MCBoot() */
@@ -336,7 +344,7 @@ mechanicalAngleCalculation(MCI_Handle_t *pHandle)
 {
     //const int16_t hElAngle = pHandle->pFOCVars->hElAngle;
     const int16_t hElAngle = *(EncRefM1.pRefElAngle);
-    const int16_t encPhase = EncRefM1.enc_I_angle;
+    const int16_t encPhase = EncRefM1.enc_I_angle * UINT16_MAX / POLE_PAIR_NUM - INT16_MAX;
     static int16_t prevAngle = 0;
     static int16_t sectionCounter = 0;
      
@@ -356,6 +364,21 @@ mechanicalAngleCalculation(MCI_Handle_t *pHandle)
     EncRefM1.hMechAngleWithPhase = totalAngle;
 }
 
+encoderAngleCalculation(MCI_Handle_t *pHandle)
+{
+    // const int16_t hElAngle = pHandle->pFOCVars->hElAngle;
+    const int16_t encAngle = TIM4->CNT;
+    const int16_t encPhase = EncRefM1.enc_I_angle;
+    static int16_t prevAngle = 0;
+    static int16_t sectionCounter = 0;
+
+    int32_t totalAngle = (int32_t)encAngle - encPhase;
+    if (totalAngle > M1_PULSE_NBR)
+      totalAngle -= M1_PULSE_NBR;
+    else if (totalAngle < 0)
+      totalAngle += M1_PULSE_NBR;
+    EncRefM1.hMechAngleWithPhase = totalAngle * UINT16_MAX / M1_PULSE_NBR - INT16_MAX;
+}
 /**
   * @brief Executes medium frequency periodic Motor Control tasks
   *
@@ -401,7 +424,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
              Mci[M1].State = CHARGE_BOOT_CAP;
 
            }
-
+           EncRefM1.enc_I_counter=0;
           }
           else
           {
@@ -473,6 +496,7 @@ __weak void TSK_MediumFrequencyTaskM1(void)
                 FOC_CalcCurrRef( M1 );
                 STC_ForceSpeedReferenceToCurrentSpeed( pSTC[M1] ); /* Init the reference speed to current speed */
                 MCI_ExecBufferedCommands( &Mci[M1] ); /* Exec the speed ramp after changing of the speed sensor */
+                NVIC_EnableIRQ(EXTI9_5_IRQn);
                 Mci[M1].State = RUN;
               }
 
@@ -531,14 +555,13 @@ __weak void TSK_MediumFrequencyTaskM1(void)
           {
             /* USER CODE BEGIN MediumFrequencyTask M1 2 */
               int8_t lastCommand = Mci[M1].lastCommand ;
-              lastCommand++;
-              lastCommand--;
               if (Mci[M1].lastCommand == MCI_CMD_EXECSPEEDSIN || Mci[M1].lastCommand ==MCI_CMD_EXECTORQUESIN)
                 Mci[M1].CommandState = MCI_COMMAND_NOT_ALREADY_EXECUTED;
-              mechanicalAngleCalculation(&Mci[M1]);
-            /* USER CODE END MediumFrequencyTask M1 2 */
+              encoderAngleCalculation(&Mci[M1]);//mechanicalAngleCalculation(&Mci[M1]);
+             // mechanicalAngleCalculation(&Mci[M1]);
+              /* USER CODE END MediumFrequencyTask M1 2 */
 
-            MCI_ExecBufferedCommands(&Mci[M1]);
+              MCI_ExecBufferedCommands(&Mci[M1]);
 
               FOC_CalcCurrRef(M1);
 
@@ -1064,6 +1087,7 @@ LL_GPIO_LockPin(M1_OPAMP2_OUT_GPIO_Port, M1_OPAMP2_OUT_Pin);
 LL_GPIO_LockPin(M1_OPAMP2_INT_GAIN_GPIO_Port, M1_OPAMP2_INT_GAIN_Pin);
 LL_GPIO_LockPin(M1_ENCODER_A_GPIO_Port, M1_ENCODER_A_Pin);
 LL_GPIO_LockPin(M1_ENCODER_B_GPIO_Port, M1_ENCODER_B_Pin);
+LL_GPIO_LockPin(M1_PWM_INPUT_GPIO_Port, M1_PWM_INPUT_Pin);
 LL_GPIO_LockPin(M1_PWM_UH_GPIO_Port, M1_PWM_UH_Pin);
 LL_GPIO_LockPin(M1_PWM_VH_GPIO_Port, M1_PWM_VH_Pin);
 LL_GPIO_LockPin(M1_PWM_WH_GPIO_Port, M1_PWM_WH_Pin);

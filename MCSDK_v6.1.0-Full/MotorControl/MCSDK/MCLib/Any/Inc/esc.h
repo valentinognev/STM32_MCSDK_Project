@@ -23,7 +23,7 @@
 #define ESC_H
  
 #define ESC_FILTER_DEEP 4    
-#define ESC_BEEP_FEATURE    
+//#define ESC_BEEP_FEATURE    
     
 typedef enum
 {

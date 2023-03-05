@@ -39,6 +39,8 @@
 #include "encoder_speed_pos_fdbk.h"
 #include "enc_align_ctrl.h"
 
+#include "esc.h"
+
 #include "ramp_ext_mngr.h"
 #include "circle_limitation.h"
 
@@ -79,6 +81,7 @@ extern NTC_Handle_t *pTemperatureSensor[NBR_OF_MOTORS];
 extern PQD_MotorPowMeas_Handle_t *pMPM[NBR_OF_MOTORS];
 extern FF_Handle_t *pFF[NBR_OF_MOTORS];
 extern MCI_Handle_t* pMCI[NBR_OF_MOTORS];
+extern ESC_Handle_t ESC_M1;
 /* USER CODE BEGIN Additional extern */
 
 /* USER CODE END Additional extern */

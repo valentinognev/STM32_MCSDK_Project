@@ -29,8 +29,9 @@
 #include "mc_configuration_registers.h"
 #include "debug_scope.h"
 
-static RevUpCtrl_Handle_t *RevUpControl[NBR_OF_MOTORS] = { &RevUpControlM1 };
-static STO_PLL_Handle_t * stoPLLSensor [NBR_OF_MOTORS] = { &STO_PLL_M1 };
+static RevUpCtrl_Handle_t *RevUpControl[NBR_OF_MOTORS] = {&RevUpControlM1};
+static STO_PLL_Handle_t *stoPLLSensor[NBR_OF_MOTORS] = {&STO_PLL_M1};
+extern FF_Handle_t *pFF[NBR_OF_MOTORS];
 static PID_Handle_t *pPIDSpeed[NBR_OF_MOTORS] = { &PIDSpeedHandle_M1 };
 static ENCODER_Handle_t *pEncoder[NBR_OF_MOTORS] = {&ENCODER_M1};
 
@@ -1081,7 +1082,7 @@ uint8_t RI_GetReg (uint16_t dataID, uint8_t * data, uint16_t *size, int16_t free
               break;
             }
 
-           case MC_REG_FF_1Q:
+            case MC_REG_FF_1Q:
             {
               *regdata32 = pFF[motorID]->wConstant_1Q;
               break;

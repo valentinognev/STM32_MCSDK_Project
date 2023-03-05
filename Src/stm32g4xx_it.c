@@ -32,7 +32,7 @@
 
 /* Private define ------------------------------------------------------------*/
 /* USER CODE BEGIN PD */
-#define NUMOFANGS 100
+#define NUMOFANGS 10
 /* USER CODE END PD */
 
 /* Private macro -------------------------------------------------------------*/
@@ -92,7 +92,7 @@ void EXTI9_5_IRQHandler(void)
     if (EncRefM1.enc_I_counter < NUMOFANGS)
     {
       //angArr[EncRefM1.enc_I_counter]=STO_CR_M1._Super.hElAngle;
-      angArr[EncRefM1.enc_I_counter] = EncRefM1.hMechAngle;
+      angArr[EncRefM1.enc_I_counter] = TIM4->CNT; //EncRefM1.hMechAngle;
       EncRefM1.enc_I_counter++;
     }
     else

@@ -20,7 +20,7 @@ message("Build type: ${CMAKE_BUILD_TYPE}")
 # Set microcontroller information
 set(MCU_FAMILY STM32G4xx)
 set(MCU_MODEL STM32G431xx)
-set(MCSDK_VERSION 6.1.0)
+set(MCSDK_VERSION 6.1.2)
 set(CPU_PARAMETERS
     -mcpu=cortex-m4
     -mthumb
@@ -51,9 +51,10 @@ set(STM32CUBEMX_INCLUDE_DIRECTORIES
     ${CMAKE_CURRENT_SOURCE_DIR}/MCSDK_v${MCSDK_VERSION}-Full/MotorControl/MCSDK/MCLib/G4xx/Inc 
     ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/CMSIS/Device/ST/${MCU_FAMILY}/Include
     ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/CMSIS/Include
-    # ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/include
-    # ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS
-    # ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
+    ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS
+   # ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/CMSIS/RTOS2/Include
+    ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/include
+    ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F
     )
 
 set(PROJECT_INCLUDE_DIRECTORIES 
@@ -89,6 +90,8 @@ file(GLOB_RECURSE STM32CUBEMX_SOURCES CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_rcc.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_comp.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_dac.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/tasks.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c
     # ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/MCSDK_v${MCSDK_VERSION}-Full/MotorControl/MCSDK/MCLib/Any/Src/bus_voltage_sensor.c
     ${CMAKE_CURRENT_SOURCE_DIR}/MCSDK_v${MCSDK_VERSION}-Full/MotorControl/MCSDK/MCLib/Any/Src/circle_limitation.c

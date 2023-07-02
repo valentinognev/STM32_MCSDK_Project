@@ -1,5 +1,7 @@
 {
     "configurations": [
+        
+    
         {
             "cwd": "${workspaceFolder}",
             "executable": "./build/STM32_MCSDK_Project.elf",

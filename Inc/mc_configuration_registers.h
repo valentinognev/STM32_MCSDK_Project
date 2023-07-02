@@ -82,7 +82,7 @@ typedef struct
 
 #define SDK_VERSION_MAIN   (0x6) /*!< [31:24] main version */
 #define SDK_VERSION_SUB1   (0x1) /*!< [23:16] sub1 version */
-#define SDK_VERSION_SUB2   (0x0) /*!< [15:8]  sub2 version */
+#define SDK_VERSION_SUB2   (0x2) /*!< [15:8]  sub2 version */
 #define SDK_VERSION_RC     (0x0) /*!< [7:0]  release candidate */
 #define SDK_VERSION        ((SDK_VERSION_MAIN << 24U)\
                                          |(SDK_VERSION_SUB1 << 16U)\

@@ -24,7 +24,7 @@
 #include "register_interface.h"
 #include "parameters_conversion.h"
 
-#define FIRMWARE_NAME_STR "ST MC SDK\tVer.6.1.0"
+#define FIRMWARE_NAME_STR "ST MC SDK\tVer.6.1.2"
 #define MAX_READABLE_CURRENT 3.3 / (2 * RSHUNT * AMPLIFICATION_GAIN)
 
 const char_t CTL_BOARD[] = "B-G431B-ESC1";

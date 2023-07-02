@@ -50,6 +50,10 @@
 __weak void MC_APP_BootHook(void)
 {
   esc_boot(&ESC_M1);
+  /*
+   * This function can be overloaded or the application can inject
+   * code into it that will be executed at the end of MCboot().
+   */
 /* USER CODE BEGIN BootHook */
 
 /* USER CODE END BootHook */
@@ -64,6 +68,11 @@ __weak void MC_APP_BootHook(void)
 __weak void MC_APP_PostMediumFrequencyHook_M1(void)
 {
   esc_pwm_control(&ESC_M1);
+   /*
+   * This function can be overloaded or the application can inject
+   * code into it that will be executed right after the Medium
+   * Frequency Task of Motor 1.
+   */
 /* USER SECTION BEGIN PostMediumFrequencyHookM1 */
 
 /* USER SECTION END PostMediumFrequencyHookM1 */

@@ -46,6 +46,7 @@
 /* USER CODE END EM */
 
 /* Exported functions prototypes ---------------------------------------------*/
+void TIM6_DAC_IRQHandler(void);
 void EXTI9_5_IRQHandler(void);
 /* USER CODE BEGIN EFP */
 

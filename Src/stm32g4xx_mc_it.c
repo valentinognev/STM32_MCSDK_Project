@@ -315,31 +315,6 @@ void HardFault_Handler(void)
 
 }
 
-void SysTick_Handler(void)
-{
-
-#ifdef MC_HAL_IS_USED
-static uint8_t SystickDividerCounter = SYSTICK_DIVIDER;
-  /* USER CODE BEGIN SysTick_IRQn 0 */
-
-  /* USER CODE END SysTick_IRQn 0 */
-  if (SystickDividerCounter == SYSTICK_DIVIDER)
-  {
-    HAL_IncTick();
-    HAL_SYSTICK_IRQHandler();
-    SystickDividerCounter = 0;
-  }
-  SystickDividerCounter ++;
-#endif /* MC_HAL_IS_USED */
-
-  /* USER CODE BEGIN SysTick_IRQn 1 */
-  /* USER CODE END SysTick_IRQn 1 */
-    MC_RunMotorControlTasks();
-
-  /* USER CODE BEGIN SysTick_IRQn 2 */
-  /* USER CODE END SysTick_IRQn 2 */
-}
-
 /**
   * @brief  This function handles Button IRQ on PIN PC10.
   */

@@ -91,7 +91,10 @@ file(GLOB_RECURSE STM32CUBEMX_SOURCES CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_comp.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Drivers/STM32G4xx_HAL_Driver/Src/stm32g4xx_ll_dac.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/tasks.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/list.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/portable/MemMang/heap_4.c
     ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/Third_Party/FreeRTOS/Source/portable/GCC/ARM_CM4F/port.c
     # ${CMAKE_CURRENT_SOURCE_DIR}/Middlewares/*.c
     ${CMAKE_CURRENT_SOURCE_DIR}/MCSDK_v${MCSDK_VERSION}-Full/MotorControl/MCSDK/MCLib/Any/Src/bus_voltage_sensor.c
     ${CMAKE_CURRENT_SOURCE_DIR}/MCSDK_v${MCSDK_VERSION}-Full/MotorControl/MCSDK/MCLib/Any/Src/circle_limitation.c

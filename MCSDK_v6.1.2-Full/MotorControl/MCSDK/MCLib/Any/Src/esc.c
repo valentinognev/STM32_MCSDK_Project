@@ -593,12 +593,12 @@ void TIM2_IRQHandler(void)
   LL_TIM_ClearFlag_CC1 (TIM2);
 
   /* Get Pulse width and low pass filter it to remove spurious informations */    
-  ESC_M1.Ton_value = esc_capture_filter(&ESC_M1, LL_TIM_OC_GetCompareCH2(TIM2));
+  // ESC_M1.Ton_value = esc_capture_filter(&ESC_M1, LL_TIM_OC_GetCompareCH2(TIM2));
 
-  /* Fail safe mechanism: stops the motor is the PWM input is disabled */
-  ESC_M1.watchdog_counter++;
-  if(ESC_M1.watchdog_counter == 0)
-     ESC_M1.watchdog_counter = 1;
+  // /* Fail safe mechanism: stops the motor is the PWM input is disabled */
+  // ESC_M1.watchdog_counter++;
+  // if(ESC_M1.watchdog_counter == 0)
+  //    ESC_M1.watchdog_counter = 1;
 }
 
 /******************* (C) COPYRIGHT 2016 STMicroelectronics *****END OF FILE****/

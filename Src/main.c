@@ -176,15 +176,6 @@ int main(void)
     counter++;
     LL_mDelay(1);
     /* USER CODE END WHILE */
-    // if (MC_GetLastCommandMotor1() == MCI_CMD_EXECSPEEDRAMP && 
-    //     MC_GetCommandStateMotor1() == MCI_BUFFER_EMPTY &&
-    //     getTickMSCounter()-getStartMotorTick() > 2000)
-    // {
-    //   int16_t hFinalSpeedMean = MC_GetMecSpeedAverageMotor1();
-    //   MCI_GetLastRampFinalSpeed(pMCI[M1]);
-    //   int16_t hFinalSpeedAmp = hFinalSpeedMean/5;
-    //   int16_t hPhase = 0;
-    //   MC_ProgramSpeedSinMotor1(hFinalSpeedMean, hFinalSpeedAmp, hPhase);
 
     /* USER CODE BEGIN 3 */
   }

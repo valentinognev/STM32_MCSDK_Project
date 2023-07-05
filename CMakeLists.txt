@@ -118,7 +118,7 @@ file(GLOB_RECURSE STM32CUBEMX_SOURCES CONFIGURE_DEPENDS
     ${CMAKE_CURRENT_SOURCE_DIR}/MCSDK_v${MCSDK_VERSION}-Full/MotorControl/MCSDK/MCLib/Any/Src/feed_forward_ctrl.c
     ${CMAKE_CURRENT_SOURCE_DIR}/MCSDK_v${MCSDK_VERSION}-Full/MotorControl/MCSDK/MCLib/Any/Src/encoder_speed_pos_fdbk.c
     ${CMAKE_CURRENT_SOURCE_DIR}/MCSDK_v${MCSDK_VERSION}-Full/MotorControl/MCSDK/MCLib/Any/Src/enc_align_ctrl.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/MCSDK_v${MCSDK_VERSION}-Full/MotorControl/MCSDK/MCLib/Any/Src/esc.c
+    #${CMAKE_CURRENT_SOURCE_DIR}/MCSDK_v${MCSDK_VERSION}-Full/MotorControl/MCSDK/MCLib/Any/Src/esc.c
     )
 
 set(PROJECT_DIR ${CMAKE_CURRENT_SOURCE_DIR}/Project)

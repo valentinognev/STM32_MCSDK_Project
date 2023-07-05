@@ -207,8 +207,8 @@ __weak void MCboot( MCI_Handle_t* pMCIList[NBR_OF_MOTORS] )
     }
     else
     {
-      MCI_ExecSpeedRamp(&Mci[M1],
-      STC_GetMecSpeedRefUnitDefault(pSTC[M1]),0); /*First command to STC*/
+    MCI_ExecSpeedRamp(&Mci[M1],
+    STC_GetMecSpeedRefUnitDefault(pSTC[M1]),0); /*First command to STC*/
     }
     pMCIList[M1] = &Mci[M1];
 
@@ -247,11 +247,6 @@ __weak void MC_RunMotorControlTasks(void)
   {
     /* ** Medium Frequency Tasks ** */
     MC_Scheduler();
-
-    /* Safety task is run after Medium Frequency task so that
-     * it can overcome actions they initiated if needed. */
-    TSK_SafetyTask();
-
   }
 }
 
@@ -560,9 +555,9 @@ __weak void TSK_MediumFrequencyTaskM1(void)
                 Mci[M1].CommandState = MCI_COMMAND_NOT_ALREADY_EXECUTED;
               encoderAngleCalculation(&Mci[M1]);//mechanicalAngleCalculation(&Mci[M1]);
              // mechanicalAngleCalculation(&Mci[M1]);
-              /* USER CODE END MediumFrequencyTask M1 2 */
+            /* USER CODE END MediumFrequencyTask M1 2 */
 
-              MCI_ExecBufferedCommands(&Mci[M1]);
+            MCI_ExecBufferedCommands(&Mci[M1]);
 
               FOC_CalcCurrRef(M1);
 

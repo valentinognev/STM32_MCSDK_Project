@@ -48,8 +48,6 @@ extern bool UART_Input;
 /* Define the number of samples to be taken by the DMA 
    For lower Frequencies, keep the less number for samples 
 */
-#define PWMNUMVAL   500
-
 int riseMEANCaptured = 0, riseAMPCaptured = 0, riseAZIMUTHCaptured = 0;
 int fallMEANCaptured = 0, fallAMPCaptured = 0, fallAZIMUTHCaptured = 0;
 float frequencyMEAN = 0, frequencyAMP = 0, frequencyAZIMUTH = 0;

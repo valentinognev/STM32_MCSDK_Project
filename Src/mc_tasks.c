@@ -60,6 +60,7 @@
 /* USER CODE END Private define */
 #define VBUS_TEMP_ERR_MASK (MC_OVER_VOLT| MC_UNDER_VOLT| MC_OVER_TEMP)
 /* Private variables----------------------------------------------------------*/
+extern bool UART_Input;
 extern FF_Handle_t *pFF[NBR_OF_MOTORS];
 static FOCVars_t FOCVars[NBR_OF_MOTORS];
 static EncAlign_Handle_t *pEAC[NBR_OF_MOTORS];
@@ -1080,6 +1081,30 @@ void StartSafetyTask(void const * argument)
 __weak void UI_HandleStartStopButton_cb (void)
 {
 /* USER CODE BEGIN START_STOP_BTN */
+  if (UART_Input)
+  {
+    UART_Input = !UART_Input;
+    LL_USART_Disable(USART2);
+
+    LL_TIM_EnableDMAReq_UPDATE(TIM2);
+    LL_TIM_EnableDMAReq_UPDATE(TIM3);
+    LL_TIM_EnableDMAReq_UPDATE(TIM8);
+    LL_TIM_EnableCounter(TIM2);
+    LL_TIM_EnableCounter(TIM3);
+    LL_TIM_EnableCounter(TIM8);  
+  }
+  else
+  {
+    UART_Input = !UART_Input;
+    LL_USART_Enable(USART2);
+
+    LL_TIM_DisableCounter(TIM2);
+    LL_TIM_DisableCounter(TIM3);
+    LL_TIM_DisableCounter(TIM8);
+    LL_TIM_DisableDMAReq_UPDATE(TIM2);
+    LL_TIM_DisableDMAReq_UPDATE(TIM3);
+    LL_TIM_DisableDMAReq_UPDATE(TIM8);
+  }
   if (IDLE == MC_GetSTMStateMotor1())
   {
     /* Ramp parameters should be tuned for the actual motor */

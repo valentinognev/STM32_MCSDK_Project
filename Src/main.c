@@ -49,6 +49,9 @@ TIM_HandleTypeDef htim4;
 osThreadId mediumFrequencyHandle;
 osThreadId safetyHandle;
 /* USER CODE BEGIN PV */
+extern uint32_t *riseDataMEAN, *riseDataAMP, *riseDataAZIMUTH;
+extern uint32_t *fallDataMEAN, *fallDataAMP, *fallDataAZIMUTH;
+
 extern OuterControlParameters_Handle_t outerControlParametersM1;
 extern MCI_Handle_t* pMCI[NBR_OF_MOTORS];
 
@@ -1104,6 +1107,12 @@ static void MX_TIM2_Init(void)
   NVIC_EnableIRQ(TIM2_IRQn);
 
   /* USER CODE BEGIN TIM2_Init 1 */
+  LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_5, PWMNUMVAL); // Set amount of copied bits for DMA
+  LL_DMA_ConfigAddresses(DMA1, LL_DMA_CHANNEL_5, (uint32_t)&TIM2->CCR1, (uint32_t)fallDataAMP,
+                         LL_DMA_DIRECTION_PERIPH_TO_MEMORY); // Send message from memory to the USART Data Register
+  LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_6, PWMNUMVAL);   // Set amount of copied bits for DMA
+  LL_DMA_ConfigAddresses(DMA1, LL_DMA_CHANNEL_6, (uint32_t)&TIM2->CCR2, (uint32_t)riseDataAMP,
+                         LL_DMA_DIRECTION_PERIPH_TO_MEMORY); // Send message from memory to the USART Data Register
 
   /* USER CODE END TIM2_Init 1 */
   TIM_InitStruct.Prescaler = 0;
@@ -1201,6 +1210,12 @@ static void MX_TIM3_Init(void)
   NVIC_EnableIRQ(TIM3_IRQn);
 
   /* USER CODE BEGIN TIM3_Init 1 */
+  LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_1, PWMNUMVAL); // Set amount of copied bits for DMA
+  LL_DMA_ConfigAddresses(DMA1, LL_DMA_CHANNEL_1, (uint32_t)&TIM3->CCR1, (uint32_t)riseDataAZIMUTH,
+                         LL_DMA_DIRECTION_PERIPH_TO_MEMORY); // Send message from memory to the USART Data Register
+  LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_2, PWMNUMVAL);   // Set amount of copied bits for DMA
+  LL_DMA_ConfigAddresses(DMA1, LL_DMA_CHANNEL_2, (uint32_t)&TIM3->CCR2, (uint32_t)fallDataAZIMUTH,
+                         LL_DMA_DIRECTION_PERIPH_TO_MEMORY); // Send message from memory to the USART Data Register
 
   /* USER CODE END TIM3_Init 1 */
   TIM_InitStruct.Prescaler = 0;
@@ -1221,9 +1236,9 @@ static void MX_TIM3_Init(void)
   LL_TIM_IC_SetFilter(TIM3, LL_TIM_CHANNEL_CH2, LL_TIM_IC_FILTER_FDIV1);
   LL_TIM_IC_SetPolarity(TIM3, LL_TIM_CHANNEL_CH2, LL_TIM_IC_POLARITY_FALLING);
   /* USER CODE BEGIN TIM3_Init 2 */
-
-  /* USER CODE END TIM3_Init 2 */
-
+  LL_DMA_EnableChannel(DMA1, LL_TIM_CHANNEL_CH1);
+  LL_DMA_EnableChannel(DMA1, LL_TIM_CHANNEL_CH2);
+   /* USER CODE END TIM3_Init 2 */
 }
 
 /**
@@ -1472,9 +1487,15 @@ static void MX_TIM8_Init(void)
 
   /* TIM8 interrupt Init */
   NVIC_SetPriority(TIM8_CC_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),5, 0));
-  NVIC_EnableIRQ(TIM8_CC_IRQn);
+  NVIC_EnableIRQ(TIM8_CC_IRQn); 
 
   /* USER CODE BEGIN TIM8_Init 1 */
+  LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_3, PWMNUMVAL); // Set amount of copied bits for DMA
+  LL_DMA_ConfigAddresses(DMA1, LL_DMA_CHANNEL_3, (uint32_t)&TIM8->CCR1, (uint32_t)riseDataMEAN,
+                         LL_DMA_DIRECTION_PERIPH_TO_MEMORY); // Send message from memory to the USART Data Register
+  LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_4, PWMNUMVAL); // Set amount of copied bits for DMA
+  LL_DMA_ConfigAddresses(DMA1, LL_DMA_CHANNEL_4, (uint32_t)&TIM8->CCR2, (uint32_t)fallDataMEAN,
+                         LL_DMA_DIRECTION_PERIPH_TO_MEMORY); // Send message from memory to the USART Data Register
 
   /* USER CODE END TIM8_Init 1 */
   TIM_InitStruct.Prescaler = 0;

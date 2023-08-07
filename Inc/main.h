@@ -118,8 +118,8 @@ void Error_Handler(void);
 #define TMS_GPIO_Port GPIOA
 #define TCK_Pin LL_GPIO_PIN_14
 #define TCK_GPIO_Port GPIOA
-#define M1_PWM_INPUT_Pin LL_GPIO_PIN_15
-#define M1_PWM_INPUT_GPIO_Port GPIOA
+#define PWM_IN_MEAN_Pin LL_GPIO_PIN_15
+#define PWM_IN_MEAN_GPIO_Port GPIOA
 #define Start_Stop_Pin LL_GPIO_PIN_10
 #define Start_Stop_GPIO_Port GPIOC
 #define Start_Stop_EXTI_IRQn EXTI15_10_IRQn
@@ -127,6 +127,10 @@ void Error_Handler(void);
 #define UART_TX_GPIO_Port GPIOB
 #define UART_RX_Pin LL_GPIO_PIN_4
 #define UART_RX_GPIO_Port GPIOB
+#define PWM_IN_AMP_Pin LL_GPIO_PIN_3
+#define PWM_IN_AMP_GPIO_Port GPIOB
+#define PWM_IN_AZIMUTH_Pin LL_GPIO_PIN_4
+#define PWM_IN_AZIMUTH_GPIO_Port GPIOB
 #define M1_ENCODER_A_Pin LL_GPIO_PIN_6
 #define M1_ENCODER_A_GPIO_Port GPIOB
 #define M1_ENCODER_B_Pin LL_GPIO_PIN_7
@@ -135,6 +139,12 @@ void Error_Handler(void);
 #define M1_ENCODER_I_GPIO_Port GPIOB
 #define M1_ENCODER_I_EXTI_IRQn EXTI9_5_IRQn
 /* USER CODE BEGIN Private defines */
+#define TIMMEAN TIM8
+#define TIMAMP TIM2
+#define TIMAZIMUTH TIM3
+#define TIMAZIMUTH_IRQHandler TIM3_IRQHandler
+#define TIMAMP_IRQHandler TIM2_IRQHandler
+#define TIMMEAN_IRQHandler TIM8_CC_IRQHandler
 
 /* USER CODE END Private defines */
 

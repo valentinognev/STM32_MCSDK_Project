@@ -53,6 +53,7 @@
 
 /* Private macro -------------------------------------------------------------*/
 /* Private variables ---------------------------------------------------------*/
+extern bool UART_Input;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
 
@@ -198,21 +199,26 @@ void SPD_TIM_M1_IRQHandler(void)
 void DMA1_Channel1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Channel1_IRQHandler 0 */
-
+  if (UART_Input)
+  {
   /* USER CODE BEGIN DMA1_Channel1_IRQHandler 0 */
 
-  /* Buffer is ready by the HW layer to be processed */
-  if (0U == LL_DMA_IsActiveFlag_TC(DMA_RX_A, DMACH_RX_A))
-  {
-    /* Nothing to do */
+  /* Buffer is ready by the HW layer to be processed */    
+    if (0U == LL_DMA_IsActiveFlag_TC(DMA_RX_A, DMACH_RX_A))
+    {
+      /* Nothing to do */
+    }
+    else
+    {
+      LL_DMA_ClearFlag_TC (DMA_RX_A, DMACH_RX_A);
+      ASPEP_HWDataReceivedIT (&aspepOverUartA);
+    }
+  /* USER CODE BEGIN DMA1_Channel1_IRQHandler 1 */
   }
   else
   {
-    LL_DMA_ClearFlag_TC (DMA_RX_A, DMACH_RX_A);
-    ASPEP_HWDataReceivedIT (&aspepOverUartA);
+    /* Nothing to do */
   }
-  /* USER CODE BEGIN DMA1_Channel1_IRQHandler 1 */
-
   /* USER CODE BEGIN DMA1_Channel1_IRQHandler 1 */
 
 }
@@ -226,69 +232,73 @@ void DMA1_Channel1_IRQHandler(void)
 void USART2_IRQHandler(void)
 {
   /* USER CODE BEGIN USART2_IRQHandler 0 */
-
+  if (UART_Input)
+  {
   /* USER CODE END USART2_IRQHandler 0 */
+    if ( 0U == LL_USART_IsActiveFlag_TC (USARTA) )
+    {
+      /* Nothing to do */
+    }
+    else
+    {
+      /* LL_GPIO_SetOutputPin( GPIOC , LL_GPIO_PIN_6  ) */
+      /* Disable the DMA channel to prepare the next chunck of data*/
+      LL_DMA_DisableChannel( DMA_TX_A, DMACH_TX_A );
+      LL_USART_ClearFlag_TC (USARTA);
+      /* Data Sent by UART*/
+      /* Need to free the buffer, and to check pending transfer*/
+      ASPEP_HWDataTransmittedIT (&aspepOverUartA);
+      /* LL_GPIO_ResetOutputPin( GPIOC , LL_GPIO_PIN_6  ) */
+    }
 
-  if ( 0U == LL_USART_IsActiveFlag_TC (USARTA) )
-  {
-    /* Nothing to do */
-  }
-  else
-  {
-    /* LL_GPIO_SetOutputPin( GPIOC , LL_GPIO_PIN_6  ) */
-    /* Disable the DMA channel to prepare the next chunck of data*/
-    LL_DMA_DisableChannel( DMA_TX_A, DMACH_TX_A );
-    LL_USART_ClearFlag_TC (USARTA);
-    /* Data Sent by UART*/
-    /* Need to free the buffer, and to check pending transfer*/
-    ASPEP_HWDataTransmittedIT (&aspepOverUartA);
-    /* LL_GPIO_ResetOutputPin( GPIOC , LL_GPIO_PIN_6  ) */
-  }
+    uint32_t test1;
+    uint32_t test2;
+    uint32_t test3;
+    uint32_t mask;
+    test1 = LL_USART_IsActiveFlag_ORE (USARTA);
+    test2 = LL_USART_IsActiveFlag_FE (USARTA);
+    test3 = LL_USART_IsActiveFlag_NE (USARTA);
+    mask = LL_USART_IsEnabledIT_ERROR (USARTA);
 
-  uint32_t test1;
-  uint32_t test2;
-  uint32_t test3;
-  uint32_t mask;
-  test1 = LL_USART_IsActiveFlag_ORE (USARTA);
-  test2 = LL_USART_IsActiveFlag_FE (USARTA);
-  test3 = LL_USART_IsActiveFlag_NE (USARTA);
-  mask = LL_USART_IsEnabledIT_ERROR (USARTA);
+    test1 = ( ( test1 | test2 | test3 ) & mask );
+    if ( 0U == test1 )
+    {
+      /* Nothing to do */
+    }
+    else
+    { /* Stopping the debugger will generate an OverRun error*/
+      WRITE_REG(USARTA->ICR, USART_ICR_FECF|USART_ICR_ORECF|USART_ICR_NECF);
+      /* We disable ERROR interrupt to avoid to trig one Overrun IT per additional byte recevied*/
+      LL_USART_DisableIT_ERROR (USARTA);
+      LL_USART_EnableIT_IDLE (USARTA);
+    }
 
-  test1 = ( ( test1 | test2 | test3 ) & mask );
-  if ( 0U == test1 )
-  {
-    /* Nothing to do */
-  }
-  else
-  { /* Stopping the debugger will generate an OverRun error*/
-    WRITE_REG(USARTA->ICR, USART_ICR_FECF|USART_ICR_ORECF|USART_ICR_NECF);
-    /* We disable ERROR interrupt to avoid to trig one Overrun IT per additional byte recevied*/
-    LL_USART_DisableIT_ERROR (USARTA);
-    LL_USART_EnableIT_IDLE (USARTA);
-  }
-
-  test1 = LL_USART_IsActiveFlag_IDLE (USARTA);
-  mask = LL_USART_IsEnabledIT_IDLE (USARTA);
-  test1 = test1 & mask;
-  if ( 0U == test1 )
-  {
-    /* Nothing to do */
-  }
-  else
-  { /* Stopping the debugger will generate an OverRun error*/
-    LL_USART_DisableIT_IDLE (USARTA);
-    /* Once the complete unexpected data are received, we enable back the error IT*/
-    LL_USART_EnableIT_ERROR (USARTA);
-    /* To be sure we fetch the potential pendig data*/
-    /* We disable the DMA request, Read the dummy data, endable back the DMA request */
-    LL_USART_DisableDMAReq_RX (USARTA);
-    ( void )LL_USART_ReceiveData8(USARTA);
-    LL_USART_EnableDMAReq_RX (USARTA);
-    ASPEP_HWDMAReset (&aspepOverUartA);
-  }
+    test1 = LL_USART_IsActiveFlag_IDLE (USARTA);
+    mask = LL_USART_IsEnabledIT_IDLE (USARTA);
+    test1 = test1 & mask;
+    if ( 0U == test1 )
+    {
+      /* Nothing to do */
+    }
+    else
+    { /* Stopping the debugger will generate an OverRun error*/
+      LL_USART_DisableIT_IDLE (USARTA);
+      /* Once the complete unexpected data are received, we enable back the error IT*/
+      LL_USART_EnableIT_ERROR (USARTA);
+      /* To be sure we fetch the potential pendig data*/
+      /* We disable the DMA request, Read the dummy data, endable back the DMA request */
+      LL_USART_DisableDMAReq_RX (USARTA);
+      ( void )LL_USART_ReceiveData8(USARTA);
+      LL_USART_EnableDMAReq_RX (USARTA);
+      ASPEP_HWDMAReset (&aspepOverUartA);
+    }
 
   /* USER CODE BEGIN USART2_IRQHandler 1 */
-
+  }
+  else
+  {
+    /* Nothing to do */
+  }
   /* USER CODE END USART2_IRQHandler 1 */
 }
 

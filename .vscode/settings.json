@@ -7,6 +7,8 @@
         "mcpa.h": "c",
         "sto_cordic_speed_pos_fdbk.h": "c",
         "sto_pll_speed_pos_fdbk.h": "c",
-        "main.h": "c"
+        "main.h": "c",
+        "stm32g4xx_ll_usart.h": "c",
+        "stm32g4xx_hal.h": "c"
     }
 }

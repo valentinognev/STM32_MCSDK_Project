@@ -56,7 +56,7 @@
 extern bool UART_Input;
 /* Private function prototypes -----------------------------------------------*/
 /* Private functions ---------------------------------------------------------*/
-
+extern DMA_HandleTypeDef hdma_tim2_ch1;
 /* USER CODE END PRIVATE */
 
 /* Public prototypes of IRQ handlers called from assembly code ---------------*/
@@ -217,7 +217,7 @@ void DMA1_Channel1_IRQHandler(void)
   }
   else
   {
-    /* Nothing to do */
+      HAL_DMA_IRQHandler(&hdma_tim2_ch1);
   }
   /* USER CODE BEGIN DMA1_Channel1_IRQHandler 1 */
 

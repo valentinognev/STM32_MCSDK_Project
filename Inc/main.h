@@ -28,6 +28,7 @@ extern "C" {
 
 /* Includes ------------------------------------------------------------------*/
 #include "stm32g4xx_hal.h"
+#include "stm32g4xx_hal_tim.h"
 
 #include "motorcontrol.h"
 
@@ -145,7 +146,7 @@ void Error_Handler(void);
 #define TIMAZIMUTH_IRQHandler TIM3_IRQHandler
 #define TIMAMP_IRQHandler TIM2_IRQHandler
 #define TIMMEAN_IRQHandler TIM8_CC_IRQHandler
-#define PWMNUMVAL 500
+#define PWMNUMVAL 100
 /* USER CODE END Private defines */
 
 #ifdef __cplusplus

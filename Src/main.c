@@ -41,7 +41,16 @@
 /* USER CODE END PM */
 
 /* Private variables ---------------------------------------------------------*/
-bool UART_Input = true;
+TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
+TIM_HandleTypeDef htim8;
+DMA_HandleTypeDef hdma_tim2_ch1;
+DMA_HandleTypeDef hdma_tim2_ch2;
+DMA_HandleTypeDef hdma_tim3_ch3;
+DMA_HandleTypeDef hdma_tim3_ch4;
+DMA_HandleTypeDef hdma_tim8_ch1;
+DMA_HandleTypeDef hdma_tim8_ch2;
+bool UART_Input = false;
 
 int32_t encoder=0;
 TIM_HandleTypeDef htim4;
@@ -49,11 +58,37 @@ TIM_HandleTypeDef htim4;
 osThreadId mediumFrequencyHandle;
 osThreadId safetyHandle;
 /* USER CODE BEGIN PV */
-extern uint32_t *riseDataMEAN, *riseDataAMP, *riseDataAZIMUTH;
-extern uint32_t *fallDataMEAN, *fallDataAMP, *fallDataAZIMUTH;
 
 extern OuterControlParameters_Handle_t outerControlParametersM1;
 extern MCI_Handle_t* pMCI[NBR_OF_MOTORS];
+
+
+/**************** PWM INPUT **************/
+
+/* define the capturing TIMER's CLOCK and the Prescalar you are using */
+#define TIMCLOCK 170000000
+#define PSCALARAMP 16
+#define PSCALARMEAN 29
+#define PSCALARAZIMUTH 29
+/* Define the number of samples to be taken by the DMA
+   For lower Frequencies, keep the less number for samples
+*/
+#define MIN(a, b) ((a) < (b) ? (a) : (b))
+
+int riseMEANCaptured = 0, riseAMPCaptured = 0, riseAZIMUTHCaptured = 0;
+int fallMEANCaptured = 0, fallAMPCaptured = 0, fallAZIMUTHCaptured = 0;
+float frequencyMEAN = 0, frequencyAMP = 0, frequencyAZIMUTH = 0;
+float widthMEAN = 0, widthAMP = 0, widthAZIMUTH = 0;
+uint32_t riseDataAMP[PWMNUMVAL], fallDataAMP[PWMNUMVAL];
+uint32_t riseDatatemp[PWMNUMVAL], fallDatatemp[PWMNUMVAL];
+uint16_t riseDataMEAN[PWMNUMVAL], riseDataAZIMUTH[PWMNUMVAL];
+uint16_t fallDataMEAN[PWMNUMVAL], fallDataAZIMUTH[PWMNUMVAL];
+int isMeasuredAMP = 0, isMeasuredMEAN = 0, isMeasuredAZIMUTH = 0;
+
+void TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim, const int pscalar, int *riseCaptured, int *fallCaptured, int *isMeasured,
+                            uint32_t *riseData, uint32_t *fallData, float *frequency, float *width);
+
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim);
 
 /* USER CODE END PV */
 
@@ -146,6 +181,21 @@ int main(void)
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 
+  /* TIM2 Channel 1 is set to rising edge, so it will store the data in 'riseData' */
+  HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, riseDataAMP, PWMNUMVAL);
+  /* TIM2 Channel 2 is set to falling edge, so it will store the data in 'fallData' */
+  HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_2, fallDataAMP, PWMNUMVAL);
+
+  /* TIM8 Channel 1 is set to rising edge, so it will store the data in 'riseData' */
+  HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_1, riseDataMEAN, PWMNUMVAL);
+  /* TIM8 Channel 2 is set to falling edge, so it will store the data in 'fallData' */
+  HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_2, fallDataMEAN, PWMNUMVAL);
+
+  /* TIM8 Channel 1 is set to rising edge, so it will store the data in 'riseData' */
+  HAL_TIM_IC_Start_DMA(&htim3, TIM_CHANNEL_3, riseDataAZIMUTH, PWMNUMVAL);
+  /* TIM8 Channel 2 is set to falling edge, so it will store the data in 'fallData' */
+  HAL_TIM_IC_Start_DMA(&htim3, TIM_CHANNEL_4, fallDataAZIMUTH, PWMNUMVAL);
+
   /* USER CODE END 2 */
   LL_TIM_EnableCounter(TIM4);
   /* USER CODE BEGIN RTOS_MUTEX */
@@ -178,7 +228,7 @@ int main(void)
   /* USER CODE END RTOS_THREADS */
 
   /* Start scheduler */
-  osKernelStart();
+  /////////////////////////////////// DELETE THE COMMENT /////////////////////////////////////////////// osKernelStart();
   /* We should never get here as control is now taken by the scheduler */
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
@@ -187,9 +237,29 @@ int main(void)
   int32_t counter;
   while (1)
   {
-    encoder = LL_TIM_GetCounter(TIM4);
-    counter++;
-    LL_mDelay(1);
+    /* Call the measurement whenever needed */
+    HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, riseDataAMP, PWMNUMVAL);
+    HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_2, fallDataAMP, PWMNUMVAL);
+    HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_1, riseDataMEAN, PWMNUMVAL);
+    HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_2, fallDataMEAN, PWMNUMVAL);
+    HAL_TIM_IC_Start_DMA(&htim3, TIM_CHANNEL_3, riseDataAZIMUTH, PWMNUMVAL);
+    HAL_TIM_IC_Start_DMA(&htim3, TIM_CHANNEL_4, fallDataAZIMUTH, PWMNUMVAL);
+    HAL_Delay(1000);
+    if (isMeasuredAMP)
+    {
+      TIM2->CNT = 0;
+      isMeasuredAMP = 0;
+    }
+    if (isMeasuredMEAN)
+    {
+      TIM8->CNT = 0;
+      isMeasuredMEAN = 0;
+    }
+    if (isMeasuredAZIMUTH)
+    {
+      TIM3->CNT = 0;
+      isMeasuredAZIMUTH = 0;
+    }
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -1046,92 +1116,52 @@ static void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 0 */
 
-  LL_TIM_InitTypeDef TIM_InitStruct = {0};
-
-  LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
-
-  /* Peripheral clock enable */
-  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM2);
-
-  LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOA);
-  LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOB);
-  /**TIM2 GPIO Configuration
-  PB3   ------> TIM2_CH2
-  */
-  GPIO_InitStruct.Pin = PWM_IN_AMP_Pin;
-  GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
-  GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
-  GPIO_InitStruct.Pull = LL_GPIO_PULL_DOWN;
-  GPIO_InitStruct.Alternate = LL_GPIO_AF_1;
-  LL_GPIO_Init(PWM_IN_AMP_GPIO_Port, &GPIO_InitStruct);
-
-  /* TIM2 DMA Init */
-
-  /* TIM2_CH1 Init */
-  LL_DMA_SetPeriphRequest(DMA1, LL_DMA_CHANNEL_5, LL_DMAMUX_REQ_TIM2_CH1);
-
-  LL_DMA_SetDataTransferDirection(DMA1, LL_DMA_CHANNEL_5, LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
-
-  LL_DMA_SetChannelPriorityLevel(DMA1, LL_DMA_CHANNEL_5, LL_DMA_PRIORITY_LOW);
-
-  LL_DMA_SetMode(DMA1, LL_DMA_CHANNEL_5, LL_DMA_MODE_NORMAL);
-
-  LL_DMA_SetPeriphIncMode(DMA1, LL_DMA_CHANNEL_5, LL_DMA_PERIPH_NOINCREMENT);
-
-  LL_DMA_SetMemoryIncMode(DMA1, LL_DMA_CHANNEL_5, LL_DMA_MEMORY_INCREMENT);
-
-  LL_DMA_SetPeriphSize(DMA1, LL_DMA_CHANNEL_5, LL_DMA_PDATAALIGN_WORD);
-
-  LL_DMA_SetMemorySize(DMA1, LL_DMA_CHANNEL_5, LL_DMA_MDATAALIGN_WORD);
-
-  /* TIM2_CH2 Init */
-  LL_DMA_SetPeriphRequest(DMA1, LL_DMA_CHANNEL_6, LL_DMAMUX_REQ_TIM2_CH2);
-
-  LL_DMA_SetDataTransferDirection(DMA1, LL_DMA_CHANNEL_6, LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
-
-  LL_DMA_SetChannelPriorityLevel(DMA1, LL_DMA_CHANNEL_6, LL_DMA_PRIORITY_LOW);
-
-  LL_DMA_SetMode(DMA1, LL_DMA_CHANNEL_6, LL_DMA_MODE_NORMAL);
-
-  LL_DMA_SetPeriphIncMode(DMA1, LL_DMA_CHANNEL_6, LL_DMA_PERIPH_NOINCREMENT);
-
-  LL_DMA_SetMemoryIncMode(DMA1, LL_DMA_CHANNEL_6, LL_DMA_MEMORY_INCREMENT);
-
-  LL_DMA_SetPeriphSize(DMA1, LL_DMA_CHANNEL_6, LL_DMA_PDATAALIGN_WORD);
-
-  LL_DMA_SetMemorySize(DMA1, LL_DMA_CHANNEL_6, LL_DMA_MDATAALIGN_WORD);
-
-  /* TIM2 interrupt Init */
-  NVIC_SetPriority(TIM2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),5, 0));
-  NVIC_EnableIRQ(TIM2_IRQn);
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_IC_InitTypeDef sConfigIC = {0};
 
   /* USER CODE BEGIN TIM2_Init 1 */
-  LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_5, PWMNUMVAL); // Set amount of copied bits for DMA
-  LL_DMA_ConfigAddresses(DMA1, LL_DMA_CHANNEL_5, (uint32_t)&TIM2->CCR1, (uint32_t)fallDataAMP,
-                         LL_DMA_DIRECTION_PERIPH_TO_MEMORY); // Send message from memory to the USART Data Register
-  LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_6, PWMNUMVAL);   // Set amount of copied bits for DMA
-  LL_DMA_ConfigAddresses(DMA1, LL_DMA_CHANNEL_6, (uint32_t)&TIM2->CCR2, (uint32_t)riseDataAMP,
-                         LL_DMA_DIRECTION_PERIPH_TO_MEMORY); // Send message from memory to the USART Data Register
 
   /* USER CODE END TIM2_Init 1 */
-  TIM_InitStruct.Prescaler = 0;
-  TIM_InitStruct.CounterMode = LL_TIM_COUNTERMODE_UP;
-  TIM_InitStruct.Autoreload = 4.294967295E9;
-  TIM_InitStruct.ClockDivision = LL_TIM_CLOCKDIVISION_DIV1;
-  LL_TIM_Init(TIM2, &TIM_InitStruct);
-  LL_TIM_DisableARRPreload(TIM2);
-  LL_TIM_SetClockSource(TIM2, LL_TIM_CLOCKSOURCE_INTERNAL);
-  LL_TIM_IC_SetFilter(TIM2, LL_TIM_CHANNEL_CH1, LL_TIM_IC_FILTER_FDIV1);
-  LL_TIM_IC_SetPolarity(TIM2, LL_TIM_CHANNEL_CH1, LL_TIM_IC_POLARITY_FALLING);
-  LL_TIM_SetTriggerOutput(TIM2, LL_TIM_TRGO_RESET);
-  LL_TIM_DisableMasterSlaveMode(TIM2);
-  LL_TIM_IC_SetActiveInput(TIM2, LL_TIM_CHANNEL_CH1, LL_TIM_ACTIVEINPUT_INDIRECTTI);
-  LL_TIM_IC_SetPrescaler(TIM2, LL_TIM_CHANNEL_CH1, LL_TIM_ICPSC_DIV1);
-  LL_TIM_IC_SetActiveInput(TIM2, LL_TIM_CHANNEL_CH2, LL_TIM_ACTIVEINPUT_DIRECTTI);
-  LL_TIM_IC_SetPrescaler(TIM2, LL_TIM_CHANNEL_CH2, LL_TIM_ICPSC_DIV1);
-  LL_TIM_IC_SetFilter(TIM2, LL_TIM_CHANNEL_CH2, LL_TIM_IC_FILTER_FDIV1);
-  LL_TIM_IC_SetPolarity(TIM2, LL_TIM_CHANNEL_CH2, LL_TIM_IC_POLARITY_RISING);
+  htim2.Instance = TIM2;
+  htim2.Init.Prescaler = 17-1;
+  htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim2.Init.Period = 4.294967295E9;
+  htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim2.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim2, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_IC_Init(&htim2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim2, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_INDIRECTTI;
+  sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
+  sConfigIC.ICFilter = 0;
+  if (HAL_TIM_IC_ConfigChannel(&htim2, &sConfigIC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
+  if (HAL_TIM_IC_ConfigChannel(&htim2, &sConfigIC, TIM_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /* USER CODE BEGIN TIM2_Init 2 */
 
   /* USER CODE END TIM2_Init 2 */
@@ -1146,100 +1176,60 @@ static void MX_TIM2_Init(void)
 static void MX_TIM3_Init(void)
 {
 
-  /* USER CODE BEGIN TIM3_Init 0 */
+ /* USER CODE BEGIN TIM3_Init 0 */
 
   /* USER CODE END TIM3_Init 0 */
 
-  LL_TIM_InitTypeDef TIM_InitStruct = {0};
-
-  LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
-
-  /* Peripheral clock enable */
-  LL_APB1_GRP1_EnableClock(LL_APB1_GRP1_PERIPH_TIM3);
-
-  LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOB);
-  /**TIM3 GPIO Configuration
-  PB4   ------> TIM3_CH1
-  */
-  GPIO_InitStruct.Pin = PWM_IN_AZIMUTH_Pin;
-  GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
-  GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
-  GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
-  GPIO_InitStruct.Alternate = LL_GPIO_AF_2;
-  LL_GPIO_Init(PWM_IN_AZIMUTH_GPIO_Port, &GPIO_InitStruct);
-
-  /* TIM3 DMA Init */
-
-  /* TIM3_CH1 Init */
-  LL_DMA_SetPeriphRequest(DMA1, LL_DMA_CHANNEL_1, LL_DMAMUX_REQ_TIM3_CH1);
-
-  LL_DMA_SetDataTransferDirection(DMA1, LL_DMA_CHANNEL_1, LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
-
-  LL_DMA_SetChannelPriorityLevel(DMA1, LL_DMA_CHANNEL_1, LL_DMA_PRIORITY_LOW);
-
-  LL_DMA_SetMode(DMA1, LL_DMA_CHANNEL_1, LL_DMA_MODE_NORMAL);
-
-  LL_DMA_SetPeriphIncMode(DMA1, LL_DMA_CHANNEL_1, LL_DMA_PERIPH_NOINCREMENT);
-
-  LL_DMA_SetMemoryIncMode(DMA1, LL_DMA_CHANNEL_1, LL_DMA_MEMORY_INCREMENT);
-
-  LL_DMA_SetPeriphSize(DMA1, LL_DMA_CHANNEL_1, LL_DMA_PDATAALIGN_HALFWORD);
-
-  LL_DMA_SetMemorySize(DMA1, LL_DMA_CHANNEL_1, LL_DMA_MDATAALIGN_HALFWORD);
-
-  /* TIM3_CH2 Init */
-  LL_DMA_SetPeriphRequest(DMA1, LL_DMA_CHANNEL_2, LL_DMAMUX_REQ_TIM3_CH2);
-
-  LL_DMA_SetDataTransferDirection(DMA1, LL_DMA_CHANNEL_2, LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
-
-  LL_DMA_SetChannelPriorityLevel(DMA1, LL_DMA_CHANNEL_2, LL_DMA_PRIORITY_LOW);
-
-  LL_DMA_SetMode(DMA1, LL_DMA_CHANNEL_2, LL_DMA_MODE_NORMAL);
-
-  LL_DMA_SetPeriphIncMode(DMA1, LL_DMA_CHANNEL_2, LL_DMA_PERIPH_NOINCREMENT);
-
-  LL_DMA_SetMemoryIncMode(DMA1, LL_DMA_CHANNEL_2, LL_DMA_MEMORY_INCREMENT);
-
-  LL_DMA_SetPeriphSize(DMA1, LL_DMA_CHANNEL_2, LL_DMA_PDATAALIGN_HALFWORD);
-
-  LL_DMA_SetMemorySize(DMA1, LL_DMA_CHANNEL_2, LL_DMA_MDATAALIGN_HALFWORD);
-
-  /* TIM3 interrupt Init */
-  NVIC_SetPriority(TIM3_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),5, 0));
-  NVIC_EnableIRQ(TIM3_IRQn);
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_IC_InitTypeDef sConfigIC = {0};
 
   /* USER CODE BEGIN TIM3_Init 1 */
-  LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_1, PWMNUMVAL); // Set amount of copied bits for DMA
-  LL_DMA_ConfigAddresses(DMA1, LL_DMA_CHANNEL_1, (uint32_t)&TIM3->CCR1, (uint32_t)riseDataAZIMUTH,
-                         LL_DMA_DIRECTION_PERIPH_TO_MEMORY); // Send message from memory to the USART Data Register
-  LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_2, PWMNUMVAL);   // Set amount of copied bits for DMA
-  LL_DMA_ConfigAddresses(DMA1, LL_DMA_CHANNEL_2, (uint32_t)&TIM3->CCR2, (uint32_t)fallDataAZIMUTH,
-                         LL_DMA_DIRECTION_PERIPH_TO_MEMORY); // Send message from memory to the USART Data Register
 
   /* USER CODE END TIM3_Init 1 */
-  TIM_InitStruct.Prescaler = 0;
-  TIM_InitStruct.CounterMode = LL_TIM_COUNTERMODE_UP;
-  TIM_InitStruct.Autoreload = 65535;
-  TIM_InitStruct.ClockDivision = LL_TIM_CLOCKDIVISION_DIV1;
-  LL_TIM_Init(TIM3, &TIM_InitStruct);
-  LL_TIM_DisableARRPreload(TIM3);
-  LL_TIM_SetClockSource(TIM3, LL_TIM_CLOCKSOURCE_INTERNAL);
-  LL_TIM_SetTriggerOutput(TIM3, LL_TIM_TRGO_RESET);
-  LL_TIM_DisableMasterSlaveMode(TIM3);
-  LL_TIM_IC_SetActiveInput(TIM3, LL_TIM_CHANNEL_CH1, LL_TIM_ACTIVEINPUT_DIRECTTI);
-  LL_TIM_IC_SetPrescaler(TIM3, LL_TIM_CHANNEL_CH1, LL_TIM_ICPSC_DIV1);
-  LL_TIM_IC_SetFilter(TIM3, LL_TIM_CHANNEL_CH1, LL_TIM_IC_FILTER_FDIV1);
-  LL_TIM_IC_SetPolarity(TIM3, LL_TIM_CHANNEL_CH1, LL_TIM_IC_POLARITY_RISING);
-  LL_TIM_IC_SetActiveInput(TIM3, LL_TIM_CHANNEL_CH2, LL_TIM_ACTIVEINPUT_INDIRECTTI);
-  LL_TIM_IC_SetPrescaler(TIM3, LL_TIM_CHANNEL_CH2, LL_TIM_ICPSC_DIV1);
-  LL_TIM_IC_SetFilter(TIM3, LL_TIM_CHANNEL_CH2, LL_TIM_IC_FILTER_FDIV1);
-  LL_TIM_IC_SetPolarity(TIM3, LL_TIM_CHANNEL_CH2, LL_TIM_IC_POLARITY_FALLING);
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = 30-1;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 65535;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_IC_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_INDIRECTTI;
+  sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
+  sConfigIC.ICFilter = 0;
+  if (HAL_TIM_IC_ConfigChannel(&htim3, &sConfigIC, TIM_CHANNEL_3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
+  if (HAL_TIM_IC_ConfigChannel(&htim3, &sConfigIC, TIM_CHANNEL_4) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /* USER CODE BEGIN TIM3_Init 2 */
-  LL_DMA_EnableChannel(DMA1, LL_TIM_CHANNEL_CH1);
-  LL_DMA_EnableChannel(DMA1, LL_TIM_CHANNEL_CH2);
-   /* USER CODE END TIM3_Init 2 */
-}
+
+  /* USER CODE END TIM3_Init 2 */
+  
+  }
 
 /**
   * @brief TIM4 Initialization Function
@@ -1430,93 +1420,54 @@ static void MX_TIM8_Init(void)
 
   /* USER CODE END TIM8_Init 0 */
 
-  LL_TIM_InitTypeDef TIM_InitStruct = {0};
-
-  LL_GPIO_InitTypeDef GPIO_InitStruct = {0};
-
-  /* Peripheral clock enable */
-  LL_APB2_GRP1_EnableClock(LL_APB2_GRP1_PERIPH_TIM8);
-
-  LL_AHB2_GRP1_EnableClock(LL_AHB2_GRP1_PERIPH_GPIOA);
-  /**TIM8 GPIO Configuration
-  PA15   ------> TIM8_CH1
-  */
-  GPIO_InitStruct.Pin = PWM_IN_MEAN_Pin;
-  GPIO_InitStruct.Mode = LL_GPIO_MODE_ALTERNATE;
-  GPIO_InitStruct.Speed = LL_GPIO_SPEED_FREQ_LOW;
-  GPIO_InitStruct.OutputType = LL_GPIO_OUTPUT_PUSHPULL;
-  GPIO_InitStruct.Pull = LL_GPIO_PULL_NO;
-  GPIO_InitStruct.Alternate = LL_GPIO_AF_2;
-  LL_GPIO_Init(PWM_IN_MEAN_GPIO_Port, &GPIO_InitStruct);
-
-  /* TIM8 DMA Init */
-
-  /* TIM8_CH1 Init */
-  LL_DMA_SetPeriphRequest(DMA1, LL_DMA_CHANNEL_3, LL_DMAMUX_REQ_TIM8_CH1);
-
-  LL_DMA_SetDataTransferDirection(DMA1, LL_DMA_CHANNEL_3, LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
-
-  LL_DMA_SetChannelPriorityLevel(DMA1, LL_DMA_CHANNEL_3, LL_DMA_PRIORITY_LOW);
-
-  LL_DMA_SetMode(DMA1, LL_DMA_CHANNEL_3, LL_DMA_MODE_NORMAL);
-
-  LL_DMA_SetPeriphIncMode(DMA1, LL_DMA_CHANNEL_3, LL_DMA_PERIPH_NOINCREMENT);
-
-  LL_DMA_SetMemoryIncMode(DMA1, LL_DMA_CHANNEL_3, LL_DMA_MEMORY_INCREMENT);
-
-  LL_DMA_SetPeriphSize(DMA1, LL_DMA_CHANNEL_3, LL_DMA_PDATAALIGN_HALFWORD);
-
-  LL_DMA_SetMemorySize(DMA1, LL_DMA_CHANNEL_3, LL_DMA_MDATAALIGN_HALFWORD);
-
-  /* TIM8_CH2 Init */
-  LL_DMA_SetPeriphRequest(DMA1, LL_DMA_CHANNEL_4, LL_DMAMUX_REQ_TIM8_CH2);
-
-  LL_DMA_SetDataTransferDirection(DMA1, LL_DMA_CHANNEL_4, LL_DMA_DIRECTION_PERIPH_TO_MEMORY);
-
-  LL_DMA_SetChannelPriorityLevel(DMA1, LL_DMA_CHANNEL_4, LL_DMA_PRIORITY_LOW);
-
-  LL_DMA_SetMode(DMA1, LL_DMA_CHANNEL_4, LL_DMA_MODE_NORMAL);
-
-  LL_DMA_SetPeriphIncMode(DMA1, LL_DMA_CHANNEL_4, LL_DMA_PERIPH_NOINCREMENT);
-
-  LL_DMA_SetMemoryIncMode(DMA1, LL_DMA_CHANNEL_4, LL_DMA_MEMORY_INCREMENT);
-
-  LL_DMA_SetPeriphSize(DMA1, LL_DMA_CHANNEL_4, LL_DMA_PDATAALIGN_HALFWORD);
-
-  LL_DMA_SetMemorySize(DMA1, LL_DMA_CHANNEL_4, LL_DMA_MDATAALIGN_HALFWORD);
-
-  /* TIM8 interrupt Init */
-  NVIC_SetPriority(TIM8_CC_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),5, 0));
-  NVIC_EnableIRQ(TIM8_CC_IRQn); 
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_IC_InitTypeDef sConfigIC = {0};
 
   /* USER CODE BEGIN TIM8_Init 1 */
-  LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_3, PWMNUMVAL); // Set amount of copied bits for DMA
-  LL_DMA_ConfigAddresses(DMA1, LL_DMA_CHANNEL_3, (uint32_t)&TIM8->CCR1, (uint32_t)riseDataMEAN,
-                         LL_DMA_DIRECTION_PERIPH_TO_MEMORY); // Send message from memory to the USART Data Register
-  LL_DMA_SetDataLength(DMA1, LL_DMA_CHANNEL_4, PWMNUMVAL); // Set amount of copied bits for DMA
-  LL_DMA_ConfigAddresses(DMA1, LL_DMA_CHANNEL_4, (uint32_t)&TIM8->CCR2, (uint32_t)fallDataMEAN,
-                         LL_DMA_DIRECTION_PERIPH_TO_MEMORY); // Send message from memory to the USART Data Register
 
   /* USER CODE END TIM8_Init 1 */
-  TIM_InitStruct.Prescaler = 0;
-  TIM_InitStruct.CounterMode = LL_TIM_COUNTERMODE_UP;
-  TIM_InitStruct.Autoreload = 65535;
-  TIM_InitStruct.ClockDivision = LL_TIM_CLOCKDIVISION_DIV1;
-  TIM_InitStruct.RepetitionCounter = 0;
-  LL_TIM_Init(TIM8, &TIM_InitStruct);
-  LL_TIM_DisableARRPreload(TIM8);
-  LL_TIM_SetClockSource(TIM8, LL_TIM_CLOCKSOURCE_INTERNAL);
-  LL_TIM_SetTriggerOutput(TIM8, LL_TIM_TRGO_RESET);
-  LL_TIM_SetTriggerOutput2(TIM8, LL_TIM_TRGO2_RESET);
-  LL_TIM_DisableMasterSlaveMode(TIM8);
-  LL_TIM_IC_SetActiveInput(TIM8, LL_TIM_CHANNEL_CH1, LL_TIM_ACTIVEINPUT_DIRECTTI);
-  LL_TIM_IC_SetPrescaler(TIM8, LL_TIM_CHANNEL_CH1, LL_TIM_ICPSC_DIV1);
-  LL_TIM_IC_SetFilter(TIM8, LL_TIM_CHANNEL_CH1, LL_TIM_IC_FILTER_FDIV1);
-  LL_TIM_IC_SetPolarity(TIM8, LL_TIM_CHANNEL_CH1, LL_TIM_IC_POLARITY_RISING);
-  LL_TIM_IC_SetActiveInput(TIM8, LL_TIM_CHANNEL_CH2, LL_TIM_ACTIVEINPUT_INDIRECTTI);
-  LL_TIM_IC_SetPrescaler(TIM8, LL_TIM_CHANNEL_CH2, LL_TIM_ICPSC_DIV1);
-  LL_TIM_IC_SetFilter(TIM8, LL_TIM_CHANNEL_CH2, LL_TIM_IC_FILTER_FDIV1);
-  LL_TIM_IC_SetPolarity(TIM8, LL_TIM_CHANNEL_CH2, LL_TIM_IC_POLARITY_FALLING);
+  htim8.Instance = TIM8;
+  htim8.Init.Prescaler = 30-1;
+  htim8.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim8.Init.Period = 65535;
+  htim8.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim8.Init.RepetitionCounter = 0;
+  htim8.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_DISABLE;
+  if (HAL_TIM_Base_Init(&htim8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim8, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_IC_Init(&htim8) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterOutputTrigger2 = TIM_TRGO2_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim8, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
+  sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
+  sConfigIC.ICFilter = 0;
+  if (HAL_TIM_IC_ConfigChannel(&htim8, &sConfigIC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_INDIRECTTI;
+  if (HAL_TIM_IC_ConfigChannel(&htim8, &sConfigIC, TIM_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
   /* USER CODE BEGIN TIM8_Init 2 */
 
   /* USER CODE END TIM8_Init 2 */
@@ -1531,8 +1482,9 @@ static void MX_DMA_Init(void)
 
   /* Init with LL driver */
   /* DMA controller clock enable */
-  LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_DMAMUX1);
-  LL_AHB1_GRP1_EnableClock(LL_AHB1_GRP1_PERIPH_DMA1);
+    /* DMA controller clock enable */
+  __HAL_RCC_DMAMUX1_CLK_ENABLE();
+  __HAL_RCC_DMA1_CLK_ENABLE();
 
   /* DMA interrupt init */
   /* DMA1_Channel1_IRQn interrupt configuration */
@@ -1612,7 +1564,182 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
+{
+  if (htim->Instance == TIM2)
+  {
+    if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+    {
+      riseAMPCaptured = 1;
+    }
+    if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
+    {
+      fallAMPCaptured = 1;
+    }
+    TIM_IC_CaptureCallback(htim, PSCALARAMP, &riseAMPCaptured, &fallAMPCaptured, &isMeasuredAMP,
+                           riseDataAMP, fallDataAMP, &frequencyAMP, &widthAMP);
+  }
+  if (htim->Instance == TIM8)
+  {
+    if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+    {
+      riseMEANCaptured = 1;
+    }
+    if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
+    {
+      fallMEANCaptured = 1;
+    }
+    for (int i=0;i<PWMNUMVAL;i++)
+    {
+      riseDatatemp[i]=riseDataMEAN[i];
+      fallDatatemp[i]=fallDataMEAN[i];
+    }  
+    TIM_IC_CaptureCallback(htim, PSCALARMEAN, &riseMEANCaptured, &fallMEANCaptured, &isMeasuredMEAN,
+                           riseDatatemp, fallDatatemp, &frequencyMEAN, &widthMEAN);
+  }
+  if (htim->Instance == TIM3)
+  {
+    if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_3)
+    {
+      riseAZIMUTHCaptured = 1;
+    }
+    if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_4)
+    {
+      fallAZIMUTHCaptured = 1;
+    }
+    for (int i=0;i<PWMNUMVAL;i++)
+    {
+      riseDatatemp[i]=riseDataAZIMUTH[i];
+      fallDatatemp[i]=fallDataAZIMUTH[i];
+    }  
+    TIM_IC_CaptureCallback(htim, PSCALARAZIMUTH, &riseAZIMUTHCaptured, &fallAZIMUTHCaptured, &isMeasuredAZIMUTH,
+                           riseDatatemp, fallDatatemp, &frequencyAZIMUTH, &widthAZIMUTH);
+  }
+}
 
+
+void TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim, const int pscalar, int *riseCaptured, int *fallCaptured, int *isMeasured,
+                            uint32_t *riseData, uint32_t *fallData, float *frequency, float *width)
+{
+  /* Rest of the calculations will be done,
+   * once both the DMAs have finished capturing enough data */
+  if (!((*riseCaptured) && (*fallCaptured)))
+    return;
+
+  // calculate the reference clock
+  float refClock = TIMCLOCK / (pscalar + 1);
+
+  int indxr = 0;
+  int indxf = 0;
+
+  int countr = 0;
+  int countrf = 0;
+
+  float riseavg = 0;
+  float rfavg = 0;
+
+  /* In case of high Frequencies, the DMA sometimes captures 0's in the beginning.
+   * increment the index until some useful data shows up
+   */
+  while (riseData[indxr] == 0)
+    indxr++;
+
+  /* Again at very high frequencies, sometimes the values don't change
+   * So we will wait for the update among the values
+   */
+  while ((MIN((riseData[indxr + 1] - riseData[indxr]), (riseData[indxr + 2] - riseData[indxr + 1]))) == 0)
+    indxr++;
+
+  /* riseavg is the difference in the 2 consecutive rise Time */
+
+  /* Assign a start value to riseavg */
+  riseavg += MIN((riseData[indxr + 1] - riseData[indxr]), (riseData[indxr + 2] - riseData[indxr + 1]));
+  indxr++;
+  countr++;
+
+  /* start adding the values to the riseavg */
+  while (indxr < (PWMNUMVAL))
+  {
+    riseavg += MIN((riseData[indxr + 1] - riseData[indxr]), riseavg / countr);
+    countr++;
+    indxr++;
+  }
+
+  /* Find the average riseavg, the average time between 2 RISE */
+  riseavg = riseavg / countr;
+
+  indxr = 0;
+
+  /* The calculation for the Falling pulse on second channel */
+
+  /* If the fall time is lower than rise time,
+   * Then there must be some error and we will increment
+   * both, until the error is gone
+   */
+  if (fallData[indxf] < riseData[indxr])
+  {
+    indxf += 2;
+    indxr += 2;
+    while (fallData[indxf] < riseData[indxr])
+      indxf++;
+  }
+
+  else if (fallData[indxf] > riseData[indxr])
+  {
+    indxf += 2;
+    indxr += 2;
+    while (fallData[indxf] > riseData[indxr + 1])
+      indxr++;
+  }
+
+  /* The method used for the calculation below is as follows:
+   * If Fall time < Rise Time, increment Fall counter
+   * If Fall time - Rise Time is in between 0 and (difference between 2 Rise times), then its a success
+   * If fall time > Rise time, but is also > (difference between 2 Rise times), then increment Rise Counter
+   */
+  while ((indxf < (PWMNUMVAL)) && (indxr < (PWMNUMVAL)))
+  {
+    /* If the Fall time is lower than rise time, increment the fall indx */
+    while ((int16_t)(fallData[indxf] - riseData[indxr]) < 0)
+    {
+      indxf++;
+    }
+
+    /* If the Difference in fall time and rise time is >0 and less than rise average,
+     * Then we will register it as a success and increment the countrf (the number of successes)
+     */
+    if (((int16_t)(fallData[indxf] - riseData[indxr]) >= 0) && (((int16_t)(fallData[indxf] - riseData[indxr]) <= riseavg)))
+    {
+      rfavg += MIN((fallData[indxf] - riseData[indxr]), (fallData[indxf + 1] - riseData[indxr + 1]));
+      indxf++;
+      indxr++;
+      countrf++;
+    }
+
+    else
+    {
+      indxr++;
+    }
+  }
+
+  /* Calculate the Average time between 2 Rise */
+  rfavg = rfavg / countrf;
+
+  /* Calculate Frequency
+   * Freq = Clock/(time taken between 2 Rise)
+   */
+  *frequency = (refClock / (float)(riseavg+1));
+
+  /* Width of the pulse
+   *  = (Time between Rise and fall) / clock
+   */
+  *width = (rfavg) / (float)(riseavg+1); // width in ns
+
+  *riseCaptured = 0;
+  *fallCaptured = 0;
+
+  *isMeasured = 1;
+}
 /* USER CODE END 4 */
 
 /* USER CODE BEGIN Header_startMediumFrequencyTask */

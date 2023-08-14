@@ -142,10 +142,6 @@ void Error_Handler(void);
 /* USER CODE BEGIN Private defines */
 #define TIMMEAN TIM8
 #define TIMAMP TIM2
-#define TIMAZIMUTH TIM3
-#define TIMAZIMUTH_IRQHandler TIM3_IRQHandler
-#define TIMAMP_IRQHandler TIM2_IRQHandler
-#define TIMMEAN_IRQHandler TIM8_CC_IRQHandler
 #define PWMNUMVAL 100
 /* USER CODE END Private defines */
 

@@ -70,6 +70,12 @@ extern uint16_t riseDataMEAN[PWMNUMVAL], fallDataMEAN[PWMNUMVAL];
 extern float frequencyMEAN, frequencyAMP;
 extern float widthMEAN, widthAMP;
 
+
+uint32_t minAmpFrequency = 1000, maxAmpFrequency = 50000, maxAmpTorque = 4000;
+uint32_t minMeanFrequency = 1000, maxMeanFrequency = 50000;
+uint32_t maxMeanTorque = 3000, minMeanTorque = 0, minMeanThresh = 500;
+
+
 static FOCVars_t FOCVars[NBR_OF_MOTORS];
 static EncAlign_Handle_t *pEAC[NBR_OF_MOTORS];
 
@@ -1061,6 +1067,16 @@ __weak void TSK_HardwareFaultTask(void)
 /* startMediumFrequencyTask function */
 void startMediumFrequencyTask(void const * argument)
 {
+  bool motorStarted = false;
+  
+  int32_t meanTorque = 0;     // cstat !MISRAC2012-Rule-11.3
+  int16_t ampTorque = 0; // cstat !MISRAC2012-Rule-11.3
+  int16_t phase = 0;  // cstat !MISRAC2012-Rule-11.3
+
+  const uint8_t motorID = 0U;
+  const MCI_Handle_t *pMCIN = &Mci[motorID];
+
+
   /* USER CODE BEGIN MF task 1 */
   /* Infinite loop */
   for(;;)
@@ -1070,19 +1086,54 @@ void startMediumFrequencyTask(void const * argument)
     HAL_StatusTypeDef status2 = HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_2, fallDataAMP, PWMNUMVAL);
     HAL_StatusTypeDef status3 = HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_1, riseDataMEAN, PWMNUMVAL);
     HAL_StatusTypeDef status4 = HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_2, fallDataMEAN, PWMNUMVAL);
-    HAL_Delay(1000);
+
     if (isMeasuredAMP)
     {
       TIM2->CNT = 0;
       isMeasuredAMP = 0;
+
+      ampTorque=0;
+      phase = 0;
+      if ( minAmpFrequency <= frequencyAMP && frequencyAMP <= maxAmpFrequency)
+      {
+        ampTorque = maxAmpTorque*frequencyAMP/(maxAmpFrequency-minAmpFrequency);
+        phase = 0 + widthAMP*360;
+      }  
     }
     if (isMeasuredMEAN)
     {
       TIM8->CNT = 0;
       isMeasuredMEAN = 0;
+      if ( minMeanFrequency <= frequencyMEAN && frequencyMEAN <= maxMeanFrequency)
+      {
+       // meanTorque = minMeanTorque + widthMEAN*(maxMeanTorque-minMeanTorque);
+        meanTorque = minMeanTorque + (frequencyMEAN-minMeanFrequency)*(maxMeanTorque-minMeanTorque)/(maxMeanFrequency-minMeanFrequency);
+        if (meanTorque < minMeanThresh)
+          meanTorque = 0;
+      }
+    }
+    if (motorStarted)
+    {
+      if (meanTorque < minMeanThresh/2)
+      {
+        MC_StopMotor1();
+        vTaskDelay(1000);
+        motorStarted = false;
+        MX_USART2_UART_Init();
+      }
+      else
+        MCI_ExecTorqueSin(pMCIN, meanTorque, ampTorque, phase);
+    } 
+    else if (meanTorque > minMeanThresh)
+    {   
+      MC_StartMotor1();
+      vTaskDelay(2000);
+      motorStarted = true;
+      MX_TIM2_Init();
     }
      /* delay of 500us */
     vTaskDelay(1);
+
     MC_RunMotorControlTasks();
   }
   /* USER CODE END MF task 1 */
@@ -1105,30 +1156,6 @@ void StartSafetyTask(void const * argument)
 __weak void UI_HandleStartStopButton_cb (void)
 {
 /* USER CODE BEGIN START_STOP_BTN */
-  if (UART_Input)
-  {
-    UART_Input = !UART_Input;
-    LL_USART_Disable(USART2);
-
-    LL_TIM_EnableDMAReq_UPDATE(TIM2);
-    LL_TIM_EnableDMAReq_UPDATE(TIM3);
-    LL_TIM_EnableDMAReq_UPDATE(TIM8);
-    LL_TIM_EnableCounter(TIM2);
-    LL_TIM_EnableCounter(TIM3);
-    LL_TIM_EnableCounter(TIM8);  
-  }
-  else
-  {
-    UART_Input = !UART_Input;
-    LL_USART_Enable(USART2);
-
-    LL_TIM_DisableCounter(TIM2);
-    LL_TIM_DisableCounter(TIM3);
-    LL_TIM_DisableCounter(TIM8);
-    LL_TIM_DisableDMAReq_UPDATE(TIM2);
-    LL_TIM_DisableDMAReq_UPDATE(TIM3);
-    LL_TIM_DisableDMAReq_UPDATE(TIM8);
-  }
   if (IDLE == MC_GetSTMStateMotor1())
   {
     /* Ramp parameters should be tuned for the actual motor */

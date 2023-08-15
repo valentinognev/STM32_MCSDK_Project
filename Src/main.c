@@ -103,9 +103,9 @@ static void MX_OPAMP1_Init(void);
 static void MX_OPAMP2_Init(void);
 static void MX_OPAMP3_Init(void);
 static void MX_TIM1_Init(void);
-static void MX_TIM2_Init(void);
+
 static void MX_TIM4_Init(void);
-static void MX_USART2_UART_Init(void);
+
 static void MX_TIM8_Init(void);
 void startMediumFrequencyTask(void const * argument);
 extern void StartSafetyTask(void const * argument);
@@ -165,8 +165,8 @@ int main(void)
   MX_TIM1_Init();
   MX_TIM4_Init();
   MX_TIM8_Init();
-  MX_USART2_UART_Init();
   MX_TIM2_Init();
+  //MX_USART2_UART_Init();
   MX_MotorControl_Init();
 
   /* Initialize interrupts */
@@ -216,21 +216,7 @@ int main(void)
   while (1)
   {
     /* Call the measurement whenever needed */
-    HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, riseDataAMP, PWMNUMVAL);
-    HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_2, fallDataAMP, PWMNUMVAL);
-    HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_1, riseDataMEAN, PWMNUMVAL);
-    HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_2, fallDataMEAN, PWMNUMVAL);
-    HAL_Delay(1000);
-    if (isMeasuredAMP)
-    {
-      TIM2->CNT = 0;
-      isMeasuredAMP = 0;
-    }
-    if (isMeasuredMEAN)
-    {
-      TIM8->CNT = 0;
-      isMeasuredMEAN = 0;
-    }
+    LL_mDelay(1);
     /* USER CODE END WHILE */
 
     /* USER CODE BEGIN 3 */
@@ -1078,7 +1064,7 @@ static void MX_TIM1_Init(void)
   * @param None
   * @retval None
   */
-static void MX_TIM2_Init(void)
+void MX_TIM2_Init(void)
 {
 
    /* USER CODE BEGIN TIM2_Init 0 */
@@ -1208,7 +1194,7 @@ static void MX_TIM4_Init(void)
   * @param None
   * @retval None
   */
-static void MX_USART2_UART_Init(void)
+void MX_USART2_UART_Init(void)
 {
 
   /* USER CODE BEGIN USART2_Init 0 */

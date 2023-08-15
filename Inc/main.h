@@ -75,7 +75,8 @@ extern "C" {
 void Error_Handler(void);
 
 /* USER CODE BEGIN EFP */
-
+void MX_USART2_UART_Init(void);
+void MX_TIM2_Init(void);
 /* USER CODE END EFP */
 
 /* Private defines -----------------------------------------------------------*/

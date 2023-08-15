@@ -67,6 +67,8 @@ extern TIM_HandleTypeDef htim8;
 extern int isMeasuredAMP, isMeasuredMEAN, isMeasuredAZIMUTH;
 extern uint32_t riseDataAMP[PWMNUMVAL], fallDataAMP[PWMNUMVAL];
 extern uint16_t riseDataMEAN[PWMNUMVAL], fallDataMEAN[PWMNUMVAL];
+extern float frequencyMEAN, frequencyAMP;
+extern float widthMEAN, widthAMP;
 
 static FOCVars_t FOCVars[NBR_OF_MOTORS];
 static EncAlign_Handle_t *pEAC[NBR_OF_MOTORS];
@@ -1064,10 +1066,10 @@ void startMediumFrequencyTask(void const * argument)
   for(;;)
   {
     /* Call the measurement whenever needed */
-    HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, riseDataAMP, PWMNUMVAL);
-    HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_2, fallDataAMP, PWMNUMVAL);
-    HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_1, riseDataMEAN, PWMNUMVAL);
-    HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_2, fallDataMEAN, PWMNUMVAL);
+    HAL_StatusTypeDef status1 = HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, riseDataAMP, PWMNUMVAL);
+    HAL_StatusTypeDef status2 = HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_2, fallDataAMP, PWMNUMVAL);
+    HAL_StatusTypeDef status3 = HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_1, riseDataMEAN, PWMNUMVAL);
+    HAL_StatusTypeDef status4 = HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_2, fallDataMEAN, PWMNUMVAL);
     HAL_Delay(1000);
     if (isMeasuredAMP)
     {

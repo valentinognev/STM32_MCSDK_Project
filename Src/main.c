@@ -74,8 +74,8 @@ extern MCI_Handle_t* pMCI[NBR_OF_MOTORS];
 
 int riseMEANCaptured = 0, riseAMPCaptured = 0;
 int fallMEANCaptured = 0, fallAMPCaptured = 0;
-float frequencyMEAN = 0, frequencyAMP = 0, frequencyAZIMUTH = 0;
-float widthMEAN = 0, widthAMP = 0, widthAZIMUTH = 0;
+float frequencyMEAN = 0, frequencyAMP = 0;
+float widthMEAN = 0, widthAMP = 0;
 uint32_t riseDataAMP[PWMNUMVAL], fallDataAMP[PWMNUMVAL];
 uint16_t riseDataMEAN[PWMNUMVAL], fallDataMEAN[PWMNUMVAL];
 uint32_t riseDatatemp[PWMNUMVAL], fallDatatemp[PWMNUMVAL];
@@ -163,21 +163,19 @@ int main(void)
   MX_OPAMP2_Init();
   MX_OPAMP3_Init();
   MX_TIM1_Init();
-  MX_TIM2_Init();
   MX_TIM4_Init();
-  MX_USART2_UART_Init();
-  MX_MotorControl_Init();
   MX_TIM8_Init();
+  MX_USART2_UART_Init();
   MX_TIM2_Init();
+  MX_MotorControl_Init();
 
   /* Initialize interrupts */
   MX_NVIC_Init();
   /* USER CODE BEGIN 2 */
 
   /* USER CODE END 2 */
+
   LL_TIM_EnableCounter(TIM4);
-  LL_TIM_EnableCounter(TIM2);
-  LL_TIM_EnableCounter(TIM8);
   /* USER CODE BEGIN RTOS_MUTEX */
   /* add mutexes, ... */
   /* USER CODE END RTOS_MUTEX */
@@ -299,18 +297,6 @@ static void MX_NVIC_Init(void)
   /* USART2_IRQn interrupt configuration */
   // NVIC_SetPriority(USART2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),8, 0));
   // NVIC_EnableIRQ(USART2_IRQn);
-  /* DMA1_Channel1_IRQn interrupt configuration */
-  NVIC_SetPriority(DMA1_Channel1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),8, 0));
-  NVIC_EnableIRQ(DMA1_Channel1_IRQn);
-  /* DMA1_Channel2_IRQn interrupt configuration */
-  NVIC_SetPriority(DMA1_Channel2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
-  NVIC_EnableIRQ(DMA1_Channel2_IRQn);
-  /* DMA1_Channel3_IRQn interrupt configuration */
-  NVIC_SetPriority(DMA1_Channel3_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
-  NVIC_EnableIRQ(DMA1_Channel3_IRQn);
-  /* DMA1_Channel4_IRQn interrupt configuration */
-  NVIC_SetPriority(DMA1_Channel4_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
-  NVIC_EnableIRQ(DMA1_Channel4_IRQn);
   /* TIM2_IRQn interrupt configuration */
   NVIC_SetPriority(TIM2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 9, 0));
   NVIC_EnableIRQ(TIM2_IRQn);
@@ -1095,7 +1081,7 @@ static void MX_TIM1_Init(void)
 static void MX_TIM2_Init(void)
 {
 
-  /* USER CODE BEGIN TIM2_Init 0 */
+   /* USER CODE BEGIN TIM2_Init 0 */
 
   /* USER CODE END TIM2_Init 0 */
 
@@ -1405,6 +1391,23 @@ static void MX_DMA_Init(void)
     /* DMA controller clock enable */
   __HAL_RCC_DMAMUX1_CLK_ENABLE();
   __HAL_RCC_DMA1_CLK_ENABLE();
+
+    /* DMA1_Channel1_IRQn interrupt configuration */
+  NVIC_SetPriority(DMA1_Channel1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),8, 0));
+  NVIC_EnableIRQ(DMA1_Channel1_IRQn);
+ /* DMA1_Channel3_IRQn interrupt configuration */
+  NVIC_SetPriority(DMA1_Channel3_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
+  NVIC_EnableIRQ(DMA1_Channel3_IRQn);
+  /* DMA1_Channel4_IRQn interrupt configuration */
+  NVIC_SetPriority(DMA1_Channel4_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
+  NVIC_EnableIRQ(DMA1_Channel4_IRQn);
+  /* DMA1_Channel2_IRQn interrupt configuration */
+  NVIC_SetPriority(DMA1_Channel5_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
+  NVIC_EnableIRQ(DMA1_Channel5_IRQn);
+   /* DMA1_Channel2_IRQn interrupt configuration */
+  NVIC_SetPriority(DMA1_Channel6_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
+  NVIC_EnableIRQ(DMA1_Channel6_IRQn);
+ 
 }
 
 /**

@@ -217,7 +217,7 @@ void DMA1_Channel1_IRQHandler(void)
   }
   else
   {
-      HAL_DMA_IRQHandler(&hdma_tim2_ch1);
+      /* Nothing to do */;
   }
   /* USER CODE BEGIN DMA1_Channel1_IRQHandler 1 */
 

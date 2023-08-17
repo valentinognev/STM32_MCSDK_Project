@@ -1,5 +1,6 @@
 {
     "configurations": [
+
         
     
         {
@@ -53,6 +54,68 @@
                 "openocd.cfg"
             ],
             "svdFile": "${workspaceRoot}/STM32G431xx.svd"
-        }
+        },
+        {
+            "showDevDebugOutput": "parsed",
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/STM32_MCSDK_Project.elf",
+            "name": "Launch JLink",
+            "request": "launch",
+            "type": "cortex-debug",
+            "servertype": "jlink",
+            "interface": "swd",
+            "preLaunchTask": "Build STM",
+            "device": "STM32G431CB",
+            "preLaunchCommands": [
+                "make flash-jlink"
+            ],
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 96000000,
+                "swoFrequency": 4000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "type": "console",
+                        "label": "ITM port 0 output",
+                        "port": 0,
+                        "showOnStartup": true,
+                        "encoding": "ascii"
+                    }
+                ]
+            },
+            "svdFile": "STM32G431xx.svd"
+        },
+        {
+            "showDevDebugOutput": "parsed",
+            "cwd": "${workspaceRoot}",
+            "executable": "./build/STM32_MCSDK_Project.elf",
+            "name": "Attach JLink",
+            "request": "attach",
+            "type": "cortex-debug",
+            "servertype": "jlink",
+            "interface": "swd",
+            "preLaunchTask": "Build STM",
+            "device": "STM32G431CB",
+            "preAttachCommands": [
+                "make flash-jlink"
+            ],
+            "swoConfig": {
+                "enabled": true,
+                "cpuFrequency": 96000000,
+                "swoFrequency": 4000000,
+                "source": "probe",
+                "decoders": [
+                    {
+                        "type": "console",
+                        "label": "ITM port 0 output",
+                        "port": 0,
+                        "showOnStartup": true,
+                        "encoding": "ascii"
+                    }
+                ]
+            },
+            "svdFile": "STM32G431xx.svd"
+        },
     ]
 }

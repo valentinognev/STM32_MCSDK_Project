@@ -63,14 +63,16 @@
 extern bool UART_Input;
 extern FF_Handle_t *pFF[NBR_OF_MOTORS];
 extern TIM_HandleTypeDef htim2;
+extern TIM_HandleTypeDef htim3;
 extern TIM_HandleTypeDef htim8;
 extern int isMeasuredAMP, isMeasuredMEAN, isMeasuredAZIMUTH;
 extern uint32_t riseDataAMP[PWMNUMVAL], fallDataAMP[PWMNUMVAL];
-extern uint16_t riseDataMEAN[PWMNUMVAL], fallDataMEAN[PWMNUMVAL];
-extern float frequencyMEAN, frequencyAMP;
-extern float widthMEAN, widthAMP;
+extern uint16_t riseDataMEAN[PWMNUMVAL], riseDataAZIMUTH[PWMNUMVAL];
+extern uint16_t fallDataMEAN[PWMNUMVAL], fallDataAZIMUTH[PWMNUMVAL];
+extern float frequencyMEAN, frequencyAMP, frequencyAZIMUTH;
+extern float widthMEAN, widthAMP, widthAZIMUTH;
 
-
+uint32_t minAzimuthFrequency = 1000, maxAzimuthFrequency = 50000;
 uint32_t minAmpFrequency = 1000, maxAmpFrequency = 50000, maxAmpTorque = 4000;
 uint32_t minMeanFrequency = 1000, maxMeanFrequency = 50000;
 uint32_t maxMeanTorque = 3000, minMeanTorque = 0, minMeanThresh = 500;
@@ -1084,8 +1086,10 @@ void startMediumFrequencyTask(void const * argument)
     /* Call the measurement whenever needed */
     HAL_StatusTypeDef status1 = HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, riseDataAMP, PWMNUMVAL);
     HAL_StatusTypeDef status2 = HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_2, fallDataAMP, PWMNUMVAL);
-    HAL_StatusTypeDef status3 = HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_1, riseDataMEAN, PWMNUMVAL);
-    HAL_StatusTypeDef status4 = HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_2, fallDataMEAN, PWMNUMVAL);
+    HAL_StatusTypeDef status3 = HAL_TIM_IC_Start_DMA(&htim3, TIM_CHANNEL_1, riseDataAZIMUTH, PWMNUMVAL);
+    HAL_StatusTypeDef status4 = HAL_TIM_IC_Start_DMA(&htim3, TIM_CHANNEL_2, fallDataAZIMUTH, PWMNUMVAL);
+    HAL_StatusTypeDef status5 = HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_1, riseDataMEAN, PWMNUMVAL);
+    HAL_StatusTypeDef status6 = HAL_TIM_IC_Start_DMA(&htim8, TIM_CHANNEL_2, fallDataMEAN, PWMNUMVAL);
 
     if (isMeasuredAMP)
     {
@@ -1094,10 +1098,9 @@ void startMediumFrequencyTask(void const * argument)
 
       ampTorque=0;
       phase = 0;
-      if ( minAmpFrequency <= frequencyAMP && frequencyAMP <= maxAmpFrequency)
+      if (minAmpFrequency <= frequencyAMP && frequencyAMP <= minAmpFrequency)
       {
-        ampTorque = maxAmpTorque*frequencyAMP/(maxAmpFrequency-minAmpFrequency);
-        phase = 0 + widthAMP*360;
+        ampTorque = widthAMP*maxAmpTorque;
       }  
     }
     if (isMeasuredMEAN)
@@ -1107,9 +1110,18 @@ void startMediumFrequencyTask(void const * argument)
       if ( minMeanFrequency <= frequencyMEAN && frequencyMEAN <= maxMeanFrequency)
       {
        // meanTorque = minMeanTorque + widthMEAN*(maxMeanTorque-minMeanTorque);
-        meanTorque = minMeanTorque + (frequencyMEAN-minMeanFrequency)*(maxMeanTorque-minMeanTorque)/(maxMeanFrequency-minMeanFrequency);
+        meanTorque = minMeanTorque + widthMEAN * (maxMeanTorque - minMeanTorque);
         if (meanTorque < minMeanThresh)
           meanTorque = 0;
+      }
+    }
+    if (isMeasuredAZIMUTH)
+    {
+      TIM3->CNT = 0;
+      isMeasuredAZIMUTH = 0;
+      if (minAzimuthFrequency <= frequencyAZIMUTH && frequencyAZIMUTH <= maxAzimuthFrequency)
+      {
+        phase = 0 + widthAMP * 360;
       }
     }
     if (motorStarted)
@@ -1119,7 +1131,6 @@ void startMediumFrequencyTask(void const * argument)
         MC_StopMotor1();
         vTaskDelay(1000);
         motorStarted = false;
-        MX_USART2_UART_Init();
       }
       else
         MCI_ExecTorqueSin(pMCIN, meanTorque, ampTorque, phase);
@@ -1129,7 +1140,6 @@ void startMediumFrequencyTask(void const * argument)
       MC_StartMotor1();
       vTaskDelay(2000);
       motorStarted = true;
-      MX_TIM2_Init();
     }
      /* delay of 500us */
     vTaskDelay(1);

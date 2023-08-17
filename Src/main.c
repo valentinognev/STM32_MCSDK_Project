@@ -42,9 +42,12 @@
 
 /* Private variables ---------------------------------------------------------*/
 TIM_HandleTypeDef htim2;
+TIM_HandleTypeDef htim3;
 TIM_HandleTypeDef htim8;
 DMA_HandleTypeDef hdma_tim2_ch1;
 DMA_HandleTypeDef hdma_tim2_ch2;
+DMA_HandleTypeDef hdma_tim3_ch1;
+DMA_HandleTypeDef hdma_tim3_ch2;
 DMA_HandleTypeDef hdma_tim8_ch1;
 DMA_HandleTypeDef hdma_tim8_ch2;
 bool UART_Input = false;
@@ -64,22 +67,23 @@ extern MCI_Handle_t* pMCI[NBR_OF_MOTORS];
 
 /* define the capturing TIMER's CLOCK and the Prescalar you are using */
 #define TIMCLOCK 170000000
-#define PSCALARAMP 16
-#define PSCALARMEAN 29
-#define PSCALARAZIMUTH 29
+#define PSCALARAMP (17-1)
+#define PSCALARMEAN (30-1)
+#define PSCALARAZIMUTH (30-1)
 /* Define the number of samples to be taken by the DMA
    For lower Frequencies, keep the less number for samples
 */
 #define MIN(a, b) ((a) < (b) ? (a) : (b))
 
-int riseMEANCaptured = 0, riseAMPCaptured = 0;
-int fallMEANCaptured = 0, fallAMPCaptured = 0;
-float frequencyMEAN = 0, frequencyAMP = 0;
-float widthMEAN = 0, widthAMP = 0;
+int riseMEANCaptured = 0, riseAMPCaptured = 0, riseAZIMUTHCaptured = 0;
+int fallMEANCaptured = 0, fallAMPCaptured = 0, fallAZIMUTHCaptured = 0;
+float frequencyMEAN = 0, frequencyAMP = 0, frequencyAZIMUTH = 0;
+float widthMEAN = 0, widthAMP = 0, widthAZIMUTH = 0;
 uint32_t riseDataAMP[PWMNUMVAL], fallDataAMP[PWMNUMVAL];
-uint16_t riseDataMEAN[PWMNUMVAL], fallDataMEAN[PWMNUMVAL];
 uint32_t riseDatatemp[PWMNUMVAL], fallDatatemp[PWMNUMVAL];
-int isMeasuredAMP = 0, isMeasuredMEAN = 0;
+uint16_t riseDataMEAN[PWMNUMVAL], riseDataAZIMUTH[PWMNUMVAL];
+uint16_t fallDataMEAN[PWMNUMVAL], fallDataAZIMUTH[PWMNUMVAL];
+int isMeasuredAMP = 0, isMeasuredMEAN = 0, isMeasuredAZIMUTH = 0;
 
 void TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim, const int pscalar, int *riseCaptured, int *fallCaptured, int *isMeasured,
                             uint32_t *riseData, uint32_t *fallData, float *frequency, float *width);
@@ -103,10 +107,8 @@ static void MX_OPAMP1_Init(void);
 static void MX_OPAMP2_Init(void);
 static void MX_OPAMP3_Init(void);
 static void MX_TIM1_Init(void);
-
 static void MX_TIM4_Init(void);
 
-static void MX_TIM8_Init(void);
 void startMediumFrequencyTask(void const * argument);
 extern void StartSafetyTask(void const * argument);
 
@@ -163,10 +165,11 @@ int main(void)
   MX_OPAMP2_Init();
   MX_OPAMP3_Init();
   MX_TIM1_Init();
+  MX_TIM2_Init();
+  MX_TIM3_Init();
   MX_TIM4_Init();
   MX_TIM8_Init();
-  MX_TIM2_Init();
-  //MX_USART2_UART_Init();
+  // MX_USART2_UART_Init();
   MX_MotorControl_Init();
 
   /* Initialize interrupts */
@@ -286,6 +289,9 @@ static void MX_NVIC_Init(void)
   /* TIM2_IRQn interrupt configuration */
   NVIC_SetPriority(TIM2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 9, 0));
   NVIC_EnableIRQ(TIM2_IRQn);
+/* TIM3_IRQn interrupt configuration */
+  NVIC_SetPriority(TIM3_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 9, 0));
+  NVIC_EnableIRQ(TIM3_IRQn);
   /* TIM8_IRQn interrupt configuration */
   NVIC_SetPriority(TIM8_CC_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 9, 0));
   NVIC_EnableIRQ(TIM8_CC_IRQn);
@@ -1067,7 +1073,7 @@ static void MX_TIM1_Init(void)
 void MX_TIM2_Init(void)
 {
 
-   /* USER CODE BEGIN TIM2_Init 0 */
+  /* USER CODE BEGIN TIM2_Init 0 */
 
   /* USER CODE END TIM2_Init 0 */
 
@@ -1079,7 +1085,7 @@ void MX_TIM2_Init(void)
 
   /* USER CODE END TIM2_Init 1 */
   htim2.Instance = TIM2;
-  htim2.Init.Prescaler = 17-1;
+  htim2.Init.Prescaler = PSCALARAMP;
   htim2.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim2.Init.Period = 4.294967295E9;
   htim2.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -1120,7 +1126,74 @@ void MX_TIM2_Init(void)
   /* USER CODE BEGIN TIM2_Init 2 */
 
   /* USER CODE END TIM2_Init 2 */
+}
 
+/**
+  * @brief TIM3 Initialization Function
+  * @param None
+  * @retval None
+  */
+/**
+ * @brief TIM3 Initialization Function
+ * @param None
+ * @retval None
+ */
+void MX_TIM3_Init(void)
+{
+
+  /* USER CODE BEGIN TIM3_Init 0 */
+
+  /* USER CODE END TIM3_Init 0 */
+
+  TIM_ClockConfigTypeDef sClockSourceConfig = {0};
+  TIM_MasterConfigTypeDef sMasterConfig = {0};
+  TIM_IC_InitTypeDef sConfigIC = {0};
+
+  /* USER CODE BEGIN TIM3_Init 1 */
+
+  /* USER CODE END TIM3_Init 1 */
+  htim3.Instance = TIM3;
+  htim3.Init.Prescaler = PSCALARAZIMUTH;
+  htim3.Init.CounterMode = TIM_COUNTERMODE_UP;
+  htim3.Init.Period = 65535;
+  htim3.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
+  htim3.Init.AutoReloadPreload = TIM_AUTORELOAD_PRELOAD_ENABLE;
+  if (HAL_TIM_Base_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sClockSourceConfig.ClockSource = TIM_CLOCKSOURCE_INTERNAL;
+  if (HAL_TIM_ConfigClockSource(&htim3, &sClockSourceConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  if (HAL_TIM_IC_Init(&htim3) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sMasterConfig.MasterOutputTrigger = TIM_TRGO_RESET;
+  sMasterConfig.MasterSlaveMode = TIM_MASTERSLAVEMODE_DISABLE;
+  if (HAL_TIMEx_MasterConfigSynchronization(&htim3, &sMasterConfig) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_RISING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_DIRECTTI;
+  sConfigIC.ICPrescaler = TIM_ICPSC_DIV1;
+  sConfigIC.ICFilter = 0;
+  if (HAL_TIM_IC_ConfigChannel(&htim3, &sConfigIC, TIM_CHANNEL_1) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  sConfigIC.ICPolarity = TIM_INPUTCHANNELPOLARITY_FALLING;
+  sConfigIC.ICSelection = TIM_ICSELECTION_INDIRECTTI;
+  if (HAL_TIM_IC_ConfigChannel(&htim3, &sConfigIC, TIM_CHANNEL_2) != HAL_OK)
+  {
+    Error_Handler();
+  }
+  /* USER CODE BEGIN TIM3_Init 2 */
+
+  /* USER CODE END TIM3_Init 2 */
 }
 
 /**
@@ -1305,7 +1378,7 @@ void MX_USART2_UART_Init(void)
   * @param None
   * @retval None
   */
-static void MX_TIM8_Init(void)
+void MX_TIM8_Init(void)
 {
 
   /* USER CODE BEGIN TIM8_Init 0 */
@@ -1320,7 +1393,7 @@ static void MX_TIM8_Init(void)
 
   /* USER CODE END TIM8_Init 1 */
   htim8.Instance = TIM8;
-  htim8.Init.Prescaler = 30-1;
+  htim8.Init.Prescaler = PSCALARMEAN;
   htim8.Init.CounterMode = TIM_COUNTERMODE_UP;
   htim8.Init.Period = 65535;
   htim8.Init.ClockDivision = TIM_CLOCKDIVISION_DIV1;
@@ -1363,7 +1436,6 @@ static void MX_TIM8_Init(void)
   /* USER CODE BEGIN TIM8_Init 2 */
 
   /* USER CODE END TIM8_Init 2 */
-
 }
 
 /**
@@ -1377,23 +1449,29 @@ static void MX_DMA_Init(void)
     /* DMA controller clock enable */
   __HAL_RCC_DMAMUX1_CLK_ENABLE();
   __HAL_RCC_DMA1_CLK_ENABLE();
+  __HAL_RCC_DMA2_CLK_ENABLE();
 
-    /* DMA1_Channel1_IRQn interrupt configuration */
-  NVIC_SetPriority(DMA1_Channel1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(),8, 0));
+  /* DMA1_Channel1_IRQn interrupt configuration */
+  NVIC_SetPriority(DMA1_Channel1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
   NVIC_EnableIRQ(DMA1_Channel1_IRQn);
- /* DMA1_Channel3_IRQn interrupt configuration */
-  NVIC_SetPriority(DMA1_Channel3_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
-  NVIC_EnableIRQ(DMA1_Channel3_IRQn);
-  /* DMA1_Channel4_IRQn interrupt configuration */
-  NVIC_SetPriority(DMA1_Channel4_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
-  NVIC_EnableIRQ(DMA1_Channel4_IRQn);
-  /* DMA1_Channel2_IRQn interrupt configuration */
-  NVIC_SetPriority(DMA1_Channel5_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
-  NVIC_EnableIRQ(DMA1_Channel5_IRQn);
-   /* DMA1_Channel2_IRQn interrupt configuration */
-  NVIC_SetPriority(DMA1_Channel6_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
-  NVIC_EnableIRQ(DMA1_Channel6_IRQn);
- 
+  /* DMA2_Channel1_IRQn interrupt configuration */
+  NVIC_SetPriority(DMA2_Channel1_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
+  NVIC_EnableIRQ(DMA2_Channel1_IRQn);
+  /* DMA2_Channel3_IRQn interrupt configuration */
+  NVIC_SetPriority(DMA2_Channel2_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
+  NVIC_EnableIRQ(DMA2_Channel2_IRQn);
+  /* DMA2_Channel3_IRQn interrupt configuration */
+  NVIC_SetPriority(DMA2_Channel3_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
+  NVIC_EnableIRQ(DMA2_Channel3_IRQn);
+  /* DMA2_Channel4_IRQn interrupt configuration */
+  NVIC_SetPriority(DMA2_Channel4_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
+  NVIC_EnableIRQ(DMA2_Channel4_IRQn);
+  /* DMA2_Channel2_IRQn interrupt configuration */
+  NVIC_SetPriority(DMA2_Channel5_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
+  NVIC_EnableIRQ(DMA2_Channel5_IRQn);
+   /* DMA2_Channel2_IRQn interrupt configuration */
+  NVIC_SetPriority(DMA2_Channel6_IRQn, NVIC_EncodePriority(NVIC_GetPriorityGrouping(), 8, 0));
+  NVIC_EnableIRQ(DMA2_Channel6_IRQn);
 }
 
 /**
@@ -1467,7 +1545,7 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
     TIM_IC_CaptureCallback(htim, PSCALARAMP, &riseAMPCaptured, &fallAMPCaptured, &isMeasuredAMP,
                            riseDataAMP, fallDataAMP, &frequencyAMP, &widthAMP);
   }
-  if (htim->Instance == TIM8)
+  else if (htim->Instance == TIM8)
   {
     if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
     {
@@ -1484,6 +1562,24 @@ void HAL_TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim)
     }  
     TIM_IC_CaptureCallback(htim, PSCALARMEAN, &riseMEANCaptured, &fallMEANCaptured, &isMeasuredMEAN,
                            riseDatatemp, fallDatatemp, &frequencyMEAN, &widthMEAN);
+  }
+  else if (htim->Instance == TIM3)
+  {
+    if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_1)
+    {
+      riseAZIMUTHCaptured = 1;
+    }
+    if (htim->Channel == HAL_TIM_ACTIVE_CHANNEL_2)
+    {
+      fallAZIMUTHCaptured = 1;
+    }
+    for (int i=0;i<PWMNUMVAL;i++)
+    {
+      riseDatatemp[i]=riseDataAZIMUTH[i];
+      fallDatatemp[i]=fallDataAZIMUTH[i];
+    }  
+    TIM_IC_CaptureCallback(htim, PSCALARAZIMUTH, &riseAZIMUTHCaptured, &fallAZIMUTHCaptured, &isMeasuredAZIMUTH,
+                           riseDatatemp, fallDatatemp, &frequencyAZIMUTH, &widthAZIMUTH);
   }
 }
 

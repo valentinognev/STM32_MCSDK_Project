@@ -56,7 +56,9 @@ flash-st: build
 	st-flash --reset write $(FIRMWARE) 0x08000000
 
 flash-ocd: build
-	openocd -f ./openocd.cfg -c "program $(BUILD_DIR)/$(PROJECT_NAME).elf verify reset exit"
+	openocd 			\
+		 -c "adapter serial 3000590010000059334A4D4E" \
+	     -f ./openocd.cfg -c "program $(BUILD_DIR)/$(PROJECT_NAME).elf verify reset exit"
 
 $(BUILD_DIR)/jlink-script:
 	touch $@

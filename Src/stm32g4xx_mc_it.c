@@ -199,13 +199,26 @@ void SPD_TIM_M1_IRQHandler(void)
 void DMA1_Channel1_IRQHandler(void)
 {
   /* USER CODE BEGIN DMA1_Channel1_IRQHandler 0 */
-
+if (UART_Input)
+  {
   /* USER CODE BEGIN DMA1_Channel1_IRQHandler 0 */
 
+/* Buffer is ready by the HW layer to be processed */    
+    if (0U == LL_DMA_IsActiveFlag_TC(DMA_RX_A, DMACH_RX_A))
+    {
+      /* Nothing to do */
+    }
+    else
+    {
+      LL_DMA_ClearFlag_TC (DMA_RX_A, DMACH_RX_A);
+      ASPEP_HWDataReceivedIT (&aspepOverUartA);
+    }
   /* USER CODE BEGIN DMA1_Channel1_IRQHandler 1 */
-
-      HAL_DMA_IRQHandler(&hdma_tim2_ch1);
-
+}
+  else
+  {
+      /* Nothing to do */;
+  }
   /* USER CODE BEGIN DMA1_Channel1_IRQHandler 1 */
 
 }

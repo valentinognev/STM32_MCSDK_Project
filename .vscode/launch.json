@@ -22,8 +22,8 @@
                 "enable breakpoint",
                 "monitor reset"
             ],
-            "showDevDebugOutput": true
-          
+            "showDevDebugOutput": true,
+            "openOCDLaunchCommands": ["adapter serial 3000590010000059334A4D4E"]
        },
        {
             "showDevDebugOutput": "parsed",

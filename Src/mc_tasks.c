@@ -1121,7 +1121,7 @@ void startMediumFrequencyTask(void const * argument)
       isMeasuredAZIMUTH = 0;
       if (minAzimuthFrequency <= frequencyAZIMUTH && frequencyAZIMUTH <= maxAzimuthFrequency)
       {
-        phase = 0 + widthAMP * 360;
+        phase = 0 + widthAZIMUTH * 360;
       }
     }
     if (motorStarted)

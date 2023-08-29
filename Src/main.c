@@ -67,9 +67,10 @@ extern MCI_Handle_t* pMCI[NBR_OF_MOTORS];
 
 /* define the capturing TIMER's CLOCK and the Prescalar you are using */
 #define TIMCLOCK 170000000
-#define PSCALARAMP (17-1)
-#define PSCALARMEAN (30-1)
-#define PSCALARAZIMUTH (30-1)
+#define PWM_CHARACTERISTIC_FREQUENCY 400 // Hz PWMNUMVAL
+#define PSCALARAMP (TIMCLOCK/(PWM_CHARACTERISTIC_FREQUENCY*0xFFFF/PWMNUMVAL)-1) //(170-1)
+#define PSCALARMEAN (TIMCLOCK/(PWM_CHARACTERISTIC_FREQUENCY*0xFFFF/PWMNUMVAL)-1)
+#define PSCALARAZIMUTH (TIMCLOCK/(PWM_CHARACTERISTIC_FREQUENCY*0xFFFF/PWMNUMVAL)-1)
 /* Define the number of samples to be taken by the DMA
    For lower Frequencies, keep the less number for samples
 */
@@ -79,10 +80,10 @@ int riseMEANCaptured = 0, riseAMPCaptured = 0, riseAZIMUTHCaptured = 0;
 int fallMEANCaptured = 0, fallAMPCaptured = 0, fallAZIMUTHCaptured = 0;
 float frequencyMEAN = 0, frequencyAMP = 0, frequencyAZIMUTH = 0;
 float widthMEAN = 0, widthAMP = 0, widthAZIMUTH = 0;
-uint32_t riseDataAMP[PWMNUMVAL], fallDataAMP[PWMNUMVAL];
-uint32_t riseDatatemp[PWMNUMVAL], fallDatatemp[PWMNUMVAL];
-uint16_t riseDataMEAN[PWMNUMVAL], riseDataAZIMUTH[PWMNUMVAL];
-uint16_t fallDataMEAN[PWMNUMVAL], fallDataAZIMUTH[PWMNUMVAL];
+uint32_t riseDataAMP[PWMNUMVAL]={0}, fallDataAMP[PWMNUMVAL]={0};
+uint32_t riseDatatemp[PWMNUMVAL]={0}, fallDatatemp[PWMNUMVAL]={0};
+uint16_t riseDataMEAN[PWMNUMVAL]={0}, riseDataAZIMUTH[PWMNUMVAL]={0};
+uint16_t fallDataMEAN[PWMNUMVAL]={0}, fallDataAZIMUTH[PWMNUMVAL]={0};
 int isMeasuredAMP = 0, isMeasuredMEAN = 0, isMeasuredAZIMUTH = 0;
 
 void TIM_IC_CaptureCallback(TIM_HandleTypeDef *htim, const int pscalar, int *riseCaptured, int *fallCaptured, int *isMeasured,

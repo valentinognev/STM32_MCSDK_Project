@@ -72,10 +72,13 @@ extern uint16_t fallDataMEAN[PWMNUMVAL], fallDataAZIMUTH[PWMNUMVAL];
 extern float frequencyMEAN, frequencyAMP, frequencyAZIMUTH;
 extern float widthMEAN, widthAMP, widthAZIMUTH;
 
-uint32_t minAzimuthFrequency = 1000, maxAzimuthFrequency = 50000;
-uint32_t minAmpFrequency = 1000, maxAmpFrequency = 50000, maxAmpTorque = 4000;
-uint32_t minMeanFrequency = 1000, maxMeanFrequency = 50000;
+uint32_t minAzimuthFrequency = 300, maxAzimuthFrequency = 50000;
+uint32_t minAmpFrequency = 300, maxAmpFrequency = 50000, maxAmpTorque = 4000;
+uint32_t minMeanFrequency = 300, maxMeanFrequency = 50000;
 uint32_t maxMeanTorque = 3000, minMeanTorque = 0, minMeanThresh = 500;
+#define PWM_MIN_WIDTH         (21.0f/52.5f)
+#define PWM_MAX_WIDTH         (42.0f/52.5f)
+
 
 
 static FOCVars_t FOCVars[NBR_OF_MOTORS];
@@ -1098,9 +1101,12 @@ void startMediumFrequencyTask(void const * argument)
 
       ampTorque=0;
       phase = 0;
-      if (minAmpFrequency <= frequencyAMP && frequencyAMP <= minAmpFrequency)
+      if (minAmpFrequency <= frequencyAMP && frequencyAMP <= maxAmpFrequency)
       {
-        ampTorque = widthAMP*maxAmpTorque;
+        widthAMP = fmax(widthAMP, PWM_MIN_WIDTH);
+        widthAMP = fmin(widthAMP, PWM_MAX_WIDTH);
+        float wid = (widthAMP-PWM_MIN_WIDTH)/(PWM_MAX_WIDTH-PWM_MIN_WIDTH);
+        ampTorque = wid*maxAmpTorque;
       }  
     }
     if (isMeasuredMEAN)
@@ -1109,8 +1115,11 @@ void startMediumFrequencyTask(void const * argument)
       isMeasuredMEAN = 0;
       if ( minMeanFrequency <= frequencyMEAN && frequencyMEAN <= maxMeanFrequency)
       {
-       // meanTorque = minMeanTorque + widthMEAN*(maxMeanTorque-minMeanTorque);
-        meanTorque = minMeanTorque + widthMEAN * (maxMeanTorque - minMeanTorque);
+        // meanTorque = minMeanTorque + widthMEAN*(maxMeanTorque-minMeanTorque);
+        widthMEAN = fmax(widthMEAN, PWM_MIN_WIDTH);
+        widthMEAN = fmin(widthMEAN, PWM_MAX_WIDTH);
+        float wid = (widthMEAN-PWM_MIN_WIDTH)/(PWM_MAX_WIDTH-PWM_MIN_WIDTH);
+        meanTorque = minMeanTorque + wid * (maxMeanTorque - minMeanTorque);
         if (meanTorque < minMeanThresh)
           meanTorque = 0;
       }
@@ -1121,7 +1130,10 @@ void startMediumFrequencyTask(void const * argument)
       isMeasuredAZIMUTH = 0;
       if (minAzimuthFrequency <= frequencyAZIMUTH && frequencyAZIMUTH <= maxAzimuthFrequency)
       {
-        phase = 0 + widthAZIMUTH * 360;
+         widthAZIMUTH = fmax(widthAZIMUTH, PWM_MIN_WIDTH);
+         widthAZIMUTH = fmin(widthAZIMUTH, PWM_MAX_WIDTH);
+         float wid = (widthAZIMUTH-PWM_MIN_WIDTH)/(PWM_MAX_WIDTH-PWM_MIN_WIDTH);
+         phase = 0 + wid * 360;
       }
     }
     if (motorStarted)

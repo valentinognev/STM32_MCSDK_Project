@@ -57,9 +57,9 @@ flash-st: build
 
 flash-ocd: build
 	openocd 			\
-		 -c "adapter serial 3000590010000059334A4D4E" \
+		 -c "adapter serial 1D17040029135147324D4E00" \
 	     -f ./openocd.cfg -c "program $(BUILD_DIR)/$(PROJECT_NAME).elf verify reset exit"
-
+# 3000590010000059334A4D4E 48FF6D066567495726091187 1D17040029135147324D4E00
 $(BUILD_DIR)/jlink-script:
 	touch $@
 	@echo device $(DEVICE) > $@

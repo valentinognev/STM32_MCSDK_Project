@@ -73,11 +73,12 @@ extern float frequencyMEAN, frequencyAMP, frequencyAZIMUTH;
 extern float widthMEAN, widthAMP, widthAZIMUTH;
 
 uint32_t minAzimuthFrequency = 300, maxAzimuthFrequency = 50000;
-uint32_t minAmpFrequency = 300, maxAmpFrequency = 50000, maxAmpTorque = 4000;
+uint32_t minAmpFrequency = 300, maxAmpFrequency = 50000, maxAmpTorque = 6000;
 uint32_t minMeanFrequency = 300, maxMeanFrequency = 50000;
-uint32_t maxMeanTorque = 3000, minMeanTorque = 0, minMeanThresh = 500;
+uint32_t maxMeanTorque = 5000, minMeanTorque = 0, minMeanThresh = 500;
 #define PWM_MIN_WIDTH         (21.0f/52.5f)
 #define PWM_MAX_WIDTH         (42.0f/52.5f)
+#define ZERO_PHASE_OFFSET (0)  // degrees
 
 
 
@@ -1077,15 +1078,18 @@ void startMediumFrequencyTask(void const * argument)
   int32_t meanTorque = 0;     // cstat !MISRAC2012-Rule-11.3
   int16_t ampTorque = 0; // cstat !MISRAC2012-Rule-11.3
   int16_t phase = 0;  // cstat !MISRAC2012-Rule-11.3
-
+  float widAMP=0, widMEAN=0, widAZIMUTH=0;
   const uint8_t motorID = 0U;
   const MCI_Handle_t *pMCIN = &Mci[motorID];
 
 
   /* USER CODE BEGIN MF task 1 */
   /* Infinite loop */
+  uint8_t skipcounter = 0;
+  uint8_t skipLen=10;
   for(;;)
   {
+    skipcounter++; skipcounter%=skipLen;
     /* Call the measurement whenever needed */
     HAL_StatusTypeDef status1 = HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, riseDataAMP, PWMNUMVAL);
     HAL_StatusTypeDef status2 = HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_2, fallDataAMP, PWMNUMVAL);
@@ -1105,8 +1109,8 @@ void startMediumFrequencyTask(void const * argument)
       {
         widthAMP = fmax(widthAMP, PWM_MIN_WIDTH);
         widthAMP = fmin(widthAMP, PWM_MAX_WIDTH);
-        float wid = (widthAMP-PWM_MIN_WIDTH)/(PWM_MAX_WIDTH-PWM_MIN_WIDTH);
-        ampTorque = wid*maxAmpTorque;
+        widAMP = (widthAMP-PWM_MIN_WIDTH)/(PWM_MAX_WIDTH-PWM_MIN_WIDTH);
+        ampTorque = widAMP*maxAmpTorque;
       }  
     }
     if (isMeasuredMEAN)
@@ -1118,8 +1122,8 @@ void startMediumFrequencyTask(void const * argument)
         // meanTorque = minMeanTorque + widthMEAN*(maxMeanTorque-minMeanTorque);
         widthMEAN = fmax(widthMEAN, PWM_MIN_WIDTH);
         widthMEAN = fmin(widthMEAN, PWM_MAX_WIDTH);
-        float wid = (widthMEAN-PWM_MIN_WIDTH)/(PWM_MAX_WIDTH-PWM_MIN_WIDTH);
-        meanTorque = minMeanTorque + wid * (maxMeanTorque - minMeanTorque);
+        widMEAN = (widthMEAN-PWM_MIN_WIDTH)/(PWM_MAX_WIDTH-PWM_MIN_WIDTH);
+        meanTorque = minMeanTorque + widMEAN * (maxMeanTorque - minMeanTorque);
         if (meanTorque < minMeanThresh)
           meanTorque = 0;
       }
@@ -1132,8 +1136,8 @@ void startMediumFrequencyTask(void const * argument)
       {
          widthAZIMUTH = fmax(widthAZIMUTH, PWM_MIN_WIDTH);
          widthAZIMUTH = fmin(widthAZIMUTH, PWM_MAX_WIDTH);
-         float wid = (widthAZIMUTH-PWM_MIN_WIDTH)/(PWM_MAX_WIDTH-PWM_MIN_WIDTH);
-         phase = 0 + wid * 360;
+         widAZIMUTH = (widthAZIMUTH-PWM_MIN_WIDTH)/(PWM_MAX_WIDTH-PWM_MIN_WIDTH);
+         phase = 0 + widAZIMUTH * 360 + ZERO_PHASE_OFFSET;
       }
     }
     if (motorStarted)
@@ -1145,7 +1149,8 @@ void startMediumFrequencyTask(void const * argument)
         motorStarted = false;
       }
       else
-        MCI_ExecTorqueSin(pMCIN, meanTorque, ampTorque, phase);
+        if (skipcounter==0)
+          MCI_ExecTorqueSin(pMCIN, meanTorque, ampTorque, phase);
     } 
     else if (meanTorque > minMeanThresh)
     {   

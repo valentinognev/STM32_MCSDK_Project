@@ -126,3 +126,5 @@ build/CMakeFiles/STM32_MCSDK_Project.dir/Src/stm32g4xx_it.c.obj
 build/CMakeFiles/STM32_MCSDK_Project.dir/Src/stm32g4xx_mc_it.c.obj
 build/CMakeFiles/STM32_MCSDK_Project.dir/Src/system_stm32g4xx.c.obj
 build/CMakeFiles/STM32_MCSDK_Project.dir/Src/usart_aspep_driver.c.obj
+build/STM32_MCSDK_Project.map
+build/CMakeFiles/STM32_MCSDK_Project.dir/MCSDK_v6.1.2-Full/MotorControl/MCSDK/MCLib/Any/Src/speed_torq_ctrl.c.obj

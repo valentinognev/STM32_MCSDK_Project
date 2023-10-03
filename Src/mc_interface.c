@@ -125,7 +125,7 @@ __weak void MCI_ExecSpeedRamp(MCI_Handle_t *pHandle,  int16_t hFinalSpeed, uint1
 #endif
 }
 
-__weak void MCI_ExecSpeedSin( MCI_Handle_t * pHandle,  const int16_t hFinalSpeedMean, const uint16_t hFinalSpeedAmp, const int16_t hPhase )
+__weak void MCI_ExecSpeedSin( MCI_Handle_t * pHandle,  const int16_t hFinalSpeedMean, const int16_t hFinalSpeedAmp, const int16_t hPhase )
 {
 #ifdef NULL_PTR_MC_INT
   if (MC_NULL == pHandle)
@@ -146,7 +146,7 @@ __weak void MCI_ExecSpeedSin( MCI_Handle_t * pHandle,  const int16_t hFinalSpeed
 #endif
 }
 
-__weak void MCI_ExecTorqueSin(MCI_Handle_t *pHandle, const int16_t hFinalTorqueMean, const uint16_t hFinalTorqueAmp, const int16_t hPhase)
+__weak void MCI_ExecTorqueSin(MCI_Handle_t *pHandle, const int16_t hFinalTorqueMean, const int16_t hFinalTorqueAmp, const int16_t hPhase)
 {
 #ifdef NULL_PTR_MC_INT
   if (MC_NULL == pHandle)

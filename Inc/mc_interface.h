@@ -155,8 +155,8 @@ typedef struct
 void MCI_Init( MCI_Handle_t * pHandle, SpeednTorqCtrl_Handle_t * pSTC, pFOCVars_t pFOCVars, PWMC_Handle_t *pPWMHandle );
 void MCI_ExecBufferedCommands( MCI_Handle_t * pHandle );
 void MCI_ExecSpeedRamp( MCI_Handle_t * pHandle,  int16_t hFinalSpeed, uint16_t hDurationms );
-void MCI_ExecSpeedSin( MCI_Handle_t * pHandle,  const int16_t hFinalSpeedMean, const uint16_t hFinalSpeedAmp, const int16_t hPhase );
-void MCI_ExecTorqueSin(MCI_Handle_t *pHandle, const int16_t hFinalTorqueMean, const uint16_t hFinalTorqueAmp, const int16_t hPhase);
+void MCI_ExecSpeedSin( MCI_Handle_t * pHandle,  const int16_t hFinalSpeedMean, const int16_t hFinalSpeedAmp, const int16_t hPhase );
+void MCI_ExecTorqueSin(MCI_Handle_t *pHandle, const int16_t hFinalTorqueMean, const int16_t hFinalTorqueAmp, const int16_t hPhase);
 void MCI_ExecSpeedRamp_F( MCI_Handle_t * pHandle, const float FinalSpeed, uint16_t hDurationms );
 
 void MCI_ExecTorqueRamp( MCI_Handle_t * pHandle,  int16_t hFinalTorque, uint16_t hDurationms );

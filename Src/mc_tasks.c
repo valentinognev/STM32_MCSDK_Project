@@ -56,7 +56,7 @@
 #define M2_CHARGE_BOOT_CAP_DUTY_CYCLES (uint32_t)(0*(PWM_PERIOD_CYCLES2/2))
 #define STOPPERMANENCY_TICKS   (uint16_t)((SYS_TICK_FREQUENCY * STOPPERMANENCY_MS)  / ((uint16_t)1000))
 #define STOPPERMANENCY_TICKS2  (uint16_t)((SYS_TICK_FREQUENCY * STOPPERMANENCY_MS2) / ((uint16_t)1000))
-
+#define MAGNET_AZIMUTH_CORRECTION (-23)
 /* USER CODE END Private define */
 #define VBUS_TEMP_ERR_MASK (MC_OVER_VOLT| MC_UNDER_VOLT| MC_OVER_TEMP)
 /* Private variables----------------------------------------------------------*/
@@ -389,7 +389,7 @@ encoderAngleCalculation(MCI_Handle_t *pHandle)
     static int16_t prevAngle = 0;
     static int16_t sectionCounter = 0;
 
-    int32_t totalAngle = (int32_t)encAngle - encPhase;
+    int32_t totalAngle = (int32_t)encAngle - encPhase + MAGNET_AZIMUTH_CORRECTION*M1_PULSE_NBR/360;
     if (totalAngle > M1_PULSE_NBR)
       totalAngle -= M1_PULSE_NBR;
     else if (totalAngle < 0)
@@ -1075,10 +1075,11 @@ void startMediumFrequencyTask(void const * argument)
 {
   bool motorStarted = false;
   
-  int32_t meanTorque = 0;     // cstat !MISRAC2012-Rule-11.3
+  int16_t meanTorque = 0;     // cstat !MISRAC2012-Rule-11.3
   int16_t ampTorque = 0; // cstat !MISRAC2012-Rule-11.3
   int16_t phase = 0;  // cstat !MISRAC2012-Rule-11.3
-  float widAMP=0, widMEAN=0, widAZIMUTH=0;
+  float azimuthCommand =0, thrustCommand =0, ampCommand =0;
+  float currentPhaseAngle = 0;
   const uint8_t motorID = 0U;
   const MCI_Handle_t *pMCIN = &Mci[motorID];
 
@@ -1089,6 +1090,8 @@ void startMediumFrequencyTask(void const * argument)
   uint8_t skipLen=10;
   for(;;)
   {
+    encoderAngleCalculation(&Mci[M1]);
+    currentPhaseAngle = EncRefM1.hMechAngleWithPhase*360.0f/0xFFFF;
     skipcounter++; skipcounter%=skipLen;
     /* Call the measurement whenever needed */
     HAL_StatusTypeDef status1 = HAL_TIM_IC_Start_DMA(&htim2, TIM_CHANNEL_1, riseDataAMP, PWMNUMVAL);
@@ -1107,10 +1110,9 @@ void startMediumFrequencyTask(void const * argument)
       phase = 0;
       if (minAmpFrequency <= frequencyAMP && frequencyAMP <= maxAmpFrequency)
       {
-        widthAMP = fmax(widthAMP, PWM_MIN_WIDTH);
-        widthAMP = fmin(widthAMP, PWM_MAX_WIDTH);
-        widAMP = (widthAMP-PWM_MIN_WIDTH)/(PWM_MAX_WIDTH-PWM_MIN_WIDTH);
-        ampTorque = widAMP*maxAmpTorque;
+        ampCommand = ((widthAMP*52580)-21000)/21000.0*UINT16_MAX;
+        ampCommand = fmax(0, ampCommand);
+        ampTorque = (int16_t)(ampCommand*maxAmpTorque/UINT16_MAX);
       }  
     }
     if (isMeasuredMEAN)
@@ -1119,11 +1121,9 @@ void startMediumFrequencyTask(void const * argument)
       isMeasuredMEAN = 0;
       if ( minMeanFrequency <= frequencyMEAN && frequencyMEAN <= maxMeanFrequency)
       {
-        // meanTorque = minMeanTorque + widthMEAN*(maxMeanTorque-minMeanTorque);
-        widthMEAN = fmax(widthMEAN, PWM_MIN_WIDTH);
-        widthMEAN = fmin(widthMEAN, PWM_MAX_WIDTH);
-        widMEAN = (widthMEAN-PWM_MIN_WIDTH)/(PWM_MAX_WIDTH-PWM_MIN_WIDTH);
-        meanTorque = minMeanTorque + widMEAN * (maxMeanTorque - minMeanTorque);
+        thrustCommand = ((widthMEAN*52580)-21000)/21000.0*UINT16_MAX;
+        thrustCommand = fmax(0, thrustCommand);
+        meanTorque = (int16_t)(thrustCommand*maxMeanTorque/UINT16_MAX);
         if (meanTorque < minMeanThresh)
           meanTorque = 0;
       }
@@ -1134,10 +1134,9 @@ void startMediumFrequencyTask(void const * argument)
       isMeasuredAZIMUTH = 0;
       if (minAzimuthFrequency <= frequencyAZIMUTH && frequencyAZIMUTH <= maxAzimuthFrequency)
       {
-         widthAZIMUTH = fmax(widthAZIMUTH, PWM_MIN_WIDTH);
-         widthAZIMUTH = fmin(widthAZIMUTH, PWM_MAX_WIDTH);
-         widAZIMUTH = (widthAZIMUTH-PWM_MIN_WIDTH)/(PWM_MAX_WIDTH-PWM_MIN_WIDTH);
-         phase = 0 + widAZIMUTH * 360 + ZERO_PHASE_OFFSET;
+         azimuthCommand = ((widthAZIMUTH*52580)-21000)/21000.0*UINT16_MAX;
+         azimuthCommand = fmax(0, azimuthCommand);
+         phase = (int16_t)(azimuthCommand / UINT16_MAX * 360);// + ZERO_PHASE_OFFSET;
       }
     }
     if (motorStarted)

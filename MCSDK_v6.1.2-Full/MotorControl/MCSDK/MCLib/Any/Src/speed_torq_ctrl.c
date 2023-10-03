@@ -466,7 +466,7 @@ __weak bool STC_ExecSin(SpeednTorqCtrl_Handle_t *pHandle, int16_t hMean, int16_t
       /* Interrupts the execution of any previous ramp command */
       Trig_Components Local_Vector_Components;
       int32_t userPhase = hPhase * UINT16_MAX / 360 - INT16_MAX;
-      int32_t angle = EncRefM1.hMechAngleWithPhase + userPhase;
+      int32_t angle = EncRefM1.hMechAngleWithPhase - userPhase;
       while (angle > INT16_MAX)
         angle -= UINT16_MAX;
       while (angle < INT16_MIN)

@@ -6,6 +6,7 @@ BUILD_DIR ?= build
 FIRMWARE := $(BUILD_DIR)/$(PROJECT_NAME).bin
 BUILD_TYPE ?= Debug
 PLATFORM = $(if $(OS),$(OS),$(shell uname -s))
+MAKE = $(if $(filter $(PLATFORM),Windows_NT),make.exe,make)
 
 ifeq ($(PLATFORM),Windows_NT)
     BUILD_SYSTEM ?= MinGW Makefiles
@@ -56,11 +57,8 @@ flash-st: build
 	st-flash --reset write $(FIRMWARE) 0x08000000
 
 flash-ocd: build
-	openocd 			\
-	     -c "adapter serial 066CFF313050353043214925"   \
-	     -f ./openocd.cfg -c "program $(BUILD_DIR)/$(PROJECT_NAME).elf verify reset exit"
-# 066FFF313050353043205739 066CFF313050353043214925 
-# 3000590010000059334A4D4E 48FF6D066567495726091187 1D17040029135147324D4E00		 
+	openocd -f ./openocd.cfg -c "program $(BUILD_DIR)/$(PROJECT_NAME).elf verify reset exit"
+
 $(BUILD_DIR)/jlink-script:
 	touch $@
 	@echo device $(DEVICE) > $@

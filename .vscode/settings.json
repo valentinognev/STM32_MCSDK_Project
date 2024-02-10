@@ -1,6 +1,9 @@
 {
-    "cortex-debug.openocdPath": "/usr/local/bin/openocd",
-    "cortex-debug.armToolchainPath": "/usr/bin",
+    // "cortex-debug.openocdPath": "/usr/local/bin/openocd",
+    // "cortex-debug.armToolchainPath": "/usr/bin",
+    "cortex-debug.armToolchainPath": "c:/Program Files (x86)/Arm GNU Toolchain arm-none-eabi/13.2 Rel1/bin",
+    "cortex-debug.openocdPath": "c:/Program Files (x86)/OpenOCD_0.12/bin/openocd.exe",
+
     "files.associations": {
         "mc_interface.h": "c",
         "motorcontrol.h": "c",
